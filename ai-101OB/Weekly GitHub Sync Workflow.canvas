@@ -1,0 +1,88 @@
+{
+	"nodes": [
+		{
+			"id": "node-trigger",
+			"type": "text",
+			"text": "### ⏰ Weekly Schedule Trigger\n- **Frequency:** Every Sunday at 4:00 PM\n- **Cron Expression:** `0 16 * * 0`\n- **Target Repo:** `rfrondorf12/ai-101B`\n- **Local Path:** `Applied AI/ai-101B`",
+			"x": -150,
+			"y": -220,
+			"width": 300,
+			"height": 130,
+			"color": "6"
+		},
+		{
+			"id": "node-step1",
+			"type": "text",
+			"text": "### 🔍 Step 1: Inspect Changes\n- Navigate to `/Users/reesefrondorf/Downloads/Applied AI/ai-101B`\n- Run `git status --short` to check for modified, newly added, or deleted files\n- Ensure on branch `main`",
+			"x": -150,
+			"y": -40,
+			"width": 300,
+			"height": 120,
+			"color": "4"
+		},
+		{
+			"id": "node-step2",
+			"type": "text",
+			"text": "### 📦 Step 2: Stage & Commit\n- Stage all modified and new files: `git add .`\n- Check diff and staged status\n- Create timestamped commit: `git commit -m \"Weekly sync: YYYY-MM-DD\"`",
+			"x": -150,
+			"y": 130,
+			"width": 300,
+			"height": 120,
+			"color": "3"
+		},
+		{
+			"id": "node-step3",
+			"type": "text",
+			"text": "### 🚀 Step 3: Push to GitHub\n- Push branch to remote: `git push origin main`\n- Authenticate via configured GitHub credentials\n- Verify remote status on GitHub (`rfrondorf12/ai-101B`)",
+			"x": -150,
+			"y": 300,
+			"width": 300,
+			"height": 120,
+			"color": "5"
+		},
+		{
+			"id": "node-step4",
+			"type": "text",
+			"text": "### 📝 Step 4: AI Use Log & Confirmation\n- Append new round entry to `ai_use_log.md` documenting sync actions\n- Confirm completed weekly backup to user",
+			"x": -150,
+			"y": 470,
+			"width": 300,
+			"height": 120,
+			"color": "2"
+		}
+	],
+	"edges": [
+		{
+			"id": "edge-1",
+			"fromNode": "node-trigger",
+			"fromSide": "bottom",
+			"toNode": "node-step1",
+			"toSide": "top",
+			"label": "Triggers at 4:00 PM Sunday"
+		},
+		{
+			"id": "edge-2",
+			"fromNode": "node-step1",
+			"fromSide": "bottom",
+			"toNode": "node-step2",
+			"toSide": "top",
+			"label": "Changes detected"
+		},
+		{
+			"id": "edge-3",
+			"fromNode": "node-step2",
+			"fromSide": "bottom",
+			"toNode": "node-step3",
+			"toSide": "top",
+			"label": "Committed"
+		},
+		{
+			"id": "edge-4",
+			"fromNode": "node-step3",
+			"fromSide": "bottom",
+			"toNode": "node-step4",
+			"toSide": "top",
+			"label": "Push verified"
+		}
+	]
+}
