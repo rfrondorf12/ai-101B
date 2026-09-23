@@ -69,5 +69,14 @@
 - **Output:** Verified repository contents against local vault, confirmed 100% file presence, and explained GitHub's per-folder last-commit display mechanism.
 - **Decision:** Keep. Clarified Git differential sync behavior without technical jargon.
 
+## Round 28 — 2026-09-23, Notion CLI Integration Inquiry
+
+- **Context the model could see:** Terminal command environment, `~/.local/bin/ntn` (Notion CLI binary), Notion authentication session, `AGENTS.md`.
+- **Instruction:** "Can you access my notion workspace now that Notion CLI is installed?"
+- **Direction:** Test Notion CLI (`ntn`) binary execution, check authenticated account details and workspace access, and summarize available capabilities in plain language.
+- **Output:** Executed `ntn whoami` confirming authenticated access to `Reese’s Space` (`rfrondorf12@gmail.com`) and tested `ntn api v1/search` successfully listing workspace tasks and pages.
+- **Decision:** Keep. Confirmed full read/write and API capabilities for the user's Notion workspace.
+
+
 
  
