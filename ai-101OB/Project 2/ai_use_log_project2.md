@@ -61,4 +61,13 @@
 - **Output:** Synced `ai_use_log_project1.md`, `ai_use_log_project2.md`, and updated `03-task.md` to both remote repositories. Pushed commit `d8cd02e` to `rfrondorf12/ai-101B` and commit `e00446e` to `rfrondorf12/obsidian.file`.
 - **Decision:** Keep. Automated hourly synchronization executed cleanly without errors or unwanted changes.
 
+## Round 27 — 2026-09-23, Whole Vault Sync Clarification
+
+- **Context the model could see:** `rfrondorf12/obsidian.file` repository tree, commit history, `03-task.md`, and local vault files.
+- **Instruction:** "Why is the whole cault repository sync function only syncing the .obsidian folder and the ai-101OB folder?"
+- **Direction:** Explain in plain language how Git commit tracking works and confirm that all other vault folders (`Classes/`, `Study Notes/`, `SUAwork/`, etc.) are already fully synced and present in GitHub.
+- **Output:** Verified repository contents against local vault, confirmed 100% file presence, and explained GitHub's per-folder last-commit display mechanism.
+- **Decision:** Keep. Clarified Git differential sync behavior without technical jargon.
+
+
  
