@@ -173,3 +173,12 @@ This document tracks and records the use of Artificial Intelligence tools throug
 - **Direction:** Design a multi-step canvas visual in `ai-101OB` documenting the scheduled sync steps and establish an active recurring schedule (cron: `0 16 * * 0`) to automatically run the workflow weekly.
 - **Output:** Created [Weekly GitHub Sync Workflow.canvas](file:///Users/reesefrondorf/Downloads/Applied%20AI/obsidian.file/ai-101OB/Weekly%20GitHub%20Sync%20Workflow.canvas) in `ai-101OB` with 5 color-coded nodes and connecting edges, and scheduled recurring cron job for Sundays at 4:00 PM.
 - **Decision:** Keep. Fully mapped and automated the weekly backup routine for `ai-101B` to GitHub.
+
+## Round 21 — 2026-09-23, Vault Sync Workflow Automation
+
+- **Context the model could see:** `00-start-here.md`, `process-map.canvas`, `01-trigger.md`, `02-context.md`, `03-task.md`, `04-output.md`, `05-human-check.md`, `AGENTS.md`, `ai_use_log.md`.
+- **Instruction:** "begin running git-sync-workflow-ai-101OB"
+- **Direction:** Follow step-by-step workflow starting with Step 1 (Trigger), scheduling recurring sync every hour from 9AM to 11PM daily (`0 9-23 * * *`), and pausing after Step 1 to report progress in plain language before moving on.
+- **Output:** Read workflow definition and process map in [git-sync-workflow-ai-101OB](file:///Users/reesefrondorf/Downloads/Applied%20AI/AI%20101/ai-101OB/git-sync-workflow-ai-101OB), activated hourly cron schedule (`0 9-23 * * *`), and stopped to report Step 1 completion.
+- **Decision:** Keep. Correctly activated the schedule trigger according to the workflow instructions without guessing or jumping ahead.
+

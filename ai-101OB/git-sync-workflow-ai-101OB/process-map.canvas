@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"trigger","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/01-trigger.md","x":-1100,"y":0,"width":340,"height":260,"color":"6"},
+		{"id":"context","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/02-context.md","x":-680,"y":0,"width":340,"height":540,"color":"6"},
+		{"id":"task","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/03-task.md","x":-260,"y":0,"width":340,"height":540,"color":"6"},
+		{"id":"output","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/04-output.md","x":160,"y":0,"width":340,"height":260,"color":"6"},
+		{"id":"check","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/05-human-check.md","x":580,"y":0,"width":340,"height":480,"color":"4"},
+		{"id":"label-model","type":"text","text":"The model does these steps","x":-680,"y":680,"width":1180,"height":60,"color":"6"},
+		{"id":"label-human","type":"text","text":"I do this step","x":580,"y":510,"width":340,"height":60,"color":"4"},
+		{"id":"start","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/00-start-here.md","x":-130,"y":-1320,"width":580,"height":820,"color":"5"}
+	],
+	"edges":[
+		{"id":"e0","fromNode":"start","fromSide":"bottom","toNode":"trigger","toSide":"top","label":"read first"},
+		{"id":"e1","fromNode":"trigger","fromSide":"right","toNode":"context","toSide":"left"},
+		{"id":"e2","fromNode":"context","fromSide":"right","toNode":"task","toSide":"left"},
+		{"id":"e3","fromNode":"task","fromSide":"right","toNode":"output","toSide":"left"},
+		{"id":"e4","fromNode":"output","fromSide":"right","toNode":"check","toSide":"left"}
+	]
+}
