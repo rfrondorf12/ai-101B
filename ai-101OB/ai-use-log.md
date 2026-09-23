@@ -1,1 +1,1 @@
-/Users/reesefrondorf/Downloads/Applied AI/AI 101/ai-101OB/Project 1/context-kit-p1/ai_use_log.md
+/Users/reesefrondorf/Downloads/Applied AI/AI 101/ai-101OB/ai_use_log.md
