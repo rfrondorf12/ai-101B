@@ -122,3 +122,37 @@ agy -> google antigravity
   Learn about exit codes using `gh help exit-codes`
 
   Learn about accessibility experiences using `gh help accessibility`
+  
+
+## Notion
+Notion CLI (Beta)
+
+  
+
+  Installed ntn v0.23.9 to /Users/reesefrondorf/.local/bin/ntn
+
+  
+
+  Get started:
+
+  
+
+    ntn login              Log in to your Notion workspace
+
+    ntn workers new        Create a new worker
+
+    ntn datasources query  Query a data source
+
+    ntn pages create       Create a page from Markdown
+
+    ntn api                Call the Notion API directly
+
+    ntn --help             See all available commands
+
+  
+
+  Add the Notion skill for your agents:
+
+  
+
+    npx skills add makenotion/skills
