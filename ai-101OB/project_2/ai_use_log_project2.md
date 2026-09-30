@@ -116,3 +116,11 @@
 - **Direction:** Stage and commit modified and new files within the vault folder, push to private GitHub repository `rfrondorf12/ai-101B`, verify output, and present plain-language explanation for Step 5 human check.
 - **Output:** Staged and committed new and updated vault files (`SchedulingFLow/`, `flashcards_flow/`, `notion-sync-workflow/`, updated `git-sync-workflow-ai-101OB`, and log updates) from `ai-101OB`, pushed to `rfrondorf12/ai-101B`, and verified repository privacy remains strictly Private.
 - **Decision:** Keep. Successfully backed up vault files to GitHub while maintaining repository privacy.
+
+## Round 34 — 2026-09-30, Background Automation Architecture Inquiry
+
+- **Context the model could see:** `ai_use_log_project2.md`, `~/Library/LaunchAgents`, `.obsidian/plugins`, `git-sync-workflow-ai-101OB`.
+- **Instruction:** "How can I make the sync workflow run automatically even if this specific terminal string is not open?"
+- **Direction:** Explain how to run the sync workflow independently of the active terminal session or AI chat window in plain language.
+- **Output:** Analyzed background execution options, comparing a native macOS LaunchAgent (system-level scheduled task) with the Obsidian Git community plugin, detailing their pros, cons, and setup steps.
+- **Decision:** Keep. Provided clear, accessible architecture options tailored to non-programmer workflow needs.
