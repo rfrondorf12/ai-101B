@@ -5,7 +5,7 @@
 		{"id":"task","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/03-task.md","x":-260,"y":0,"width":340,"height":540,"color":"6"},
 		{"id":"output","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/04-output.md","x":160,"y":0,"width":340,"height":260,"color":"6"},
 		{"id":"check","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/05-human-check.md","x":580,"y":0,"width":340,"height":480,"color":"4"},
-		{"id":"label-model","type":"text","text":"The model does these steps","x":-680,"y":680,"width":1180,"height":60,"color":"6"},
+		{"id":"label-model","type":"text","text":"The model does these steps","x":-680,"y":680,"width":1180,"height":80,"color":"6"},
 		{"id":"label-human","type":"text","text":"I do this step","x":580,"y":510,"width":340,"height":60,"color":"4"},
 		{"id":"start","type":"file","file":"ai-101OB/git-sync-workflow-ai-101OB/00-start-here.md","x":-130,"y":-1320,"width":580,"height":820,"color":"5"}
 	],

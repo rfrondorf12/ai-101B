@@ -6,6 +6,7 @@
 
 **My setting:** every hour from 9AM to 11PM every day.
 
-**Good looks like:** the workflow starts at 9AM every day.
+**Good looks like:** the workflow starts automatically at 9AM every day.
 
 **How I check it:** I look at the time stamp on the latest update in GitHub.
+

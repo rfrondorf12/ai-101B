@@ -81,6 +81,8 @@
 
 - **Context the model could see:** `00-start-here.md`, `process-map.canvas`, `01-trigger.md`, `02-context.md`, `03-task.md`, `04-output.md`, `05-human-check.md`, `AGENTS.md`, `ai_use_log_project2.md`.
 - **Instruction:** "run git-sync-workflow-ai-101OB"
+- **Direction:** Follow step-by-step workflow starting with Step 1 (Trigger), scheduling recurring sync every hour from 9AM to 11PM daily (`0 9-23 * * *`), and stopping after Step 1 to report progress in plain language before moving on.
+- **Output:** Read workflow definition and process map in `git-sync-workflow-ai-101OB`, activated hourly recurring schedule trigger (`0 9-23 * * *`), and paused to report Step 1 completion and verify Step 2 context.
 - **Decision:** Keep. Correctly activated schedule trigger according to workflow instructions without guessing or jumping ahead.
 
 ## Round 30 — 2026-09-29, Vault Sync Workflow Execution (Step 3 & 4)
@@ -88,5 +90,29 @@
 - **Context the model could see:** User confirmation "yes" for Step 2 context check, `03-task.md`, `04-output.md`, `05-human-check.md`, local vault files in `ai-101OB`, and GitHub repository `rfrondorf12/ai-101B`.
 - **Instruction:** "yes" (confirming context lines and authorizing Step 3 Task execution).
 - **Direction:** Stage and commit modified and new files within the vault folder, push to private GitHub repository `rfrondorf12/ai-101B`, verify output, and present plain-language explanation for Step 5 human check.
-- **Output:** Staged and committed changes in `ai-101B/ai-101OB/` with descriptive commit message, pushed to `rfrondorf12/ai-101B`, and verified repository privacy remains strictly Private.
+- **Output:** Staged and committed 12 updated/new files from `ai-101OB` with commit `c9aeb23` (`"Vault sync: 2026-09-29 update notes and project logs"`), pushed to `rfrondorf12/ai-101B`, and verified repository privacy remains strictly Private.
+- **Decision:** Keep. Successfully backed up vault files to GitHub while maintaining repository privacy.
+
+## Round 31 — 2026-09-29, Scheduled Workflow Troubleshooting
+
+- **Context the model could see:** `ai_use_log_project2.md`, `crontab -l`, `~/Library/LaunchAgents`, past conversation transcripts, `01-trigger.md`.
+- **Instruction:** "Why didn't this workflow run automatically today while I was on my mac?"
+- **Direction:** Investigate why automatic scheduling did not run in the background today and explain the root cause in plain language.
+- **Output:** Checked system cron and launchd configuration, identified that previously scheduled triggers were in-session CLI timers that ended when the terminal/chat closed, and explained how to make it run permanently in the background.
+- **Decision:** Keep. Clearly diagnosed the scheduler limitation and explained system vs. session automation.
+
+## Round 32 — 2026-09-30, Vault Sync Workflow Automation (Step 1 Trigger)
+
+- **Context the model could see:** `00-start-here.md`, `process-map.canvas`, `01-trigger.md`, `02-context.md`, `03-task.md`, `04-output.md`, `05-human-check.md`, `AGENTS.md`, `ai_use_log_project2.md`.
+- **Instruction:** "run git-sync-workflow-ai-101OB"
+- **Direction:** Follow step-by-step workflow starting with Step 1 (Trigger), scheduling recurring sync every hour from 9AM to 11PM daily (`0 9-23 * * *`), and stopping after Step 1 to report progress in plain language before moving on.
+- **Output:** Read workflow definition and process map in `git-sync-workflow-ai-101OB`, activated hourly recurring schedule trigger (`0 9-23 * * *`), and paused to report Step 1 completion and verify Step 2 context.
+- **Decision:** Keep. Correctly activated schedule trigger according to workflow instructions without guessing or jumping ahead.
+
+## Round 33 — 2026-09-30, Vault Sync Workflow Execution (Step 3 & 4)
+
+- **Context the model could see:** User confirmation "yes" for Step 2 context check, `03-task.md`, `04-output.md`, `05-human-check.md`, local vault files in `ai-101OB`, and GitHub repository `rfrondorf12/ai-101B`.
+- **Instruction:** "yes" (confirming context lines and authorizing Step 3 Task execution).
+- **Direction:** Stage and commit modified and new files within the vault folder, push to private GitHub repository `rfrondorf12/ai-101B`, verify output, and present plain-language explanation for Step 5 human check.
+- **Output:** Staged and committed new and updated vault files (`SchedulingFLow/`, `flashcards_flow/`, `notion-sync-workflow/`, updated `git-sync-workflow-ai-101OB`, and log updates) from `ai-101OB`, pushed to `rfrondorf12/ai-101B`, and verified repository privacy remains strictly Private.
 - **Decision:** Keep. Successfully backed up vault files to GitHub while maintaining repository privacy.
