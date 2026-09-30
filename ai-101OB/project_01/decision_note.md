@@ -1,0 +1,8 @@
+The output I kept was [[AI101_P1_Frondorf_Reese_Final.jpg]]. I kept this output because it followed the instructions contained in the README file and context kit. To get the final output, I revised the context kit to set stricter guidelines around the use of colors. Instead of only supplying hex codes, I also embedded a screenshot of the colors I wanted to be used. This seemed to work better for the model's understanding of the three color rule. 
+
+
+An output I rejected was [[AI101_P1_Frondorf_Reese_Round2.jpg]]. I rejected this output because multiple colors were hallucinated despite being clearly outlined with hex codes in the brief. This example specifically had included a peach shade and multiple shades of brown rather than the three colors  #17aaa4 #ea2a24  #4d1414 . 
+
+The most prominent change between my first artifact and the final output is the image style. In the first artifact, there are only a few pixelated elements and all other lines are flat. In the final artifact, the entire image is pixelated like an indie video game and the color hierarchy changed. In the first artifact, dark brown is the most prominent color, while in the final artifact it is a smaller accent color. 
+
+One thing I noticed when comparing context kits and use logs in class was that Victoria's context kit included much more specific context in the form of paragraphs, so her outputs were more consistent across versions. My context kit was more focused on visual direction with images and colors than on directing with text, so the outputs across my versions were less consistent with the entire image but very consistent with color and general intent. 
