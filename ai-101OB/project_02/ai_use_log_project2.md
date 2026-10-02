@@ -140,3 +140,55 @@
 - **Direction:** Diagnose why the scheduled vault sync stopped running, fix broken paths or configuration, verify system LaunchAgent scheduling, and run a test sync.
 - **Output:** Identified that moving the `Applied AI` directory out of `~/Downloads` broke the LaunchAgent path and script paths. Updated `sync-vault.sh`, `com.reesefrondorf.vault-sync.plist`, and `02-context.md` to reflect the new `~/Applied AI/` location, reloaded the LaunchAgent into `launchctl`, repaired the `ai-use-log.md` symlink, executed a test sync pushing commit `7ea1853` to GitHub, and verified repository privacy remains Private.
 - **Decision:** Keep. Restored automated hourly sync service and verified clean end-to-end push.
+
+## Round 37 — 2026-10-01, Memory Snapshot Migration
+
+- **Context the model could see:** `read_me.md`, `AGENTS.md`, `git-sync-workflow-ai-101OB/`, `ai_use_log_project2.md`, and user prompt.
+- **Instruction:** "You are helping me migrate context from one AI assistant to another. Your job is to compile, from our past conversations, a portable memory snapshot of what you reliably know about me."
+- **Direction:** Compile a portable, structured memory snapshot in third-person factual bullets following specified headers, omitting ungrounded sections, and marking uncertain items with (inferred).
+- **Output:** Generated portable Markdown memory snapshot across Identity, Profession & work, Communication preferences, Interests & hobbies, Ongoing projects, Working style & values, Tools & environment, and Durable workspace rules.
+- **Decision:** Keep. Accurately captured verified user profile, preferences, boundaries, and active projects without fabricating details.
+
+- **AGY Summary**: ### Troubleshooting Summary
+  I investigated why the git-sync-workflow-ai-101OB stopped running automatically. Here is what happened, what was fixed, and the verification results.
+  ──────
+  ### 1. What Went Wrong (Root Cause)
+  • Directory moved: The parent folder Applied AI was moved out of ~/Downloads/ directly to your
+  user folder:
+      • Old location: /Users/reesefrondorf/Downloads/Applied AI/
+      • New location: /Users/reesefrondorf/Applied AI/
+  • Broken scheduler & scripts:
+      1. The macOS background scheduler (com.reesefrondorf.vault-sync.plist) was still looking
+      for the sync script in ~/Downloads/.... When it tried to run every hour, macOS gave error
+      code 127: No such file or directory.
+      2. The sync script (sync-vault.sh) had hardcoded source and destination paths pointing to
+      ~/Downloads/....
+      3. The context document (02-context.md) still referenced the old path.
+      4. The file shortcut ai-use-log.md was pointing to the old Downloads path.
+  ──────
+  ### 2. What Was Fixed
+  1. Updated Script Paths:
+  In sync-vault.sh, updated the vault and repository locations:
+      • Source: ~/Applied AI/AI 101/ai-101OB/
+      • Destination Repo: ~/Applied AI/ai-101B
+  2. Updated LaunchAgent Configuration:
+  In com.reesefrondorf.vault-sync.plist, updated the script path to /Users/reesefrondorf/Applied
+  AI/AI 101/ai-101OB/git-sync-workflow-ai-101OB/sync-vault.sh.
+  3. Reloaded macOS Background Service:
+  Unloaded the stale service and reloaded the updated plist into launchctl. It is now active and
+  returning status 0 (healthy and running).
+  4. Updated Context Reference:
+  Updated 02-context.md to record ~/Applied AI/AI 101/ai-101OB.
+  5. Fixed AI Use Log Link:
+  Restored the local file and updated the ai-use-log.md symlink to point relatively to
+  ai_use_log.md.
+  ──────
+  ### 3. Verification & Human Check
+  • Manual Test Sync: Successfully executed sync-vault.sh. It detected the latest changes,
+  created commit 05fb497, and pushed to GitHub.
+  • No-Change Detection Test: Re-ran the script immediately after; it verified No changes
+  detected in vault. Everything is up to date.
+  • Privacy Verification: Confirmed via GitHub API that repository rfrondorf12/ai-101B remains
+  strictly Private (isPrivate: true).
+  • Automated Log: Appended Round 36 to ai_use_log_project2.md.
+- **My summary** I knew the workflow wasn't working and that I needed to troubleshoot. I asked agy why the workflow wasn't running even after it helped me add a program to make it run automatically in the background on my mac. It said that my obsidian vault file was in Downloads and that apple software was blocking the workflow. I moved the vault under my user profile file to prevent issues with apple software. After this, I knew I had to update the file paths in the files of the program it drafted me and in my workflow. Unfortunately, I never recorded where the file it created was for me. Because of this misstep, I enlisted agy to update the file paths and recorded more detailed notes of its work so I can fix things myself in the future.
