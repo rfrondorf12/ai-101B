@@ -2,7 +2,7 @@
 
 **What goes in:** the information the model needs before it can do the job.
 
-- **Where my vault lives:** ~/Downloads/AppliedAI/AI101/ai-101B
+- **Where my vault lives:** ~/Applied AI/AI 101/ai-101OB
 - **Where it goes:** https://github.com/rfrondorf12/ai-101B.git
 - **Privacy rule:** the repository stays private.
 

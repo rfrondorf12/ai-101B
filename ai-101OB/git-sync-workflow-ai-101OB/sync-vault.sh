@@ -4,8 +4,8 @@ set -euo pipefail
 # Set up environment path so git, gh, and rsync are found
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
-SRC_DIR="$HOME/Downloads/Applied AI/AI 101/ai-101OB/"
-REPO_DIR="$HOME/Downloads/Applied AI/ai-101B"
+SRC_DIR="$HOME/Applied AI/AI 101/ai-101OB/"
+REPO_DIR="$HOME/Applied AI/ai-101B"
 DEST_VAULT_DIR="$REPO_DIR/ai-101OB/"
 LOG_FILE="$HOME/Library/Logs/ai-101-sync.log"
 

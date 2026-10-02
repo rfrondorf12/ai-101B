@@ -1,1 +1,1 @@
-/Users/reesefrondorf/Downloads/Applied AI/AI 101/ai-101OB/ai_use_log.md
+ai_use_log.md
