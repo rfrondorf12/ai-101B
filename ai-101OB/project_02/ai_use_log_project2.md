@@ -132,3 +132,11 @@
 - **Direction:** Implement native macOS background automation via a dedicated shell script (`sync-vault.sh`) and a LaunchAgent (`com.reesefrondorf.vault-sync.plist`) configured to run hourly from 9AM to 11PM daily.
 - **Output:** Created and tested `sync-vault.sh`, verified change detection and push to `rfrondorf12/ai-101B`, generated LaunchAgent property list at `~/Library/LaunchAgents/com.reesefrondorf.vault-sync.plist`, loaded into `launchctl`, and verified active status.
 - **Decision:** Keep. Successfully enabled autonomous system-level synchronization that runs silently without terminal or chat sessions.
+
+## Round 36 — 2026-10-01, Vault Sync Workflow Troubleshooting
+
+- **Context the model could see:** `git-sync-workflow-ai-101OB/` (`00-start-here.md`, `01-trigger.md`, `02-context.md`, `03-task.md`, `04-output.md`, `05-human-check.md`, `sync-vault.sh`), `~/Library/LaunchAgents/com.reesefrondorf.vault-sync.plist`, `~/Library/Logs/ai-101-sync.log`, `~/Library/Logs/ai-101-sync.error.log`, `AGENTS.md`, `ai_use_log_project2.md`.
+- **Instruction:** "troubleshoot git-sync-workflow-ai-101OB"
+- **Direction:** Diagnose why the scheduled vault sync stopped running, fix broken paths or configuration, verify system LaunchAgent scheduling, and run a test sync.
+- **Output:** Identified that moving the `Applied AI` directory out of `~/Downloads` broke the LaunchAgent path and script paths. Updated `sync-vault.sh`, `com.reesefrondorf.vault-sync.plist`, and `02-context.md` to reflect the new `~/Applied AI/` location, reloaded the LaunchAgent into `launchctl`, repaired the `ai-use-log.md` symlink, executed a test sync pushing commit `7ea1853` to GitHub, and verified repository privacy remains Private.
+- **Decision:** Keep. Restored automated hourly sync service and verified clean end-to-end push.
