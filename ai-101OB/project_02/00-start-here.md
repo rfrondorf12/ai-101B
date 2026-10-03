@@ -2,8 +2,7 @@
 
 ## Goal
 
-Create an interactive HTML file with flashcards and notes from an uploaded file or pasted text. 
-
+Create an interactive HTML file with flashcards and notes from an uploaded file or pasted text to make mundane reading and watching tasks more appealing. 
 ## How to Use This Folder
 
 1. Read `process-map.canvas` to see the steps in order.
@@ -11,14 +10,16 @@ Create an interactive HTML file with flashcards and notes from an uploaded file 
 3. Do one step at a time. After each step, stop and tell me what you did before moving on.
 
 ## Rules
-
-- The repository must stay private. Never make it public.
-- Only sync files inside my vault folder. Do not touch anything else on my computer.
+- Follow formatting and design guidelines.
+- Only include information in notes and flashcards that is directly from the input material. Do not add material outside of what I provide. If there is an issue with the provided material, ask me. 
+- Format notes based on note sets included in the context kit. 
+- Vocabulary terms should be in bold.
+- Equations should be highlighted in green.
 - If something is unclear, ask me. Do not guess.
 - Explain what you did in plain language. I am not a programmer.
 
 ## What Stays My Decision
 
-- How often the sync runs.
-- Which repository it goes to.
-- Whether the result is correct.
+- Which file or text gets turned into a note.
+- Layout and design elements on the HTML file. 
+- The format of notes and flashcards
