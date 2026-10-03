@@ -192,3 +192,72 @@
   strictly Private (isPrivate: true).
   • Automated Log: Appended Round 36 to ai_use_log_project2.md.
 - **My summary** I knew the workflow wasn't working and that I needed to troubleshoot. I asked agy why the workflow wasn't running even after it helped me add a program to make it run automatically in the background on my mac. It said that my obsidian vault file was in Downloads and that apple software was blocking the workflow. I moved the vault under my user profile file to prevent issues with apple software. After this, I knew I had to update the file paths in the files of the program it drafted me and in my workflow. Unfortunately, I never recorded where the file it created was for me. Because of this misstep, I enlisted agy to update the file paths and recorded more detailed notes of its work so I can fix things myself in the future.
+
+
+## Round 38 — 2026-10-03, Whole Vault Sync Troubleshooting
+
+- **Context the model could see:** `git-sync-workflow-whole-vault/` files (`00-start-here.md`, `01-trigger.md`, `02-context.md`, `03-task.md`, `04-output.md`, `05-human-check.md`, `process-map.canvas`), `~/Applied AI/obsidian.file`, `com.reesefrondorf.vault-sync.plist`, `AGENTS.md`, and `ai_use_log_project2.md`.
+- **Instruction:** "update and troubleshoot git-sync-workflow-whole-vault"
+- **Direction:** Diagnose why whole vault syncing stopped, repair broken paths and canvas links, implement automated synchronization script and macOS LaunchAgent for background execution, and verify push to GitHub while preserving repository privacy.
+- **Output:** Corrected vault directory path in `02-context.md` from `~/Downloads/AppliedAI/AI101` to `~/Applied AI/AI 101`. Fixed canvas node file references in `process-map.canvas` to point to `git-sync-workflow-whole-vault/` step files instead of the sub-folder workflow. Created executable script `sync-whole-vault.sh` mirroring automated vault syncing. Resolved image directory case naming in Git (`Imported Images` -> `imported_images`). Created and loaded macOS LaunchAgent `com.reesefrondorf.whole-vault-sync.plist` into `launchctl` for autonomous hourly backups between 9AM and 11PM. Successfully executed manual sync pushing commit `4ce46d4` to `rfrondorf12/obsidian.file`, and verified repository privacy remains strictly Private.
+- **Decision:** Keep. Fully restored, modernized, and automated whole vault backup workflow.
+-  I investigated and resolved all issues preventing the git-sync-workflow-whole-vault from
+  running properly. Here is what was diagnosed, what was updated, and the verification results.
+  ──────
+  ### 1. Root Cause Analysis (What Went Wrong)
+  1. Outdated Vault Location in Step 2 Context:
+      • In 02-context.md, the path was still pointing to ~/Downloads/AppliedAI/AI101. That path
+      broke when the vault was moved to ~/Applied AI/AI 101.
+  2. Broken Canvas Node Links:
+      • In process-map.canvas, all step nodes were mistakenly linking to files inside ai-
+      101OB/git-sync-workflow-ai-101OB/ instead of git-sync-workflow-whole-vault/.
+  3. Missing Automated Sync Script:
+      • While ai-101OB had an automated script (sync-vault.sh), git-sync-workflow-whole-vault
+      had no script to automatically sync, commit, and push changes from ~/Applied AI/AI 101/ to
+      the whole-vault repository ~/Applied AI/obsidian.file/.
+  4. No Background System Service (LaunchAgent):
+      • macOS background scheduling (com.reesefrondorf.vault-sync.plist) was only configured to
+      run the subfolder sync (ai-101OB). The whole vault had not synced to GitHub since
+      September 23.
+  5. Folder Case Alignment in Git:
+      • In the repository, the image folder was historically recorded as Imported Images while
+      in the vault it is imported_images.
+
+  ──────
+  ### 2. Changes Made
+
+  6. Updated Context File:
+      • Edited 02-context.md to record the active path: ~/Applied AI/AI 101.
+  7. Fixed Process Map Canvas:
+      • Updated process-map.canvas so that every step card correctly references the files in
+      git-sync-workflow-whole-vault.
+  8. Created Automated Sync Script:
+      • Created and made executable sync-whole-vault.sh. It mirrors the reliable logic of the
+      subfolder sync:
+          • Syncs notes, attachments, and configs to ~/Applied AI/obsidian.file/ (excluding .
+          DS_Store and .trash).
+          • Detects new or modified files.
+          • Commits changes with a timestamp and pushes to rfrondorf12/obsidian.file.
+          • Logs output to ~/Library/Logs/whole-vault-sync.log.
+
+  9. Normalized Git Folder Naming:
+      • Renamed Imported Images to imported_images in Git so it matches your local vault folder
+      structure.
+  10. Configured macOS Background Service (LaunchAgent):
+      • Created com.reesefrondorf.whole-vault-sync.plist and loaded it into launchctl. It runs
+      silently in the background every hour on the hour between 9:00 AM and 11:00 PM daily.
+  11. Updated AI Use Log:
+      • Appended Round 38 to ai_use_log_project2.md following the required course schema.
+
+  ──────
+  ### 3. Verification & Human Check (Step 5)
+
+  • End-to-End Test Execution: Ran sync-whole-vault.sh. It detected all modifications since
+  September 23, staged 161 files, committed, and pushed commit 4ce46d4 followed by c9d3355 to
+  GitHub.
+  • No-Change Detection Test: Ran the script again immediately after; confirmed No changes
+  detected in whole vault. Everything is up to date.
+  • Background Scheduler Status: Checked launchctl list; both com.reesefrondorf.vault-sync and
+  com.reesefrondorf.whole-vault-sync are active and returning healthy exit status 0.
+  • Privacy Verification: Confirmed via GitHub that rfrondorf12/obsidian.file https://github.
+  com/rfrondorf12/obsidian.file remains strictly Private.
