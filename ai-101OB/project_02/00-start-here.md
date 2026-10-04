@@ -16,6 +16,8 @@ Create an interactive HTML file with flashcards and notes from an uploaded file 
 - Vocabulary terms should be in bold.
 - Equations should be highlighted in green.
 - If something is unclear, ask me. Do not guess.
+- After the first run, a file named teach_me_hub.html should be created. After this file is created, this workflow should only edit the teach_me_hub.html. No new html file should be created if teach_me_hub.html exists. 
+- teach_me_hub.html should be placed in ~/Applied AI/AI 101/ai-101OB/project_02/outputs. If it does not exist 
 - Explain what you did in plain language. I am not a programmer.
 
 ## What Stays My Decision
