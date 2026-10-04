@@ -15,7 +15,7 @@ echo "==========================================" >> "$LOG_FILE"
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] Starting automated vault sync" >> "$LOG_FILE"
 
 # Sync files from active vault folder to repo directory (excluding system .DS_Store files)
-/usr/bin/rsync -av --exclude '.DS_Store' "$SRC_DIR" "$DEST_VAULT_DIR" >> "$LOG_FILE" 2>&1
+/usr/bin/rsync -av --delete --exclude '.DS_Store' "$SRC_DIR" "$DEST_VAULT_DIR" >> "$LOG_FILE" 2>&1
 
 # Check if there are changes inside the ai-101OB directory of the repository
 if [ -n "$(/usr/bin/git -C "$REPO_DIR" status --porcelain ai-101OB)" ]; then
