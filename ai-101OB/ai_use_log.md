@@ -207,6 +207,11 @@ This document tracks and records the use of Artificial Intelligence tools throug
 - **Output:** Staged and committed 24 updated/new vault files from `AI 101/` with message `"Whole vault sync: 2026-09-23 update notes and workflows"`, pushed commit `4385aed` to `rfrondorf12/obsidian.file`, and verified repository privacy remains strictly Private.
 - **Decision:** Keep. Successfully backed up the whole Obsidian vault to GitHub.
 
- 
+## Round 25 — 2026-10-04, Vault Sync Workflow Troubleshooting & Delete Mirroring
 
-
+- **Context the model could see:** `sync-vault.sh`, `ai-101-sync.log`, LaunchAgent plist, and GitHub repository `rfrondorf12/ai-101B`.
+- **Instruction:** "why is git-sync-workflow-ai-101OB still not working? ai-1010B folder should be being pushed to Github automatically on the hour." / "enable --delete so deleted/renamed folders are mirrored to GitHub accuratly"
+- **Direction:** Diagnose sync schedule behavior, identify that the schedule was running but dormant due to no file changes, add the `--delete` flag to `rsync` in `sync-vault.sh`, and run an automated sync to push pending deletions.
+- **Output:** Updated `sync-vault.sh` with `--delete`, executed sync, removed lingering obsolete folders, and pushed commit `3e2ee00` to `rfrondorf12/ai-101B`.
+- **Decision:** Keep. Correctly mirrors deleted/renamed folders and confirmed the hourly background schedule is healthy.
+- **Human Review:** Reviewed timestamp on GitHub to confirm update. Sync was successful with timestamp matching current time.
