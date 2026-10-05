@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcards — Adobe Certified Professional</title>
+  <!-- Link to shared CSS file per github_site_instructions -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Website Navigation Bar -->
+  <header class="site-navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="brand-group">
+        <div class="brand-badge">👾 TEACH ME HUB</div>
+        <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.8; text-transform: uppercase;">STUDY WORKFLOW</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links-row">
+          <li><a href="index.html" class="nav-link-btn">🏠 Dashboard</a></li>
+          <li><a href="folders.html" class="nav-link-btn">📁 Subject Folders</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-breadcrumb" style="font-size: 0.8rem; color: #555;">
+          <span>Art</span> &gt; <span>Flashcards: Adobe Certified Professional</span>
+        </div>
+        <span class="pill-badge pill-art">Art</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content View -->
+  <main>
+    <div class="content-container">
+
+      <section class="neo-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <span class="pill-badge pill-art">Art</span>
+            <h2 style="margin-top: 6px;">Adobe Certified Professional — Flashcards</h2>
+          </div>
+          <div>
+            <a href="note-adobe-professional.html" class="btn btn-primary">📝 Linked Note</a>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: bold;">
+            <span>Card <span id="card-index-indicator">1</span> of <span id="card-total-indicator">44</span></span>
+            <span>Mastery: <span id="mastery-percent">0%</span></span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Flashcard -->
+        <div class="flashcard-wrapper" onclick="toggleCardFlip()">
+          <div class="flashcard" id="main-flashcard">
+            <div class="card-face card-front">
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span class="pill-badge pill-art">Art</span>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-sm" onclick="event.stopPropagation(); showCardHint();" title="Get a hint">💡 Get a Hint</button>
+                  <button class="btn btn-sm btn-circle" id="starCardBtn" onclick="event.stopPropagation(); toggleStarCard();" title="Star this card">☆</button>
+                </div>
+              </div>
+              <div class="card-body-text" id="card-front-text">Loading card...</div>
+              <div class="card-hint">👆 Click anywhere to flip</div>
+            </div>
+            <div class="card-face card-back">
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span class="pill-badge pill-art">Answer / Definition</span>
+                <div style="font-size: 0.75rem; font-weight: bold; color: #777;">Click to flip front</div>
+              </div>
+              <div class="card-body-text" id="card-back-text">Loading answer...</div>
+              <div class="card-hint">👆 Click to flip back</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls Bar -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 24px; flex-wrap: wrap;">
+          <div class="card-nav-pill">
+            <button onclick="prevCard()" title="Previous Card">←</button>
+            <span style="font-size: 0.95rem; min-width: 60px; text-align: center;">
+              <span id="card-nav-curr">1</span> / <span id="card-nav-total">44</span>
+            </span>
+            <button onclick="nextCard()" title="Next Card">→</button>
+          </div>
+
+          <button class="btn btn-primary" onclick="toggleCardFlip()">🔄 Flip</button>
+          <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
+        </div>
+
+        <!-- Mastery Rating Buttons -->
+        <div style="display: flex; justify-content: center; gap: 14px; margin-top: 20px;">
+          <button class="btn" style="border-color: #fbb040;" onclick="markCardStatus('learning')">⏳ Still Learning</button>
+          <button class="btn" style="border-color: #39b54a; background-color: #eafaf1;" onclick="markCardStatus('mastered')">✅ Mastered</button>
+        </div>
+
+        <!-- Studying Progress Section -->
+        <div style="margin-top: 36px; padding: 22px; border: 2.5px solid var(--border-color); border-radius: 14px; background-color: #faf5f1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="font-size: 1.1rem;">Studying Progress</h3>
+            <span class="pill-badge pill-art" id="progress-box-pct">0%</span>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #e2e8f0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>⚪ <strong>New cards</strong></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-new" style="font-size: 1rem; font-weight: 900;">44</span>
+              <button class="btn btn-sm" onclick="filterByStatus('new')">Study</button>
+            </div>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #9b51e0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>🟣 <strong>Still learning</strong></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-learning" style="font-size: 1rem; font-weight: 900;">0</span>
+              <button class="btn btn-sm" onclick="filterByStatus('learning')">Study</button>
+            </div>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #39b54a;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>🟢 <strong>Mastered</strong></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-mastered" style="font-size: 1rem; font-weight: 900;">0</span>
+              <button class="btn btn-sm" onclick="filterByStatus('mastered')">Study</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Term Search & List -->
+        <div style="margin-top: 32px; border-top: 2.5px solid var(--border-color); padding-top: 22px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <h3>Deck Terms &amp; Answers (44)</h3>
+            <span style="font-size: 0.8rem; color: #777;">Click Study on any term to jump</span>
+          </div>
+          <input type="text" id="termSearchInput" class="term-search-box" placeholder="🔍 Search card terms or definitions..." onkeyup="filterTermList()">
+          <div id="termsList" style="margin-top: 14px; max-height: 280px; overflow-y: auto; border: 2.5px solid var(--border-color); border-radius: 10px; background-color: #fff;">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <div style="margin-top: 28px; padding-top: 18px; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <a href="index.html" class="btn">🏠 Return to Dashboard</a>
+          <a href="folders.html" class="btn">📁 Return to Folders</a>
+          <a href="note-adobe-professional.html" class="btn btn-primary">📝 View Full Note</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Teach Me Hub • Hosted with GitHub Pages</p>
+  </footer>
+
+  <script>
+    const deckData = [
+      {
+        q: "What are the two essential things a designer must clarify with a client at the beginning of every project?",
+        a: "The **purpose** of the design (the client's business goals and what they want to achieve) and the **target audience**.",
+        status: "new"
+      },
+      {
+        q: "What three key questions should a designer ask if a client brief is not detailed enough?",
+        a: "1. What is the main message you are trying to convey?<br>2. What action do you want the viewer to take after seeing the design?<br>3. How is this image going to be used (small handheld print vs. wall poster)?",
+        status: "new"
+      },
+      {
+        q: "How does the **target audience** influence graphic design complexity?",
+        a: "Older/mature audiences can understand complex graphics, infographics, and statistics; younger audiences require simpler graphics, more vibrant colors, and characters.",
+        status: "new"
+      },
+      {
+        q: "What is meant by project **deliverables**?",
+        a: "The actual files that you will need to supply to your client at the end of the project, depending on the output (print, web, or video).",
+        status: "new"
+      },
+      {
+        q: "What default resolution and color mode settings are used when creating a document for print in Photoshop?",
+        a: "A resolution of **300 ppi** (pixels per inch), working in RGB color mode for full tool availability and outputting/converting to **CMYK**.",
+        status: "new"
+      },
+      {
+        q: "What does **CMYK** stand for, and what does the letter **K** represent?",
+        a: "Cyan, Magenta, Yellow, and Key color (Black), which are the four ink colors used in printing.",
+        status: "new"
+      },
+      {
+        q: "What are the best file formats for print, and what is the standard bleed size?",
+        a: "**PDF**, **TIFF**, and **EPS**; standard bleed is **3 millimeters** (set via File > Print under Corner Crop Marks).",
+        status: "new"
+      },
+      {
+        q: "What resolution, color mode, and export formats are standard for web images?",
+        a: "**72 ppi** resolution, **RGB** color mode, exported as **JPEG**, **PNG**, **GIF**, or modern **WebP** via Export As or Save for Web.",
+        status: "new"
+      },
+      {
+        q: "What are the pixel dimensions for Full HD (1080p) and 4K (UHDTV) in video projects?",
+        a: "Full HD is **1920 × 1080 pixels**; 4K UHDTV is **3840 × 2160 pixels**.",
+        status: "new"
+      },
+      {
+        q: "What is **pixel aspect ratio**, and what ratio is used for anamorphic video?",
+        a: "The ratio between the width and height of an individual pixel (modern video uses square pixels 1.0; anamorphic format uses a **2:1** ratio with rectangular pixels).",
+        status: "new"
+      },
+      {
+        q: "What is the difference between a **raster image** and a **vector image**?",
+        a: "A **raster image** is made of pixels and is resolution dependent; a **vector image** is resolution independent and can be scaled up or down without losing quality.",
+        status: "new"
+      },
+      {
+        q: "What are the three key components of project communication?",
+        a: "1. **Project scope**<br>2. **Due dates**<br>3. **Possible impacts of delays**.",
+        status: "new"
+      },
+      {
+        q: "What is **scope creep**, and how do you prevent it?",
+        a: "The gradual, unapproved expansion of project goals, deliverables, or requirements beyond original agreement. Prevent with written deliverables, signed contracts, and limiting revision rounds.",
+        status: "new"
+      },
+      {
+        q: "What is a **change order**?",
+        a: "A signed document between designer and client whenever additional changes, directions, or tasks are requested that were not agreed on in the beginning.",
+        status: "new"
+      },
+      {
+        q: "What is the difference between a **Gantt chart** and the **Critical Path Method (CPM)**?",
+        a: "A **Gantt chart** visualizes tasks, timelines, overlaps, and deadlines; the **Critical Path Method** identifies the specific sequence of dependent tasks that directly impact project completion.",
+        status: "new"
+      },
+      {
+        q: "What is a **feedback loop** in graphic design?",
+        a: "The complete process of the designer delivering work for review, the client reviewing and sending feedback, and the designer addressing feedback and making changes.",
+        status: "new"
+      },
+      {
+        q: "What are the five key stages of project management in order?",
+        a: "1. **Planning and Analysis**<br>2. **Scheduling**<br>3. **Building**<br>4. **Review and Evaluation**<br>5. **Implementation and Publication**.",
+        status: "new"
+      },
+      {
+        q: "What is **copyright** in graphic design?",
+        a: "A legal protection that gives creators ownership over their original work (designs, illustrations, logos, layouts) automatically upon creation.",
+        status: "new"
+      },
+      {
+        q: "What is **public domain**?",
+        a: "Creative materials not protected by intellectual property laws (copyright, trademark, patent); owned by the public and usable by anyone without permission.",
+        status: "new"
+      },
+      {
+        q: "What is a **derivative work**, and does altering an original work make it yours?",
+        a: "A work altered from or based on an existing piece. Changing a design does NOT make it yours; the original creator still owns the copyright and permission is required.",
+        status: "new"
+      },
+      {
+        q: "What is **fair use**, and what four factors do courts evaluate?",
+        a: "A legal rule allowing limited use of copyrighted material without permission for education, commentary, news, or parody. Evaluated by: 1. Purpose, 2. Nature of work, 3. Amount used, 4. Effect on the market/financial value.",
+        status: "new"
+      },
+      {
+        q: "What is **licensing**?",
+        a: "A legal agreement permitting use of copyrighted material by paying a fee established by the copyright holder under specified terms and conditions.",
+        status: "new"
+      },
+      {
+        q: "What is **Creative Commons (CC)**?",
+        a: "A licensing system that lets creators share their work with the public while retaining some rights ('some rights reserved').",
+        status: "new"
+      },
+      {
+        q: "When are a **model release** and a **location release** required?",
+        a: "A **model release** is required when a recognizable person appears in your work; a **location release** is required for private property or recognizable landmarks.",
+        status: "new"
+      },
+      {
+        q: "What are the three primary working/project file formats in Adobe software?",
+        a: "**PSD** (Photoshop Document), **AI** (Adobe Illustrator), and **INDD** (InDesign Document).",
+        status: "new"
+      },
+      {
+        q: "What does **bit depth** measure, and how many colors can an 8-bit image hold?",
+        a: "A way of measuring the amount of colors in a file format; 8-bit holds **256 colors** (2^8), while 24-bit holds 8 bits per channel (RGB) for 16.7 million colors.",
+        status: "new"
+      },
+      {
+        q: "What is the primary difference between **EPS** and **SVG** vector formats?",
+        a: "**EPS** is predominantly used for print projects; **SVG** (Scalable Vector Graphics) is specifically designed for the web.",
+        status: "new"
+      },
+      {
+        q: "What is **Camera RAW**, and why is it preferred over JPEG for editing?",
+        a: "Unprocessed sensor data that retains a much wider tonal range, allowing recovery of highlight and shadow details without burning out to pure white or solid black.",
+        status: "new"
+      },
+      {
+        q: "What does a **histogram** show, and what do edge peaks indicate?",
+        a: "It displays the number of pixels across tonal regions from darkest blacks (left) to brightest whites (right). Peaks on either far edge indicate **clipping** (lost shadow or highlight detail).",
+        status: "new"
+      },
+      {
+        q: "What is **aliasing**, and how does **anti-aliasing** correct it?",
+        a: "**Aliasing** is the jagged stair-stepping effect along curved edges and low-resolution type; **anti-aliasing** averages and smooths edge colors to eliminate stair-stepping.",
+        status: "new"
+      },
+      {
+        q: "Why don't perfectly horizontal or vertical lines need anti-aliasing?",
+        a: "Because horizontal and vertical lines can align perfectly to the pixel grid, creating crisp, sharp edges naturally.",
+        status: "new"
+      },
+      {
+        q: "What is Photoshop's AI neural filter for resizing raster images called?",
+        a: "**SuperZoom**, powered by Adobe Sensei AI, which can upscale images up to 9x while enhancing details and removing JPEG artifacts.",
+        status: "new"
+      },
+      {
+        q: "What is a **color gamut**, and how do sRGB and Adobe RGB compare?",
+        a: "The subset of colors that can be represented by a color space. **sRGB** has a smaller gamut designed for web; **Adobe RGB** has a wider gamut used for print design.",
+        status: "new"
+      },
+      {
+        q: "What does the **Out of Gamut warning** in Photoshop's Color Picker signify?",
+        a: "The selected color cannot be represented with CMYK printing inks; clicking the warning jumps to the nearest achievable CMYK print color.",
+        status: "new"
+      },
+      {
+        q: "What are the three axes of the device-independent **LAB color mode**?",
+        a: "**L** (Lightness: 0 to 100, black to white), **a-axis** (green to red), and **b-axis** (blue to yellow).",
+        status: "new"
+      },
+      {
+        q: "How do you synchronize color management settings across all Adobe CC applications?",
+        a: "Open **Adobe Bridge**, go to Edit > Color Settings, select your saved settings profile, and click **Apply**.",
+        status: "new"
+      },
+      {
+        q: "What is the **rule of thirds** in composition?",
+        a: "A guideline dividing the frame into 3×3 sections, placing focal points off-center along the grid lines or intersections to guide the viewer's eye.",
+        status: "new"
+      },
+      {
+        q: "What is the difference between wide and shallow **depth of field**?",
+        a: "**Wide depth of field** keeps both foreground and background in sharp focus; **shallow depth of field** blurs foreground and background to isolate the subject.",
+        status: "new"
+      },
+      {
+        q: "What are **Smart Guides** in Photoshop, and what is the keyboard shortcut?",
+        a: "Dynamic purple/magenta guides showing alignment and spacing between layers; shortcut is **Cmd/Ctrl + Shift + R** (View > Show > Smart Guides).",
+        status: "new"
+      },
+      {
+        q: "What is a **Smart Object**, and why is it used before transforming layers?",
+        a: "An embedded container layer that preserves original image resolution and data, preventing pixelation and quality loss when scaling, rotating, or warping repeatedly.",
+        status: "new"
+      },
+      {
+        q: "What happens when you apply a filter to a **Smart Object** layer?",
+        a: "It automatically becomes a non-destructive **Smart Filter**, allowing you to toggle visibility, adjust settings, or delete it at any time.",
+        status: "new"
+      },
+      {
+        q: "What are the four core pillars of **non-destructive editing** in Photoshop?",
+        a: "1. Separate **Layers**<br>2. **Smart Objects** & Smart Filters<br>3. **Adjustment Layers** (with clipping masks)<br>4. **Layer Masks**.",
+        status: "new"
+      },
+      {
+        q: "What is the difference between **kerning** and **tracking**?",
+        a: "**Kerning** adjusts spacing between a specific pair of individual characters; **tracking** adjusts character spacing uniformly across an entire word, line, or block of text.",
+        status: "new"
+      },
+      {
+        q: "What happens when you change resolution in Image Size with **Resample unchecked**?",
+        a: "Pixel dimensions and image data remain identical; only print output resolution (ppi) and physical document size change without recalculating or adding pixels.",
+        status: "new"
+      }
+    ];
+
+    let currentIndex = 0;
+    let isFlipped = false;
+
+    // Load saved statuses from localStorage
+    try {
+      const savedStatuses = JSON.parse(localStorage.getItem("teachme_adobe_statuses") || "{}");
+      deckData.forEach((c, idx) => {
+        if (savedStatuses[idx]) c.status = savedStatuses[idx];
+      });
+    } catch (e) {}
+
+    function renderCard() {
+      const card = deckData[currentIndex];
+      const cardEl = document.getElementById("main-flashcard");
+      if (isFlipped) {
+        cardEl.classList.remove("flipped");
+        isFlipped = false;
+      }
+
+      setTimeout(() => {
+        document.getElementById("card-front-text").innerHTML = card.q;
+        document.getElementById("card-back-text").innerHTML = card.a;
+
+        const currNum = currentIndex + 1;
+        const totalNum = deckData.length;
+
+        document.getElementById("card-index-indicator").innerText = currNum;
+        document.getElementById("card-total-indicator").innerText = totalNum;
+        document.getElementById("card-nav-curr").innerText = currNum;
+        document.getElementById("card-nav-total").innerText = totalNum;
+
+        const starBtn = document.getElementById("starCardBtn");
+        starBtn.innerText = card.starred ? "★" : "☆";
+        starBtn.style.backgroundColor = card.starred ? "var(--accent-yellow)" : "#fff";
+
+        updateProgress();
+      }, 100);
+    }
+
+    function toggleStarCard() {
+      const card = deckData[currentIndex];
+      card.starred = !card.starred;
+      const starBtn = document.getElementById("starCardBtn");
+      starBtn.innerText = card.starred ? "★" : "☆";
+      starBtn.style.backgroundColor = card.starred ? "var(--accent-yellow)" : "#fff";
+    }
+
+    function showCardHint() {
+      const card = deckData[currentIndex];
+      const stripped = card.a.replace(/<[^>]*>?/gm, "").replace(/\*\*/g, "");
+      const words = stripped.split(" ").slice(0, 5).join(" ");
+      alert("💡 Hint: Starts with -> " + words + "...");
+    }
+
+    function filterByStatus(status) {
+      const idx = deckData.findIndex(c => c.status === status);
+      if (idx !== -1) {
+        jumpToCard(idx);
+      } else {
+        alert("No cards currently marked as " + status + "!");
+      }
+    }
+
+    function toggleCardFlip() {
+      const cardEl = document.getElementById("main-flashcard");
+      isFlipped = !isFlipped;
+      if (isFlipped) {
+        cardEl.classList.add("flipped");
+      } else {
+        cardEl.classList.remove("flipped");
+      }
+    }
+
+    function nextCard() {
+      if (currentIndex < deckData.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      renderCard();
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = deckData.length - 1;
+      }
+      renderCard();
+    }
+
+    function shuffleCards() {
+      for (let i = deckData.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deckData[i], deckData[j]] = [deckData[j], deckData[i]];
+      }
+      currentIndex = 0;
+      renderCard();
+      renderTermList();
+    }
+
+    function markCardStatus(status) {
+      deckData[currentIndex].status = status;
+      try {
+        const statuses = {};
+        deckData.forEach((c, i) => { if (c.status) statuses[i] = c.status; });
+        localStorage.setItem("teachme_adobe_statuses", JSON.stringify(statuses));
+      } catch (e) {}
+      updateProgress();
+      nextCard();
+    }
+
+    function updateProgress() {
+      const total = deckData.length;
+      const masteredCount = deckData.filter(c => c.status === "mastered").length;
+      const learningCount = deckData.filter(c => c.status === "learning").length;
+      const newCount = deckData.filter(c => c.status === "new" || !c.status).length;
+      const pct = total > 0 ? Math.round((masteredCount / total) * 100) : 0;
+
+      document.getElementById("mastery-percent").innerText = pct + "%";
+      document.getElementById("progress-fill").style.width = pct + "%";
+      document.getElementById("progress-box-pct").innerText = pct + "%";
+
+      document.getElementById("study-row-new").innerText = newCount;
+      document.getElementById("study-row-learning").innerText = learningCount;
+      document.getElementById("study-row-mastered").innerText = masteredCount;
+
+      try {
+        localStorage.setItem("teachme_adobe_mastered", masteredCount);
+      } catch (e) {}
+    }
+
+    function renderTermList() {
+      const listEl = document.getElementById("termsList");
+      listEl.innerHTML = "";
+      deckData.forEach((card, idx) => {
+        const item = document.createElement("div");
+        item.className = "term-item";
+        const cleanQ = card.q.replace(/<[^>]*>?/gm, "").replace(/\*\*/g, "");
+        const cleanA = card.a.replace(/<[^>]*>?/gm, "").replace(/\*\*/g, "");
+        item.innerHTML = `
+          <div>
+            <strong>#${idx + 1} ${cleanQ.substring(0, 48)}...</strong>
+            <div style="font-size: 0.75rem; color: #666;">${cleanA.substring(0, 65)}...</div>
+          </div>
+          <button class="btn" style="padding: 4px 8px; font-size: 0.75rem;" onclick="jumpToCard(${idx})">Study</button>
+        `;
+        listEl.appendChild(item);
+      });
+    }
+
+    function jumpToCard(idx) {
+      currentIndex = idx;
+      renderCard();
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    function filterTermList() {
+      const query = document.getElementById("termSearchInput").value.toLowerCase();
+      const items = document.querySelectorAll("#termsList .term-item");
+      items.forEach((item, idx) => {
+        const card = deckData[idx];
+        const match = card.q.toLowerCase().includes(query) || card.a.toLowerCase().includes(query);
+        item.style.display = match ? "flex" : "none";
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCard();
+      renderTermList();
+      updateProgress();
+    });
+  </script>
+</body>
+</html>

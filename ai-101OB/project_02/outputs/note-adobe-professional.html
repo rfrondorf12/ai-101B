@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Notes — Adobe Certified Professional</title>
+  <!-- Link to shared CSS file per github_site_instructions -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Website Navigation Bar -->
+  <header class="site-navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="brand-group">
+        <div class="brand-badge">👾 TEACH ME HUB</div>
+        <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.8; text-transform: uppercase;">STUDY WORKFLOW</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links-row">
+          <li><a href="index.html" class="nav-link-btn">🏠 Dashboard</a></li>
+          <li><a href="folders.html" class="nav-link-btn">📁 Subject Folders</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-breadcrumb" style="font-size: 0.8rem; color: #555;">
+          <span>Art</span> &gt; <span>Notes: Adobe Certified Professional</span>
+        </div>
+        <span class="pill-badge pill-art">Art</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content View -->
+  <main>
+    <div class="content-container">
+
+      <section class="neo-box note-content">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <span class="pill-badge pill-art">Art</span>
+            <h1 style="margin-top: 10px;">Adobe Certified Professional: Photoshop &amp; Graphic Design</h1>
+            <p style="font-size: 0.85rem; color: #555;">Source: <code>adobe_professional_certificate.md</code></p>
+          </div>
+          <div>
+            <a href="flashcards-adobe-professional.html" class="btn btn-teal">🗂️ Linked Flashcards</a>
+          </div>
+        </div>
+
+        <hr style="border: 0; border-top: 2px solid var(--border-color); margin: 16px 0;">
+
+        <h2>1. Exam Structure &amp; Environment</h2>
+        <p><em>Note: This introductory section covers testing logistics and is excluded from the flashcard deck per source instructions.</em></p>
+        <ul>
+          <li><strong>Exam Structure</strong> - Total time is <span class="equation-highlight">50 minutes</span> to complete 13 multiple choice questions (Segment 1) followed by 17 live hands-on tasks in Photoshop (Segment 2).</li>
+          <li><strong>Multiple Choice Segment</strong> - Consists of 13 questions; typically single choice unless specified otherwise.</li>
+          <li><strong>Mark for Review</strong> - Checkbox available on any question or task to flag it with an icon, allowing you to return via the summary screen before final submission.</li>
+          <li><strong>Reset Option</strong> - Any question or task can be reset to its initial state at any point.</li>
+          <li><strong>Live Task Segment</strong> - Runs directly inside Photoshop with the certification test panel docked on the right and the document workspace on the left.</li>
+          <li><strong>Workspace Reset</strong> - Reset interface layout via <span class="path-highlight">Window &gt; Workspace &gt; Reset the Certification Test Workspace</span>.</li>
+          <li><strong>Recommended Panel Layout</strong> - Dock the <strong>Layers</strong> and <strong>Properties</strong> panels right beside the certification test panel and keep them visible.</li>
+          <li><strong>Blocked Features</strong> - The Help menu is intentionally blocked during the exam.</li>
+          <li><strong>Exhibit Button</strong> - On select tasks, click <strong>Exhibit</strong> to preview the target visual result (before and after) before reading instructions.</li>
+          <li><strong>Text Copy Shortcut</strong> - Any text styled in underlined, bold, and italic in the instructions copies automatically to the clipboard when clicked.</li>
+          <li><strong>Exam Golden Rule</strong> - Only modify settings explicitly requested; leave all other dialog box options at their default values.</li>
+          <li><strong>Passing Score</strong> - Requires <span class="equation-highlight">700 / 1000 points (70%)</span>. Score reports appear immediately upon submitting.</li>
+        </ul>
+
+        <h2>2. Identify Purpose and Audience</h2>
+        <ul>
+          <li><strong>Purpose</strong> - The client's business goals and what they want to achieve with the design or image. Clarified through the design brief and direct client consultation.</li>
+          <li><strong>Target Audience</strong> - The specific demographic group for whom the design is created (e.g. high school students aged 15–17).</li>
+          <li><strong>Audience Age Considerations</strong> - Older and mature audiences can comprehend complex graphics, detailed infographics, and statistics; younger audiences require simpler layouts, vibrant colors, and characters.</li>
+          <li><strong>Designer Brief Clarifications</strong> - Key questions to ask if a brief lacks detail:
+            <ul>
+              <li>What is the main message to convey?</li>
+              <li>What specific action should the viewer take after seeing the design?</li>
+              <li>How will the image be displayed (small handheld print vs. large classroom wall poster)?</li>
+            </ul>
+          </li>
+          <li><strong>Print Specifications</strong> - Specified in the brief: print dimensions, color mode, and resolution (<span class="equation-highlight">300 ppi</span>).</li>
+        </ul>
+
+        <h2>3. Requirements: Video, Print, and Web</h2>
+        <ul>
+          <li><strong>Deliverables</strong> - The actual completed files supplied to the client at project delivery, determined by the medium (print, web, video). New document setup: <span class="path-highlight">File &gt; New</span>.</li>
+          <li><strong>Print Requirements</strong>:
+            <ul>
+              <li><strong>Resolution</strong> - Default suggested standard is <span class="equation-highlight">300 ppi</span> (pixels per inch).</li>
+              <li><strong>Color Mode</strong> - Work in RGB mode within Photoshop for full feature and tool availability; output/convert to <strong>CMYK</strong> for print production.</li>
+              <li><strong>CMYK</strong> - Four-color process inks: Cyan, Magenta, Yellow, and Key color (Black).</li>
+              <li><strong>Print File Formats</strong> - PDF, TIFF, and EPS.</li>
+              <li><strong>Bleed Configuration</strong> - Set via <span class="path-highlight">File &gt; Print</span> &gt; under Printing Marks enable Corner Crop Marks &gt; open Functions &gt; set Bleed (standard: <span class="equation-highlight">3 mm</span>).</li>
+            </ul>
+          </li>
+          <li><strong>Web Requirements</strong>:
+            <ul>
+              <li><strong>Resolution</strong> - Suggested standard is <span class="equation-highlight">72 ppi</span>.</li>
+              <li><strong>Color Mode</strong> - RGB color mode.</li>
+              <li><strong>Export Paths</strong> - Export files via <span class="path-highlight">File &gt; Export &gt; Export As</span> or <span class="path-highlight">File &gt; Export &gt; Save for Web</span>.</li>
+              <li><strong>Web Formats</strong> - JPEG, PNG, GIF, and modern WebP (accessible via <span class="path-highlight">File &gt; Save a Copy &gt; on your computer</span>).</li>
+              <li><strong>Compression Priority</strong> - Minimize file size for faster page load times without compromising visual image quality.</li>
+            </ul>
+          </li>
+          <li><strong>Film &amp; Video Requirements</strong>:
+            <ul>
+              <li><strong>Presets &amp; Dimensions</strong> - Full HD / 1080p (<span class="equation-highlight">1920 &times; 1080 pixels</span>), 720p, and 4K UHDTV (<span class="equation-highlight">3840 &times; 2160 pixels</span>).</li>
+              <li><strong>Pixel Aspect Ratio</strong> - Ratio between width and height of an individual pixel. Modern formats use square pixels (<span class="equation-highlight">1.0</span> ratio); NTSC requires a <span class="equation-highlight">0.91</span> ratio; Anamorphic format uses a <span class="equation-highlight">2:1</span> ratio (rectangular pixels).</li>
+            </ul>
+          </li>
+          <li><strong>Image Classifications</strong>:
+            <ul>
+              <li><strong>Raster Image</strong> - Pixel-based image, resolution-dependent; degrades and pixelates when scaled upward.</li>
+              <li><strong>Vector Image</strong> - Mathematically calculated artwork; resolution-independent; scales infinitely without losing sharpness.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2>4. Key Components of Project Communication</h2>
+        <ul>
+          <li><strong>Three Communication Pillars</strong> - 1. Project scope, 2. Due dates, 3. Possible impacts of delays.</li>
+          <li><strong>Project Scope</strong> - Documented agreement defining deliverables, goals, and client expectations established in the brief.</li>
+          <li><strong>Scope Creep</strong> - The gradual, unapproved expansion of project goals, deliverables, or revisions beyond the original agreement without adjustments to timeline, budget, or contract.</li>
+          <li><strong>Preventing Scope Creep</strong> - Establish clear written deliverables, signed contracts, and explicitly limit allowed revision rounds included in initial pricing.</li>
+          <li><strong>Change Order</strong> - A signed contractual amendment between designer and client detailing additional changes, altered directions, and compensation outside the initial scope.</li>
+          <li><strong>Gantt Chart</strong> - Visual timeline representation for tracking project tasks, durations, overlaps, and deadlines.</li>
+          <li><strong>Critical Path Method (CPM)</strong> - Visual planning technique identifying the sequence of dependent tasks that directly impact project completion date.</li>
+          <li><strong>Feedback Loop</strong> - The cyclic process of a designer submitting work, the client reviewing and returning feedback, and the designer making revisions. Tracked via version numbers (v1, v2) and dedicated project subfolders.</li>
+        </ul>
+
+        <h2>5. Basic Project Management Concepts</h2>
+        <ol>
+          <li><strong>Planning and Analysis</strong> - Identifying target audience, demographics, client goals/purpose, securing contracts/agreements, and reviewing the design brief.</li>
+          <li><strong>Scheduling</strong> - Establishing realistic timelines based on deliverables and scope; setting deadlines with Gantt charts.</li>
+          <li><strong>Building</strong> - Asset creation and ideation (mind mapping, rough sketches, UI wireframing), prototyping, and developing final designs.</li>
+          <li><strong>Review and Evaluation</strong> - Internal peer reviews against the brief, formal client presentations (PDF/slides rehearsal), and client approval.</li>
+          <li><strong>Implementation and Publication</strong> - Delivering the completed final product in the format and medium for which it was designed.</li>
+        </ol>
+
+        <h2>6. Copyright, Permissions, and Licensing</h2>
+        <ul>
+          <li><strong>Copyright</strong> - Automatic legal protection granting creators exclusive ownership over original works (designs, logos, illustrations) upon creation. Rule: <em>"If you made it you own it; if someone else made it you need permission."</em></li>
+          <li><strong>Public Domain</strong> - Creative material not protected by intellectual property laws (copyright, trademark, patent); owned by the general public and free for anyone to use without permission.</li>
+          <li><strong>Derivative Work</strong> - New work altered from or based upon an existing original piece. Modifying a design does not make it yours; the original creator retains copyright and legal permission is required.</li>
+          <li><strong>Fair Use</strong> - Legal doctrine allowing limited use of copyrighted material without permission in specific contexts: education, commentary, news reporting, and parody.</li>
+          <li><strong>Four Fair Use Factors</strong> - 1. Purpose of use, 2. Nature of original work (factual vs. creative), 3. Amount used relative to whole, 4. Effect on the market/financial value for the copyright holder.</li>
+          <li><strong>Licensing</strong> - Legal agreement permitting use of copyrighted material for a specified fee, timeframe, and defined usage terms.</li>
+          <li><strong>Creative Commons (CC)</strong> - Licensing framework allowing creators to share work publicly while reserving specific rights ("some rights reserved").</li>
+          <li><strong>Model Release</strong> - Signed legal document required when an individual person is recognizable in artwork.</li>
+          <li><strong>Location Release</strong> - Signed legal document required when private property or recognizable commercial landmarks appear in artwork.</li>
+        </ul>
+
+        <h2>7. File Formats &amp; Technical Attributes</h2>
+        <ul>
+          <li><strong>Graphic Design File Categories</strong>:
+            <ul>
+              <li><strong>Working / Project Files</strong> - PSD (Photoshop), AI (Illustrator), INDD (InDesign).</li>
+              <li><strong>Asset Files</strong> - Raster/vector graphics, text files, spreadsheets.</li>
+              <li><strong>Print-Ready Files</strong> - PDF, EPS.</li>
+            </ul>
+          </li>
+          <li><strong>Raster Image Formats</strong>:
+            <ul>
+              <li><strong>JPEG</strong> - Lossy compression; produces <strong>compression artifacts</strong> at lower quality settings; supports embedded color profiles.</li>
+              <li><strong>PNG</strong> - Lossless compression with transparency. Default 24-bit depth; PNG-8 provides 8-bit depth (<span class="equation-highlight">2^8 = 256 colors</span>) for smaller file sizes.</li>
+              <li><strong>GIF</strong> - Supports frame animation; capped strictly at 8-bit depth (<span class="equation-highlight">256 colors max</span>).</li>
+              <li><strong>WebP</strong> - Modern web image format offering efficient compression.</li>
+            </ul>
+          </li>
+          <li><strong>Bit Depth</strong> - Measurement of color data capacity per pixel (<span class="equation-highlight">8-bit = 256 colors</span>; <span class="equation-highlight">24-bit = 8 bits per channel RGB</span> for 16.7 million colors).</li>
+          <li><strong>Vector File Formats</strong>:
+            <ul>
+              <li><strong>EPS</strong> - Vector format standard for print production.</li>
+              <li><strong>SVG</strong> - Scalable Vector Graphics, standard for web deployment.</li>
+            </ul>
+          </li>
+          <li><strong>Camera RAW</strong> - Unprocessed sensor data from digital cameras; preserves wide tonal latitude for highlight and shadow recovery without clipping.</li>
+          <li><strong>Tonal Range</strong> - Span between the darkest shadows and brightest highlights in an image.</li>
+          <li><strong>Histogram</strong> - Graphical distribution of pixels from pure black (left), mid-tones (center), to pure white (right). Spikes on either far edge indicate clipping.</li>
+          <li><strong>Access Full File Types</strong> - Access comprehensive export formats via <span class="path-highlight">File &gt; Save a Copy</span>.</li>
+        </ul>
+
+        <h2>8. Aliasing and Image Scaling</h2>
+        <ul>
+          <li><strong>Aliasing</strong> - Jagged, stair-stepped pixel edges visible along curves and diagonals on low-resolution type or raster graphics.</li>
+          <li><strong>Anti-Aliasing</strong> - Edge-smoothing technique that blends pixel colors with surrounding background to soften stair-stepping. (Note: Perfectly horizontal and vertical lines align cleanly to the pixel grid and do not require anti-aliasing).</li>
+          <li><strong>Neural SuperZoom</strong> - Photoshop AI neural filter (<span class="path-highlight">Filter &gt; Neural Filters</span>) powered by Adobe Sensei to upscale raster images up to 9x while reconstructing missing details and reducing noise.</li>
+        </ul>
+
+        <h2>9. Color Spaces, Gamuts, and Calibration</h2>
+        <ul>
+          <li><strong>Color Management</strong> - Systematic calibration ensuring color consistency from screen preview to final printed product.</li>
+          <li><strong>ICC Color Profile</strong> - International Color Consortium (1993) standard describing device color space, gamut, and calibration parameters.</li>
+          <li><strong>Color Models</strong>:
+            <ul>
+              <li><strong>RGB</strong> - Additive color model for screens; combining red, green, and blue creates white (maximum intensity).</li>
+              <li><strong>CMYK</strong> - Subtractive color model for print; combining inks creates dark/black tones.</li>
+            </ul>
+          </li>
+          <li><strong>Color Gamut</strong> - The complete range of colors reproducible within a color space. Relative gamut range:
+            <div style="margin: 8px 0;"><span class="equation-highlight">sRGB &lt; standard CMYK &lt; Adobe RGB &lt; ProPhoto RGB</span></div>
+            <ul>
+              <li><strong>sRGB</strong> - Smallest gamut, standard for web and digital displays.</li>
+              <li><strong>Adobe RGB</strong> - Wide gamut standard for graphic design and prepress print workflows.</li>
+              <li><strong>ProPhoto RGB</strong> - Extra-large gamut used in professional photographic workflows.</li>
+            </ul>
+          </li>
+          <li><strong>Out of Gamut Warning</strong> - Warning indicator in Photoshop Color Picker alerting that a chosen color cannot be reproduced in CMYK print ink. Clicking the icon shifts to the nearest printable CMYK color.</li>
+        </ul>
+
+        <h2>10. LAB Color Space and Synchronizing Settings</h2>
+        <ul>
+          <li><strong>LAB Color Mode (L*a*b*)</strong> - Three-dimensional device-independent color model matching human vision:
+            <ul>
+              <li><strong>L (Lightness / Luminosity)</strong> - Measured on a scale from <span class="equation-highlight">0 (black) to 100 (white)</span>.</li>
+              <li><strong>a-axis</strong> - Green (negative values) to Red (positive values).</li>
+              <li><strong>b-axis</strong> - Blue (negative values) to Yellow (positive values).</li>
+            </ul>
+          </li>
+          <li><strong>Synchronizing Adobe Color Settings</strong> - Configure policies in <span class="path-highlight">Edit &gt; Color Settings</span> in Photoshop. To synchronize across Photoshop, Illustrator, and InDesign: launch Adobe Bridge (<span class="path-highlight">File &gt; Browse in Bridge</span>), navigate to <span class="path-highlight">Edit &gt; Color Settings</span>, choose your saved preset, and click <strong>Apply</strong>.</li>
+        </ul>
+
+        <h2>11. Photographic &amp; Composition Principles</h2>
+        <ul>
+          <li><strong>Aspect Ratio</strong> - Proportional relationship between image width and height (<span class="equation-highlight">16:9</span> widescreen, <span class="equation-highlight">4:3</span> traditional, <span class="equation-highlight">1:1</span> square). Set via the Crop Tool.</li>
+          <li><strong>Rule of Thirds</strong> - Compositional framework dividing the frame into 3&times;3 equal sections. Important visual focal points are aligned along grid lines or intersections rather than centered.</li>
+          <li><strong>Planes of Depth</strong>:
+            <ul>
+              <li><strong>Foreground</strong> - Visual elements positioned closest to the viewer.</li>
+              <li><strong>Mid-ground</strong> - Intermediate visual space between foreground and background.</li>
+              <li><strong>Background</strong> - Distant scenic backdrop or elements furthest away.</li>
+            </ul>
+          </li>
+          <li><strong>Depth of Field</strong> - The range of distance in an image that appears acceptably sharp:
+            <ul>
+              <li><strong>Wide Depth of Field</strong> - Entire scene from foreground to background is in focus.</li>
+              <li><strong>Shallow Depth of Field</strong> - Narrow plane of focus with blurred foreground and background to isolate the subject.</li>
+            </ul>
+          </li>
+          <li><strong>Contrast</strong> - Differentiation created through tonal or color variation to make key elements pop.</li>
+          <li><strong>White Balance</strong> - Color temperature adjustment ensuring whites and neutral grays appear true without unnatural tint casts. Quick path: <span class="path-highlight">Image &gt; Auto Color</span>; manual Camera Raw path: <span class="path-highlight">Filter &gt; Camera Raw Filter &gt; Color</span>.</li>
+        </ul>
+
+        <h2>12. Guides, Rulers, and Grids</h2>
+        <ul>
+          <li><strong>Rulers</strong> - Toggle visibility via <span class="equation-highlight">Cmd/Ctrl + R</span>, <span class="path-highlight">View &gt; Rulers</span>, or Properties panel. Right-click ruler to change units (pixels, inches, cm). Drag top-left intersection to reposition the zero origin; double-click intersection to reset origin.</li>
+          <li><strong>Creating Guides</strong> - Drag from horizontal or vertical rulers. Hold <span class="equation-highlight">Alt/Option</span> while dragging to toggle between horizontal and vertical orientation.</li>
+          <li><strong>New Guide Commands</strong> - Create individual guide via <span class="path-highlight">View &gt; Guides &gt; New Guide</span>. Generate multi-column/row grids with gutters and margins via <span class="path-highlight">View &gt; Guides &gt; New Guide Layout</span>.</li>
+          <li><strong>Manipulating Guides</strong> - Must use the <strong>Move Tool</strong> (shortcut: <span class="equation-highlight">V</span>). Highlighted guides delete with <span class="equation-highlight">Backspace</span>. Lock guides via <span class="path-highlight">View &gt; Guides &gt; Lock Guides</span>.</li>
+          <li><strong>Smart Guides</strong> - Dynamic magenta alignment guides showing alignment and spacing between objects (toggle: <span class="equation-highlight">Cmd/Ctrl + Shift + R</span> or <span class="path-highlight">View &gt; Show &gt; Smart Guides</span>).</li>
+          <li><strong>Grid</strong> - Toggle grid via <span class="path-highlight">View &gt; Show &gt; Grid</span>.</li>
+        </ul>
+
+        <h2>13. Brushes, Presets, and Dynamics</h2>
+        <ul>
+          <li><strong>Panels</strong> - <strong>Brushes panel</strong> (organizing, importing, presets) vs. <strong>Brush Settings panel</strong> (detailed dynamics and behavior).</li>
+          <li><strong>Preset Libraries</strong> - Download Kyle T. Webster brush sets via <span class="path-highlight">Brushes panel menu &gt; Get More Brushes</span> or import via <span class="path-highlight">Import Brushes</span>.</li>
+          <li><strong>Brush Dynamic Parameters</strong>:
+            <ul>
+              <li><strong>Size &amp; Hardness</strong> - Brush diameter and edge softness (0% = soft edge, 100% = crisp edge).</li>
+              <li><strong>Spacing</strong> - Distance between stamped tip instances (<span class="equation-highlight">1%</span> = continuous smooth stroke; larger values = dotted/spaced stamp pattern).</li>
+              <li><strong>Scattering &amp; Count</strong> - Disperses tip instances across axes and adjusts density.</li>
+              <li><strong>Size &amp; Angle Jitter</strong> - Randomizes size and rotational angle of brush stamps.</li>
+              <li><strong>Transfer</strong> - Randomizes opacity per stamp.</li>
+              <li><strong>Color Dynamics (Hue Jitter)</strong> - Randomizes stroke color between foreground and background hues.</li>
+              <li><strong>Roundness &amp; Angle</strong> - Compresses round tip into an oval and slants angle for calligraphy.</li>
+            </ul>
+          </li>
+          <li><strong>Lock Settings</strong> - Padlock icon locks customized settings across different brush tip shapes. Reset via <span class="path-highlight">Brush Settings panel menu &gt; Reset All Locked Settings</span>.</li>
+          <li><strong>Exporting Brushes</strong> - Export customized brushes as <strong>.ABR</strong> files via <span class="path-highlight">Brushes panel menu &gt; Export Selected Brushes</span>.</li>
+        </ul>
+
+        <h2>14. Non-Destructive Editing Workflow</h2>
+        <ul>
+          <li><strong>Core Philosophy</strong> - Workflow preserving original pixel and vector data so all edits remain reversible and re-editable at any point.</li>
+          <li><strong>Four Pillars of Non-Destructive Editing</strong> - 1. Independent Layers, 2. Smart Objects &amp; Smart Filters, 3. Adjustment Layers (with clipping masks), 4. Layer Masks.</li>
+          <li><strong>Smart Objects</strong> - Protective container layers that keep embedded raster or vector source data intact at original resolution during transformations (scaling, rotation, skewing).
+            <ul>
+              <li>Convert layer via <span class="path-highlight">Right-click &gt; Convert to Smart Object</span>.</li>
+              <li>Double-click thumbnail to edit embedded child source document (extension <strong>.psb</strong> - Photoshop Big); save via <span class="path-highlight">File &gt; Save</span> to update master file.</li>
+              <li>Nested Smart Objects: Multiple layers or existing smart objects can be combined into a single master smart object.</li>
+            </ul>
+          </li>
+          <li><strong>Smart Filters</strong> - Any filter applied to a Smart Object layer automatically becomes a non-destructive Smart Filter with toggleable visibility, editable settings, and maskable areas.</li>
+          <li><strong>Vector Layers</strong> - Text and Shape layers in Photoshop are native vector objects and scale infinitely without quality loss; converting to Smart Objects is unnecessary.</li>
+          <li><strong>Layer Mask Toggle</strong> - Hold <span class="equation-highlight">Shift</span> and click layer mask thumbnail to temporarily disable/enable the mask.</li>
+        </ul>
+
+        <h2>15. Destructive Editing Operations</h2>
+        <ul>
+          <li><strong>Definition</strong> - Irreversible changes that overwrite, alter, or delete underlying pixel data permanently once closed and saved.</li>
+          <li><strong>Destructive Actions</strong>:
+            <ul>
+              <li><strong>Flattening</strong> - Merging all layers into a single background layer via <span class="path-highlight">Layers panel menu &gt; Flatten Image</span>.</li>
+              <li><strong>Rasterizing</strong> - Converting vector, text, or Smart Object layers into static pixels (<span class="path-highlight">Right-click &gt; Rasterize Layer</span>), forfeiting scalable vectors and live attributes.</li>
+              <li><strong>Direct Painting</strong> - Painting directly onto existing image pixels with brush.</li>
+              <li><strong>Direct Menu Adjustments</strong> - Applying adjustments via <span class="path-highlight">Image &gt; Adjustments</span> directly on raster pixels instead of using Adjustment Layers.</li>
+              <li><strong>Direct Erasure</strong> - Erasing pixels with the Eraser tool instead of hiding them with a Layer Mask.</li>
+            </ul>
+          </li>
+          <li><strong>Non-Destructive Alternatives</strong>:
+            <ul>
+              <li>Eraser &rarr; <strong>Layer Mask</strong> (paint black to hide, white to reveal).</li>
+              <li>Direct Adjustments &rarr; <strong>Adjustment Layers</strong> with <strong>Clipping Mask</strong> (<span class="equation-highlight">Alt/Option-click</span> between layers).</li>
+              <li>Direct Painting &rarr; Paint on a newly created transparent layer above artwork.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2>16. Clone Stamp Tool and History Brush</h2>
+        <ul>
+          <li><strong>Clone Stamp Tool</strong> (shortcut: <span class="equation-highlight">S</span>):
+            <ul>
+              <li>Samples pixels from a source point and replicates them onto a target area. Recommended hardness is <span class="equation-highlight">0%</span> (soft brush).</li>
+              <li>Non-destructive workflow: Create a new blank layer above artwork, set Sample dropdown to <strong>All Layers</strong>, hold <span class="equation-highlight">Alt/Option</span> and click to sample source pixels, and paint on the blank layer.</li>
+              <li><strong>Aligned Option</strong> - When enabled, sampling point moves synchronously with brush strokes. When disabled, every new stroke resets back to the initial sample anchor point.</li>
+              <li><strong>Clone Source Panel</strong> (<span class="path-highlight">Window &gt; Clone Source</span>) - Allows scaling sample dimensions (e.g. <span class="equation-highlight">25%</span>), flipping horizontally or vertically, and offsetting angles.</li>
+            </ul>
+          </li>
+          <li><strong>History Brush Tool</strong> - Paints pixel data back to a designated historical snapshot state selected in the History panel.</li>
+        </ul>
+
+        <h2>17. Character &amp; Paragraph Typography</h2>
+        <ul>
+          <li><strong>Character Formatting Options</strong>:
+            <ul>
+              <li><strong>Tracking</strong> - Adjusts letter spacing uniformly across an entire word, sentence, or text block.</li>
+              <li><strong>Kerning</strong> - Adjusts spacing between a specific pair of individual characters (shortcut: <span class="equation-highlight">Alt/Option + Left/Right Arrow</span>).</li>
+              <li><strong>Baseline Shift</strong> - Offsets selected text vertically above or below the font's baseline.</li>
+              <li><strong>Vertical &amp; Horizontal Scale</strong> - Stretches glyphs vertically or horizontally (recommended to remain at <span class="equation-highlight">100%</span>).</li>
+              <li><strong>Ligatures</strong> - OpenType typographic feature joining adjacent character pairs (e.g. "Th", "fi") into a single unified glyph to improve legibility and aesthetics.</li>
+              <li><strong>Discretionary Ligatures</strong> - Stylistic optional ligatures for specific decorative character pairs ("st", "ch").</li>
+            </ul>
+          </li>
+          <li><strong>Paragraph Formatting Options</strong>:
+            <ul>
+              <li><strong>Alignment</strong> - Left, Center, Right, or Justified text alignment.</li>
+              <li><strong>Indentation</strong> - Full paragraph margin indent or First-line indent.</li>
+              <li><strong>Space Between Paragraphs</strong> - Adds vertical space between paragraphs cleanly without empty carriage returns.</li>
+              <li><strong>Hyphenation</strong> - Toggles automatic word hyphenation across line breaks.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2>18. Export &amp; Output Preparation</h2>
+        <ul>
+          <li><strong>Document Verification</strong>:
+            <ul>
+              <li><strong>Color Mode &amp; Bit Depth</strong> - Verify via <span class="path-highlight">Image &gt; Mode</span> (RGB, CMYK, Grayscale, 8/16/32-bit).</li>
+              <li><strong>Image Size &amp; Resolution</strong> - Check via <span class="path-highlight">Image &gt; Image Size</span> (<span class="equation-highlight">300 ppi</span> for print). When <strong>Resample is unchecked</strong>, changing resolution preserves exact pixel dimensions and data while updating physical output size.</li>
+              <li><strong>File Info Metadata</strong> - Access metadata via <span class="path-highlight">File &gt; File Info</span> &gt; Basic category. Set Copyright Status to Copyrighted and add Copyright Notice.</li>
+            </ul>
+          </li>
+          <li><strong>Export Workflows</strong>:
+            <ul>
+              <li><strong>Print Export</strong> - Save via <span class="path-highlight">File &gt; Save As</span> &gt; choose Photoshop PDF &gt; select PDF/X preset (e.g., PDF/X-1a, PDF/X-4).</li>
+              <li><strong>Save for Web</strong> - Access via <span class="path-highlight">File &gt; Export &gt; Save for Web</span>. Configure preset formats (JPEG, PNG, GIF), adjust quality slider, resize percentage, and click Save.</li>
+              <li><strong>Export As</strong> - Access via <span class="path-highlight">File &gt; Export &gt; Export As</span>. Select format, embed metadata/copyright, and add multiple output scale versions (e.g. 1x, 0.5x).</li>
+              <li><strong>Render Video</strong> - Access via <span class="path-highlight">File &gt; Export &gt; Render Video</span>. If video layers are present, select Adobe Media Encoder and MP4 format.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Docked Notes Bottom Action Bar -->
+        <div style="margin-top: 36px; padding-top: 22px; border-top: 2.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div style="display: flex; gap: 10px;">
+            <a href="index.html" class="btn">🏠 Return to Dashboard</a>
+            <a href="folders.html" class="btn">📁 Return to Folders</a>
+          </div>
+          <a href="flashcards-adobe-professional.html" class="btn btn-teal">🗂️ Study Linked Flashcards →</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Teach Me Hub • Hosted with GitHub Pages</p>
+  </footer>
+
+</body>
+</html>

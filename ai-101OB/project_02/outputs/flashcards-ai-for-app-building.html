@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcards — AI for App Building</title>
+  <!-- Link to shared CSS file per github_site_instructions -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Website Navigation Bar -->
+  <header class="site-navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="brand-group">
+        <div class="brand-badge">👾 TEACH ME HUB</div>
+        <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.8; text-transform: uppercase;">STUDY WORKFLOW</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links-row">
+          <li><a href="index.html" class="nav-link-btn">🏠 Dashboard</a></li>
+          <li><a href="folders.html" class="nav-link-btn">📁 Subject Folders</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-breadcrumb" style="font-size: 0.8rem; color: #555;">
+          <span>AI</span> &gt; <span>Flashcards: AI for App Building</span>
+        </div>
+        <span class="pill-badge pill-ai">Artificial Intelligence</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content View -->
+  <main>
+    <div class="content-container">
+
+      <section class="neo-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <span class="pill-badge pill-ai">Artificial Intelligence</span>
+            <h2 style="margin-top: 6px;">AI for App Building — Flashcards</h2>
+          </div>
+          <div>
+            <a href="note-ai-for-app-building.html" class="btn btn-primary">📝 Linked Note</a>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: bold;">
+            <span>Card <span id="card-index-indicator">1</span> of <span id="card-total-indicator">15</span></span>
+            <span>Mastery: <span id="mastery-percent">0%</span></span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Flashcard -->
+        <div class="flashcard-wrapper" onclick="toggleCardFlip()">
+          <div class="flashcard" id="main-flashcard">
+            <div class="card-face card-front">
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span class="pill-badge pill-ai">Artificial Intelligence</span>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-sm" onclick="event.stopPropagation(); showCardHint();" title="Get a hint">💡 Get a Hint</button>
+                  <button class="btn btn-sm btn-circle" id="starCardBtn" onclick="event.stopPropagation(); toggleStarCard();" title="Star this card">☆</button>
+                </div>
+              </div>
+              <div class="card-body-text" id="card-front-text">Loading card...</div>
+              <div class="card-hint">👆 Click anywhere to flip</div>
+            </div>
+            <div class="card-face card-back">
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span class="pill-badge pill-ai">Answer / Definition</span>
+                <div style="font-size: 0.75rem; font-weight: bold; color: #777;">Click to flip front</div>
+              </div>
+              <div class="card-body-text" id="card-back-text">Loading answer...</div>
+              <div class="card-hint">👆 Click to flip back</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls Bar -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 24px; flex-wrap: wrap;">
+          <div class="card-nav-pill">
+            <button onclick="prevCard()" title="Previous Card">←</button>
+            <span style="font-size: 0.95rem; min-width: 60px; text-align: center;">
+              <span id="card-nav-curr">1</span> / <span id="card-nav-total">15</span>
+            </span>
+            <button onclick="nextCard()" title="Next Card">→</button>
+          </div>
+
+          <button class="btn btn-primary" onclick="toggleCardFlip()">🔄 Flip</button>
+          <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
+        </div>
+
+        <!-- Mastery Rating Buttons -->
+        <div style="display: flex; justify-content: center; gap: 14px; margin-top: 20px;">
+          <button class="btn" style="border-color: #fbb040;" onclick="markCardStatus('learning')">⏳ Still Learning</button>
+          <button class="btn" style="border-color: #39b54a; background-color: #eafaf1;" onclick="markCardStatus('mastered')">✅ Mastered</button>
+        </div>
+
+        <!-- Studying Progress Section -->
+        <div style="margin-top: 36px; padding: 22px; border: 2.5px solid var(--border-color); border-radius: 14px; background-color: #faf5f1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="font-size: 1.1rem;">Studying Progress</h3>
+            <span class="pill-badge pill-ai" id="progress-box-pct">0%</span>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #e2e8f0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>⚪ <strong>New cards</strong></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-new" style="font-size: 1rem; font-weight: 900;">15</span>
+              <button class="btn btn-sm" onclick="filterByStatus('new')">Study</button>
+            </div>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #9b51e0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>🟣 <strong>Still learning</strong></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-learning" style="font-size: 1rem; font-weight: 900;">0</span>
+              <button class="btn btn-sm" onclick="filterByStatus('learning')">Study</button>
+            </div>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #39b54a;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span>🟢 <strong>Mastered</strong></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-mastered" style="font-size: 1rem; font-weight: 900;">0</span>
+              <button class="btn btn-sm" onclick="filterByStatus('mastered')">Study</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Term Search & List -->
+        <div style="margin-top: 32px; border-top: 2.5px solid var(--border-color); padding-top: 22px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <h3>Deck Terms &amp; Answers (15)</h3>
+            <span style="font-size: 0.8rem; color: #777;">Click Study on any term to jump</span>
+          </div>
+          <input type="text" id="termSearchInput" class="term-search-box" placeholder="🔍 Search card terms or definitions..." onkeyup="filterTermList()">
+          <div id="termsList" style="margin-top: 14px; max-height: 280px; overflow-y: auto; border: 2.5px solid var(--border-color); border-radius: 10px; background-color: #fff;">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <div style="margin-top: 28px; padding-top: 18px; border-top: 2px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <a href="index.html" class="btn">🏠 Return to Dashboard</a>
+          <a href="folders.html" class="btn">📁 Return to Folders</a>
+          <a href="note-ai-for-app-building.html" class="btn btn-primary">📝 View Full Note</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Teach Me Hub • Hosted with GitHub Pages</p>
+  </footer>
+
+  <script>
+    const deckData = [
+      {
+        q: "What is **Vibecoding**?",
+        a: "Using natural language to build software or apps.",
+        status: "new"
+      },
+      {
+        q: "What is **Agentic AI**?",
+        a: "Takes action on your behalf under your supervision; writes code & builds the interface.",
+        status: "new"
+      },
+      {
+        q: "When building a custom tool in Google AI Studio, what three things should you pay attention to?",
+        a: "1. Natural conversation flow<br>2. Specificity of feedback<br>3. Speed from idea to prototype.",
+        status: "new"
+      },
+      {
+        q: "What is the purpose of the prototype app called **The Tiebreaker**?",
+        a: "Helps make decisions by showing different pros and cons through a pros and cons list, a comparison table, or a SWOT analysis.",
+        status: "new"
+      },
+      {
+        q: "What real-world test input was used for **The Tiebreaker**?",
+        a: "'Should I offer my software for free with paid features, or charge a flat $20/month premium plan?'",
+        status: "new"
+      },
+      {
+        q: "How do you troubleshoot errors in **The Tiebreaker**?",
+        a: "See error button for Auto fix, then verify the fix.",
+        status: "new"
+      },
+      {
+        q: "What does the **Brand builder app** prototype do?",
+        a: "Lets you describe a product and imagine it across different mediums (billboard, newspaper, social post) while maintaining product consistency without people in images.",
+        status: "new"
+      },
+      {
+        q: "Which specific model must be used for images in the **Brand builder app**?",
+        a: "The Nano-Banana model.",
+        status: "new"
+      },
+      {
+        q: "How do you troubleshoot when the brand builder app tries to use multiple models and confuses itself?",
+        a: "Click error button, copy paste errors into prompt box, and provide feedback: 'Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps.'",
+        status: "new"
+      },
+      {
+        q: "What is the goal of the **Interactive dashboard** prototype?",
+        a: "Allows you to visualize data in many different ways accurately after providing/attaching data.",
+        status: "new"
+      },
+      {
+        q: "How do you iterate on design and layout in the **Interactive dashboard**?",
+        a: "Use the annotate app button in the prompt box and use the comment tool to highlight a specific area, then send prompt.",
+        status: "new"
+      },
+      {
+        q: "What 4 questions should you assess on the worksheet before building an app?",
+        a: "1. Does the task solve part of a broader workflow?<br>2. Can you outline a clear, step-by-step process?<br>3. Does the process involve consistent inputs and outputs?<br>4. What's the complexity level (calendar/email/other platforms)?",
+        status: "new"
+      },
+      {
+        q: "What is the rule for prompting different blocks of an app?",
+        a: "Break it up into blocks: give the overall goal, but prompt it to make one block at a time to make correcting errors easier.",
+        status: "new"
+      },
+      {
+        q: "What is your responsibility after publishing an app?",
+        a: "You are responsible for the outputs it produces and need to maintain its functionality for users.",
+        status: "new"
+      },
+      {
+        q: "What are the 6 reflection questions to ask after using your new app?",
+        a: "1. What did I just achieve?<br>2. How much time have I saved?<br>3. Have I reduced costs?<br>4. Has the quality of my work improved?<br>5. Am I more productive?<br>6. Did I discover something new?",
+        status: "new"
+      }
+    ];
+
+    let currentIndex = 0;
+    let isFlipped = false;
+
+    // Load saved statuses from localStorage
+    try {
+      const savedStatuses = JSON.parse(localStorage.getItem("teachme_ai_statuses") || "{}");
+      deckData.forEach((c, idx) => {
+        if (savedStatuses[idx]) c.status = savedStatuses[idx];
+      });
+    } catch (e) {}
+
+    function renderCard() {
+      const card = deckData[currentIndex];
+      const cardEl = document.getElementById("main-flashcard");
+      if (isFlipped) {
+        cardEl.classList.remove("flipped");
+        isFlipped = false;
+      }
+
+      setTimeout(() => {
+        document.getElementById("card-front-text").innerHTML = card.q;
+        document.getElementById("card-back-text").innerHTML = card.a;
+
+        const currNum = currentIndex + 1;
+        const totalNum = deckData.length;
+
+        document.getElementById("card-index-indicator").innerText = currNum;
+        document.getElementById("card-total-indicator").innerText = totalNum;
+        document.getElementById("card-nav-curr").innerText = currNum;
+        document.getElementById("card-nav-total").innerText = totalNum;
+
+        const starBtn = document.getElementById("starCardBtn");
+        starBtn.innerText = card.starred ? "★" : "☆";
+        starBtn.style.backgroundColor = card.starred ? "var(--accent-yellow)" : "#fff";
+
+        updateProgress();
+      }, 100);
+    }
+
+    function toggleStarCard() {
+      const card = deckData[currentIndex];
+      card.starred = !card.starred;
+      const starBtn = document.getElementById("starCardBtn");
+      starBtn.innerText = card.starred ? "★" : "☆";
+      starBtn.style.backgroundColor = card.starred ? "var(--accent-yellow)" : "#fff";
+    }
+
+    function showCardHint() {
+      const card = deckData[currentIndex];
+      const stripped = card.a.replace(/<[^>]*>?/gm, "").replace(/\*\*/g, "");
+      const words = stripped.split(" ").slice(0, 4).join(" ");
+      alert("💡 Hint: Starts with -> " + words + "...");
+    }
+
+    function filterByStatus(status) {
+      const idx = deckData.findIndex(c => c.status === status);
+      if (idx !== -1) {
+        jumpToCard(idx);
+      } else {
+        alert("No cards currently marked as " + status + "!");
+      }
+    }
+
+    function toggleCardFlip() {
+      const cardEl = document.getElementById("main-flashcard");
+      isFlipped = !isFlipped;
+      if (isFlipped) {
+        cardEl.classList.add("flipped");
+      } else {
+        cardEl.classList.remove("flipped");
+      }
+    }
+
+    function nextCard() {
+      if (currentIndex < deckData.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      renderCard();
+    }
+
+    function prevCard() {
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = deckData.length - 1;
+      }
+      renderCard();
+    }
+
+    function shuffleCards() {
+      for (let i = deckData.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deckData[i], deckData[j]] = [deckData[j], deckData[i]];
+      }
+      currentIndex = 0;
+      renderCard();
+      renderTermList();
+    }
+
+    function markCardStatus(status) {
+      deckData[currentIndex].status = status;
+      try {
+        const statuses = {};
+        deckData.forEach((c, i) => { if (c.status) statuses[i] = c.status; });
+        localStorage.setItem("teachme_ai_statuses", JSON.stringify(statuses));
+      } catch (e) {}
+      updateProgress();
+      nextCard();
+    }
+
+    function updateProgress() {
+      const total = deckData.length;
+      const masteredCount = deckData.filter(c => c.status === "mastered").length;
+      const learningCount = deckData.filter(c => c.status === "learning").length;
+      const newCount = deckData.filter(c => c.status === "new" || !c.status).length;
+      const pct = total > 0 ? Math.round((masteredCount / total) * 100) : 0;
+
+      document.getElementById("mastery-percent").innerText = pct + "%";
+      document.getElementById("progress-fill").style.width = pct + "%";
+      document.getElementById("progress-box-pct").innerText = pct + "%";
+
+      document.getElementById("study-row-new").innerText = newCount;
+      document.getElementById("study-row-learning").innerText = learningCount;
+      document.getElementById("study-row-mastered").innerText = masteredCount;
+
+      try {
+        localStorage.setItem("teachme_ai_mastered", masteredCount);
+      } catch (e) {}
+    }
+
+    function renderTermList() {
+      const listEl = document.getElementById("termsList");
+      listEl.innerHTML = "";
+      deckData.forEach((card, idx) => {
+        const item = document.createElement("div");
+        item.className = "term-item";
+        item.innerHTML = `
+          <div>
+            <strong>#${idx + 1} ${card.q.replace(/\\*\\*/g, "").substring(0, 45)}...</strong>
+            <div style="font-size: 0.75rem; color: #666;">${card.a.replace(/\\*\\*/g, "").substring(0, 60)}...</div>
+          </div>
+          <button class="btn" style="padding: 4px 8px; font-size: 0.75rem;" onclick="jumpToCard(${idx})">Study</button>
+        `;
+        listEl.appendChild(item);
+      });
+    }
+
+    function jumpToCard(idx) {
+      currentIndex = idx;
+      renderCard();
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    function filterTermList() {
+      const query = document.getElementById("termSearchInput").value.toLowerCase();
+      const items = document.querySelectorAll("#termsList .term-item");
+      items.forEach((item, idx) => {
+        const card = deckData[idx];
+        const match = card.q.toLowerCase().includes(query) || card.a.toLowerCase().includes(query);
+        item.style.display = match ? "flex" : "none";
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCard();
+      renderTermList();
+      updateProgress();
+    });
+  </script>
+</body>
+</html>

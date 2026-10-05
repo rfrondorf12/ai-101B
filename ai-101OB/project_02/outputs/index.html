@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teach Me Hub — Dashboard</title>
+  <!-- Link to shared CSS file per github_site_instructions -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Website Navigation Bar -->
+  <header class="site-navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="brand-group">
+        <div class="brand-badge">👾 TEACH ME HUB</div>
+        <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.8; text-transform: uppercase;">STUDY WORKFLOW</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links-row">
+          <li><a href="index.html" class="nav-link-btn active">🏠 Dashboard</a></li>
+          <li><a href="folders.html" class="nav-link-btn">📁 Subject Folders</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-breadcrumb" style="font-size: 0.8rem; color: #555;">
+          <span>Dashboard</span> &gt; <span>Overview</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content View -->
+  <main>
+    <div class="content-container">
+
+      <!-- DASHBOARD HERO -->
+      <section class="neo-box dash-hero">
+        <div>
+          <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Welcome to Your Teach Me Hub</h1>
+          <p style="font-size: 0.9rem;">Your interactive study workspace for notes and spaced repetition decks, generated straight from your vault.</p>
+        </div>
+        <div>
+          <a href="flashcards-adobe-professional.html" class="btn btn-teal">⚡ Study Active Deck</a>
+        </div>
+      </section>
+
+      <!-- RECENT DECK MASTERY (Circular Ratio Indicator) -->
+      <div class="mastery-highlight-box">
+        <div class="mastery-gauge-container">
+          <!-- Circle filled with the exact ratio of color to lack of color -->
+          <div class="ratio-circle" id="dash-mastery-circle" title="Mastery Ratio">
+            <div class="ratio-circle-inner">
+              <div id="dash-mastery-pct">0%</div>
+              <span>Mastered</span>
+            </div>
+          </div>
+
+          <div class="mastery-info-details">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span class="pill-badge pill-art">Art</span>
+              <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: bold; color: #777;">Recently Added Deck</span>
+            </div>
+            <h3>Adobe Certified Professional</h3>
+            <div class="mastery-stats-text">
+              <span>🎯 <strong id="dash-mastered-count">0</strong> of <strong>44</strong> Mastered</span>
+              <span>•</span>
+              <span>⏳ <strong id="dash-unmastered-count">44</strong> Remaining</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <a href="flashcards-adobe-professional.html" class="btn btn-teal">⚡ Study Deck (44 Cards)</a>
+        </div>
+      </div>
+
+      <!-- SUBJECT FOLDERS GRID -->
+      <h3 style="margin-bottom: 12px;">📁 Subject Folders</h3>
+      <div class="folder-grid">
+        <a href="folders.html#folder-art" class="folder-card" style="border-top: 6px solid var(--folder-art);">
+          <div class="folder-header">
+            <div class="folder-icon" style="background-color: var(--folder-art); color: #fff;">AR</div>
+            <strong>Art</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: #555;">1 Note • 1 Flashcard Deck</p>
+        </a>
+
+        <a href="folders.html#folder-ai" class="folder-card" style="border-top: 6px solid var(--folder-ai-pink);">
+          <div class="folder-header">
+            <div class="folder-icon" style="background-color: var(--folder-ai-pink); color: #fff;">AI</div>
+            <strong>Artificial Intelligence</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: #555;">1 Note • 1 Flashcard Deck</p>
+        </a>
+
+        <div class="folder-card" style="border-top: 6px solid var(--folder-science);">
+          <div class="folder-header">
+            <div class="folder-icon" style="background-color: var(--folder-science); color: #fff;">SC</div>
+            <strong>Science</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+        </div>
+
+        <div class="folder-card" style="border-top: 6px solid var(--folder-math);">
+          <div class="folder-header">
+            <div class="folder-icon" style="background-color: var(--folder-math); color: #fff;">MA</div>
+            <strong>Math</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+        </div>
+
+        <div class="folder-card" style="border-top: 6px solid var(--folder-lit);">
+          <div class="folder-header">
+            <div class="folder-icon" style="background-color: var(--folder-lit); color: #fff;">LT</div>
+            <strong>Literature</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+        </div>
+
+        <div class="folder-card" style="border-top: 6px solid var(--folder-lang);">
+          <div class="folder-header">
+            <div class="folder-icon" style="background-color: var(--folder-lang); color: #fff;">LN</div>
+            <strong>Language</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+        </div>
+
+        <div class="folder-card" style="border-top: 6px solid var(--folder-history);">
+          <div class="folder-header">
+            <div class="folder-icon" style="background-color: var(--folder-history); color: #fff;">HI</div>
+            <strong>History</strong>
+          </div>
+          <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+        </div>
+      </div>
+
+      <!-- RECENT ADDITIONS -->
+      <div class="neo-box" style="margin-top: 24px;">
+        <h3 style="margin-bottom: 12px;">Recent Additions</h3>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; background-color: #faf5f1; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <strong>adobe_professional_certificate</strong> <span class="pill-badge pill-art">Art</span>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 4px;">Source: adobe_professional_certificate.md • 44 Cards Generated</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="note-adobe-professional.html" class="btn btn-primary">Notes</a>
+            <a href="flashcards-adobe-professional.html" class="btn btn-teal">Flashcards</a>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; background-color: #faf5f1; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <strong>ai_for_app_building</strong> <span class="pill-badge pill-ai">Artificial Intelligence</span>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 4px;">Source: AI Professional Courses • 15 Cards Generated</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="note-ai-for-app-building.html" class="btn btn-primary">Notes</a>
+            <a href="flashcards-ai-for-app-building.html" class="btn btn-teal">Flashcards</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Teach Me Hub • Hosted with GitHub Pages</p>
+  </footer>
+
+  <script>
+    // Read saved progress from localStorage if present
+    window.addEventListener("DOMContentLoaded", () => {
+      try {
+        const saved = localStorage.getItem("teachme_adobe_mastered");
+        const mastered = saved ? parseInt(saved, 10) : 0;
+        const total = 44;
+        const unmastered = total - mastered;
+        const pct = Math.round((mastered / total) * 100);
+
+        const circleEl = document.getElementById("dash-mastery-circle");
+        if (circleEl) {
+          circleEl.style.background = `conic-gradient(var(--accent-teal) 0deg ${pct * 3.6}deg, #edf2f7 ${pct * 3.6}deg 360deg)`;
+        }
+        const pctEl = document.getElementById("dash-mastery-pct");
+        if (pctEl) pctEl.innerText = pct + "%";
+
+        const masteredEl = document.getElementById("dash-mastered-count");
+        if (masteredEl) masteredEl.innerText = mastered;
+
+        const unmasteredEl = document.getElementById("dash-unmastered-count");
+        if (unmasteredEl) unmasteredEl.innerText = unmastered;
+      } catch (e) {
+        // Fallback default
+      }
+    });
+  </script>
+</body>
+</html>

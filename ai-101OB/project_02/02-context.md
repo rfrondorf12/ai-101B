@@ -4,7 +4,7 @@
 
 - **Where Outputs Go** ~/Applied AI/AI 101/ai-101OB/project_02/outputs
 
-Upon the first ever "launch teach me workflow" command, the output should be a base HTML file that follows the linked figma wireframe. The HTML file should be named "teach_me_hub". all following teach me workflow runs should edit teach_me_hub.html by adding a note and flashcard page for the file named in the trigger prompt. 
+all teach me workflow runs should edit teach_me_hub.html by adding a note and flashcard page for the file named in the trigger prompt. 
 
 - **Flashcard Reference Examples to Follow** are in ~/Applied AI/AI 101/ai-101OB/project_02/teachme_flow_planning/notes_cards_references
 	- flashcard references are formatted in /notes_cards_references with # between terms and definitions and with a semicolon between question and answer pairings. 
@@ -19,8 +19,10 @@ Upon the first ever "launch teach me workflow" command, the output should be a b
 
 ## **Note format rules that should always be followed, no matter what**
 1. Vocabulary terms should always be in bold. 
+	1. **Vocabulary Term** - definition should follow a dash next to the term
 2. Equations should always be highlighted in green
-3. Headings should be used as they are in ap_american_government and ap_macro_notes files. 
+3. File paths and processes to find a tool (ex.: File > share > export) should always be highlighted in pink
+4. Headings should be used as they are in ap_american_government and ap_macro_notes files. 
 
 # HTML File style references
 ## Image 1
@@ -43,7 +45,8 @@ I like this dashboard for tracking how well I know the flashcards.
 ![[Screenshot 2026-10-04 at 4.39.03 PM.png]]
 
 
-
+# Fonts
+[[brand_fonts]]
 # HTML File format Wireframe
 
 separate content into different `<div>` blocks. You then use **CSS** or **JavaScript** to show one "page" and hide the others. make sure to include a navigation bar. 
@@ -95,7 +98,7 @@ Use this wireframe to format the HTML file:
 https://www.figma.com/make/4Lb1H6KVBWGEf7Am19LvNk/Study-Workflow-Wireframe?t=s6PYZ6x6g4hoj17c-1
 
 ## Folders Page Organization
-each note and flashcard set should be assigned to a subject folder. Folders should include science (green), math (red), literature (blue), language (purple), artificial intelligence (pink), history (orange), and art (teal). If you think an additional folder is necessary for accurate categorization, ask me first. 
+each note and flashcard set should be assigned to a subject folder. Folders should include science (green), math (red), literature (blue), language (purple), artificial intelligence (pink), history (orange), and art (teal). Do not show the color in parentheses next to the name of the folder, that is for only you and I to see and know which folder is what color. If you think an additional folder is necessary for accurate categorization, ask me first. 
 
 **Why this step matters:** without this, the model has to guess. Guesses are how things go wrong.
 

@@ -392,3 +392,41 @@
   6. Successfully staged, committed, and pushed all pending notes, flashcard hubs, and project assets to private GitHub repository `rfrondorf12/obsidian.file`. Tested both update and no-change execution paths, and confirmed LaunchAgent `com.reesefrondorf.whole-vault-sync` returned exit code 0.
 - **Decision:** Keep. Fully resolved sync blocker, protected against large files, and restored reliable automated hourly backups to GitHub.
 
+## Round 40 — 2026-10-05, Successful Teach Me Workflow Run — adobe_professional_certificate
+
+- **Context the Model Could See:** `00-start-here.md`, `01-trigger.md`, `02-context.md`, `03-task.md`, `04-output.md`, `05-human-check.md`, `process-map.canvas`, `notes_cards_references`, `DIGI_ReeseFrondorf_MoodBoard.pdf`, existing `teach_me_hub.html`, and source note `study_notes/adobe_professional_certificate.md`.
+- **Instruction:** "launch teach me workflow" followed by selecting source file `adobe_professional_certificate in /AppliedAI/AI 101/study_notes`.
+- **Direction:** Execute the workflow step-by-step:
+  1. Trigger acknowledged and prompted for input file (Step 1).
+  2. Context and strict source bounds verified, assigned to Art subject folder, excluded introductory testing logistics section from flashcards per source instruction, verified formatting rules (Step 2).
+  3. Updated existing `teach_me_hub.html` without creating a new file: generated full structured study notes following `ap_american_government` style with bolded vocabulary, green equation highlights, and pink tool path highlights; generated 44 interactive 3D flashcards covering all 17 content sections; added bidirectional navigation buttons between notes and flashcards; activated the Art folder in the Subject Directory and Dashboard grid; updated top navigation bar links; and updated the circular mastery gauge (Step 3 & 4).
+- **Output:** Updated [teach_me_hub.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/teach_me_hub.html) in `~/Applied AI/AI 101/ai-101OB/project_02/outputs/` with new dedicated note and flashcard pages for Adobe Certified Professional.
+- **Human Review:** Reviewed new note and flashcards. Identified rule update needed for navigation bar.
+- **Decision:** Keep notes and flashcards; update navigation bar per new rule.
+
+## Round 41 — 2026-10-05, Navigation Bar Simplification Rule Implementation
+
+- **Context the Model Could See:** `00-start-here.md` (updated with rule 23: *"Do not add a tab in the navigation bar at the top for each individual flashcard and note that is created. Keep it simple. The flashcards and notes should be able to be accessed through their assigned folder, there is no need for them to have their own button in the nav bar."*), `teach_me_hub.html`.
+- **Instruction:** "Edit the HTML file based on the new rule about the navigation bar"
+- **Direction:** Remove individual note and flashcard buttons from the top navigation bar, keeping only high-level global views (`🏠 Dashboard` and `📁 Subject Folders`), while preserving folder-based navigation to all notes and flashcards.
+- **Output:** Updated [teach_me_hub.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/teach_me_hub.html) to simplify the top navbar. All notes and flashcard decks remain directly accessible via their assigned folders in the Subject Directory, Dashboard cards, and linked buttons.
+- **Decision:** Keep. Correctly simplified the navigation bar per the new rule without cluttering the header.
+
+## Round 42 — 2026-10-05, Reformat Teach Me Hub to Multi-Page GitHub Pages Architecture
+
+- **Context the Model Could See:** `github_site_instructions.md`, `00-start-here.md`, `teach_me_hub.html`, `ai-101OB/project_02/outputs/`.
+- **Instruction:** "Reformat teach_me_hub.html to be multiple files so that the html file can be turned into a live, multi-page site using GitHub. Use file github_site_instructions for formatting and instruction details. Only adapt the html file to the files I need, do not create the repo yet."
+- **Direction:** Decompose the single-page HTML hub into a standardized multi-page static site structure ready for GitHub Pages deployment per `github_site_instructions.md`, without creating a Git repository yet.
+- **Output:** Created the following modular static site files in `~/Applied AI/AI 101/ai-101OB/project_02/outputs/`:
+  1. [index.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/index.html) — Primary homepage and dashboard (mandatory root filename for GitHub Pages) with circular mastery gauge and recent additions.
+  2. [folders.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/folders.html) — Dedicated Subject Folders directory with folder anchors (`#folder-art`, `#folder-ai`).
+  3. [note-adobe-professional.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/note-adobe-professional.html) — Dedicated study notes page for Adobe Certified Professional.
+  4. [flashcards-adobe-professional.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/flashcards-adobe-professional.html) — Interactive 44-card study deck with 3D flip, shuffle, search, and localStorage progress persistence.
+  5. [note-ai-for-app-building.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/note-ai-for-app-building.html) — Dedicated study notes page for AI for App Building.
+  6. [flashcards-ai-for-app-building.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/flashcards-ai-for-app-building.html) — Interactive 15-card study deck with localStorage progress persistence.
+  7. [style.css](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/style.css) — Centralized shared CSS stylesheet linked across all pages.
+- **Decision:** Keep. Successfully adapted single-file hub into clean, modular static site ready for GitHub Pages hosting.
+
+
+
+

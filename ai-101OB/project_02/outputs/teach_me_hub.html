@@ -419,6 +419,14 @@
       font-weight: bold;
     }
 
+    .path-highlight {
+      background-color: #ffd1dc;
+      border: 1px solid #ff6b9d;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
     /* Flashcard View & 3D Flip */
     .flashcard-wrapper {
       perspective: 1200px;
@@ -624,8 +632,6 @@
         <ul class="nav-links-row">
           <li><button class="nav-link-btn active" onclick="navigateTo('home')">🏠 Dashboard</button></li>
           <li><button class="nav-link-btn" onclick="navigateTo('folders')">📁 Subject Folders</button></li>
-          <li><button class="nav-link-btn" onclick="navigateTo('note-ai-for-app-building')">📝 Study Notes</button></li>
-          <li><button class="nav-link-btn" onclick="navigateTo('flashcards-ai-for-app-building')">🗂️ Flashcards</button></li>
         </ul>
       </nav>
 
@@ -740,12 +746,22 @@
               <div class="folder-icon" style="background-color: var(--folder-art); color: #fff;">AR</div>
               <strong>Art</strong>
             </div>
-            <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+            <p style="font-size: 0.8rem; color: #555;">1 Note • 1 Flashcard Deck</p>
           </div>
         </div>
 
         <div class="neo-box" style="margin-top: 24px;">
           <h3 style="margin-bottom: 12px;">Recent Additions</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; background-color: #faf5f1; margin-bottom: 12px;">
+            <div>
+              <strong>adobe_professional_certificate</strong> <span class="pill-badge pill-art">Art</span>
+              <p style="font-size: 0.8rem; color: #666; margin-top: 4px;">Source: adobe_professional_certificate.md • 44 Cards Generated</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-primary" onclick="navigateTo('note-adobe-professional')">Notes</button>
+              <button class="btn btn-teal" onclick="navigateTo('flashcards-adobe-professional')">Flashcards</button>
+            </div>
+          </div>
           <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; background-color: #faf5f1;">
             <div>
               <strong>ai_for_app_building</strong> <span class="pill-badge pill-ai">Artificial Intelligence</span>
@@ -768,7 +784,7 @@
           <div style="margin-top: 20px;">
             <div style="border: 2px solid var(--folder-ai-pink); border-radius: 8px; padding: 16px; margin-bottom: 16px; background-color: #fff9fb;">
               <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="pill-badge pill-ai">Artificial Intelligence (Pink)</span>
+                <span class="pill-badge pill-ai">Artificial Intelligence</span>
                 <span style="font-size: 0.8rem; font-weight: bold;">1 File Active</span>
               </div>
               <div style="margin-top: 14px; padding: 12px; background: #fff; border: 2px solid var(--border-color); border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
@@ -783,24 +799,39 @@
               </div>
             </div>
 
+            <!-- Art Folder (Active) -->
+            <div style="border: 2px solid var(--folder-art); border-radius: 8px; padding: 16px; margin-bottom: 16px; background-color: #f0faf9;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="pill-badge pill-art">Art</span>
+                <span style="font-size: 0.8rem; font-weight: bold;">1 File Active</span>
+              </div>
+              <div style="margin-top: 14px; padding: 12px; background: #fff; border: 2px solid var(--border-color); border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <strong>adobe_professional_certificate</strong>
+                  <div style="font-size: 0.75rem; color: #666;">Includes Notes & 44 Interactive Flashcards</div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-primary" onclick="navigateTo('note-adobe-professional')">View Note</button>
+                  <button class="btn btn-teal" onclick="navigateTo('flashcards-adobe-professional')">Study Flashcards</button>
+                </div>
+              </div>
+            </div>
+
             <!-- Other placeholders -->
             <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
-              <span class="pill-badge pill-science">Science (Green)</span> — No files added yet
+              <span class="pill-badge pill-science">Science</span> — No files added yet
             </div>
             <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
-              <span class="pill-badge pill-math">Math (Red)</span> — No files added yet
+              <span class="pill-badge pill-math">Math</span> — No files added yet
             </div>
             <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
-              <span class="pill-badge pill-lit">Literature (Blue)</span> — No files added yet
+              <span class="pill-badge pill-lit">Literature</span> — No files added yet
             </div>
             <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
-              <span class="pill-badge pill-lang">Language (Purple)</span> — No files added yet
+              <span class="pill-badge pill-lang">Language</span> — No files added yet
             </div>
             <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
-              <span class="pill-badge pill-history">History (Orange)</span> — No files added yet
-            </div>
-            <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
-              <span class="pill-badge pill-art">Art (Teal)</span> — No files added yet
+              <span class="pill-badge pill-history">History</span> — No files added yet
             </div>
           </div>
         </div>
@@ -1023,6 +1054,463 @@
         </div>
       </section>
 
+      <!-- PAGE 5: NOTES (ADOBE CERTIFIED PROFESSIONAL) -->
+      <section id="note-adobe-professional" class="page">
+        <div class="neo-box note-content">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+            <div>
+              <span class="pill-badge pill-art">Art</span>
+              <h1 style="margin-top: 10px;">Adobe Certified Professional: Photoshop & Graphic Design</h1>
+              <p style="font-size: 0.85rem; color: #555;">Source: <code>adobe_professional_certificate.md</code></p>
+            </div>
+            <div>
+              <button class="btn btn-teal" onclick="navigateTo('flashcards-adobe-professional')">🗂️ Linked Flashcards</button>
+            </div>
+          </div>
+
+          <hr style="border: 0; border-top: 2px solid var(--border-color); margin: 16px 0;">
+
+          <h2>1. Exam Structure & Environment</h2>
+          <p><em>Note: This introductory section covers testing logistics and is excluded from the flashcard deck per source instructions.</em></p>
+          <ul>
+            <li><strong>Exam Structure</strong> - Total time is <span class="equation-highlight">50 minutes</span> to complete 13 multiple choice questions (Segment 1) followed by 17 live hands-on tasks in Photoshop (Segment 2).</li>
+            <li><strong>Multiple Choice Segment</strong> - Consists of 13 questions; typically single choice unless specified otherwise.</li>
+            <li><strong>Mark for Review</strong> - Checkbox available on any question or task to flag it with an icon, allowing you to return via the summary screen before final submission.</li>
+            <li><strong>Reset Option</strong> - Any question or task can be reset to its initial state at any point.</li>
+            <li><strong>Live Task Segment</strong> - Runs directly inside Photoshop with the certification test panel docked on the right and the document workspace on the left.</li>
+            <li><strong>Workspace Reset</strong> - Reset interface layout via <span class="path-highlight">Window &gt; Workspace &gt; Reset the Certification Test Workspace</span>.</li>
+            <li><strong>Recommended Panel Layout</strong> - Dock the <strong>Layers</strong> and <strong>Properties</strong> panels right beside the certification test panel and keep them visible.</li>
+            <li><strong>Blocked Features</strong> - The Help menu is intentionally blocked during the exam.</li>
+            <li><strong>Exhibit Button</strong> - On select tasks, click <strong>Exhibit</strong> to preview the target visual result (before and after) before reading instructions.</li>
+            <li><strong>Text Copy Shortcut</strong> - Any text styled in underlined, bold, and italic in the instructions copies automatically to the clipboard when clicked.</li>
+            <li><strong>Exam Golden Rule</strong> - Only modify settings explicitly requested; leave all other dialog box options at their default values.</li>
+            <li><strong>Passing Score</strong> - Requires <span class="equation-highlight">700 / 1000 points (70%)</span>. Score reports appear immediately upon submitting.</li>
+          </ul>
+
+          <h2>2. Identify Purpose and Audience</h2>
+          <ul>
+            <li><strong>Purpose</strong> - The client's business goals and what they want to achieve with the design or image. Clarified through the design brief and direct client consultation.</li>
+            <li><strong>Target Audience</strong> - The specific demographic group for whom the design is created (e.g. high school students aged 15–17).</li>
+            <li><strong>Audience Age Considerations</strong> - Older and mature audiences can comprehend complex graphics, detailed infographics, and statistics; younger audiences require simpler layouts, vibrant colors, and characters.</li>
+            <li><strong>Designer Brief Clarifications</strong> - Key questions to ask if a brief lacks detail:
+              <ul>
+                <li>What is the main message to convey?</li>
+                <li>What specific action should the viewer take after seeing the design?</li>
+                <li>How will the image be displayed (small handheld print vs. large classroom wall poster)?</li>
+              </ul>
+            </li>
+            <li><strong>Print Specifications</strong> - Specified in the brief: print dimensions, color mode, and resolution (<span class="equation-highlight">300 ppi</span>).</li>
+          </ul>
+
+          <h2>3. Requirements: Video, Print, and Web</h2>
+          <ul>
+            <li><strong>Deliverables</strong> - The actual completed files supplied to the client at project delivery, determined by the medium (print, web, video). New document setup: <span class="path-highlight">File &gt; New</span>.</li>
+            <li><strong>Print Requirements</strong>:
+              <ul>
+                <li><strong>Resolution</strong> - Default suggested standard is <span class="equation-highlight">300 ppi</span> (pixels per inch).</li>
+                <li><strong>Color Mode</strong> - Work in RGB mode within Photoshop for full feature and tool availability; output/convert to <strong>CMYK</strong> for print production.</li>
+                <li><strong>CMYK</strong> - Four-color process inks: Cyan, Magenta, Yellow, and Key color (Black).</li>
+                <li><strong>Print File Formats</strong> - PDF, TIFF, and EPS.</li>
+                <li><strong>Bleed Configuration</strong> - Set via <span class="path-highlight">File &gt; Print</span> &gt; under Printing Marks enable Corner Crop Marks &gt; open Functions &gt; set Bleed (standard: <span class="equation-highlight">3 mm</span>).</li>
+              </ul>
+            </li>
+            <li><strong>Web Requirements</strong>:
+              <ul>
+                <li><strong>Resolution</strong> - Suggested standard is <span class="equation-highlight">72 ppi</span>.</li>
+                <li><strong>Color Mode</strong> - RGB color mode.</li>
+                <li><strong>Export Paths</strong> - Export files via <span class="path-highlight">File &gt; Export &gt; Export As</span> or <span class="path-highlight">File &gt; Export &gt; Save for Web</span>.</li>
+                <li><strong>Web Formats</strong> - JPEG, PNG, GIF, and modern WebP (accessible via <span class="path-highlight">File &gt; Save a Copy &gt; on your computer</span>).</li>
+                <li><strong>Compression Priority</strong> - Minimize file size for faster page load times without compromising visual image quality.</li>
+              </ul>
+            </li>
+            <li><strong>Film &amp; Video Requirements</strong>:
+              <ul>
+                <li><strong>Presets &amp; Dimensions</strong> - Full HD / 1080p (<span class="equation-highlight">1920 &times; 1080 pixels</span>), 720p, and 4K UHDTV (<span class="equation-highlight">3840 &times; 2160 pixels</span>).</li>
+                <li><strong>Pixel Aspect Ratio</strong> - Ratio between width and height of an individual pixel. Modern formats use square pixels (<span class="equation-highlight">1.0</span> ratio); NTSC requires a <span class="equation-highlight">0.91</span> ratio; Anamorphic format uses a <span class="equation-highlight">2:1</span> ratio (rectangular pixels).</li>
+              </ul>
+            </li>
+            <li><strong>Image Classifications</strong>:
+              <ul>
+                <li><strong>Raster Image</strong> - Pixel-based image, resolution-dependent; degrades and pixelates when scaled upward.</li>
+                <li><strong>Vector Image</strong> - Mathematically calculated artwork; resolution-independent; scales infinitely without losing sharpness.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h2>4. Key Components of Project Communication</h2>
+          <ul>
+            <li><strong>Three Communication Pillars</strong> - 1. Project scope, 2. Due dates, 3. Possible impacts of delays.</li>
+            <li><strong>Project Scope</strong> - Documented agreement defining deliverables, goals, and client expectations established in the brief.</li>
+            <li><strong>Scope Creep</strong> - The gradual, unapproved expansion of project goals, deliverables, or revisions beyond the original agreement without adjustments to timeline, budget, or contract.</li>
+            <li><strong>Preventing Scope Creep</strong> - Establish clear written deliverables, signed contracts, and explicitly limit allowed revision rounds included in initial pricing.</li>
+            <li><strong>Change Order</strong> - A signed contractual amendment between designer and client detailing additional changes, altered directions, and compensation outside the initial scope.</li>
+            <li><strong>Gantt Chart</strong> - Visual timeline representation for tracking project tasks, durations, overlaps, and deadlines.</li>
+            <li><strong>Critical Path Method (CPM)</strong> - Visual planning technique identifying the sequence of dependent tasks that directly impact project completion date.</li>
+            <li><strong>Feedback Loop</strong> - The cyclic process of a designer submitting work, the client reviewing and returning feedback, and the designer making revisions. Tracked via version numbers (v1, v2) and dedicated project subfolders.</li>
+          </ul>
+
+          <h2>5. Basic Project Management Concepts</h2>
+          <ol>
+            <li><strong>Planning and Analysis</strong> - Identifying target audience, demographics, client goals/purpose, securing contracts/agreements, and reviewing the design brief.</li>
+            <li><strong>Scheduling</strong> - Establishing realistic timelines based on deliverables and scope; setting deadlines with Gantt charts.</li>
+            <li><strong>Building</strong> - Asset creation and ideation (mind mapping, rough sketches, UI wireframing), prototyping, and developing final designs.</li>
+            <li><strong>Review and Evaluation</strong> - Internal peer reviews against the brief, formal client presentations (PDF/slides rehearsal), and client approval.</li>
+            <li><strong>Implementation and Publication</strong> - Delivering the completed final product in the format and medium for which it was designed.</li>
+          </ol>
+
+          <h2>6. Copyright, Permissions, and Licensing</h2>
+          <ul>
+            <li><strong>Copyright</strong> - Automatic legal protection granting creators exclusive ownership over original works (designs, logos, illustrations) upon creation. Rule: <em>"If you made it you own it; if someone else made it you need permission."</em></li>
+            <li><strong>Public Domain</strong> - Creative material not protected by intellectual property laws (copyright, trademark, patent); owned by the general public and free for anyone to use without permission.</li>
+            <li><strong>Derivative Work</strong> - New work altered from or based upon an existing original piece. Modifying a design does not make it yours; the original creator retains copyright and legal permission is required.</li>
+            <li><strong>Fair Use</strong> - Legal doctrine allowing limited use of copyrighted material without permission in specific contexts: education, commentary, news reporting, and parody.</li>
+            <li><strong>Four Fair Use Factors</strong> - 1. Purpose of use, 2. Nature of original work (factual vs. creative), 3. Amount used relative to whole, 4. Effect on the market/financial value for the copyright holder.</li>
+            <li><strong>Licensing</strong> - Legal agreement permitting use of copyrighted material for a specified fee, timeframe, and defined usage terms.</li>
+            <li><strong>Creative Commons (CC)</strong> - Licensing framework allowing creators to share work publicly while reserving specific rights ("some rights reserved").</li>
+            <li><strong>Model Release</strong> - Signed legal document required when an individual person is recognizable in artwork.</li>
+            <li><strong>Location Release</strong> - Signed legal document required when private property or recognizable commercial landmarks appear in artwork.</li>
+          </ul>
+
+          <h2>7. File Formats &amp; Technical Attributes</h2>
+          <ul>
+            <li><strong>Graphic Design File Categories</strong>:
+              <ul>
+                <li><strong>Working / Project Files</strong> - PSD (Photoshop), AI (Illustrator), INDD (InDesign).</li>
+                <li><strong>Asset Files</strong> - Raster/vector graphics, text files, spreadsheets.</li>
+                <li><strong>Print-Ready Files</strong> - PDF, EPS.</li>
+              </ul>
+            </li>
+            <li><strong>Raster Image Formats</strong>:
+              <ul>
+                <li><strong>JPEG</strong> - Lossy compression; produces <strong>compression artifacts</strong> at lower quality settings; supports embedded color profiles.</li>
+                <li><strong>PNG</strong> - Lossless compression with transparency. Default 24-bit depth; PNG-8 provides 8-bit depth (<span class="equation-highlight">2^8 = 256 colors</span>) for smaller file sizes.</li>
+                <li><strong>GIF</strong> - Supports frame animation; capped strictly at 8-bit depth (<span class="equation-highlight">256 colors max</span>).</li>
+                <li><strong>WebP</strong> - Modern web image format offering efficient compression.</li>
+              </ul>
+            </li>
+            <li><strong>Bit Depth</strong> - Measurement of color data capacity per pixel (<span class="equation-highlight">8-bit = 256 colors</span>; <span class="equation-highlight">24-bit = 8 bits per channel RGB</span> for 16.7 million colors).</li>
+            <li><strong>Vector File Formats</strong>:
+              <ul>
+                <li><strong>EPS</strong> - Vector format standard for print production.</li>
+                <li><strong>SVG</strong> - Scalable Vector Graphics, standard for web deployment.</li>
+              </ul>
+            </li>
+            <li><strong>Camera RAW</strong> - Unprocessed sensor data from digital cameras; preserves wide tonal latitude for highlight and shadow recovery without clipping.</li>
+            <li><strong>Tonal Range</strong> - Span between the darkest shadows and brightest highlights in an image.</li>
+            <li><strong>Histogram</strong> - Graphical distribution of pixels from pure black (left), mid-tones (center), to pure white (right). Spikes on either far edge indicate clipping.</li>
+            <li><strong>Access Full File Types</strong> - Access comprehensive export formats via <span class="path-highlight">File &gt; Save a Copy</span>.</li>
+          </ul>
+
+          <h2>8. Aliasing and Image Scaling</h2>
+          <ul>
+            <li><strong>Aliasing</strong> - Jagged, stair-stepped pixel edges visible along curves and diagonals on low-resolution type or raster graphics.</li>
+            <li><strong>Anti-Aliasing</strong> - Edge-smoothing technique that blends pixel colors with surrounding background to soften stair-stepping. (Note: Perfectly horizontal and vertical lines align cleanly to the pixel grid and do not require anti-aliasing).</li>
+            <li><strong>Neural SuperZoom</strong> - Photoshop AI neural filter (<span class="path-highlight">Filter &gt; Neural Filters</span>) powered by Adobe Sensei to upscale raster images up to 9x while reconstructing missing details and reducing noise.</li>
+          </ul>
+
+          <h2>9. Color Spaces, Gamuts, and Calibration</h2>
+          <ul>
+            <li><strong>Color Management</strong> - Systematic calibration ensuring color consistency from screen preview to final printed product.</li>
+            <li><strong>ICC Color Profile</strong> - International Color Consortium (1993) standard describing device color space, gamut, and calibration parameters.</li>
+            <li><strong>Color Models</strong>:
+              <ul>
+                <li><strong>RGB</strong> - Additive color model for screens; combining red, green, and blue creates white (maximum intensity).</li>
+                <li><strong>CMYK</strong> - Subtractive color model for print; combining inks creates dark/black tones.</li>
+              </ul>
+            </li>
+            <li><strong>Color Gamut</strong> - The complete range of colors reproducible within a color space. Relative gamut range:
+              <div style="margin: 8px 0;"><span class="equation-highlight">sRGB &lt; standard CMYK &lt; Adobe RGB &lt; ProPhoto RGB</span></div>
+              <ul>
+                <li><strong>sRGB</strong> - Smallest gamut, standard for web and digital displays.</li>
+                <li><strong>Adobe RGB</strong> - Wide gamut standard for graphic design and prepress print workflows.</li>
+                <li><strong>ProPhoto RGB</strong> - Extra-large gamut used in professional photographic workflows.</li>
+              </ul>
+            </li>
+            <li><strong>Out of Gamut Warning</strong> - Warning indicator in Photoshop Color Picker alerting that a chosen color cannot be reproduced in CMYK print ink. Clicking the icon shifts to the nearest printable CMYK color.</li>
+          </ul>
+
+          <h2>10. LAB Color Space and Synchronizing Settings</h2>
+          <ul>
+            <li><strong>LAB Color Mode (L*a*b*)</strong> - Three-dimensional device-independent color model matching human vision:
+              <ul>
+                <li><strong>L (Lightness / Luminosity)</strong> - Measured on a scale from <span class="equation-highlight">0 (black) to 100 (white)</span>.</li>
+                <li><strong>a-axis</strong> - Green (negative values) to Red (positive values).</li>
+                <li><strong>b-axis</strong> - Blue (negative values) to Yellow (positive values).</li>
+              </ul>
+            </li>
+            <li><strong>Synchronizing Adobe Color Settings</strong> - Configure policies in <span class="path-highlight">Edit &gt; Color Settings</span> in Photoshop. To synchronize across Photoshop, Illustrator, and InDesign: launch Adobe Bridge (<span class="path-highlight">File &gt; Browse in Bridge</span>), navigate to <span class="path-highlight">Edit &gt; Color Settings</span>, choose your saved preset, and click <strong>Apply</strong>.</li>
+          </ul>
+
+          <h2>11. Photographic &amp; Composition Principles</h2>
+          <ul>
+            <li><strong>Aspect Ratio</strong> - Proportional relationship between image width and height (<span class="equation-highlight">16:9</span> widescreen, <span class="equation-highlight">4:3</span> traditional, <span class="equation-highlight">1:1</span> square). Set via the Crop Tool.</li>
+            <li><strong>Rule of Thirds</strong> - Compositional framework dividing the frame into 3&times;3 equal sections. Important visual focal points are aligned along grid lines or intersections rather than centered.</li>
+            <li><strong>Planes of Depth</strong>:
+              <ul>
+                <li><strong>Foreground</strong> - Visual elements positioned closest to the viewer.</li>
+                <li><strong>Mid-ground</strong> - Intermediate visual space between foreground and background.</li>
+                <li><strong>Background</strong> - Distant scenic backdrop or elements furthest away.</li>
+              </ul>
+            </li>
+            <li><strong>Depth of Field</strong> - The range of distance in an image that appears acceptably sharp:
+              <ul>
+                <li><strong>Wide Depth of Field</strong> - Entire scene from foreground to background is in focus.</li>
+                <li><strong>Shallow Depth of Field</strong> - Narrow plane of focus with blurred foreground and background to isolate the subject.</li>
+              </ul>
+            </li>
+            <li><strong>Contrast</strong> - Differentiation created through tonal or color variation to make key elements pop.</li>
+            <li><strong>White Balance</strong> - Color temperature adjustment ensuring whites and neutral grays appear true without unnatural tint casts. Quick path: <span class="path-highlight">Image &gt; Auto Color</span>; manual Camera Raw path: <span class="path-highlight">Filter &gt; Camera Raw Filter &gt; Color</span>.</li>
+          </ul>
+
+          <h2>12. Guides, Rulers, and Grids</h2>
+          <ul>
+            <li><strong>Rulers</strong> - Toggle visibility via <span class="equation-highlight">Cmd/Ctrl + R</span>, <span class="path-highlight">View &gt; Rulers</span>, or Properties panel. Right-click ruler to change units (pixels, inches, cm). Drag top-left intersection to reposition the zero origin; double-click intersection to reset origin.</li>
+            <li><strong>Creating Guides</strong> - Drag from horizontal or vertical rulers. Hold <span class="equation-highlight">Alt/Option</span> while dragging to toggle between horizontal and vertical orientation.</li>
+            <li><strong>New Guide Commands</strong> - Create individual guide via <span class="path-highlight">View &gt; Guides &gt; New Guide</span>. Generate multi-column/row grids with gutters and margins via <span class="path-highlight">View &gt; Guides &gt; New Guide Layout</span>.</li>
+            <li><strong>Manipulating Guides</strong> - Must use the <strong>Move Tool</strong> (shortcut: <span class="equation-highlight">V</span>). Highlighted guides delete with <span class="equation-highlight">Backspace</span>. Lock guides via <span class="path-highlight">View &gt; Guides &gt; Lock Guides</span>.</li>
+            <li><strong>Smart Guides</strong> - Dynamic magenta alignment guides showing alignment and spacing between objects (toggle: <span class="equation-highlight">Cmd/Ctrl + Shift + R</span> or <span class="path-highlight">View &gt; Show &gt; Smart Guides</span>).</li>
+            <li><strong>Grid</strong> - Toggle grid via <span class="path-highlight">View &gt; Show &gt; Grid</span>.</li>
+          </ul>
+
+          <h2>13. Brushes, Presets, and Dynamics</h2>
+          <ul>
+            <li><strong>Panels</strong> - <strong>Brushes panel</strong> (organizing, importing, presets) vs. <strong>Brush Settings panel</strong> (detailed dynamics and behavior).</li>
+            <li><strong>Preset Libraries</strong> - Download Kyle T. Webster brush sets via <span class="path-highlight">Brushes panel menu &gt; Get More Brushes</span> or import via <span class="path-highlight">Import Brushes</span>.</li>
+            <li><strong>Brush Dynamic Parameters</strong>:
+              <ul>
+                <li><strong>Size &amp; Hardness</strong> - Brush diameter and edge softness (0% = soft edge, 100% = crisp edge).</li>
+                <li><strong>Spacing</strong> - Distance between stamped tip instances (<span class="equation-highlight">1%</span> = continuous smooth stroke; larger values = dotted/spaced stamp pattern).</li>
+                <li><strong>Scattering &amp; Count</strong> - Disperses tip instances across axes and adjusts density.</li>
+                <li><strong>Size &amp; Angle Jitter</strong> - Randomizes size and rotational angle of brush stamps.</li>
+                <li><strong>Transfer</strong> - Randomizes opacity per stamp.</li>
+                <li><strong>Color Dynamics (Hue Jitter)</strong> - Randomizes stroke color between foreground and background hues.</li>
+                <li><strong>Roundness &amp; Angle</strong> - Compresses round tip into an oval and slants angle for calligraphy.</li>
+              </ul>
+            </li>
+            <li><strong>Lock Settings</strong> - Padlock icon locks customized settings across different brush tip shapes. Reset via <span class="path-highlight">Brush Settings panel menu &gt; Reset All Locked Settings</span>.</li>
+            <li><strong>Exporting Brushes</strong> - Export customized brushes as <strong>.ABR</strong> files via <span class="path-highlight">Brushes panel menu &gt; Export Selected Brushes</span>.</li>
+          </ul>
+
+          <h2>14. Non-Destructive Editing Workflow</h2>
+          <ul>
+            <li><strong>Core Philosophy</strong> - Workflow preserving original pixel and vector data so all edits remain reversible and re-editable at any point.</li>
+            <li><strong>Four Pillars of Non-Destructive Editing</strong> - 1. Independent Layers, 2. Smart Objects &amp; Smart Filters, 3. Adjustment Layers (with clipping masks), 4. Layer Masks.</li>
+            <li><strong>Smart Objects</strong> - Protective container layers that keep embedded raster or vector source data intact at original resolution during transformations (scaling, rotation, skewing).
+              <ul>
+                <li>Convert layer via <span class="path-highlight">Right-click &gt; Convert to Smart Object</span>.</li>
+                <li>Double-click thumbnail to edit embedded child source document (extension <strong>.psb</strong> - Photoshop Big); save via <span class="path-highlight">File &gt; Save</span> to update master file.</li>
+                <li>Nested Smart Objects: Multiple layers or existing smart objects can be combined into a single master smart object.</li>
+              </ul>
+            </li>
+            <li><strong>Smart Filters</strong> - Any filter applied to a Smart Object layer automatically becomes a non-destructive Smart Filter with toggleable visibility, editable settings, and maskable areas.</li>
+            <li><strong>Vector Layers</strong> - Text and Shape layers in Photoshop are native vector objects and scale infinitely without quality loss; converting to Smart Objects is unnecessary.</li>
+            <li><strong>Layer Mask Toggle</strong> - Hold <span class="equation-highlight">Shift</span> and click layer mask thumbnail to temporarily disable/enable the mask.</li>
+          </ul>
+
+          <h2>15. Destructive Editing Operations</h2>
+          <ul>
+            <li><strong>Definition</strong> - Irreversible changes that overwrite, alter, or delete underlying pixel data permanently once closed and saved.</li>
+            <li><strong>Destructive Actions</strong>:
+              <ul>
+                <li><strong>Flattening</strong> - Merging all layers into a single background layer via <span class="path-highlight">Layers panel menu &gt; Flatten Image</span>.</li>
+                <li><strong>Rasterizing</strong> - Converting vector, text, or Smart Object layers into static pixels (<span class="path-highlight">Right-click &gt; Rasterize Layer</span>), forfeiting scalable vectors and live attributes.</li>
+                <li><strong>Direct Painting</strong> - Painting directly onto existing image pixels with brush.</li>
+                <li><strong>Direct Menu Adjustments</strong> - Applying adjustments via <span class="path-highlight">Image &gt; Adjustments</span> directly on raster pixels instead of using Adjustment Layers.</li>
+                <li><strong>Direct Erasure</strong> - Erasing pixels with the Eraser tool instead of hiding them with a Layer Mask.</li>
+              </ul>
+            </li>
+            <li><strong>Non-Destructive Alternatives</strong>:
+              <ul>
+                <li>Eraser &rarr; <strong>Layer Mask</strong> (paint black to hide, white to reveal).</li>
+                <li>Direct Adjustments &rarr; <strong>Adjustment Layers</strong> with <strong>Clipping Mask</strong> (<span class="equation-highlight">Alt/Option-click</span> between layers).</li>
+                <li>Direct Painting &rarr; Paint on a newly created transparent layer above artwork.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h2>16. Clone Stamp Tool and History Brush</h2>
+          <ul>
+            <li><strong>Clone Stamp Tool</strong> (shortcut: <span class="equation-highlight">S</span>):
+              <ul>
+                <li>Samples pixels from a source point and replicates them onto a target area. Recommended hardness is <span class="equation-highlight">0%</span> (soft brush).</li>
+                <li>Non-destructive workflow: Create a new blank layer above artwork, set Sample dropdown to <strong>All Layers</strong>, hold <span class="equation-highlight">Alt/Option</span> and click to sample source pixels, and paint on the blank layer.</li>
+                <li><strong>Aligned Option</strong> - When enabled, sampling point moves synchronously with brush strokes. When disabled, every new stroke resets back to the initial sample anchor point.</li>
+                <li><strong>Clone Source Panel</strong> (<span class="path-highlight">Window &gt; Clone Source</span>) - Allows scaling sample dimensions (e.g. <span class="equation-highlight">25%</span>), flipping horizontally or vertically, and offsetting angles.</li>
+              </ul>
+            </li>
+            <li><strong>History Brush Tool</strong> - Paints pixel data back to a designated historical snapshot state selected in the History panel.</li>
+          </ul>
+
+          <h2>17. Character &amp; Paragraph Typography</h2>
+          <ul>
+            <li><strong>Character Formatting Options</strong>:
+              <ul>
+                <li><strong>Tracking</strong> - Adjusts letter spacing uniformly across an entire word, sentence, or text block.</li>
+                <li><strong>Kerning</strong> - Adjusts spacing between a specific pair of individual characters (shortcut: <span class="equation-highlight">Alt/Option + Left/Right Arrow</span>).</li>
+                <li><strong>Baseline Shift</strong> - Offsets selected text vertically above or below the font's baseline.</li>
+                <li><strong>Vertical &amp; Horizontal Scale</strong> - Stretches glyphs vertically or horizontally (recommended to remain at <span class="equation-highlight">100%</span>).</li>
+                <li><strong>Ligatures</strong> - OpenType typographic feature joining adjacent character pairs (e.g. "Th", "fi") into a single unified glyph to improve legibility and aesthetics.</li>
+                <li><strong>Discretionary Ligatures</strong> - Stylistic optional ligatures for specific decorative character pairs ("st", "ch").</li>
+              </ul>
+            </li>
+            <li><strong>Paragraph Formatting Options</strong>:
+              <ul>
+                <li><strong>Alignment</strong> - Left, Center, Right, or Justified text alignment.</li>
+                <li><strong>Indentation</strong> - Full paragraph margin indent or First-line indent.</li>
+                <li><strong>Space Between Paragraphs</strong> - Adds vertical space between paragraphs cleanly without empty carriage returns.</li>
+                <li><strong>Hyphenation</strong> - Toggles automatic word hyphenation across line breaks.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h2>18. Export &amp; Output Preparation</h2>
+          <ul>
+            <li><strong>Document Verification</strong>:
+              <ul>
+                <li><strong>Color Mode &amp; Bit Depth</strong> - Verify via <span class="path-highlight">Image &gt; Mode</span> (RGB, CMYK, Grayscale, 8/16/32-bit).</li>
+                <li><strong>Image Size &amp; Resolution</strong> - Check via <span class="path-highlight">Image &gt; Image Size</span> (<span class="equation-highlight">300 ppi</span> for print). When <strong>Resample is unchecked</strong>, changing resolution preserves exact pixel dimensions and data while updating physical output size.</li>
+                <li><strong>File Info Metadata</strong> - Access metadata via <span class="path-highlight">File &gt; File Info</span> &gt; Basic category. Set Copyright Status to Copyrighted and add Copyright Notice.</li>
+              </ul>
+            </li>
+            <li><strong>Export Workflows</strong>:
+              <ul>
+                <li><strong>Print Export</strong> - Save via <span class="path-highlight">File &gt; Save As</span> &gt; choose Photoshop PDF &gt; select PDF/X preset (e.g., PDF/X-1a, PDF/X-4).</li>
+                <li><strong>Save for Web</strong> - Access via <span class="path-highlight">File &gt; Export &gt; Save for Web</span>. Configure preset formats (JPEG, PNG, GIF), adjust quality slider, resize percentage, and click Save.</li>
+                <li><strong>Export As</strong> - Access via <span class="path-highlight">File &gt; Export &gt; Export As</span>. Select format, embed metadata/copyright, and add multiple output scale versions (e.g. 1x, 0.5x).</li>
+                <li><strong>Render Video</strong> - Access via <span class="path-highlight">File &gt; Export &gt; Render Video</span>. If video layers are present, select Adobe Media Encoder and MP4 format.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Docked Notes Bottom Action Bar -->
+          <div style="margin-top: 36px; padding-top: 22px; border-top: 2.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+            <button class="btn" onclick="navigateTo('home')">🏠 Return to Dashboard</button>
+            <button class="btn btn-teal" onclick="navigateTo('flashcards-adobe-professional')">🗂️ Study Linked Flashcards →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 6: FLASHCARDS (ADOBE CERTIFIED PROFESSIONAL) -->
+      <section id="flashcards-adobe-professional" class="page">
+        <div class="neo-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+              <span class="pill-badge pill-art">Art</span>
+              <h2 style="margin-top: 6px;">Adobe Certified Professional — Flashcards</h2>
+            </div>
+            <div>
+              <button class="btn btn-primary" onclick="navigateTo('note-adobe-professional')">📝 Linked Note</button>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: bold;">
+              <span>Card <span id="adobe-card-index-indicator">1</span> of <span id="adobe-card-total-indicator">44</span></span>
+              <span>Mastery: <span id="adobe-mastery-percent">0%</span></span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" id="adobe-progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- 3D Interactive Flashcard -->
+          <div class="flashcard-wrapper" onclick="toggleAdobeCardFlip()">
+            <div class="flashcard" id="adobe-main-flashcard">
+              <div class="card-face card-front">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                  <span class="pill-badge pill-art">Art</span>
+                  <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-sm" onclick="event.stopPropagation(); showAdobeCardHint();" title="Get a hint">💡 Get a Hint</button>
+                    <button class="btn btn-sm btn-circle" id="adobeStarCardBtn" onclick="event.stopPropagation(); toggleStarAdobeCard();" title="Star this card">☆</button>
+                  </div>
+                </div>
+                <div class="card-body-text" id="adobe-card-front-text">Loading card...</div>
+                <div class="card-hint">👆 Click anywhere to flip</div>
+              </div>
+              <div class="card-face card-back">
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                  <span class="pill-badge pill-art">Answer / Definition</span>
+                  <div style="font-size: 0.75rem; font-weight: bold; color: #777;">Click to flip front</div>
+                </div>
+                <div class="card-body-text" id="adobe-card-back-text">Loading answer...</div>
+                <div class="card-hint">👆 Click to flip back</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls Bar -->
+          <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 24px; flex-wrap: wrap;">
+            <div class="card-nav-pill">
+              <button onclick="prevAdobeCard()" title="Previous Card">←</button>
+              <span style="font-size: 0.95rem; min-width: 60px; text-align: center;">
+                <span id="adobe-card-nav-curr">1</span> / <span id="adobe-card-nav-total">44</span>
+              </span>
+              <button onclick="nextAdobeCard()" title="Next Card">→</button>
+            </div>
+
+            <button class="btn btn-primary" onclick="toggleAdobeCardFlip()">🔄 Flip</button>
+            <button class="btn" onclick="shuffleAdobeCards()">🔀 Shuffle</button>
+          </div>
+
+          <!-- Mastery Rating Buttons -->
+          <div style="display: flex; justify-content: center; gap: 14px; margin-top: 20px;">
+            <button class="btn" style="border-color: #fbb040;" onclick="markAdobeCardStatus('learning')">⏳ Still Learning</button>
+            <button class="btn" style="border-color: #39b54a; background-color: #eafaf1;" onclick="markAdobeCardStatus('mastered')">✅ Mastered</button>
+          </div>
+
+          <!-- Studying Progress Section -->
+          <div style="margin-top: 36px; padding: 22px; border: 2.5px solid var(--border-color); border-radius: 14px; background-color: #faf5f1;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 style="font-size: 1.1rem;">Studying Progress</h3>
+              <span class="pill-badge pill-art" id="adobe-progress-box-pct">0%</span>
+            </div>
+
+            <div class="study-row-pill" style="border-left: 6px solid #e2e8f0;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span>⚪ <strong>New cards</strong></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span id="adobe-study-row-new" style="font-size: 1rem; font-weight: 900;">44</span>
+                <button class="btn btn-sm" onclick="filterAdobeByStatus('new')">Study</button>
+              </div>
+            </div>
+
+            <div class="study-row-pill" style="border-left: 6px solid #9b51e0;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span>🟣 <strong>Still learning</strong></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span id="adobe-study-row-learning" style="font-size: 1rem; font-weight: 900;">0</span>
+                <button class="btn btn-sm" onclick="filterAdobeByStatus('learning')">Study</button>
+              </div>
+            </div>
+
+            <div class="study-row-pill" style="border-left: 6px solid #39b54a;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span>🟢 <strong>Mastered</strong></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span id="adobe-study-row-mastered" style="font-size: 1rem; font-weight: 900;">0</span>
+                <button class="btn btn-sm" onclick="filterAdobeByStatus('mastered')">Study</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Term Search & List -->
+          <div style="margin-top: 32px; border-top: 2.5px solid var(--border-color); padding-top: 22px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h3>Deck Terms &amp; Answers (44)</h3>
+              <span style="font-size: 0.8rem; color: #777;">Click Study on any term to jump</span>
+            </div>
+            <input type="text" id="adobeTermSearchInput" class="term-search-box" placeholder="🔍 Search card terms or definitions..." onkeyup="filterAdobeTermList()">
+            <div id="adobeTermsList" style="margin-top: 14px; max-height: 280px; overflow-y: auto; border: 2.5px solid var(--border-color); border-radius: 10px; background-color: #fff;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
 
     </div>
   </main>
@@ -1211,12 +1699,393 @@
       nextCard();
     }
 
+    // --- DECK 2: Adobe Certified Professional (44 Cards) ---
+    const adobeDeckData = [
+      {
+        q: "What are the two essential things a designer must clarify with a client at the beginning of every project?",
+        a: "The **purpose** of the design (the client's business goals and what they want to achieve) and the **target audience**.",
+        status: "new"
+      },
+      {
+        q: "What three key questions should a designer ask if a client brief is not detailed enough?",
+        a: "1. What is the main message you are trying to convey?<br>2. What action do you want the viewer to take after seeing the design?<br>3. How is this image going to be used (small handheld print vs. wall poster)?",
+        status: "new"
+      },
+      {
+        q: "How does the **target audience** influence graphic design complexity?",
+        a: "Older/mature audiences can understand complex graphics, infographics, and statistics; younger audiences require simpler graphics, more vibrant colors, and characters.",
+        status: "new"
+      },
+      {
+        q: "What is meant by project **deliverables**?",
+        a: "The actual files that you will need to supply to your client at the end of the project, depending on the output (print, web, or video).",
+        status: "new"
+      },
+      {
+        q: "What default resolution and color mode settings are used when creating a document for print in Photoshop?",
+        a: "A resolution of **300 ppi** (pixels per inch), working in RGB color mode for full tool availability and outputting/converting to **CMYK**.",
+        status: "new"
+      },
+      {
+        q: "What does **CMYK** stand for, and what does the letter **K** represent?",
+        a: "Cyan, Magenta, Yellow, and Key color (Black), which are the four ink colors used in printing.",
+        status: "new"
+      },
+      {
+        q: "What are the best file formats for print, and what is the standard bleed size?",
+        a: "**PDF**, **TIFF**, and **EPS**; standard bleed is **3 millimeters** (set via File > Print under Corner Crop Marks).",
+        status: "new"
+      },
+      {
+        q: "What resolution, color mode, and export formats are standard for web images?",
+        a: "**72 ppi** resolution, **RGB** color mode, exported as **JPEG**, **PNG**, **GIF**, or modern **WebP** via Export As or Save for Web.",
+        status: "new"
+      },
+      {
+        q: "What are the pixel dimensions for Full HD (1080p) and 4K (UHDTV) in video projects?",
+        a: "Full HD is **1920 × 1080 pixels**; 4K UHDTV is **3840 × 2160 pixels**.",
+        status: "new"
+      },
+      {
+        q: "What is **pixel aspect ratio**, and what ratio is used for anamorphic video?",
+        a: "The ratio between the width and height of an individual pixel (modern video uses square pixels 1.0; anamorphic format uses a **2:1** ratio with rectangular pixels).",
+        status: "new"
+      },
+      {
+        q: "What is the difference between a **raster image** and a **vector image**?",
+        a: "A **raster image** is made of pixels and is resolution dependent; a **vector image** is resolution independent and can be scaled up or down without losing quality.",
+        status: "new"
+      },
+      {
+        q: "What are the three key components of project communication?",
+        a: "1. **Project scope**<br>2. **Due dates**<br>3. **Possible impacts of delays**.",
+        status: "new"
+      },
+      {
+        q: "What is **scope creep**, and how do you prevent it?",
+        a: "The gradual, unapproved expansion of project goals, deliverables, or requirements beyond original agreement. Prevent with written deliverables, signed contracts, and limiting revision rounds.",
+        status: "new"
+      },
+      {
+        q: "What is a **change order**?",
+        a: "A signed document between designer and client whenever additional changes, directions, or tasks are requested that were not agreed on in the beginning.",
+        status: "new"
+      },
+      {
+        q: "What is the difference between a **Gantt chart** and the **Critical Path Method (CPM)**?",
+        a: "A **Gantt chart** visualizes tasks, timelines, overlaps, and deadlines; the **Critical Path Method** identifies the specific sequence of dependent tasks that directly impact project completion.",
+        status: "new"
+      },
+      {
+        q: "What is a **feedback loop** in graphic design?",
+        a: "The complete process of the designer delivering work for review, the client reviewing and sending feedback, and the designer addressing feedback and making changes.",
+        status: "new"
+      },
+      {
+        q: "What are the five key stages of project management in order?",
+        a: "1. **Planning and Analysis**<br>2. **Scheduling**<br>3. **Building**<br>4. **Review and Evaluation**<br>5. **Implementation and Publication**.",
+        status: "new"
+      },
+      {
+        q: "What is **copyright** in graphic design?",
+        a: "A legal protection that gives creators ownership over their original work (designs, illustrations, logos, layouts) automatically upon creation.",
+        status: "new"
+      },
+      {
+        q: "What is **public domain**?",
+        a: "Creative materials not protected by intellectual property laws (copyright, trademark, patent); owned by the public and usable by anyone without permission.",
+        status: "new"
+      },
+      {
+        q: "What is a **derivative work**, and does altering an original work make it yours?",
+        a: "A work altered from or based on an existing piece. Changing a design does NOT make it yours; the original creator still owns the copyright and permission is required.",
+        status: "new"
+      },
+      {
+        q: "What is **fair use**, and what four factors do courts evaluate?",
+        a: "A legal rule allowing limited use of copyrighted material without permission for education, commentary, news, or parody. Evaluated by: 1. Purpose, 2. Nature of work, 3. Amount used, 4. Effect on the market/financial value.",
+        status: "new"
+      },
+      {
+        q: "What is **licensing**?",
+        a: "A legal agreement permitting use of copyrighted material by paying a fee established by the copyright holder under specified terms and conditions.",
+        status: "new"
+      },
+      {
+        q: "What is **Creative Commons (CC)**?",
+        a: "A licensing system that lets creators share their work with the public while retaining some rights ('some rights reserved').",
+        status: "new"
+      },
+      {
+        q: "When are a **model release** and a **location release** required?",
+        a: "A **model release** is required when a recognizable person appears in your work; a **location release** is required for private property or recognizable landmarks.",
+        status: "new"
+      },
+      {
+        q: "What are the three primary working/project file formats in Adobe software?",
+        a: "**PSD** (Photoshop Document), **AI** (Adobe Illustrator), and **INDD** (InDesign Document).",
+        status: "new"
+      },
+      {
+        q: "What does **bit depth** measure, and how many colors can an 8-bit image hold?",
+        a: "A way of measuring the amount of colors in a file format; 8-bit holds **256 colors** (2^8), while 24-bit holds 8 bits per channel (RGB) for 16.7 million colors.",
+        status: "new"
+      },
+      {
+        q: "What is the primary difference between **EPS** and **SVG** vector formats?",
+        a: "**EPS** is predominantly used for print projects; **SVG** (Scalable Vector Graphics) is specifically designed for the web.",
+        status: "new"
+      },
+      {
+        q: "What is **Camera RAW**, and why is it preferred over JPEG for editing?",
+        a: "Unprocessed sensor data that retains a much wider tonal range, allowing recovery of highlight and shadow details without burning out to pure white or solid black.",
+        status: "new"
+      },
+      {
+        q: "What does a **histogram** show, and what do edge peaks indicate?",
+        a: "It displays the number of pixels across tonal regions from darkest blacks (left) to brightest whites (right). Peaks on either far edge indicate **clipping** (lost shadow or highlight detail).",
+        status: "new"
+      },
+      {
+        q: "What is **aliasing**, and how does **anti-aliasing** correct it?",
+        a: "**Aliasing** is the jagged stair-stepping effect along curved edges and low-resolution type; **anti-aliasing** averages and smooths edge colors to eliminate stair-stepping.",
+        status: "new"
+      },
+      {
+        q: "Why don't perfectly horizontal or vertical lines need anti-aliasing?",
+        a: "Because horizontal and vertical lines can align perfectly to the pixel grid, creating crisp, sharp edges naturally.",
+        status: "new"
+      },
+      {
+        q: "What is Photoshop's AI neural filter for resizing raster images called?",
+        a: "**SuperZoom**, powered by Adobe Sensei AI, which can upscale images up to 9x while enhancing details and removing JPEG artifacts.",
+        status: "new"
+      },
+      {
+        q: "What is a **color gamut**, and how do sRGB and Adobe RGB compare?",
+        a: "The subset of colors that can be represented by a color space. **sRGB** has a smaller gamut designed for web; **Adobe RGB** has a wider gamut used for print design.",
+        status: "new"
+      },
+      {
+        q: "What does the **Out of Gamut warning** in Photoshop's Color Picker signify?",
+        a: "The selected color cannot be represented with CMYK printing inks; clicking the warning jumps to the nearest achievable CMYK print color.",
+        status: "new"
+      },
+      {
+        q: "What are the three axes of the device-independent **LAB color mode**?",
+        a: "**L** (Lightness: 0 to 100, black to white), **a-axis** (green to red), and **b-axis** (blue to yellow).",
+        status: "new"
+      },
+      {
+        q: "How do you synchronize color management settings across all Adobe CC applications?",
+        a: "Open **Adobe Bridge**, go to Edit > Color Settings, select your saved settings profile, and click **Apply**.",
+        status: "new"
+      },
+      {
+        q: "What is the **rule of thirds** in composition?",
+        a: "A guideline dividing the frame into 3×3 sections, placing focal points off-center along the grid lines or intersections to guide the viewer's eye.",
+        status: "new"
+      },
+      {
+        q: "What is the difference between wide and shallow **depth of field**?",
+        a: "**Wide depth of field** keeps both foreground and background in sharp focus; **shallow depth of field** blurs foreground and background to isolate the subject.",
+        status: "new"
+      },
+      {
+        q: "What are **Smart Guides** in Photoshop, and what is the keyboard shortcut?",
+        a: "Dynamic purple/magenta guides showing alignment and spacing between layers; shortcut is **Cmd/Ctrl + Shift + R** (View > Show > Smart Guides).",
+        status: "new"
+      },
+      {
+        q: "What is a **Smart Object**, and why is it used before transforming layers?",
+        a: "An embedded container layer that preserves original image resolution and data, preventing pixelation and quality loss when scaling, rotating, or warping repeatedly.",
+        status: "new"
+      },
+      {
+        q: "What happens when you apply a filter to a **Smart Object** layer?",
+        a: "It automatically becomes a non-destructive **Smart Filter**, allowing you to toggle visibility, adjust settings, or delete it at any time.",
+        status: "new"
+      },
+      {
+        q: "What are the four core pillars of **non-destructive editing** in Photoshop?",
+        a: "1. Separate **Layers**<br>2. **Smart Objects** & Smart Filters<br>3. **Adjustment Layers** (with clipping masks)<br>4. **Layer Masks**.",
+        status: "new"
+      },
+      {
+        q: "What is the difference between **kerning** and **tracking**?",
+        a: "**Kerning** adjusts spacing between a specific pair of individual characters; **tracking** adjusts character spacing uniformly across an entire word, line, or block of text.",
+        status: "new"
+      },
+      {
+        q: "What happens when you change resolution in Image Size with **Resample unchecked**?",
+        a: "Pixel dimensions and image data remain identical; only print output resolution (ppi) and physical document size change without recalculating or adding pixels.",
+        status: "new"
+      }
+    ];
+
+    let currentAdobeCardIndex = 0;
+    let isAdobeFlipped = false;
+
+    function renderAdobeCard() {
+      const card = adobeDeckData[currentAdobeCardIndex];
+      const cardEl = document.getElementById("adobe-main-flashcard");
+      if (isAdobeFlipped) {
+        cardEl.classList.remove("flipped");
+        isAdobeFlipped = false;
+      }
+      
+      setTimeout(() => {
+        document.getElementById("adobe-card-front-text").innerHTML = card.q;
+        document.getElementById("adobe-card-back-text").innerHTML = card.a;
+        
+        const currNum = currentAdobeCardIndex + 1;
+        const totalNum = adobeDeckData.length;
+        
+        if (document.getElementById("adobe-card-index-indicator")) document.getElementById("adobe-card-index-indicator").innerText = currNum;
+        if (document.getElementById("adobe-card-total-indicator")) document.getElementById("adobe-card-total-indicator").innerText = totalNum;
+        if (document.getElementById("adobe-card-nav-curr")) document.getElementById("adobe-card-nav-curr").innerText = currNum;
+        if (document.getElementById("adobe-card-nav-total")) document.getElementById("adobe-card-nav-total").innerText = totalNum;
+
+        const starBtn = document.getElementById("adobeStarCardBtn");
+        if (starBtn) {
+          starBtn.innerText = card.starred ? "★" : "☆";
+          starBtn.style.backgroundColor = card.starred ? "var(--accent-yellow)" : "#fff";
+        }
+
+        updateAdobeProgress();
+      }, 100);
+    }
+
+    function toggleStarAdobeCard() {
+      const card = adobeDeckData[currentAdobeCardIndex];
+      card.starred = !card.starred;
+      const starBtn = document.getElementById("adobeStarCardBtn");
+      if (starBtn) {
+        starBtn.innerText = card.starred ? "★" : "☆";
+        starBtn.style.backgroundColor = card.starred ? "var(--accent-yellow)" : "#fff";
+      }
+    }
+
+    function showAdobeCardHint() {
+      const card = adobeDeckData[currentAdobeCardIndex];
+      const stripped = card.a.replace(/<[^>]*>?/gm, "").replace(/\*\*/g, "");
+      const words = stripped.split(" ").slice(0, 5).join(" ");
+      alert("💡 Hint: Starts with -> " + words + "...");
+    }
+
+    function filterAdobeByStatus(status) {
+      const idx = adobeDeckData.findIndex(c => c.status === status);
+      if (idx !== -1) {
+        jumpToAdobeCard(idx);
+      } else {
+        alert("No cards currently marked as " + status + "!");
+      }
+    }
+
+    function toggleAdobeCardFlip() {
+      const cardEl = document.getElementById("adobe-main-flashcard");
+      isAdobeFlipped = !isAdobeFlipped;
+      if (isAdobeFlipped) {
+        cardEl.classList.add("flipped");
+      } else {
+        cardEl.classList.remove("flipped");
+      }
+    }
+
+    function nextAdobeCard() {
+      if (currentAdobeCardIndex < adobeDeckData.length - 1) {
+        currentAdobeCardIndex++;
+      } else {
+        currentAdobeCardIndex = 0;
+      }
+      renderAdobeCard();
+    }
+
+    function prevAdobeCard() {
+      if (currentAdobeCardIndex > 0) {
+        currentAdobeCardIndex--;
+      } else {
+        currentAdobeCardIndex = adobeDeckData.length - 1;
+      }
+      renderAdobeCard();
+    }
+
+    function shuffleAdobeCards() {
+      for (let i = adobeDeckData.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [adobeDeckData[i], adobeDeckData[j]] = [adobeDeckData[j], adobeDeckData[i]];
+      }
+      currentAdobeCardIndex = 0;
+      renderAdobeCard();
+      renderAdobeTermList();
+    }
+
+    function markAdobeCardStatus(status) {
+      adobeDeckData[currentAdobeCardIndex].status = status;
+      updateAdobeProgress();
+      nextAdobeCard();
+    }
+
+    function updateAdobeProgress() {
+      const total = adobeDeckData.length;
+      const masteredCount = adobeDeckData.filter(c => c.status === "mastered").length;
+      const learningCount = adobeDeckData.filter(c => c.status === "learning").length;
+      const newCount = adobeDeckData.filter(c => c.status === "new" || !c.status).length;
+      const pct = total > 0 ? Math.round((masteredCount / total) * 100) : 0;
+
+      if (document.getElementById("adobe-mastery-percent")) document.getElementById("adobe-mastery-percent").innerText = pct + "%";
+      if (document.getElementById("adobe-progress-fill")) document.getElementById("adobe-progress-fill").style.width = pct + "%";
+      if (document.getElementById("adobe-progress-box-pct")) document.getElementById("adobe-progress-box-pct").innerText = pct + "%";
+
+      if (document.getElementById("adobe-study-row-new")) document.getElementById("adobe-study-row-new").innerText = newCount;
+      if (document.getElementById("adobe-study-row-learning")) document.getElementById("adobe-study-row-learning").innerText = learningCount;
+      if (document.getElementById("adobe-study-row-mastered")) document.getElementById("adobe-study-row-mastered").innerText = masteredCount;
+
+      updateDashboardMastery();
+    }
+
+    function renderAdobeTermList() {
+      const listEl = document.getElementById("adobeTermsList");
+      if (!listEl) return;
+      listEl.innerHTML = "";
+      adobeDeckData.forEach((card, idx) => {
+        const item = document.createElement("div");
+        item.className = "term-item";
+        const cleanQ = card.q.replace(/<[^>]*>?/gm, "").replace(/\*\*/g, "");
+        const cleanA = card.a.replace(/<[^>]*>?/gm, "").replace(/\*\*/g, "");
+        item.innerHTML = `
+          <div>
+            <strong>#${idx + 1} ${cleanQ.substring(0, 48)}...</strong>
+            <div style="font-size: 0.75rem; color: #666;">${cleanA.substring(0, 65)}...</div>
+          </div>
+          <button class="btn" style="padding: 4px 8px; font-size: 0.75rem;" onclick="jumpToAdobeCard(${idx})">Study</button>
+        `;
+        listEl.appendChild(item);
+      });
+    }
+
+    function jumpToAdobeCard(idx) {
+      currentAdobeCardIndex = idx;
+      renderAdobeCard();
+      window.scrollTo({ top: 100, behavior: 'smooth' });
+    }
+
+    function filterAdobeTermList() {
+      const query = document.getElementById("adobeTermSearchInput").value.toLowerCase();
+      const items = document.querySelectorAll("#adobeTermsList .term-item");
+      items.forEach((item, idx) => {
+        const card = adobeDeckData[idx];
+        const match = card.q.toLowerCase().includes(query) || card.a.toLowerCase().includes(query);
+        item.style.display = match ? "flex" : "none";
+      });
+    }
+
     let mostRecentDeck = {
-      pageId: "flashcards-ai-for-app-building",
-      name: "AI for App Building",
-      folder: "Artificial Intelligence",
-      pillClass: "pill-ai",
-      getData: () => deckData
+      pageId: "flashcards-adobe-professional",
+      name: "Adobe Certified Professional",
+      folder: "Art",
+      pillClass: "pill-art",
+      getData: () => adobeDeckData
     };
 
     function updateDashboardMastery() {
@@ -1247,6 +2116,12 @@
 
       const titleEl = document.getElementById("dash-recent-title");
       if (titleEl) titleEl.innerText = mostRecentDeck.name;
+
+      const pillEl = document.getElementById("dash-recent-pill");
+      if (pillEl) {
+        pillEl.className = "pill-badge " + mostRecentDeck.pillClass;
+        pillEl.innerText = mostRecentDeck.folder;
+      }
     }
 
     function openMostRecentDeck() {
@@ -1275,6 +2150,7 @@
 
     function renderTermList() {
       const listEl = document.getElementById("termsList");
+      if (!listEl) return;
       listEl.innerHTML = "";
       deckData.forEach((card, idx) => {
         const item = document.createElement("div");
@@ -1298,7 +2174,7 @@
 
     function filterTermList() {
       const query = document.getElementById("termSearchInput").value.toLowerCase();
-      const items = document.querySelectorAll(".term-item");
+      const items = document.querySelectorAll("#termsList .term-item");
       items.forEach((item, idx) => {
         const card = deckData[idx];
         const match = card.q.toLowerCase().includes(query) || card.a.toLowerCase().includes(query);
@@ -1327,6 +2203,24 @@
         if (breadcrumb) breadcrumb.innerHTML = "<span>AI</span> &gt; <span>Notes: AI for App Building</span>";
       } else if (pageId === "flashcards-ai-for-app-building") {
         if (breadcrumb) breadcrumb.innerHTML = "<span>AI</span> &gt; <span>Flashcards: AI for App Building</span>";
+        mostRecentDeck = {
+          pageId: "flashcards-ai-for-app-building",
+          name: "AI for App Building",
+          folder: "Artificial Intelligence",
+          pillClass: "pill-ai",
+          getData: () => deckData
+        };
+      } else if (pageId === "note-adobe-professional") {
+        if (breadcrumb) breadcrumb.innerHTML = "<span>Art</span> &gt; <span>Notes: Adobe Certified Professional</span>";
+      } else if (pageId === "flashcards-adobe-professional") {
+        if (breadcrumb) breadcrumb.innerHTML = "<span>Art</span> &gt; <span>Flashcards: Adobe Certified Professional</span>";
+        mostRecentDeck = {
+          pageId: "flashcards-adobe-professional",
+          name: "Adobe Certified Professional",
+          folder: "Art",
+          pillClass: "pill-art",
+          getData: () => adobeDeckData
+        };
       }
 
       // Highlight active nav item
@@ -1344,6 +2238,10 @@
     window.addEventListener("DOMContentLoaded", () => {
       renderCard();
       renderTermList();
+      renderAdobeCard();
+      renderAdobeTermList();
+      updateProgress();
+      updateAdobeProgress();
       updateDashboardMastery();
     });
   </script>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Notes — AI for App Building</title>
+  <!-- Link to shared CSS file per github_site_instructions -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Website Navigation Bar -->
+  <header class="site-navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="brand-group">
+        <div class="brand-badge">👾 TEACH ME HUB</div>
+        <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.8; text-transform: uppercase;">STUDY WORKFLOW</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links-row">
+          <li><a href="index.html" class="nav-link-btn">🏠 Dashboard</a></li>
+          <li><a href="folders.html" class="nav-link-btn">📁 Subject Folders</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-breadcrumb" style="font-size: 0.8rem; color: #555;">
+          <span>AI</span> &gt; <span>Notes: AI for App Building</span>
+        </div>
+        <span class="pill-badge pill-ai">Artificial Intelligence</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content View -->
+  <main>
+    <div class="content-container">
+
+      <section class="neo-box note-content">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <span class="pill-badge pill-ai">Artificial Intelligence</span>
+            <h1 style="margin-top: 10px;">AI for App Building</h1>
+            <p style="font-size: 0.85rem; color: #555;">Source: <code>ai_for_app_building.md</code></p>
+          </div>
+          <div>
+            <a href="flashcards-ai-for-app-building.html" class="btn btn-teal">🗂️ Linked Flashcards</a>
+          </div>
+        </div>
+
+        <hr style="border: 0; border-top: 2px solid var(--border-color); margin: 16px 0;">
+
+        <h2>1. Core Foundations</h2>
+        <ul>
+          <li><strong>Vibecoding</strong> - Using natural language to build software or apps.</li>
+          <li><strong>Agentic AI</strong> - Takes action on your behalf under your supervision; writes code &amp; builds the interface.</li>
+        </ul>
+
+        <h2>2. Build a Custom Tool</h2>
+        <ul>
+          <li><strong>Prototyping Environment</strong> - Google AI Studio, etc. &rarr; build.</li>
+          <li><strong>Key Focus Areas</strong> - Pay attention to natural conversation flow, specificity of feedback, and speed from idea to prototype.</li>
+        </ul>
+
+        <h3>Case Study A: The Tiebreaker</h3>
+        <ul>
+          <li><strong>Prototype Concept</strong> - An app called <em>The Tiebreaker</em> that helps make decisions by showing different pros and cons through a pros and cons list, a comparison table, or a SWOT analysis.</li>
+          <li><strong>Real-World Scenario Test</strong>:
+            <ul>
+              <li><strong>Input</strong> - <em>"Should I offer my software for free with paid features, or charge a flat $20/month premium plan?"</em></li>
+              <li><strong>Action</strong> - Select analysis type &amp; review results.</li>
+            </ul>
+          </li>
+          <li><strong>Troubleshoot</strong> - See error button for Auto fix.</li>
+          <li><strong>Verify</strong> - Verify the fix.</li>
+        </ul>
+
+        <h3>Case Study B: Marketing Materials Generator</h3>
+        <ul>
+          <li><strong>Prototype Concept</strong> - App brand builder to visualize products across mediums.</li>
+          <li><strong>Step 1 (Define App Prototype)</strong> - <em>"I want an app called the Brand builder app that lets me describe a product and imagine it across a bunch of different mediums, this could include a billboard, a newspaper, and a social post. Maintain product consistency between each shot. I do not want to see people in any of the images. You must use the Nano-Banana model for these images."</em> &rarr; Click build.</li>
+          <li><strong>Step 2 (Run Initial Test)</strong> - Once interface loads, type product you want to visualize into description field &amp; generate.</li>
+          <li><strong>Step 3 (Troubleshoot Model Confusion)</strong> - Sometimes the app tries to use multiple models and confuses itself. Click the error button, select errors, copy paste them into prompt box &amp; provide feedback with a corrective prompt under the errors:
+            <blockquote>"Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps."</blockquote>
+          </li>
+          <li><strong>Step 4 (Finalize)</strong> - Visualize campaign post-fix.</li>
+        </ul>
+
+        <h3>Case Study C: Interactive Dashboard</h3>
+        <ul>
+          <li><strong>Step 1 (Define Prototype)</strong> - <em>"I want to make an interactive dashboard that allows me to visualize data in many different ways. I am going to provide the data for you, so please set up the dashboard with it accurately."</em> &rarr; Attach data.</li>
+          <li><strong>Step 2 (Explore &amp; Filter Data)</strong> - Use filters and verify chart updates.</li>
+          <li><strong>Step 3 (Iterate on Design &amp; Layout)</strong> - Use the <strong>annotate app</strong> button in prompt box &amp; use comment tool to highlight a specific area &rarr; send prompt.</li>
+        </ul>
+
+        <h2>3. App Building Process &amp; Assessment</h2>
+        <p>Worksheet assessment to evaluate where the most value could come from an app:</p>
+        <ol>
+          <li><strong>Workflow Fit</strong> - Does the task solve part of a broader, more complex problem or workflow? If it is part of a bigger workflow, like a specific step, consider building an app.</li>
+          <li><strong>Process Clarity</strong> - Can you outline a clear, step-by-step process for solving the problem?</li>
+          <li><strong>Consistent Inputs &amp; Outputs</strong> - Does the process involve consistent inputs and outputs? Make sure the same types of inputs go in and the same type of outputs go out.</li>
+          <li><strong>Complexity Level</strong> - What's the complexity level? If app requires access to tools like calendar or email or needs to connect to other platforms, consult an expert to make sure the idea is feasible and safe.</li>
+        </ol>
+
+        <blockquote>
+          <strong>Prompting Principle:</strong> "Break it up in terms of the different blocks of the app you're trying to make. Give it the overall goal, but then prompt it to make one at a time. Makes it easier to correct errors."
+        </blockquote>
+
+        <h2>4. Post-Publishing Ownership &amp; Evaluation</h2>
+        <ul>
+          <li><strong>Responsibility</strong> - After publishing an app, you are responsible for the outputs it produces and need to maintain its functionality for users.</li>
+        </ul>
+
+        <h4>Post-Use Evaluation Questions</h4>
+        <ul>
+          <li><strong>What did I just achieve?</strong> - How do you feel knowing you just developed a working app without ever writing a line of code?</li>
+          <li><strong>How much time have I saved?</strong> - How many hours per week or month did you gain back?</li>
+          <li><strong>Have I reduced costs?</strong> - Did this reduce any expenses, like saving money on tools you no longer need or subscription services you replaced?</li>
+          <li><strong>Has the quality of my work improved?</strong> - Are you experiencing fewer errors, better outputs, or higher satisfaction with your work?</li>
+          <li><strong>Am I more productive?</strong> - Are you able to complete more tasks or projects?</li>
+          <li><strong>Did I discover something new?</strong> - What unexpected benefits did you discover when you used your app?</li>
+        </ul>
+
+        <!-- Docked Notes Bottom Action Bar -->
+        <div style="margin-top: 36px; padding-top: 22px; border-top: 2.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+          <div style="display: flex; gap: 10px;">
+            <a href="index.html" class="btn">🏠 Return to Dashboard</a>
+            <a href="folders.html" class="btn">📁 Return to Folders</a>
+          </div>
+          <a href="flashcards-ai-for-app-building.html" class="btn btn-teal">🗂️ Study Linked Flashcards →</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Teach Me Hub • Hosted with GitHub Pages</p>
+  </footer>
+
+</body>
+</html>
