@@ -28,9 +28,6 @@ Work through the workflow you ran last week, in order:
 
 **Write the research brief.** Do: In `research-brief.md`, write up two checked claims: the claim, what the source says, the corrected claim, and the input, rule, or check it becomes. Add one line: “Because of this research, I will add, change, or protect this step: ___.” Why: Research should change your workflow, not just sit in a file.
 
-## Include in context: 
-Examples of best flashcards generated or created myself on knowt, as well as examples of my notes from AP classes.
-
 # Step File Outlines
 ## 00-start
 - goal

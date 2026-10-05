@@ -261,3 +261,11 @@
   com.reesefrondorf.whole-vault-sync are active and returning healthy exit status 0.
   • Privacy Verification: Confirmed via GitHub that rfrondorf12/obsidian.file https://github.
   com/rfrondorf12/obsidian.file remains strictly Private.
+
+## 2026-10-04, Wireframe Generation, Figma
+- **Context the Model Could See:** [[Screenshot 2026-10-04 at 4.39.03 PM.png]] [[Screenshot 2026-10-04 at 4.38.03 PM.png]] [[Screenshot 2026-10-04 at 4.34.49 PM.png]] [[Screenshot 2026-10-04 at 4.34.12 PM.png]] [[DIGI_ReeseFrondorf_MoodBoard.pdf]] [[Screenshot 2026-10-04 at 4.30.39 PM.png]]
+- **Instruction:** Make a wireframe layout to add to a context kit for a workflow. The goal is to get a separate ai tool to produce an html file with organized notes and flashcards. The home page should have a navigation bar, a dashboard showing elements like time studied, progress bar, accuracy level, etc. It should also have a place to view recently accessed study sets and notes. Individual note pages will just contain notes and related diagrams/pictures, and should also have a navigation bar. The pages should also have a link to already created flashcards, or a button to create new linked flashcards. There should also be a page with folders for different subjects. Flashcard pages should have buttons to move back or forward to the next card, and below the interactive cards a list of questions and answers in a table with two columns (question and answer)
+- **Output:** Created https://www.figma.com/make/4Lb1H6KVBWGEf7Am19LvNk/Study-Workflow-Wireframe?t=s6PYZ6x6g4hoj17c-1 
+- **Decision:** Keep. Successfully generated a usable wireframe for the desired HTML file output to include in context file
+
+

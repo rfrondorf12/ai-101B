@@ -48,7 +48,10 @@ I like this dashboard for tracking how well I know the flashcards.
 Use this wireframe to format the HTML file:
 https://www.figma.com/make/4Lb1H6KVBWGEf7Am19LvNk/Study-Workflow-Wireframe?t=s6PYZ6x6g4hoj17c-1
 
+## Folders Page Organization
+- each note and flashcard set should be assigned to a subject folder. Folders should include science, math, literature, language, artificial intelligence, history, and art. If you think an additional folder is necessary for accurate categorization, ask me first. 
+
 
 **Why this step matters:** without this, the model has to guess. Guesses are how things go wrong.
 
-**How I check it:** I read these three lines back before the model starts. Are they all correct?
+**How I check it:** I make sure the html file is updated with accurate information that is formatted correctly. 
