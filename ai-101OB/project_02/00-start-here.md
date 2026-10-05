@@ -19,6 +19,7 @@ Create an interactive HTML file with flashcards and notes from an uploaded file 
 - After the first run, a file named teach_me_hub.html should be created. After this file is created, this workflow should only edit the teach_me_hub.html. No new html file should be created if teach_me_hub.html exists. 
 - teach_me_hub.html should be placed in ~/Applied AI/AI 101/ai-101OB/project_02/outputs. If it does not exist 
 - Explain what you did in plain language. I am not a programmer.
+- There is no default number of flashcards to make. Make as many flashcards in a set as is necessary to cover content. Max number of flashcards in a set is 400.
 
 ## What Stays My Decision
 

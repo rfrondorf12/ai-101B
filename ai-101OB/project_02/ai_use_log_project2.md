@@ -377,3 +377,18 @@
 - **Output:** Created and updated [teach_me_hub.html](file:///Users/reesefrondorf/Applied%20AI/AI%20101/ai-101OB/project_02/outputs/teach_me_hub.html) in `~/Applied AI/AI 101/ai-101OB/project_02/outputs/` with interactive 3D flashcards, study progress tracking, note reader, subject folder directory, and top navbar.
 - **Human Review:** Successfully generated desired HTML file with accurate notes, interactive flashcards, and desired UX. 
 - **Decision:** Keep. Initial hub created and verified functioning smoothly.
+
+## Round 39 — 2026-10-04, Whole Vault Sync Troubleshooting & Fix (GitHub 100MB File Limit)
+
+- **Context the Model Could See:** `git-sync-workflow-whole-vault/` (`00-start-here.md`, `01-trigger.md`, `02-context.md`, `03-task.md`, `04-output.md`, `05-human-check.md`, `diagram.md`, `process-map.canvas`, `sync-whole-vault.sh`), `~/Library/Logs/whole-vault-sync.log`, `~/Library/LaunchAgents/com.reesefrondorf.whole-vault-sync.plist`, `~/Applied AI/obsidian.file/`, and `~/Applied AI/AI 101/`.
+- **Instruction:** "troubleshoot and update git-sync-workflow-whole-vault workflow"
+- **Direction:** Diagnose why automated whole vault sync stopped pushing to GitHub, resolve the blocking file causing rejection, configure file exclusion rules, update sync script and workflow documents, and verify end-to-end execution.
+- **Output:** 
+  1. Identified root cause in `~/Library/Logs/whole-vault-sync.log`: GitHub pre-receive hook rejected `Moodboard copy 2.psd` (110.90 MB) for exceeding GitHub's 100.00 MB file size limit, blocking all subsequent hourly sync pushes with exit code 1.
+  2. Safely reset unpushed commits in `~/Applied AI/obsidian.file` to `origin/main` without affecting any files in the local vault (`AI 101/`).
+  3. Added `*.psd` to `.gitignore` in both `obsidian.file` and `AI 101`.
+  4. Updated [sync-whole-vault.sh](file:///Users/reesefrondorf/Applied%20AI/AI%20101/git-sync-workflow-whole-vault/sync-whole-vault.sh) to explicitly exclude `.git`, `.DS_Store`, `.trash`, `*.one`, `*.psd`, and enforced `--max-size=100m` to prevent any file >= 100MB from ever breaking GitHub syncs.
+  5. Updated [02-context.md](file:///Users/reesefrondorf/Applied%20AI/AI%20101/git-sync-workflow-whole-vault/02-context.md) with the 100MB file limit rule and [diagram.md](file:///Users/reesefrondorf/Applied%20AI/AI%20101/git-sync-workflow-whole-vault/diagram.md) with the hourly 9 AM–11 PM trigger schedule.
+  6. Successfully staged, committed, and pushed all pending notes, flashcard hubs, and project assets to private GitHub repository `rfrondorf12/obsidian.file`. Tested both update and no-change execution paths, and confirmed LaunchAgent `com.reesefrondorf.whole-vault-sync` returned exit code 0.
+- **Decision:** Keep. Fully resolved sync blocker, protected against large files, and restored reliable automated hourly backups to GitHub.
+
