@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teach Me Hub</title>
+  <style>
+    :root {
+      --bg-canvas: #faf5f1;
+      --text-main: #240404;
+      --card-bg: #ffffff;
+      --border-color: #240404;
+      --accent-yellow: #f9ed32;
+      --accent-teal: #6ddac7;
+      --accent-red: #e82e25;
+      --accent-orange: #fbb040;
+      --accent-green: #39b54a;
+      --folder-ai-pink: #ff6b9d;
+      --folder-science: #39b54a;
+      --folder-math: #e82e25;
+      --folder-lit: #2d7ff9;
+      --folder-lang: #9b51e0;
+      --folder-history: #fbb040;
+      --folder-art: #17aaa4;
+      --shadow-offset: 4px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-main);
+      font-family: 'Space Mono', 'Courier New', Courier, monospace, sans-serif;
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Sidebar Navigation */
+    aside {
+      width: 260px;
+      background-color: #fff;
+      border-right: 3px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+
+    .sidebar-brand {
+      padding: 24px 20px;
+      border-bottom: 3px solid var(--border-color);
+      background-color: var(--accent-yellow);
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-top: 4px;
+      opacity: 0.85;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 0.9rem;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+
+    .nav-btn:hover {
+      background-color: #fff;
+      border-color: var(--border-color);
+      box-shadow: 2px 2px 0px var(--border-color);
+      transform: translate(-1px, -1px);
+    }
+
+    .nav-btn.active {
+      background-color: var(--accent-teal);
+      border-color: var(--border-color);
+      box-shadow: 3px 3px 0px var(--border-color);
+    }
+
+    .nav-section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #777;
+      margin: 16px 8px 4px 8px;
+      font-weight: bold;
+    }
+
+    /* Main Content Area */
+    main {
+      flex-grow: 1;
+      overflow-y: auto;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header.top-header {
+      padding: 16px 32px;
+      border-bottom: 3px solid var(--border-color);
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-breadcrumb {
+      font-size: 0.85rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pill-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border: 2px solid var(--border-color);
+      border-radius: 999px;
+      box-shadow: 2px 2px 0px var(--border-color);
+      text-transform: uppercase;
+    }
+
+    .pill-ai { background-color: var(--folder-ai-pink); color: #fff; }
+    .pill-science { background-color: var(--folder-science); color: #fff; }
+    .pill-math { background-color: var(--folder-math); color: #fff; }
+    .pill-lit { background-color: var(--folder-lit); color: #fff; }
+    .pill-lang { background-color: var(--folder-lang); color: #fff; }
+    .pill-history { background-color: var(--folder-history); color: #fff; }
+    .pill-art { background-color: var(--folder-art); color: #fff; }
+
+    .content-container {
+      padding: 32px;
+      max-width: 1050px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Dynamic Page Switching */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Neo-Brutalist Box Utility */
+    .neo-box {
+      background-color: #fff;
+      border: 3px solid var(--border-color);
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 0.85rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px var(--border-color);
+      transition: all 0.15s ease;
+      background-color: #fff;
+      color: var(--text-main);
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--border-color);
+    }
+
+    .btn:active {
+      transform: translate(1px, 1px);
+      box-shadow: 2px 2px 0px var(--border-color);
+    }
+
+    .btn-primary { background-color: var(--accent-yellow); }
+    .btn-teal { background-color: var(--accent-teal); }
+    .btn-red { background-color: var(--accent-red); color: #fff; }
+
+    /* Dashboard Grid */
+    .dash-hero {
+      background-color: var(--accent-yellow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .folder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .folder-card {
+      background-color: #fff;
+      border: 3px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 3px 3px 0px var(--border-color);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .folder-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0px var(--border-color);
+    }
+
+    .folder-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .folder-icon {
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    /* Note View Styling */
+    .note-content h1 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      border-bottom: 3px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .note-content h2 {
+      font-size: 1.3rem;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .note-content h3 {
+      font-size: 1.1rem;
+      margin-top: 20px;
+      margin-bottom: 8px;
+    }
+
+    .note-content h4 {
+      font-size: 0.95rem;
+      margin-top: 14px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .note-content ul, .note-content ol {
+      margin-left: 24px;
+      margin-bottom: 14px;
+    }
+
+    .note-content li {
+      margin-bottom: 6px;
+    }
+
+    .note-content blockquote {
+      border-left: 5px solid var(--accent-red);
+      background-color: #fff3f3;
+      padding: 12px 18px;
+      margin: 16px 0;
+      font-style: italic;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .equation-highlight {
+      background-color: #d1f7c4;
+      border: 1px solid #39b54a;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    /* Flashcard View & 3D Flip */
+    .flashcard-wrapper {
+      perspective: 1200px;
+      max-width: 650px;
+      margin: 20px auto;
+    }
+
+    .flashcard {
+      width: 100%;
+      height: 340px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .card-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border: 3px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 6px 6px 0px var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      background-color: #fff;
+    }
+
+    .card-front {
+      background-color: #ffffff;
+    }
+
+    .card-back {
+      background-color: #f7fafc;
+      transform: rotateY(180deg);
+    }
+
+    .card-tag {
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #777;
+    }
+
+    .card-body-text {
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: center;
+      line-height: 1.4;
+      margin: auto 0;
+    }
+
+    .card-hint {
+      font-size: 0.75rem;
+      text-align: center;
+      color: #999;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .flashcard-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 14px;
+      background-color: #e2e8f0;
+      border: 2px solid var(--border-color);
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background-color: var(--accent-teal);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .mastery-stats {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .stat-pill {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      text-align: center;
+      background-color: #fff;
+      font-size: 0.8rem;
+      font-weight: bold;
+      box-shadow: 2px 2px 0px var(--border-color);
+    }
+
+    .stat-pill.active {
+      background-color: var(--accent-yellow);
+    }
+
+    /* Search & Term List */
+    .term-search-box {
+      width: 100%;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      border: 2px solid var(--border-color);
+      border-radius: 6px;
+      margin-top: 14px;
+      box-shadow: 2px 2px 0px var(--border-color);
+    }
+
+    .term-item {
+      padding: 10px 14px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .term-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Navigation -->
+  <aside>
+    <div class="sidebar-brand">
+      <div class="brand-title">👾 TEACH ME HUB</div>
+      <div class="brand-subtitle">STUDY & MASTERY WORKFLOW</div>
+    </div>
+    <ul class="sidebar-nav">
+      <li><a class="nav-btn active" onclick="navigateTo('home')">🏠 Dashboard</a></li>
+      <li><a class="nav-btn" onclick="navigateTo('folders')">📁 Subject Folders</a></li>
+      
+      <div class="nav-section-label">Active Unit</div>
+      <li><a class="nav-btn" onclick="navigateTo('note-ai-for-app-building')">📝 Notes: App Building</a></li>
+      <li><a class="nav-btn" onclick="navigateTo('flashcards-ai-for-app-building')">🗂️ Cards: App Building</a></li>
+    </ul>
+    <div style="padding: 16px; border-top: 2px solid var(--border-color); font-size: 0.75rem; text-align: center;">
+      Vault Sync v1.0 • Ready
+    </div>
+  </aside>
+
+  <!-- Main Content View -->
+  <main>
+    <header class="top-header">
+      <div class="header-breadcrumb" id="header-breadcrumb">
+        <span>Dashboard</span> &gt; <span>Overview</span>
+      </div>
+      <div>
+        <span class="pill-badge pill-ai">Artificial Intelligence</span>
+      </div>
+    </header>
+
+    <div class="content-container">
+
+      <!-- PAGE 1: DASHBOARD -->
+      <section id="home" class="page active">
+        <div class="neo-box dash-hero">
+          <div>
+            <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Welcome to Your Teach Me Hub</h1>
+            <p style="font-size: 0.9rem;">Your interactive study workspace for notes and spaced repetition decks, generated straight from your vault.</p>
+          </div>
+          <div>
+            <button class="btn btn-teal" onclick="navigateTo('flashcards-ai-for-app-building')">⚡ Study Deck</button>
+          </div>
+        </div>
+
+        <h3 style="margin-bottom: 12px;">📁 Subject Folders</h3>
+        <div class="folder-grid">
+          <div class="folder-card" style="border-top: 6px solid var(--folder-ai-pink);" onclick="navigateTo('folders')">
+            <div class="folder-header">
+              <div class="folder-icon" style="background-color: var(--folder-ai-pink); color: #fff;">AI</div>
+              <strong>Artificial Intelligence</strong>
+            </div>
+            <p style="font-size: 0.8rem; color: #555;">1 Note • 1 Flashcard Deck</p>
+          </div>
+
+          <div class="folder-card" style="border-top: 6px solid var(--folder-science);" onclick="navigateTo('folders')">
+            <div class="folder-header">
+              <div class="folder-icon" style="background-color: var(--folder-science); color: #fff;">SC</div>
+              <strong>Science</strong>
+            </div>
+            <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+          </div>
+
+          <div class="folder-card" style="border-top: 6px solid var(--folder-math);" onclick="navigateTo('folders')">
+            <div class="folder-header">
+              <div class="folder-icon" style="background-color: var(--folder-math); color: #fff;">MA</div>
+              <strong>Math</strong>
+            </div>
+            <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+          </div>
+
+          <div class="folder-card" style="border-top: 6px solid var(--folder-lit);" onclick="navigateTo('folders')">
+            <div class="folder-header">
+              <div class="folder-icon" style="background-color: var(--folder-lit); color: #fff;">LT</div>
+              <strong>Literature</strong>
+            </div>
+            <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+          </div>
+
+          <div class="folder-card" style="border-top: 6px solid var(--folder-lang);" onclick="navigateTo('folders')">
+            <div class="folder-header">
+              <div class="folder-icon" style="background-color: var(--folder-lang); color: #fff;">LN</div>
+              <strong>Language</strong>
+            </div>
+            <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+          </div>
+
+          <div class="folder-card" style="border-top: 6px solid var(--folder-history);" onclick="navigateTo('folders')">
+            <div class="folder-header">
+              <div class="folder-icon" style="background-color: var(--folder-history); color: #fff;">HI</div>
+              <strong>History</strong>
+            </div>
+            <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+          </div>
+
+          <div class="folder-card" style="border-top: 6px solid var(--folder-art);" onclick="navigateTo('folders')">
+            <div class="folder-header">
+              <div class="folder-icon" style="background-color: var(--folder-art); color: #fff;">AR</div>
+              <strong>Art</strong>
+            </div>
+            <p style="font-size: 0.8rem; color: #555;">0 Notes</p>
+          </div>
+        </div>
+
+        <div class="neo-box" style="margin-top: 24px;">
+          <h3 style="margin-bottom: 12px;">Recent Additions</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; background-color: #faf5f1;">
+            <div>
+              <strong>ai_for_app_building</strong> <span class="pill-badge pill-ai">Artificial Intelligence</span>
+              <p style="font-size: 0.8rem; color: #666; margin-top: 4px;">Source: AI Professional Courses • 15 Cards Generated</p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-primary" onclick="navigateTo('note-ai-for-app-building')">Notes</button>
+              <button class="btn btn-teal" onclick="navigateTo('flashcards-ai-for-app-building')">Flashcards</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 2: FOLDERS DIRECTORY -->
+      <section id="folders" class="page">
+        <div class="neo-box">
+          <h2>📁 Subject Directory</h2>
+          <p style="font-size: 0.85rem; margin-top: 6px;">Browse and access your study files grouped by topic.</p>
+          
+          <div style="margin-top: 20px;">
+            <div style="border: 2px solid var(--folder-ai-pink); border-radius: 8px; padding: 16px; margin-bottom: 16px; background-color: #fff9fb;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="pill-badge pill-ai">Artificial Intelligence (Pink)</span>
+                <span style="font-size: 0.8rem; font-weight: bold;">1 File Active</span>
+              </div>
+              <div style="margin-top: 14px; padding: 12px; background: #fff; border: 2px solid var(--border-color); border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <strong>ai_for_app_building</strong>
+                  <div style="font-size: 0.75rem; color: #666;">Includes Notes & 15 Interactive Flashcards</div>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-primary" onclick="navigateTo('note-ai-for-app-building')">View Note</button>
+                  <button class="btn btn-teal" onclick="navigateTo('flashcards-ai-for-app-building')">Study Flashcards</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Other placeholders -->
+            <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
+              <span class="pill-badge pill-science">Science (Green)</span> — No files added yet
+            </div>
+            <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
+              <span class="pill-badge pill-math">Math (Red)</span> — No files added yet
+            </div>
+            <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
+              <span class="pill-badge pill-lit">Literature (Blue)</span> — No files added yet
+            </div>
+            <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
+              <span class="pill-badge pill-lang">Language (Purple)</span> — No files added yet
+            </div>
+            <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
+              <span class="pill-badge pill-history">History (Orange)</span> — No files added yet
+            </div>
+            <div style="padding: 12px 16px; border: 2px dashed #bbb; border-radius: 8px; margin-bottom: 10px; color: #888;">
+              <span class="pill-badge pill-art">Art (Teal)</span> — No files added yet
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE 3: NOTES (AI FOR APP BUILDING) -->
+      <section id="note-ai-for-app-building" class="page">
+        <div class="neo-box note-content">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+            <div>
+              <span class="pill-badge pill-ai">Artificial Intelligence</span>
+              <h1 style="margin-top: 10px;">AI for App Building</h1>
+              <p style="font-size: 0.85rem; color: #555;">Source: <code>ai_for_app_building.md</code></p>
+            </div>
+            <div>
+              <button class="btn btn-teal" onclick="navigateTo('flashcards-ai-for-app-building')">🗂️ Linked Flashcards</button>
+            </div>
+          </div>
+
+          <hr style="border: 0; border-top: 2px solid var(--border-color); margin: 16px 0;">
+
+          <h2>1. Core Foundations</h2>
+          <ul>
+            <li><strong>Vibecoding</strong>: Using natural language to build software or apps.</li>
+            <li><strong>Agentic AI</strong>: Takes action on your behalf under your supervision; writes code & builds the interface.</li>
+          </ul>
+
+          <h2>2. Build a Custom Tool</h2>
+          <ul>
+            <li><strong>Prototyping Environment</strong>: Google AI studio, etc. → build.</li>
+            <li><strong>Key Focus Areas</strong>: Pay attention to natural conversation flow, specificity of feedback, & speed from idea to prototype.</li>
+          </ul>
+
+          <h3>Case Study A: The Tiebreaker</h3>
+          <ul>
+            <li><strong>Prototype Concept</strong>: An app called <em>The Tiebreaker</em> that helps make decisions by showing different pros and cons through a pros and cons list, a comparison table, or a SWOT analysis.</li>
+            <li><strong>Real-World Scenario Test</strong>:
+              <ul>
+                <li><strong>Input</strong>: <em>"Should I offer my software for free with paid features, or charge a flat $20/month premium plan?"</em></li>
+                <li><strong>Action</strong>: Select analysis type & review results.</li>
+              </ul>
+            </li>
+            <li><strong>Troubleshoot</strong>: See error button for Auto fix.</li>
+            <li><strong>Verify</strong>: Verify the fix.</li>
+          </ul>
+
+          <h3>Case Study B: Marketing Materials Generator</h3>
+          <ul>
+            <li><strong>Prototype Concept</strong>: App brand builder to visualize products across mediums.</li>
+            <li><strong>Step 1 (Define App Prototype)</strong>: <em>"I want an app called the Brand builder app that lets me describe a product and imagine it across a bunch of different mediums, this could include a billboard, a newspaper, and a social post. Maintain product consistency between each shot. I do not want to see people in any of the images. You must use the Nano-Banana model for these images."</em> → Click build.</li>
+            <li><strong>Step 2 (Run Initial Test)</strong>: Once interface loads, type product you want to visualize into description field & generate.</li>
+            <li><strong>Step 3 (Troubleshoot Model Confusion)</strong>: Sometimes the app tries to use multiple models and confuses itself. Click the error button, select errors, copy paste them into prompt box & provide feedback with a corrective prompt under the errors:
+              <blockquote>"Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps."</blockquote>
+            </li>
+            <li><strong>Step 4 (Finalize)</strong>: Visualize campaign post-fix.</li>
+          </ul>
+
+          <h3>Case Study C: Interactive Dashboard</h3>
+          <ul>
+            <li><strong>Step 1 (Define Prototype)</strong>: <em>"I want to make an interactive dashboard that allows me to visualize data in many different ways. I am going to provide the data for you, so please set up the dashboard with it accurately."</em> → Attach data.</li>
+            <li><strong>Step 2 (Explore & Filter Data)</strong>: Use filters and verify chart updates.</li>
+            <li><strong>Step 3 (Iterate on Design & Layout)</strong>: Use the <strong>annotate app</strong> button in prompt box & use comment tool to highlight a specific area → send prompt.</li>
+          </ul>
+
+          <h2>3. App Building Process & Assessment</h2>
+          <p>Worksheet assessment to assess where the most value could come from an app:</p>
+          <ol>
+            <li><strong>Workflow Fit</strong>: Does the task solve part of a broader, more complex problem or workflow? If it is part of a bigger workflow, like a specific step, consider building an app.</li>
+            <li><strong>Process Clarity</strong>: Can you outline a clear, step-by-step process for solving the problem?</li>
+            <li><strong>Consistent Inputs & Outputs</strong>: Does the process involve consistent inputs and outputs? Make sure the same types of inputs go in and the same type of outputs go out.</li>
+            <li><strong>Complexity Level</strong>: What's the complexity level? If app requires access to tools like calendar or email or needs to connect to other platforms, consult an expert to make sure the idea is feasible and safe.</li>
+          </ol>
+
+          <blockquote>
+            <strong>Prompting Principle:</strong> "Break it up in terms of the different blocks of the app you're trying to make. Give it the overall goal, but then prompt it to make one at a time. Makes it easier to correct errors."
+          </blockquote>
+
+          <h2>4. Post-Publishing Ownership & Evaluation</h2>
+          <ul>
+            <li><strong>Responsibility</strong>: After publishing an app, you are responsible for the outputs it produces and need to maintain its functionality for users.</li>
+          </ul>
+
+          <h4>Post-Use Evaluation Questions</h4>
+          <ul>
+            <li><strong>What did I just achieve?</strong> How do you feel knowing you just developed a working app without ever writing a line of code?</li>
+            <li><strong>How much time have I saved?</strong> How many hours per week or month did you gain back?</li>
+            <li><strong>Have I reduced costs?</strong> Did this reduce any expenses, like saving money on tools you no longer need or subscription services you replaced?</li>
+            <li><strong>Has the quality of my work improved?</strong> Are you experiencing fewer errors, better outputs, or higher satisfaction with your work?</li>
+            <li><strong>Am I more productive?</strong> Are you able to complete more tasks or projects?</li>
+            <li><strong>Did I discover something new?</strong> What unexpected benefits did you discover when you used your app?</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- PAGE 4: FLASHCARDS (AI FOR APP BUILDING) -->
+      <section id="flashcards-ai-for-app-building" class="page">
+        <div class="neo-box">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+              <span class="pill-badge pill-ai">Artificial Intelligence</span>
+              <h2 style="margin-top: 6px;">AI for App Building — Flashcards</h2>
+            </div>
+            <div>
+              <button class="btn btn-primary" onclick="navigateTo('note-ai-for-app-building')">📝 Linked Note</button>
+            </div>
+          </div>
+
+          <!-- Progress -->
+          <div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: bold;">
+              <span>Card <span id="card-index-indicator">1</span> of <span id="card-total-indicator">15</span></span>
+              <span>Mastery: <span id="mastery-percent">0%</span></span>
+            </div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+          </div>
+
+          <!-- 3D Interactive Flashcard -->
+          <div class="flashcard-wrapper" onclick="toggleCardFlip()">
+            <div class="flashcard" id="main-flashcard">
+              <div class="card-face card-front">
+                <div class="card-tag">QUESTION / FRONT</div>
+                <div class="card-body-text" id="card-front-text">What is Vibecoding?</div>
+                <div class="card-hint">👆 Click anywhere to flip</div>
+              </div>
+              <div class="card-face card-back">
+                <div class="card-tag">ANSWER / DEFINITION</div>
+                <div class="card-body-text" id="card-back-text">Using natural language to build software or apps.</div>
+                <div class="card-hint">👆 Click to flip back</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="flashcard-controls">
+            <button class="btn" onclick="prevCard()">← Prev</button>
+            <button class="btn btn-primary" onclick="toggleCardFlip()">🔄 Flip</button>
+            <button class="btn" onclick="nextCard()">Next →</button>
+            <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
+          </div>
+
+          <!-- Mastery Buttons -->
+          <div style="display: flex; justify-content: center; gap: 12px; margin-top: 16px;">
+            <button class="btn" style="border-color: #fbb040;" onclick="markCardStatus('learning')">⏳ Still Learning</button>
+            <button class="btn" style="border-color: #39b54a; background-color: #eafaf1;" onclick="markCardStatus('mastered')">✅ Mastered</button>
+          </div>
+
+          <!-- Term Search & List -->
+          <div style="margin-top: 32px; border-top: 2px solid var(--border-color); padding-top: 20px;">
+            <h3>Deck Terms & Answers (15)</h3>
+            <input type="text" id="termSearchInput" class="term-search-box" placeholder="🔍 Search card terms or definitions..." onkeyup="filterTermList()">
+            <div id="termsList" style="margin-top: 12px; max-height: 250px; overflow-y: auto; border: 2px solid var(--border-color); border-radius: 6px; background-color: #fff;">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    // Deck Data strictly from ai_for_app_building.md
+    const deckData = [
+      {
+        q: "What is **Vibecoding**?",
+        a: "Using natural language to build software or apps.",
+        status: "new"
+      },
+      {
+        q: "What is **Agentic AI**?",
+        a: "Takes action on your behalf under your supervision; writes code & builds the interface.",
+        status: "new"
+      },
+      {
+        q: "When building a custom tool in Google AI Studio, what three things should you pay attention to?",
+        a: "1. Natural conversation flow\\n2. Specificity of feedback\\n3. Speed from idea to prototype.",
+        status: "new"
+      },
+      {
+        q: "What is the purpose of the prototype app called **The Tiebreaker**?",
+        a: "Helps make decisions by showing different pros and cons through a pros and cons list, a comparison table, or a SWOT analysis.",
+        status: "new"
+      },
+      {
+        q: "What real-world test input was used for **The Tiebreaker**?",
+        a: "'Should I offer my software for free with paid features, or charge a flat $20/month premium plan?'",
+        status: "new"
+      },
+      {
+        q: "How do you troubleshoot errors in **The Tiebreaker**?",
+        a: "See error button for Auto fix, then verify the fix.",
+        status: "new"
+      },
+      {
+        q: "What does the **Brand builder app** prototype do?",
+        a: "Lets you describe a product and imagine it across different mediums (billboard, newspaper, social post) while maintaining product consistency without people in images.",
+        status: "new"
+      },
+      {
+        q: "Which specific model must be used for images in the **Brand builder app**?",
+        a: "The Nano-Banana model.",
+        status: "new"
+      },
+      {
+        q: "How do you troubleshoot when the brand builder app tries to use multiple models and confuses itself?",
+        a: "Click error button, copy paste errors into prompt box, and provide feedback: 'Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps.'",
+        status: "new"
+      },
+      {
+        q: "What is the goal of the **Interactive dashboard** prototype?",
+        a: "Allows you to visualize data in many different ways accurately after providing/attaching data.",
+        status: "new"
+      },
+      {
+        q: "How do you iterate on design and layout in the **Interactive dashboard**?",
+        a: "Use the annotate app button in the prompt box and use the comment tool to highlight a specific area, then send prompt.",
+        status: "new"
+      },
+      {
+        q: "What 4 questions should you assess on the worksheet before building an app?",
+        a: "1. Does the task solve part of a broader workflow?\\n2. Can you outline a clear, step-by-step process?\\n3. Does the process involve consistent inputs and outputs?\\n4. What's the complexity level (calendar/email/other platforms)?",
+        status: "new"
+      },
+      {
+        q: "What is the rule for prompting different blocks of an app?",
+        a: "Break it up into blocks: give the overall goal, but prompt it to make one block at a time to make correcting errors easier.",
+        status: "new"
+      },
+      {
+        q: "What is your responsibility after publishing an app?",
+        a: "You are responsible for the outputs it produces and need to maintain its functionality for users.",
+        status: "new"
+      },
+      {
+        q: "What are the 6 reflection questions to ask after using your new app?",
+        a: "1. What did I just achieve?\\n2. How much time have I saved?\\n3. Have I reduced costs?\\n4. Has the quality of my work improved?\\n5. Am I more productive?\\n6. Did I discover something new?",
+        status: "new"
+      }
+    ];
+
+    let currentCardIndex = 0;
+    let isFlipped = false;
+
+    function renderCard() {
+      const card = deckData[currentCardIndex];
+      const cardEl = document.getElementById("main-flashcard");
+      if (isFlipped) {
+        cardEl.classList.remove("flipped");
+        isFlipped = false;
+      }
+      
+      setTimeout(() => {
+        document.getElementById("card-front-text").innerHTML = card.q.replace(/\\n/g, "<br>");
+        document.getElementById("card-back-text").innerHTML = card.a.replace(/\\n/g, "<br>");
+        document.getElementById("card-index-indicator").innerText = currentCardIndex + 1;
+        document.getElementById("card-total-indicator").innerText = deckData.length;
+        updateProgress();
+      }, 100);
+    }
+
+    function toggleCardFlip() {
+      const cardEl = document.getElementById("main-flashcard");
+      isFlipped = !isFlipped;
+      if (isFlipped) {
+        cardEl.classList.add("flipped");
+      } else {
+        cardEl.classList.remove("flipped");
+      }
+    }
+
+    function nextCard() {
+      if (currentCardIndex < deckData.length - 1) {
+        currentCardIndex++;
+        renderCard();
+      } else {
+        currentCardIndex = 0;
+        renderCard();
+      }
+    }
+
+    function prevCard() {
+      if (currentCardIndex > 0) {
+        currentCardIndex--;
+        renderCard();
+      } else {
+        currentCardIndex = deckData.length - 1;
+        renderCard();
+      }
+    }
+
+    function shuffleCards() {
+      for (let i = deckData.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [deckData[i], deckData[j]] = [deckData[j], deckData[i]];
+      }
+      currentCardIndex = 0;
+      renderCard();
+      renderTermList();
+    }
+
+    function markCardStatus(status) {
+      deckData[currentCardIndex].status = status;
+      updateProgress();
+      nextCard();
+    }
+
+    function updateProgress() {
+      const masteredCount = deckData.filter(c => c.status === "mastered").length;
+      const pct = Math.round((masteredCount / deckData.length) * 100);
+      document.getElementById("mastery-percent").innerText = pct + "%";
+      document.getElementById("progress-fill").style.width = pct + "%";
+    }
+
+    function renderTermList() {
+      const listEl = document.getElementById("termsList");
+      listEl.innerHTML = "";
+      deckData.forEach((card, idx) => {
+        const item = document.createElement("div");
+        item.className = "term-item";
+        item.innerHTML = `
+          <div>
+            <strong>#${idx + 1} ${card.q.replace(/\\*\\*/g, "").substring(0, 45)}...</strong>
+            <div style="font-size: 0.75rem; color: #666;">${card.a.replace(/\\*\\*/g, "").substring(0, 60)}...</div>
+          </div>
+          <button class="btn" style="padding: 4px 8px; font-size: 0.75rem;" onclick="jumpToCard(${idx})">Study</button>
+        `;
+        listEl.appendChild(item);
+      });
+    }
+
+    function jumpToCard(idx) {
+      currentCardIndex = idx;
+      renderCard();
+      window.scrollTo({ top: 100, behavior: 'smooth' });
+    }
+
+    function filterTermList() {
+      const query = document.getElementById("termSearchInput").value.toLowerCase();
+      const items = document.querySelectorAll(".term-item");
+      items.forEach((item, idx) => {
+        const card = deckData[idx];
+        const match = card.q.toLowerCase().includes(query) || card.a.toLowerCase().includes(query);
+        item.style.display = match ? "flex" : "none";
+      });
+    }
+
+    // Page Navigation
+    function navigateTo(pageId) {
+      document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+      document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add("active");
+      }
+
+      // Update breadcrumb
+      const breadcrumb = document.getElementById("header-breadcrumb");
+      if (pageId === "home") {
+        breadcrumb.innerHTML = "<span>Dashboard</span> &gt; <span>Overview</span>";
+      } else if (pageId === "folders") {
+        breadcrumb.innerHTML = "<span>Folders</span> &gt; <span>Directory</span>";
+      } else if (pageId === "note-ai-for-app-building") {
+        breadcrumb.innerHTML = "<span>Artificial Intelligence</span> &gt; <span>Notes: AI for App Building</span>";
+      } else if (pageId === "flashcards-ai-for-app-building") {
+        breadcrumb.innerHTML = "<span>Artificial Intelligence</span> &gt; <span>Flashcards: AI for App Building</span>";
+      }
+
+      // Highlight active nav item
+      const navLinks = document.querySelectorAll(".nav-btn");
+      navLinks.forEach(link => {
+        if (link.getAttribute("onclick") && link.getAttribute("onclick").includes(pageId)) {
+          link.classList.add("active");
+        }
+      });
+    }
+
+    // Initial setup on load
+    window.addEventListener("DOMContentLoaded", () => {
+      renderCard();
+      renderTermList();
+    });
+  </script>
+</body>
+</html>

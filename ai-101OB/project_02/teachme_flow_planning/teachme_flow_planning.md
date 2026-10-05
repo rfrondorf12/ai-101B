@@ -1,6 +1,6 @@
 **Goal:** make custom flashcard sets based on Learn modes out of transcripts and files
 
-**Trigger:** "Teach Me [file name]"
+**Trigger:** "teach me [file name]"
 
 Want it to use the community Plugin "spaced repetition" to create flashcards or notes out of uploaded content based on past created notes/flashcards. 
 

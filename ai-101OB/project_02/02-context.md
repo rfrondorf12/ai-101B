@@ -4,7 +4,7 @@
 
 - **Where Outputs Go** ~/Applied AI/AI 101/ai-101OB/project_02/outputs
 
-Upon the first ever "teachme" command, the output should be a base HTML file that follows the figma wireframe. The HTML file should be named "teach_me_hub". all following teachme workflow runs should edit teach_me_hub.html by adding a note and flashcard page for the file named in the trigger prompt. 
+Upon the first ever "launch teach me workflow" command, the output should be a base HTML file that follows the linked figma wireframe. The HTML file should be named "teach_me_hub". all following teach me workflow runs should edit teach_me_hub.html by adding a note and flashcard page for the file named in the trigger prompt. 
 
 - **Flashcard Reference Examples to Follow** are in ~/Applied AI/AI 101/ai-101OB/project_02/teachme_flow_planning/notes_cards_references
 	- flashcard references are formatted in /notes_cards_references with # between terms and definitions and with a semicolon between question and answer pairings. 
@@ -45,12 +45,57 @@ I like this dashboard for tracking how well I know the flashcards.
 
 
 # HTML File format Wireframe
+
+separate content into different `<div>` blocks. You then use **CSS** or **JavaScript** to show one "page" and hide the others. make sure to include a navigation bar. 
+Code can look similar to this for example: 
+`<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Hide pages by default */
+    .page { display: none; }
+    
+    /* Show the page when its ID is in the URL (e.g., #page1) */
+    .page:target { display: block; }
+    
+    /* Keep the home page visible if no hash is selected */
+    #home { display: block; }
+    #home:has(~ .page:target) { display: none; }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Menu -->
+  <nav>
+    <a href="#home">Home</a> | 
+    <a href="#about">About</a> | 
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- "Page" 1 -->
+  <div id="home" class="page">
+    <h1>Welcome to the Homepage</h1>
+  </div>
+
+  <!-- "Page" 2 -->
+  <div id="about" class="page">
+    <h1>About Us</h1>
+  </div>
+
+  <!-- "Page" 3 -->
+  <div id="contact" class="page">
+    <h1>Contact Details</h1>
+  </div>
+
+</body>
+</html>
+`
+
 Use this wireframe to format the HTML file:
 https://www.figma.com/make/4Lb1H6KVBWGEf7Am19LvNk/Study-Workflow-Wireframe?t=s6PYZ6x6g4hoj17c-1
 
 ## Folders Page Organization
-- each note and flashcard set should be assigned to a subject folder. Folders should include science, math, literature, language, artificial intelligence, history, and art. If you think an additional folder is necessary for accurate categorization, ask me first. 
-
+each note and flashcard set should be assigned to a subject folder. Folders should include science (green), math (red), literature (blue), language (purple), artificial intelligence (pink), history (orange), and art (teal). If you think an additional folder is necessary for accurate categorization, ask me first. 
 
 **Why this step matters:** without this, the model has to guess. Guesses are how things go wrong.
 
