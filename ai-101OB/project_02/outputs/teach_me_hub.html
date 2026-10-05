@@ -36,105 +36,98 @@
       color: var(--text-main);
       font-family: 'Space Mono', 'Courier New', Courier, monospace, sans-serif;
       display: flex;
+      flex-direction: column;
       min-height: 100vh;
       line-height: 1.5;
     }
 
-    /* Sidebar Navigation */
-    aside {
-      width: 260px;
+    /* Top Website Navigation Bar */
+    header.site-navbar {
+      width: 100%;
       background-color: #fff;
-      border-right: 3px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-    }
-
-    .sidebar-brand {
-      padding: 24px 20px;
       border-bottom: 3px solid var(--border-color);
-      background-color: var(--accent-yellow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 0px rgba(36, 4, 4, 0.04);
     }
 
-    .brand-title {
-      font-size: 1.25rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: -0.5px;
+    .navbar-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    .brand-subtitle {
-      font-size: 0.75rem;
-      font-weight: bold;
-      margin-top: 4px;
-      opacity: 0.85;
-    }
-
-    .sidebar-nav {
-      list-style: none;
-      padding: 16px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex-grow: 1;
-    }
-
-    .nav-btn {
+    .brand-group {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 12px 14px;
-      color: var(--text-main);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 0.9rem;
-      border: 2px solid transparent;
-      border-radius: 8px;
-      transition: all 0.15s ease;
       cursor: pointer;
     }
 
-    .nav-btn:hover {
+    .brand-badge {
+      background-color: var(--accent-yellow);
+      border: 2.5px solid var(--border-color);
+      border-radius: 80px;
+      padding: 6px 16px;
+      font-size: 1.05rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      box-shadow: 2.5px 2.5px 0px var(--border-color);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-link-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border: 2px solid transparent;
+      border-radius: 80px; /* 80px corner rounding */
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: transparent;
+      font-family: inherit;
+    }
+
+    .nav-link-btn:hover {
       background-color: #fff;
       border-color: var(--border-color);
-      box-shadow: 2px 2px 0px var(--border-color);
+      box-shadow: 2.5px 2.5px 0px var(--border-color);
       transform: translate(-1px, -1px);
     }
 
-    .nav-btn.active {
+    .nav-link-btn.active {
       background-color: var(--accent-teal);
       border-color: var(--border-color);
-      box-shadow: 3px 3px 0px var(--border-color);
-    }
-
-    .nav-section-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #777;
-      margin: 16px 8px 4px 8px;
-      font-weight: bold;
+      box-shadow: 2.5px 2.5px 0px var(--border-color);
     }
 
     /* Main Content Area */
     main {
       flex-grow: 1;
-      overflow-y: auto;
-      height: 100vh;
+      width: 100%;
       display: flex;
       flex-direction: column;
-    }
-
-    header.top-header {
-      padding: 16px 32px;
-      border-bottom: 3px solid var(--border-color);
-      background-color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
     }
 
     .header-breadcrumb {
@@ -193,13 +186,14 @@
     .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      padding: 10px 18px;
+      padding: 10px 22px;
       font-size: 0.85rem;
       font-weight: 900;
       text-transform: uppercase;
       border: 2px solid var(--border-color);
-      border-radius: 6px;
+      border-radius: 80px; /* 80px corner rounding */
       cursor: pointer;
       box-shadow: 3px 3px 0px var(--border-color);
       transition: all 0.15s ease;
@@ -219,17 +213,112 @@
       box-shadow: 2px 2px 0px var(--border-color);
     }
 
+    .btn-sm {
+      padding: 6px 14px;
+      font-size: 0.75rem;
+      border-radius: 80px;
+    }
+
+    .btn-circle {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      border-radius: 80px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
     .btn-primary { background-color: var(--accent-yellow); }
     .btn-teal { background-color: var(--accent-teal); }
     .btn-red { background-color: var(--accent-red); color: #fff; }
 
-    /* Dashboard Grid */
+    /* Dashboard Grid & Hero */
     .dash-hero {
       background-color: var(--accent-yellow);
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
+      border-radius: 12px;
+    }
+
+    /* Circular Mastery Gauge Section */
+    .mastery-highlight-box {
+      background-color: #fff;
+      border: 3px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--shadow-offset) var(--shadow-offset) 0px var(--border-color);
+      padding: 24px 28px;
+      margin-bottom: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .mastery-gauge-container {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    /* Circle filled with ratio of color to lack of color */
+    .ratio-circle {
+      width: 108px;
+      height: 108px;
+      border-radius: 50%;
+      border: 3px solid var(--border-color);
+      background: conic-gradient(var(--accent-teal) 0deg, #edf2f7 0deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 3px 3px 0px var(--border-color);
+      flex-shrink: 0;
+      transition: background 0.4s ease;
+    }
+
+    .ratio-circle-inner {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      box-shadow: inset 1px 1px 2px rgba(0,0,0,0.06);
+    }
+
+    .ratio-circle-inner span {
+      font-size: 0.6rem;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #666;
+      margin-top: 1px;
+    }
+
+    .mastery-info-details h3 {
+      font-size: 1.15rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mastery-stats-text {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .folder-grid {
@@ -432,9 +521,9 @@
 
     .stat-pill {
       flex: 1;
-      padding: 10px;
+      padding: 10px 16px;
       border: 2px solid var(--border-color);
-      border-radius: 8px;
+      border-radius: 80px;
       text-align: center;
       background-color: #fff;
       font-size: 0.8rem;
@@ -446,20 +535,69 @@
       background-color: var(--accent-yellow);
     }
 
+    /* Pill Navigation for Flashcard Deck (Figma/Knowt Wireframe) */
+    .card-nav-pill {
+      background: #fff;
+      border: 2.5px solid var(--border-color);
+      border-radius: 80px;
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      box-shadow: 2.5px 2.5px 0px var(--border-color);
+      gap: 14px;
+      font-weight: 900;
+    }
+
+    .card-nav-pill button {
+      background: var(--accent-teal);
+      border: 2px solid var(--border-color);
+      width: 36px;
+      height: 36px;
+      border-radius: 80px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.05rem;
+      transition: all 0.15s ease;
+    }
+
+    .card-nav-pill button:hover {
+      transform: scale(1.08);
+      background-color: var(--accent-yellow);
+    }
+
+    /* Study Progress Breakdown Rows (Screenshot 6) */
+    .study-row-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 80px;
+      margin-bottom: 10px;
+      background: #fff;
+      box-shadow: 2px 2px 0px var(--border-color);
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+
     /* Search & Term List */
     .term-search-box {
       width: 100%;
-      padding: 10px 14px;
+      padding: 12px 20px;
       font-family: inherit;
       font-size: 0.9rem;
       border: 2px solid var(--border-color);
-      border-radius: 6px;
+      border-radius: 80px;
       margin-top: 14px;
       box-shadow: 2px 2px 0px var(--border-color);
+      outline: none;
     }
 
     .term-item {
-      padding: 10px 14px;
+      padding: 10px 16px;
       border-bottom: 1px solid #eee;
       display: flex;
       justify-content: space-between;
@@ -474,35 +612,34 @@
 </head>
 <body>
 
-  <!-- Sidebar Navigation -->
-  <aside>
-    <div class="sidebar-brand">
-      <div class="brand-title">👾 TEACH ME HUB</div>
-      <div class="brand-subtitle">STUDY & MASTERY WORKFLOW</div>
+  <!-- Top Website Navigation Bar -->
+  <header class="site-navbar">
+    <div class="navbar-container">
+      <div class="brand-group" onclick="navigateTo('home')">
+        <div class="brand-badge">👾 TEACH ME HUB</div>
+        <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.8; text-transform: uppercase;">STUDY WORKFLOW</span>
+      </div>
+
+      <nav>
+        <ul class="nav-links-row">
+          <li><button class="nav-link-btn active" onclick="navigateTo('home')">🏠 Dashboard</button></li>
+          <li><button class="nav-link-btn" onclick="navigateTo('folders')">📁 Subject Folders</button></li>
+          <li><button class="nav-link-btn" onclick="navigateTo('note-ai-for-app-building')">📝 Study Notes</button></li>
+          <li><button class="nav-link-btn" onclick="navigateTo('flashcards-ai-for-app-building')">🗂️ Flashcards</button></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-breadcrumb" id="header-breadcrumb" style="font-size: 0.8rem; color: #555;">
+          <span>Dashboard</span> &gt; <span>Overview</span>
+        </div>
+        <span class="pill-badge pill-ai">Artificial Intelligence</span>
+      </div>
     </div>
-    <ul class="sidebar-nav">
-      <li><a class="nav-btn active" onclick="navigateTo('home')">🏠 Dashboard</a></li>
-      <li><a class="nav-btn" onclick="navigateTo('folders')">📁 Subject Folders</a></li>
-      
-      <div class="nav-section-label">Active Unit</div>
-      <li><a class="nav-btn" onclick="navigateTo('note-ai-for-app-building')">📝 Notes: App Building</a></li>
-      <li><a class="nav-btn" onclick="navigateTo('flashcards-ai-for-app-building')">🗂️ Cards: App Building</a></li>
-    </ul>
-    <div style="padding: 16px; border-top: 2px solid var(--border-color); font-size: 0.75rem; text-align: center;">
-      Vault Sync v1.0 • Ready
-    </div>
-  </aside>
+  </header>
 
   <!-- Main Content View -->
   <main>
-    <header class="top-header">
-      <div class="header-breadcrumb" id="header-breadcrumb">
-        <span>Dashboard</span> &gt; <span>Overview</span>
-      </div>
-      <div>
-        <span class="pill-badge pill-ai">Artificial Intelligence</span>
-      </div>
-    </header>
 
     <div class="content-container">
 
@@ -515,6 +652,36 @@
           </div>
           <div>
             <button class="btn btn-teal" onclick="navigateTo('flashcards-ai-for-app-building')">⚡ Study Deck</button>
+          </div>
+        </div>
+
+        <!-- Recent Deck Mastery (Circular Ratio Indicator) -->
+        <div class="mastery-highlight-box">
+          <div class="mastery-gauge-container">
+            <!-- Circle filled with the exact ratio of color to lack of color -->
+            <div class="ratio-circle" id="dash-mastery-circle" title="Mastery Ratio">
+              <div class="ratio-circle-inner">
+                <div id="dash-mastery-pct">0%</div>
+                <span>Mastered</span>
+              </div>
+            </div>
+
+            <div class="mastery-info-details">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <span class="pill-badge pill-ai" id="dash-recent-pill">Artificial Intelligence</span>
+                <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: bold; color: #777;">Recently Opened Deck</span>
+              </div>
+              <h3 id="dash-recent-title">AI for App Building</h3>
+              <div class="mastery-stats-text">
+                <span>🎯 <strong id="dash-mastered-count">0</strong> of <strong id="dash-total-count">15</strong> Mastered</span>
+                <span>•</span>
+                <span>⏳ <strong id="dash-unmastered-count">15</strong> Remaining</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn btn-teal" onclick="openMostRecentDeck()">⚡ Study Active Deck</button>
           </div>
         </div>
 
@@ -725,6 +892,12 @@
             <li><strong>Am I more productive?</strong> Are you able to complete more tasks or projects?</li>
             <li><strong>Did I discover something new?</strong> What unexpected benefits did you discover when you used your app?</li>
           </ul>
+
+          <!-- Docked Notes Bottom Action Bar (Wireframe) -->
+          <div style="margin-top: 36px; padding-top: 22px; border-top: 2.5px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+            <button class="btn" onclick="navigateTo('home')">🏠 Return to Dashboard</button>
+            <button class="btn btn-teal" onclick="navigateTo('flashcards-ai-for-app-building')">🗂️ Study Linked Flashcards →</button>
+          </div>
         </div>
       </section>
 
@@ -756,37 +929,94 @@
           <div class="flashcard-wrapper" onclick="toggleCardFlip()">
             <div class="flashcard" id="main-flashcard">
               <div class="card-face card-front">
-                <div class="card-tag">QUESTION / FRONT</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                  <span class="pill-badge pill-ai">Artificial Intelligence</span>
+                  <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-sm" onclick="event.stopPropagation(); showCardHint();" title="Get a hint">💡 Get a Hint</button>
+                    <button class="btn btn-sm btn-circle" id="starCardBtn" onclick="event.stopPropagation(); toggleStarCard();" title="Star this card">☆</button>
+                  </div>
+                </div>
                 <div class="card-body-text" id="card-front-text">What is Vibecoding?</div>
                 <div class="card-hint">👆 Click anywhere to flip</div>
               </div>
               <div class="card-face card-back">
-                <div class="card-tag">ANSWER / DEFINITION</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                  <span class="pill-badge pill-ai">Answer / Definition</span>
+                  <div style="font-size: 0.75rem; font-weight: bold; color: #777;">Click to flip front</div>
+                </div>
                 <div class="card-body-text" id="card-back-text">Using natural language to build software or apps.</div>
                 <div class="card-hint">👆 Click to flip back</div>
               </div>
             </div>
           </div>
 
-          <!-- Controls -->
-          <div class="flashcard-controls">
-            <button class="btn" onclick="prevCard()">← Prev</button>
+          <!-- Controls Bar (Figma / Knowt Wireframe Screenshot 4) -->
+          <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 24px; flex-wrap: wrap;">
+            <!-- Centered Pill Nav -->
+            <div class="card-nav-pill">
+              <button onclick="prevCard()" title="Previous Card">←</button>
+              <span style="font-size: 0.95rem; min-width: 60px; text-align: center;">
+                <span id="card-nav-curr">1</span> / <span id="card-nav-total">15</span>
+              </span>
+              <button onclick="nextCard()" title="Next Card">→</button>
+            </div>
+
             <button class="btn btn-primary" onclick="toggleCardFlip()">🔄 Flip</button>
-            <button class="btn" onclick="nextCard()">Next →</button>
             <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
           </div>
 
-          <!-- Mastery Buttons -->
-          <div style="display: flex; justify-content: center; gap: 12px; margin-top: 16px;">
+          <!-- Mastery Rating Buttons (80px Rounding) -->
+          <div style="display: flex; justify-content: center; gap: 14px; margin-top: 20px;">
             <button class="btn" style="border-color: #fbb040;" onclick="markCardStatus('learning')">⏳ Still Learning</button>
             <button class="btn" style="border-color: #39b54a; background-color: #eafaf1;" onclick="markCardStatus('mastered')">✅ Mastered</button>
           </div>
 
+          <!-- Studying Progress Section (Figma/Knowt Wireframe Screenshot 6) -->
+          <div style="margin-top: 36px; padding: 22px; border: 2.5px solid var(--border-color); border-radius: 14px; background-color: #faf5f1;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 style="font-size: 1.1rem;">Studying Progress</h3>
+              <span class="pill-badge pill-ai" id="progress-box-pct">0%</span>
+            </div>
+
+            <div class="study-row-pill" style="border-left: 6px solid #e2e8f0;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span>⚪ <strong>New cards</strong></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span id="study-row-new" style="font-size: 1rem; font-weight: 900;">15</span>
+                <button class="btn btn-sm" onclick="filterByStatus('new')">Study</button>
+              </div>
+            </div>
+
+            <div class="study-row-pill" style="border-left: 6px solid #9b51e0;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span>🟣 <strong>Still learning</strong></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span id="study-row-learning" style="font-size: 1rem; font-weight: 900;">0</span>
+                <button class="btn btn-sm" onclick="filterByStatus('learning')">Study</button>
+              </div>
+            </div>
+
+            <div class="study-row-pill" style="border-left: 6px solid #39b54a;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span>🟢 <strong>Mastered</strong></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <span id="study-row-mastered" style="font-size: 1rem; font-weight: 900;">0</span>
+                <button class="btn btn-sm" onclick="filterByStatus('mastered')">Study</button>
+              </div>
+            </div>
+          </div>
+
           <!-- Term Search & List -->
-          <div style="margin-top: 32px; border-top: 2px solid var(--border-color); padding-top: 20px;">
-            <h3>Deck Terms & Answers (15)</h3>
+          <div style="margin-top: 32px; border-top: 2.5px solid var(--border-color); padding-top: 22px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h3>Deck Terms & Answers (15)</h3>
+              <span style="font-size: 0.8rem; color: #777;">Click Study on any term to jump</span>
+            </div>
             <input type="text" id="termSearchInput" class="term-search-box" placeholder="🔍 Search card terms or definitions..." onkeyup="filterTermList()">
-            <div id="termsList" style="margin-top: 12px; max-height: 250px; overflow-y: auto; border: 2px solid var(--border-color); border-radius: 6px; background-color: #fff;">
+            <div id="termsList" style="margin-top: 14px; max-height: 280px; overflow-y: auto; border: 2.5px solid var(--border-color); border-radius: 10px; background-color: #fff;">
               <!-- Populated by JS -->
             </div>
           </div>
@@ -890,10 +1120,48 @@
       setTimeout(() => {
         document.getElementById("card-front-text").innerHTML = card.q.replace(/\\n/g, "<br>");
         document.getElementById("card-back-text").innerHTML = card.a.replace(/\\n/g, "<br>");
-        document.getElementById("card-index-indicator").innerText = currentCardIndex + 1;
-        document.getElementById("card-total-indicator").innerText = deckData.length;
+        
+        const currNum = currentCardIndex + 1;
+        const totalNum = deckData.length;
+        
+        if (document.getElementById("card-index-indicator")) document.getElementById("card-index-indicator").innerText = currNum;
+        if (document.getElementById("card-total-indicator")) document.getElementById("card-total-indicator").innerText = totalNum;
+        if (document.getElementById("card-nav-curr")) document.getElementById("card-nav-curr").innerText = currNum;
+        if (document.getElementById("card-nav-total")) document.getElementById("card-nav-total").innerText = totalNum;
+
+        const starBtn = document.getElementById("starCardBtn");
+        if (starBtn) {
+          starBtn.innerText = card.starred ? "★" : "☆";
+          starBtn.style.backgroundColor = card.starred ? "var(--accent-yellow)" : "#fff";
+        }
+
         updateProgress();
       }, 100);
+    }
+
+    function toggleStarCard() {
+      const card = deckData[currentCardIndex];
+      card.starred = !card.starred;
+      const starBtn = document.getElementById("starCardBtn");
+      if (starBtn) {
+        starBtn.innerText = card.starred ? "★" : "☆";
+        starBtn.style.backgroundColor = card.starred ? "var(--accent-yellow)" : "#fff";
+      }
+    }
+
+    function showCardHint() {
+      const card = deckData[currentCardIndex];
+      const words = card.a.split(" ").slice(0, 4).join(" ");
+      alert("💡 Hint: Starts with -> " + words + "...");
+    }
+
+    function filterByStatus(status) {
+      const idx = deckData.findIndex(c => c.status === status);
+      if (idx !== -1) {
+        jumpToCard(idx);
+      } else {
+        alert("No cards currently marked as " + status + "!");
+      }
     }
 
     function toggleCardFlip() {
@@ -942,11 +1210,66 @@
       nextCard();
     }
 
+    let mostRecentDeck = {
+      pageId: "flashcards-ai-for-app-building",
+      name: "AI for App Building",
+      folder: "Artificial Intelligence",
+      pillClass: "pill-ai",
+      getData: () => deckData
+    };
+
+    function updateDashboardMastery() {
+      if (!mostRecentDeck) return;
+      const data = mostRecentDeck.getData();
+      const total = data.length;
+      const mastered = data.filter(c => c.status === "mastered").length;
+      const unmastered = total - mastered;
+      const pct = total > 0 ? Math.round((mastered / total) * 100) : 0;
+
+      // Circle filled with the exact ratio of color to lack of color
+      const circleEl = document.getElementById("dash-mastery-circle");
+      if (circleEl) {
+        circleEl.style.background = `conic-gradient(var(--accent-teal) 0deg ${pct * 3.6}deg, #edf2f7 ${pct * 3.6}deg 360deg)`;
+      }
+
+      const pctEl = document.getElementById("dash-mastery-pct");
+      if (pctEl) pctEl.innerText = pct + "%";
+
+      const masteredEl = document.getElementById("dash-mastered-count");
+      if (masteredEl) masteredEl.innerText = mastered;
+
+      const totalEl = document.getElementById("dash-total-count");
+      if (totalEl) totalEl.innerText = total;
+
+      const unmasteredEl = document.getElementById("dash-unmastered-count");
+      if (unmasteredEl) unmasteredEl.innerText = unmastered;
+
+      const titleEl = document.getElementById("dash-recent-title");
+      if (titleEl) titleEl.innerText = mostRecentDeck.name;
+    }
+
+    function openMostRecentDeck() {
+      if (mostRecentDeck) {
+        navigateTo(mostRecentDeck.pageId);
+      }
+    }
+
     function updateProgress() {
+      const total = deckData.length;
       const masteredCount = deckData.filter(c => c.status === "mastered").length;
-      const pct = Math.round((masteredCount / deckData.length) * 100);
-      document.getElementById("mastery-percent").innerText = pct + "%";
-      document.getElementById("progress-fill").style.width = pct + "%";
+      const learningCount = deckData.filter(c => c.status === "learning").length;
+      const newCount = deckData.filter(c => c.status === "new" || !c.status).length;
+      const pct = total > 0 ? Math.round((masteredCount / total) * 100) : 0;
+
+      if (document.getElementById("mastery-percent")) document.getElementById("mastery-percent").innerText = pct + "%";
+      if (document.getElementById("progress-fill")) document.getElementById("progress-fill").style.width = pct + "%";
+      if (document.getElementById("progress-box-pct")) document.getElementById("progress-box-pct").innerText = pct + "%";
+
+      if (document.getElementById("study-row-new")) document.getElementById("study-row-new").innerText = newCount;
+      if (document.getElementById("study-row-learning")) document.getElementById("study-row-learning").innerText = learningCount;
+      if (document.getElementById("study-row-mastered")) document.getElementById("study-row-mastered").innerText = masteredCount;
+
+      updateDashboardMastery();
     }
 
     function renderTermList() {
@@ -985,7 +1308,7 @@
     // Page Navigation
     function navigateTo(pageId) {
       document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-      document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
+      document.querySelectorAll(".nav-link-btn").forEach(b => b.classList.remove("active"));
 
       const targetPage = document.getElementById(pageId);
       if (targetPage) {
@@ -995,28 +1318,32 @@
       // Update breadcrumb
       const breadcrumb = document.getElementById("header-breadcrumb");
       if (pageId === "home") {
-        breadcrumb.innerHTML = "<span>Dashboard</span> &gt; <span>Overview</span>";
+        if (breadcrumb) breadcrumb.innerHTML = "<span>Dashboard</span> &gt; <span>Overview</span>";
+        updateDashboardMastery();
       } else if (pageId === "folders") {
-        breadcrumb.innerHTML = "<span>Folders</span> &gt; <span>Directory</span>";
+        if (breadcrumb) breadcrumb.innerHTML = "<span>Folders</span> &gt; <span>Directory</span>";
       } else if (pageId === "note-ai-for-app-building") {
-        breadcrumb.innerHTML = "<span>Artificial Intelligence</span> &gt; <span>Notes: AI for App Building</span>";
+        if (breadcrumb) breadcrumb.innerHTML = "<span>AI</span> &gt; <span>Notes: AI for App Building</span>";
       } else if (pageId === "flashcards-ai-for-app-building") {
-        breadcrumb.innerHTML = "<span>Artificial Intelligence</span> &gt; <span>Flashcards: AI for App Building</span>";
+        if (breadcrumb) breadcrumb.innerHTML = "<span>AI</span> &gt; <span>Flashcards: AI for App Building</span>";
       }
 
       // Highlight active nav item
-      const navLinks = document.querySelectorAll(".nav-btn");
+      const navLinks = document.querySelectorAll(".nav-link-btn");
       navLinks.forEach(link => {
         if (link.getAttribute("onclick") && link.getAttribute("onclick").includes(pageId)) {
           link.classList.add("active");
         }
       });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     // Initial setup on load
     window.addEventListener("DOMContentLoaded", () => {
       renderCard();
       renderTermList();
+      updateDashboardMastery();
     });
   </script>
 </body>
