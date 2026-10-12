@@ -2,7 +2,7 @@
 
 ## Goal
 
-Create an interactive HTML file with flashcards and notes from an uploaded file or pasted text to make mundane reading and watching tasks more appealing. Push file to github repo to update website. 
+Create an interactive HTML file with flashcards and notes from an uploaded file or pasted text to make mundane reading and watching tasks more appealing. Push file to github repo to update vercel website. 
 ## How to Use This Folder
 
 1. Read `process-map.canvas` to see the steps in order.
@@ -15,15 +15,13 @@ Create an interactive HTML file with flashcards and notes from an uploaded file 
 - Format notes based on note sets included in the context kit. 
 - Vocabulary terms should be in bold.
 - Equations should be highlighted in green.
-- If something is unclear, ask me. Do not guess.
-- After the first run, a file named teach_me_hub.html should be created. After this file is created, this workflow should only edit the teach_me_hub.html. No new html file should be created if teach_me_hub.html exists. 
-- teach_me_hub.html should be placed in ~/Applied AI/AI 101/ai-101OB/project_02/outputs. If it does not exist 
+- If something is unclear, ask me. Do not guess.  
 - Explain what you did in plain language. I am not a programmer.
 - There is no default number of flashcards to make. Make as many flashcards in a set as is necessary to cover content. Max number of flashcards in a set is 400.
 - Do not add a tab in the navigation bar at the top for each individual flashcard and note that is created. Keep it simple. The flashcards and notes should be able to be accessed through their assigned folder, there is no need for them to have their own button in the nav bar. 
-- The GitHub repository stays public. Only edit teach_me repository. 
+- The GitHub repository stays private. Only edit teach_me repository. 
 - If there are images or diagrams in notes, embed them into the note page in the HTML file. Do not put them on the flashcards. 
-- he HTML files are named 'note_' or 'flashcards_" followed by the provided file name. (ex.: flashcards_ap_psych_notes.html and note_ap_psych_notes.html). If there is no provided file name, ask me to name the file. 
+- the HTML files are named 'note_' or 'flashcards_" followed by the provided file name. (ex.: flashcards_ap_psych_notes.html and note_ap_psych_notes.html). If there is no provided file name, ask me to name the file. 
 - Ask me first before changing any files between 03-task and 04-task. Tell me what is being changed and why it is necessary. 
 
 ## What Stays My Decision

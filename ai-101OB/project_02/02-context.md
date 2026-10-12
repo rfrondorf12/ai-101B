@@ -46,7 +46,7 @@ I like this dashboard for tracking how well I know the flashcards.
 
 
 # Fonts
-Use only fonts contained in brand_fonts page
+Use only fonts contained in brand_fonts page. The main page names and headings should always use the discovery font. Body text should always be Adaptive Mono OT
 [[brand_fonts]]
 # HTML File format Wireframe
 Use this wireframe to format the HTML files:

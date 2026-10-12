@@ -3,4 +3,4 @@ The generated notes and flashcard sets follow the formatting directions from [[a
 
 **Good looks like:** Instructions and rules are followed accurately and the output is interactive and functioning in the deployed teach_me repository website. 
 
-**How I check it:** I open webpage and test if it can be used as an efficient study tool.
+**How I check it:** I open the website and test if it can be used as an efficient study tool.
