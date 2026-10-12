@@ -43,7 +43,7 @@
           <p style="font-size: 0.9rem;">Your interactive study workspace for notes and spaced repetition decks, generated straight from your vault.</p>
         </div>
         <div>
-          <a href="flashcards-adobe-professional.html" class="btn btn-teal">⚡ Study Active Deck</a>
+          <a href="flashcards-neural-networks.html" class="btn btn-teal">⚡ Study Active Deck</a>
         </div>
       </section>
 
@@ -60,20 +60,20 @@
 
           <div class="mastery-info-details">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-              <span class="pill-badge pill-art">Art</span>
+              <span class="pill-badge pill-ai">Artificial Intelligence</span>
               <span style="font-size: 0.75rem; text-transform: uppercase; font-weight: bold; color: #777;">Recently Added Deck</span>
             </div>
-            <h3>Adobe Certified Professional</h3>
+            <h3>Neural Networks</h3>
             <div class="mastery-stats-text">
-              <span>🎯 <strong id="dash-mastered-count">0</strong> of <strong>44</strong> Mastered</span>
+              <span>🎯 <strong id="dash-mastered-count">0</strong> of <strong>32</strong> Mastered</span>
               <span>•</span>
-              <span>⏳ <strong id="dash-unmastered-count">44</strong> Remaining</span>
+              <span>⏳ <strong id="dash-unmastered-count">32</strong> Remaining</span>
             </div>
           </div>
         </div>
 
         <div>
-          <a href="flashcards-adobe-professional.html" class="btn btn-teal">⚡ Study Deck (44 Cards)</a>
+          <a href="flashcards-neural-networks.html" class="btn btn-teal">⚡ Study Deck (32 Cards)</a>
         </div>
       </div>
 
@@ -93,7 +93,7 @@
             <div class="folder-icon" style="background-color: var(--folder-ai-pink); color: #fff;">AI</div>
             <strong>Artificial Intelligence</strong>
           </div>
-          <p style="font-size: 0.8rem; color: #555;">1 Note • 1 Flashcard Deck</p>
+          <p style="font-size: 0.8rem; color: #555;">2 Notes • 2 Flashcard Decks</p>
         </a>
 
         <div class="folder-card" style="border-top: 6px solid var(--folder-science);">
@@ -142,6 +142,16 @@
         <h3 style="margin-bottom: 12px;">Recent Additions</h3>
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; background-color: #faf5f1; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
           <div>
+            <strong>neural_networks</strong> <span class="pill-badge pill-ai">Artificial Intelligence</span>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 4px;">Source: Elements of AI/Lessons/neural_networks.md • 32 Cards Generated</p>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="note-neural-networks.html" class="btn btn-primary">Notes</a>
+            <a href="flashcards-neural-networks.html" class="btn btn-teal">Flashcards</a>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border: 2px solid var(--border-color); border-radius: 6px; background-color: #faf5f1; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+          <div>
             <strong>adobe_professional_certificate</strong> <span class="pill-badge pill-art">Art</span>
             <p style="font-size: 0.8rem; color: #666; margin-top: 4px;">Source: adobe_professional_certificate.md • 44 Cards Generated</p>
           </div>
@@ -173,9 +183,13 @@
     // Read saved progress from localStorage if present
     window.addEventListener("DOMContentLoaded", () => {
       try {
-        const saved = localStorage.getItem("teachme_adobe_mastered");
-        const mastered = saved ? parseInt(saved, 10) : 0;
-        const total = 44;
+        const savedProgress = localStorage.getItem("teachme_progress_neural_networks");
+        let mastered = 0;
+        const total = 32;
+        if (savedProgress) {
+          const parsed = JSON.parse(savedProgress);
+          mastered = parsed.filter(c => c.status === "mastered").length;
+        }
         const unmastered = total - mastered;
         const pct = Math.round((mastered / total) * 100);
 

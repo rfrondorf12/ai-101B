@@ -23,6 +23,8 @@ Create an interactive HTML file with flashcards and notes from an uploaded file 
 - Do not add a tab in the navigation bar at the top for each individual flashcard and note that is created. Keep it simple. The flashcards and notes should be able to be accessed through their assigned folder, there is no need for them to have their own button in the nav bar. 
 - The GitHub repository stays public. Only edit teach_me repository. 
 - If there are images or diagrams in notes, embed them into the note page in the HTML file. Do not put them on the flashcards. 
+- he HTML files are named 'note_' or 'flashcards_" followed by the provided file name. (ex.: flashcards_ap_psych_notes.html and note_ap_psych_notes.html). If there is no provided file name, ask me to name the file. 
+- Ask me first before changing any files between 03-task and 04-task. Tell me what is being changed and why it is necessary. 
 
 ## What Stays My Decision
 
