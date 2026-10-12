@@ -2,7 +2,7 @@
 
 ## Goal
 
-Create an interactive HTML file with flashcards and notes from an uploaded file or pasted text to make mundane reading and watching tasks more appealing. 
+Create an interactive HTML file with flashcards and notes from an uploaded file or pasted text to make mundane reading and watching tasks more appealing. Push file to github repo to update website. 
 ## How to Use This Folder
 
 1. Read `process-map.canvas` to see the steps in order.
@@ -21,6 +21,7 @@ Create an interactive HTML file with flashcards and notes from an uploaded file 
 - Explain what you did in plain language. I am not a programmer.
 - There is no default number of flashcards to make. Make as many flashcards in a set as is necessary to cover content. Max number of flashcards in a set is 400.
 - Do not add a tab in the navigation bar at the top for each individual flashcard and note that is created. Keep it simple. The flashcards and notes should be able to be accessed through their assigned folder, there is no need for them to have their own button in the nav bar. 
+- The GitHub repository stays public. Only edit teach_me repository. 
 - If there are images or diagrams in notes, embed them into the note page in the HTML file. Do not put them on the flashcards. 
 
 ## What Stays My Decision

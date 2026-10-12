@@ -1,8 +1,8 @@
 {
 	"nodes":[
 		{"id":"9fd08070c93ac467","type":"file","file":"ai-101OB/project_02/01-trigger.md","x":-360,"y":480,"width":400,"height":400,"color":"3"},
-		{"id":"aaea60cde7379395","type":"file","file":"ai-101OB/project_02/04-output.md","x":680,"y":960,"width":400,"height":400,"color":"3"},
-		{"id":"805632a5bdd49473","type":"file","file":"ai-101OB/project_02/05-human-check.md","x":200,"y":960,"width":400,"height":400,"color":"4"},
+		{"id":"aaea60cde7379395","type":"file","file":"ai-101OB/project_02/05-output.md","x":680,"y":960,"width":400,"height":400,"color":"3"},
+		{"id":"805632a5bdd49473","type":"file","file":"ai-101OB/project_02/06-human-check.md","x":200,"y":960,"width":400,"height":400,"color":"4"},
 		{"id":"bb47ddf45c6fc39c","type":"file","file":"ai-101OB/project_02/00-start-here.md","x":0,"y":-200,"width":400,"height":400,"color":"5"},
 		{"id":"fee02dbb92008a81","type":"text","text":"I do these steps","x":275,"y":1400,"width":250,"height":60,"color":"4"},
 		{"id":"0683502626641713","type":"text","text":"The model does these steps","x":-680,"y":680,"width":280,"height":60,"color":"3"},
