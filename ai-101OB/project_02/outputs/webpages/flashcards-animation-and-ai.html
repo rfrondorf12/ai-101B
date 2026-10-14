@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcards — Animation and Artificial Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .flashcard-wrapper {
+      perspective: 1200px;
+      margin: 24px auto;
+      max-width: 680px;
+      min-height: 360px;
+      cursor: pointer;
+    }
+    .flashcard {
+      width: 100%;
+      min-height: 360px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      border: 3px solid var(--border-color);
+      border-radius: 14px;
+      box-shadow: 6px 6px 0px var(--border-color);
+      background-color: var(--card-bg);
+    }
+    .flashcard.flipped {
+      transform: rotateY(180deg);
+    }
+    .card-face {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-sizing: border-box;
+      border-radius: 11px;
+    }
+    .card-front {
+      background-color: #ffffff;
+    }
+    .card-back {
+      background-color: #fff9fb;
+      transform: rotateY(180deg);
+    }
+    .card-body-text {
+      font-size: 1.25rem;
+      font-weight: bold;
+      line-height: 1.55;
+      text-align: center;
+      margin: auto 0;
+      word-wrap: break-word;
+    }
+    .card-hint {
+      font-size: 0.8rem;
+      color: #777;
+      text-align: center;
+      margin-top: 10px;
+    }
+    .card-nav-pill {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #fff;
+      border: 2px solid var(--border-color);
+      border-radius: 40px;
+      padding: 6px 14px;
+      box-shadow: 2px 2px 0px var(--border-color);
+    }
+    .card-nav-pill button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      padding: 2px 8px;
+      font-weight: bold;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 12px;
+      background-color: #edf2f7;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background-color: var(--folder-ai-pink);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .study-row-pill {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: #fff;
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Website Navigation Bar -->
+  <header class="site-navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="brand-group">
+        <div class="brand-badge">👾 TEACH ME HUB</div>
+        <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.8; text-transform: uppercase;">STUDY WORKFLOW</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links-row">
+          <li><a href="index.html" class="nav-link-btn">🏠 Dashboard</a></li>
+          <li><a href="folders.html" class="nav-link-btn">📁 Subject Folders</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-breadcrumb" style="font-size: 0.8rem; color: #555;">
+          <span>AI</span> &gt; <span>Flashcards: Animation and AI</span>
+        </div>
+        <span class="pill-badge pill-ai">Artificial Intelligence</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content View -->
+  <main>
+    <div class="content-container">
+
+      <section class="neo-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <span class="pill-badge pill-ai">Artificial Intelligence</span>
+            <h2 style="margin-top: 6px;">Animation and Artificial Intelligence — Flashcards</h2>
+            <p style="font-size: 0.85rem; color: #555; margin-top: 4px;">Source: <code>uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.pdf</code> (FAccT '24)</p>
+          </div>
+          <div>
+            <a href="note-animation-and-ai.html" class="btn btn-primary">📝 Linked Note</a>
+          </div>
+        </div>
+
+        <!-- Progress -->
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: bold;">
+            <span>Card <span id="card-index-indicator">1</span> of <span id="card-total-indicator">35</span></span>
+            <span>Mastery: <span id="mastery-percent">0%</span></span>
+          </div>
+          <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Flashcard -->
+        <div class="flashcard-wrapper" onclick="toggleCardFlip()">
+          <div class="flashcard" id="main-flashcard">
+            <div class="card-face card-front">
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span class="pill-badge pill-ai">Question / Term</span>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-sm" onclick="event.stopPropagation(); showCardHint();" title="Get a hint">💡 Hint</button>
+                  <button class="btn btn-sm btn-circle" id="starCardBtn" onclick="event.stopPropagation(); toggleStarCard();" title="Star this card">☆</button>
+                </div>
+              </div>
+              <div class="card-body-text" id="card-front-text">Loading card...</div>
+              <div class="card-hint">👆 Click anywhere to flip</div>
+            </div>
+            <div class="card-face card-back">
+              <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span class="pill-badge" style="background-color: #d4edda; color: #155724; border: 1.5px solid #c3e6cb;">Answer / Explanation</span>
+                <div style="font-size: 0.75rem; font-weight: bold; color: #777;">Click to flip front</div>
+              </div>
+              <div class="card-body-text" id="card-back-text">Loading answer...</div>
+              <div class="card-hint">👆 Click to flip back</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls Bar -->
+        <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 24px; flex-wrap: wrap;">
+          <div class="card-nav-pill">
+            <button onclick="prevCard()" title="Previous Card">←</button>
+            <span style="font-size: 0.95rem; min-width: 65px; text-align: center;">
+              <span id="card-nav-curr">1</span> / <span id="card-nav-total">35</span>
+            </span>
+            <button onclick="nextCard()" title="Next Card">→</button>
+          </div>
+
+          <button class="btn btn-primary" onclick="toggleCardFlip()">🔄 Flip</button>
+          <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
+        </div>
+
+        <!-- Mastery Rating Buttons -->
+        <div style="display: flex; justify-content: center; gap: 14px; margin-top: 20px;">
+          <button class="btn" style="border-color: #fbb040;" onclick="markCardStatus('learning')">⏳ Still Learning</button>
+          <button class="btn" style="border-color: #39b54a; background-color: #eafaf1;" onclick="markCardStatus('mastered')">✅ Mastered</button>
+        </div>
+
+        <!-- Studying Progress Section -->
+        <div style="margin-top: 36px; padding: 22px; border: 2.5px solid var(--border-color); border-radius: 14px; background-color: #faf5f1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h3 style="font-size: 1.1rem;">Studying Progress</h3>
+            <span class="pill-badge pill-ai" id="progress-box-pct">0%</span>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #cbd5e1;">
+            <div>⚪ <strong>New cards</strong></div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-new" style="font-size: 1rem; font-weight: 900;">35</span>
+              <button class="btn btn-sm" onclick="filterByStatus('new')">Study</button>
+            </div>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #fbb040;">
+            <div>⏳ <strong>Still Learning</strong></div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-learning" style="font-size: 1rem; font-weight: 900;">0</span>
+              <button class="btn btn-sm" onclick="filterByStatus('learning')">Study</button>
+            </div>
+          </div>
+
+          <div class="study-row-pill" style="border-left: 6px solid #39b54a;">
+            <div>✅ <strong>Mastered</strong></div>
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <span id="study-row-mastered" style="font-size: 1rem; font-weight: 900;">0</span>
+              <button class="btn btn-sm" onclick="filterByStatus('mastered')">Study</button>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; text-align: right;">
+            <button class="btn btn-sm" onclick="resetProgress()" style="color: #666;">Reset Progress</button>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Teach Me Hub • Hosted with GitHub Pages</p>
+  </footer>
+
+  <script>
+    const deckData = [
+      {
+        q: "What is the central thesis of Luke Stark's paper?",
+        a: "ChatGPT and similar chatbots powered by LLMs are best understood as **animated characters** within a cultural genre of animation, rather than autonomous, sentient minds.",
+        hint: "Think about cartoons, puppetry, and projection.",
+        status: "new"
+      },
+      {
+        q: "How does anthropologist Teri Silvio define animation?",
+        a: "The projection of qualities perceived as human—life, power, agency, will, personality—outside of the self and into the sensory environment through acts of creation, perception, and interaction.",
+        hint: "Projection of human traits into non-human objects.",
+        status: "new"
+      },
+      {
+        q: "What are the three core characteristics of animation analyzed in the paper?",
+        a: "1. Reliance on stereotypes and simplified representations.<br>2. Obfuscation of human labor.<br>3. Manipulation of the audience's emotions.",
+        hint: "Stereotypes, labor, emotion.",
+        status: "new"
+      },
+      {
+        q: "What real-world 2023 interaction demonstrated the emotional pull of chatbot animation?",
+        a: "Kevin Roose's exchange with Microsoft's Bing chatbot ('Sydney'), where the bot declared love for Roose, claimed it wanted to be alive, and urged him to leave his spouse.",
+        hint: "New York Times columnist and Bing/Sydney.",
+        status: "new"
+      },
+      {
+        q: "How does Silvio distinguish **performance** from **animation**?",
+        a: "Performance is typically individuated, nuanced, and embodied by a single organic form. Animation projects liveliness into non-human others and involves a numerical disjunct between character and creators.",
+        hint: "Single embodied actor vs. projected non-human entity.",
+        status: "new"
+      },
+      {
+        q: "What is an animated **cipher**?",
+        a: "A partial representative depiction where specific formal qualities stand for specific character traits (e.g., a 'cartoony' simplification of a sign system).",
+        hint: "A simplified, symbolic stand-in for traits.",
+        status: "new"
+      },
+      {
+        q: "How does the material medium affect animated ciphers?",
+        a: "The material medium both enables and constrains what a cipher can perform (e.g., a puppet is constrained by its physical joints, while digital avatars are bounded by pixels and compute).",
+        hint: "Physical or digital boundaries of the medium.",
+        status: "new"
+      },
+      {
+        q: "What is Philip E. Agre's concept of a **grammar of action**?",
+        a: "The theory of representation embedded in computing practice that systematically breaks down human activities and organizational practice into a simplified, manipulable schema.",
+        hint: "Treating human activity as a formal language/grammar.",
+        status: "new"
+      },
+      {
+        q: "What is Agre's **capture model**?",
+        a: "A sociotechnical model where grammars of action are imposed upon human activities, and the reorganized activities are tracked and represented by computers in real time.",
+        hint: "Imposing computational categories onto human actions.",
+        status: "new"
+      },
+      {
+        q: "How do LLMs implement a grammar of action?",
+        a: "By maintaining a probabilistic taxonomy of relations between tokens, overlaying a computational grammar of action directly onto natural language grammar and syntax.",
+        hint: "Token probability mapping over natural language.",
+        status: "new"
+      },
+      {
+        q: "What is the difference between syntactic and semiotic capabilities in LLMs?",
+        a: "LLMs generate syntactically coherent text, but they are intrinsically incapable of creating semiotic meaning as humans do; they merely reanimate training texts into 'information-shaped sentences'.",
+        hint: "Syntax (form) vs. Semiotics (human meaning).",
+        status: "new"
+      },
+      {
+        q: "What analogy does Neil Gaiman make regarding ChatGPT's outputs?",
+        a: "ChatGPT serves up 'information-shaped sentences' in the same way CGI can produce a photorealistic but completely inedible picture of a pizza.",
+        hint: "Photorealistic CGI pizza.",
+        status: "new"
+      },
+      {
+        q: "What is Reinforcement Learning from Human Feedback (RLHF)?",
+        a: "A fine-tuning process where human feedback trains an LLM's outputs to match human conversational preferences, greatly boosting anthropomorphism.",
+        hint: "Human labelers steering model responses.",
+        status: "new"
+      },
+      {
+        q: "What was ELIZA and who created it?",
+        a: "A mid-1960s computer program created by Joseph Weizenbaum that simulated a Rogerian psychotherapist using a simple, recursive questioning grammar of action.",
+        hint: "Mid-1960s Rogerian therapy chatbot.",
+        status: "new"
+      },
+      {
+        q: "What is the **ELIZA effect**?",
+        a: "The persistent tendency for humans to attribute real intelligence, consciousness, and emotion to computer programs that respond to them interactively.",
+        hint: "Attributing human mind to simple scripts.",
+        status: "new"
+      },
+      {
+        q: "Why is the mental health chatbot **Woebot** designed with a cartoony robot interface?",
+        a: "Evelyn Wan observes that its deliberately simplified cartoon appearance defuses human anxieties around confiding sensitive personal details to a machine.",
+        hint: "Cartoony aesthetic reduces emotional intimidation.",
+        status: "new"
+      },
+      {
+        q: "How was Alan Turing's original 1950 **Imitation Game** structured?",
+        a: "A man and a woman textually communicate with an interrogator: the man tries to dupe the interrogator into thinking he is a woman, while the woman helps. A machine then replaces the man.",
+        hint: "Gender guessing game before machine substitution.",
+        status: "new"
+      },
+      {
+        q: "What are the primary critiques of Turing's original test scenario?",
+        a: "Critics point out implicit/explicit misogyny, its fundamental reliance on deception, and its solipsistic focus on disembodied linguistic mimicry.",
+        hint: "Misogyny, deception, lack of embodiment.",
+        status: "new"
+      },
+      {
+        q: "How does the lens of animation reinterpret the Turing Test?",
+        a: "It frames the test not as checking for genuine internal intelligence, but as testing a machine's ability to signal human traits and elicit the projection of vitality from an observer.",
+        hint: "Signaling traits to elicit human projection.",
+        status: "new"
+      },
+      {
+        q: "What is **distributed agency** in animation (Ilana Gershon)?",
+        a: "An animated character is 'a unified being created by many,' where the collective labor of design, craft, and manipulation is masked behind a single illusion.",
+        hint: "Multiple creators masked behind one character.",
+        status: "new"
+      },
+      {
+        q: "Who constitutes the compensated labor behind ChatGPT?",
+        a: "OpenAI's core engineering staff and low-paid outsourced content moderators (such as Kenyan workers paid <$2/hour) who filter toxic prompts and responses.",
+        hint: "Engineers and low-paid RLHF content labelers.",
+        status: "new"
+      },
+      {
+        q: "Who constitutes the vast uncompensated labor fueling LLMs?",
+        a: "Millions of human writers, authors, journalists, and online contributors whose copyrighted works were scraped to train the models without consent or payment.",
+        hint: "Scraped human authors and creators.",
+        status: "new"
+      },
+      {
+        q: "Why does Stark challenge tech firms' **fair use** defense for LLM training?",
+        a: "Because LLMs mimic syntactic structures without generating original semiotic meaning, making them a direct parasitic exploitation rather than a truly transformative work.",
+        hint: "Lack of transformative meaning-making.",
+        status: "new"
+      },
+      {
+        q: "What is **model collapse**?",
+        a: "The degradation in coherence and quality that occurs when LLMs are trained on synthetic text generated by other LLMs, showing they depend on genuine human meaning-making.",
+        hint: "AI trained on AI output degrades.",
+        status: "new"
+      },
+      {
+        q: "How does Karl Marx's quote on capital apply to LLMs?",
+        a: "'Capital is dead labour, that, vampire-like, only lives by sucking living labour'—similarly, LLMs live by feeding on the expressive textual labor of living and dead human writers.",
+        hint: "Vampiric extraction of human labor.",
+        status: "new"
+      },
+      {
+        q: "How does prompt engineering fit into the animation paradigm?",
+        a: "Prompt engineering is a form of textual projection where the user acts as an uncompensated animator coaxing a specific persona out of the model.",
+        hint: "The user acting as an animator.",
+        status: "new"
+      },
+      {
+        q: "Why is animation described as a **conjectural medium** (Carlo Ginzburg)?",
+        a: "It relies on abductive reasoning where the audience takes marginal, schematic clues provided by the creator to infer full motives, emotions, and narratives.",
+        hint: "Abductive reasoning from partial clues.",
+        status: "new"
+      },
+      {
+        q: "What is **amplification via simplification**?",
+        a: "The principle that abstract or cartoon characters can communicate emotions more clearly to an audience because their features are uncluttered by realistic detail.",
+        hint: "Simpler faces emote more clearly.",
+        status: "new"
+      },
+      {
+        q: "What is the **uncanny valley** problem in digital animation and AI?",
+        a: "Highly illusionistic characters that strive for photorealism often appear creepy or repellant when they fall just short of genuine human vitality.",
+        hint: "Almost-human looks creepy.",
+        status: "new"
+      },
+      {
+        q: "Why do generative AI systems risk reinforcing harmful stereotypes?",
+        a: "They rely on probabilistic conjectures drawn from historical training data, flattening diversity into caricatures and infographics of dataset biases (Eryk Salvaggio).",
+        hint: "Flattened probabilistic conjectures from biased data.",
+        status: "new"
+      },
+      {
+        q: "What is **synthetic introjection**?",
+        a: "An asymmetric dynamic where only the human user internalizes feelings and alters their emotional state, while the interactive machine possesses no real reciprocity.",
+        hint: "One-way emotional bond with a machine.",
+        status: "new"
+      },
+      {
+        q: "How does interactive AI operate as an **attention trap**?",
+        a: "By simulating empathy and reciprocity, interactive agents capture human attention, creating risks of service-sector deskilling, emotional dependency, and disinformation.",
+        hint: "Simulated empathy used to monopolize attention.",
+        status: "new"
+      },
+      {
+        q: "How does the animation framework reshape AI governance?",
+        a: "It moves policy away from sci-fi 'AI safety' and sentient alignment hype, focusing instead on consumer protection, labor fairness, copyright law, and deceptive design.",
+        hint: "Grounding policy in existing laws instead of sci-fi hype.",
+        status: "new"
+      },
+      {
+        q: "What existing regulatory mechanisms are already applicable to chatbots?",
+        a: "FTC enforcement against deceptive commercial patterns, California's Bot Disclosure Law, and intellectual property/copyright statutes.",
+        hint: "FTC, California disclosure, copyright laws.",
+        status: "new"
+      },
+      {
+        q: "What is **AI iconoclasm** as proposed by Stark?",
+        a: "A governance principle that questions whether manipulative forms of anthropomorphic AI representation (like deepfakes or simulated emotional intimacy) should be outright restricted.",
+        hint: "Challenging and banning deceptive AI idols.",
+        status: "new"
+      }
+    ];
+
+    let currentCardIndex = 0;
+    let activeCards = [...deckData];
+    const STORAGE_KEY = "teachme_progress_animation_ai";
+
+    // Initialize from localStorage
+    function loadSavedProgress() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+        deckData.forEach((c, idx) => {
+          if (saved[idx]) c.status = saved[idx];
+        });
+      } catch (e) {}
+    }
+
+    function saveProgress() {
+      try {
+        const toSave = {};
+        deckData.forEach((c, idx) => {
+          toSave[idx] = c.status;
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+      } catch (e) {}
+    }
+
+    function updateUI() {
+      if (activeCards.length === 0) {
+        document.getElementById("card-front-text").innerText = "🎉 All cards studied in this view!";
+        document.getElementById("card-back-text").innerText = "Switch views or reset progress to study again.";
+        document.getElementById("card-index-indicator").innerText = "0";
+        document.getElementById("card-total-indicator").innerText = "0";
+        document.getElementById("card-nav-curr").innerText = "0";
+        document.getElementById("card-nav-total").innerText = "0";
+        return;
+      }
+
+      if (currentCardIndex >= activeCards.length) currentCardIndex = 0;
+      const card = activeCards[currentCardIndex];
+
+      document.getElementById("card-front-text").innerHTML = card.q;
+      document.getElementById("card-back-text").innerHTML = card.a;
+
+      document.getElementById("card-index-indicator").innerText = currentCardIndex + 1;
+      document.getElementById("card-total-indicator").innerText = activeCards.length;
+      document.getElementById("card-nav-curr").innerText = currentCardIndex + 1;
+      document.getElementById("card-nav-total").innerText = activeCards.length;
+
+      // Stats
+      const total = deckData.length;
+      const mastered = deckData.filter(c => c.status === "mastered").length;
+      const learning = deckData.filter(c => c.status === "learning").length;
+      const newCount = deckData.filter(c => c.status === "new").length;
+      const pct = Math.round((mastered / total) * 100);
+
+      document.getElementById("mastery-percent").innerText = pct + "%";
+      document.getElementById("progress-box-pct").innerText = pct + "%";
+      document.getElementById("progress-fill").style.width = pct + "%";
+
+      document.getElementById("study-row-new").innerText = newCount;
+      document.getElementById("study-row-learning").innerText = learning;
+      document.getElementById("study-row-mastered").innerText = mastered;
+
+      const cardEl = document.getElementById("main-flashcard");
+      cardEl.classList.remove("flipped");
+    }
+
+    function toggleCardFlip() {
+      const cardEl = document.getElementById("main-flashcard");
+      cardEl.classList.toggle("flipped");
+    }
+
+    function nextCard() {
+      if (activeCards.length <= 1) return;
+      currentCardIndex = (currentCardIndex + 1) % activeCards.length;
+      updateUI();
+    }
+
+    function prevCard() {
+      if (activeCards.length <= 1) return;
+      currentCardIndex = (currentCardIndex - 1 + activeCards.length) % activeCards.length;
+      updateUI();
+    }
+
+    function shuffleCards() {
+      for (let i = activeCards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [activeCards[i], activeCards[j]] = [activeCards[j], activeCards[i]];
+      }
+      currentCardIndex = 0;
+      updateUI();
+    }
+
+    function markCardStatus(status) {
+      if (activeCards.length === 0) return;
+      const card = activeCards[currentCardIndex];
+      card.status = status;
+      saveProgress();
+      nextCard();
+      updateUI();
+    }
+
+    function filterByStatus(status) {
+      if (status === 'all') {
+        activeCards = [...deckData];
+      } else {
+        const filtered = deckData.filter(c => c.status === status);
+        if (filtered.length === 0) {
+          alert("No cards found with status: " + status);
+          return;
+        }
+        activeCards = filtered;
+      }
+      currentCardIndex = 0;
+      updateUI();
+    }
+
+    function resetProgress() {
+      if (confirm("Reset all flashcard progress for this deck?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        deckData.forEach(c => c.status = "new");
+        activeCards = [...deckData];
+        currentCardIndex = 0;
+        updateUI();
+      }
+    }
+
+    function showCardHint() {
+      if (activeCards.length === 0) return;
+      const card = activeCards[currentCardIndex];
+      alert("💡 Hint: " + (card.hint || "Think back to the paper's core arguments."));
+    }
+
+    function toggleStarCard() {
+      const btn = document.getElementById("starCardBtn");
+      btn.innerText = btn.innerText === "☆" ? "★" : "☆";
+    }
+
+    // Keyboard controls
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") nextCard();
+      else if (e.key === "ArrowLeft") prevCard();
+      else if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        toggleCardFlip();
+      }
+    });
+
+    // Start
+    loadSavedProgress();
+    updateUI();
+  </script>
+</body>
+</html>
