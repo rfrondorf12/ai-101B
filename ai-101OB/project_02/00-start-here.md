@@ -6,7 +6,12 @@ Create an interactive HTML file with flashcards and notes from an uploaded file 
 ## How to Use This Folder
 
 1. Read `process-map.canvas` to see the steps in order.
-2. Follow the step files in order: `01-start-here.md` through `05-human-check.md`.
+2. Follow the step files in order:
+   - `01-trigger.md`: Listen for the `"teach me [file name]"` trigger.
+   - `02-context.md`: Ingest provided note file and styling rules.
+   - `agents/study-builder.md`: Call the `study-builder` agent to adapt content into color-coded HTML notes, generate flashcards, link pages, and push to GitHub (`teach_me`).
+   - `agents/learn-mode_agent.md`: Call the `learn-mode` agent to build the 3-tier Learn Mode deliverable (Multiple Choice with deck distractors, Cloze completion, and side-by-side Active Recall) and deploy updates.
+   - `06-human-check.md`: Perform human verification on the live deployed Vercel site.
 3. Do one step at a time. After each step, stop and tell me what you did before moving on.
 
 ## Rules

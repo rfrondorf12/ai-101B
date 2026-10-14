@@ -48,6 +48,15 @@ I like this dashboard for tracking how well I know the flashcards.
 # Fonts
 Use only fonts contained in brand_fonts page. The main page names and headings should always use the discovery font. Body text should always be Adaptive Mono OT
 [[brand_fonts]]
+
+# Reference Sites
+Site 1: https://knowt.com/flashcards/f4beeeaf-50cc-41f6-a9c6-62a9fad1f9a7
+Site 2: https://quizlet.com/768424611/ultimate-ultimate-latin-quizlet-flash-cards/?funnelUUID=4944708f-6355-4fe6-a08a-ca0eaecec5f1
+Site 3: https://rfrondorfdesigns.my.canva.site
+
+Use sites 1&2 for functionality references and layout references.
+Use site 3 for style reference. 
+
 # HTML File format Wireframe
 Use this wireframe to format the HTML files:
 https://www.figma.com/make/4Lb1H6KVBWGEf7Am19LvNk/Study-Workflow-Wireframe?t=s6PYZ6x6g4hoj17c-1
@@ -58,3 +67,6 @@ each note and flashcard set should be assigned to a subject folder. Folders shou
 **Why this step matters:** without this, the model has to guess. Guesses are how things go wrong.
 
 **How I check it:** I make sure the html file is updated with accurate information that is formatted correctly. 
+
+# Learn Mode Formatting
+Learn mode for flashcards should be accessible via a button near the flashcards that says "enter learn mode." Learn mode should be on its own HTML page for each set of flashcards and notes. The questions in learn mode should pull directly from the question format of the flashcards. 

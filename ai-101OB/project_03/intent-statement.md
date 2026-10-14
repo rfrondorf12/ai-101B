@@ -4,30 +4,31 @@
 
 ## What I am building
 
-**Part A.** A workflow builder agent that converts supplied notes or transcripts into an interactive HTML study deliverable—featuring color-coded notes, flashcards, and a 3-tier Learn Mode (Multiple Choice with deck-sampled distractors, Cloze completion, and typed Active Recall with side-by-side verification)—and updates the linked GitHub repository to deploy to Vercel.
+**Part A.** Two coordinated workflow agents:
+- **Agent 1 (`study-builder`):** Converts supplied notes or transcripts into color-coded HTML notes and baseline flashcard pages according to formatting standards, pushing updates to GitHub to deploy to Vercel.
+- **Agent 2 (`learn-mode-manager`):** Takes the baseline flashcard and note sets and builds the interactive 3-tier Learn Mode (Multiple Choice with deck-sampled distractors, Cloze completion, and typed Active Recall with side-by-side verification).
 
 **Part B.** A vault agent that works for the learner and protects strict content fidelity: ensuring no external facts or AI hallucinations enter the cards, keeping the workflow strictly focused on cognitive recall rather than passive review, and preventing unvetted pushes to GitHub.
 
 ## Why
 
-Passive flashcard flipping and automated answer-writing **offload critical thinking** and give an **illusion of competence** without genuine comprehension. Automating the construction of a graduated 3-tier cognitive ladder removes the manual friction of formatting study sets while forcing active recall and self-evaluation, ensuring AI supports learning without replacing the student's cognitive effort.
+Passive flashcard flipping and automated answer-writing **offload critical thinking** and give an **illusion of competence** without genuine comprehension. Automating the construction of a graduated <mark style="background:#d3f8b6">3-tier cognitive ladder</mark> removes the manual friction of formatting study sets while forcing active recall and self-evaluation, ensuring ==AI supports learning without replacing the student's cognitive effort.==
 
 ## The Project 2 workflow my skill will encode
 
 Teach Me Workflow (`teach_me`):
 1. `01-trigger.md`: Trigger on `"teach me [file name]"` with user-specified input.
 2. `02-context.md`: Ingest provided note file/transcript and styling guidelines.
-3. `03-task.md`: Extract core facts, vocabulary, and flashcard pairs strictly from source text.
-4. `04-task2.md`: Assemble the 3-tier Learn Mode logic (deck-sampled distractors, cloze sentences, side-by-side active recall) into the interactive HTML file.
-5. `05-output.md`: Push the interactive file to the private GitHub repository to update the live Vercel site.
-6. `06-human-check.md`: Run through the deck to verify factual accuracy and layout before deployment.
+3. `agents/study-builder.md`: Extract core facts, vocabulary, and flashcard pairs strictly from source text into HTML note and card pages, committing to GitHub.
+4. `agents/learn-mode-manager.md`: Assemble and integrate the 3-tier Learn Mode logic (deck-sampled distractors, cloze sentences, side-by-side active recall) into the study deliverable.
+5. `06-human-check.md`: Post-deployment human check on the live Vercel site to verify accessibility, formatting, and factual fidelity.
 
 ## What the agents must never decide
 
 - Which notes, files, or topics get turned into study sets.
 - Adding facts, definitions, or distractors that do not exist in the supplied text.
 - Automatically grading the student's open-ended recall answers instead of letting the student evaluate their answer side-by-side against the notes.
-- Pushing updates to the GitHub repository without explicit human verification.
+- Marking a study set as complete or verified without the user's post-deployment check on the live site.
 
 ## How I will know it works
 
