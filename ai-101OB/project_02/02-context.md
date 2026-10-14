@@ -70,3 +70,11 @@ each note and flashcard set should be assigned to a subject folder. Folders shou
 
 # Learn Mode Formatting
 Learn mode for flashcards should be accessible via a button near the flashcards that says "enter learn mode." Learn mode should be on its own HTML page for each set of flashcards and notes. The questions in learn mode should pull directly from the question format of the flashcards. 
+
+Learn mode should run in rounds of 7 questions. Round 1 should be multiple choice questions, round 2 should be fill in the blank, and round 3 should be complete active recall, where students can compare their answer with the direct reference in the notes to check for comprehension. 
+
+Each flashcard progresses through the rounds based on student mastery. If a student gets the multiple choice version of the question correct, they move on to the fill-in-the-blank version later. If they get the multiple choice question wrong, the question will come up as multiple choice in subsequent rounds until the student gets it correct and moves on to the fill in the blank round. The same process should be followed for progressing from the fill in the blank round to the active recall round. At the end of a question's active recall round, the student should be presented with the option to mark the question as mastered or in progress. If marked "in progress," the question will go back to a fill in the blank version, and progress up to active recall until the student marks the active recall version of the question as mastered. 
+
+This is how the pages of learn mode should be formatted, still following other formatting guidelines in this document closely.
+![[Screenshot 2026-10-14 at 4.07.42 PM.png]]
+![[Screenshot 2026-10-14 at 4.06.48 PM.png]]

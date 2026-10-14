@@ -6,6 +6,8 @@
 |------|------------------------------|------------------|------------------------------------|
 | 2026-10-14 | Structure Part A agent role in workflow-agent.md and define human check boundary | Suggested splitting creation (03-task) from GitHub push (04-task2) to force human check prior to git push | **Record of Resistance #1:** Rejected model's suggestion to split the steps. Chose to combine creation and pushing into one agent role, placing human check on the live deployed Vercel site. |
 | 2026-10-14 | Finalize study-builder agent scope in workflow-agent.md | Combined note formatting, flashcards, and 3-tier learn mode generation into a single agent | **Record of Resistance #2:** Rejected bundling learn mode into study-builder. Decoupled into two separate agents: study-builder for notes and flashcards, and a dedicated second agent to manage learn mode. |
+| 2026-10-14 | Re-run workflow test on sample file (`uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.pdf`) using `study-builder_agent` and `learn-mode_agent` | Generated note and flashcard files with 3-tier Learn Mode; pushed to GitHub repository | Kept 3-tier Learn Mode mechanics. Noted persistent missing Q&A table, poor font legibility, and neglected instructions for term shuffle / spaced repetition to log in `run-comparison.md`. |
+
 
 ---
 
