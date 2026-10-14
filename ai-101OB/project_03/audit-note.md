@@ -1,27 +1,19 @@
 # audit-note.md
 
-*Write this before you build either agent. A weak workflow automated is still a weak workflow. Describe what happened, not what you hoped would happen. Delete the italic guidance lines before you submit.*
-
 ## The workflow I audited
-
-[The name of your Project 2 workflow and the one-line problem it solves.]
+teach_me workflow that automatically formats input files into preferred format of notes with linked flashcards to study. 
 
 ## The stress test
-
-[What you ran: harder input, a missing file, a vague instruction, a case where the human check should fire. Say exactly what you changed from your Project 2 run.]
+I changed the workflow to create and push files to a distinct Git repo, then connected it to Vercel so that it runs and updates a website. 
 
 ## What happened
-
-[What the workflow did. Quote the output where the problem shows.]
+There were issues with global user id and identification between vercel and Github. 
 
 ## The fix
-
-[The one thing you changed: which file, which lines, what the new wording says.]
+Went into terminal and ran git config --global user.name "Reese_Frondorf"  and git config --global user.email "rfrondorf12@gmail.com"
 
 ## What the fix changed
-
-[Rerun the stress test. What is different now?]
+The new notes and flashcards are on the site, but the dashboard showing percent mastery no longer works. Weird pink highlight for the new flashcards? also missing list/table of terms and definitions under new flashcards. 
 
 ## What I learned about my workflow
-
-[One or two sentences. Which step is weakest? Which step could hold more judgment? This points to the step your agent will take over.]
+Consistency in formatting and elements of the HTML files is the weakest within the new workflow updates. 
