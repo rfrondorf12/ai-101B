@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neural Networks — Learn Mode</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Scoped high-contrast typography for Learn Mode study interface */
+    .learn-container {
+      max-width: 780px;
+      margin: 0 auto;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #1e293b;
+    }
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border: 2px solid var(--border-color);
+      box-shadow: 2px 2px 0 var(--border-color);
+    }
+    .t1-badge { background-color: var(--accent-yellow); color: #240404; }
+    .t2-badge { background-color: var(--accent-orange); color: #240404; }
+    .t3-badge { background-color: var(--accent-teal); color: #240404; }
+
+    .lm-progress-bar {
+      width: 100%;
+      height: 14px;
+      background-color: #e2e8f0;
+      border: 2px solid var(--border-color);
+      border-radius: 9999px;
+      overflow: hidden;
+      margin: 10px 0 18px 0;
+    }
+    .lm-progress-fill {
+      height: 100%;
+      background-color: var(--folder-ai-pink);
+      width: 0%;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .quiz-card {
+      background: #ffffff;
+      border: 3px solid var(--border-color);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 6px 6px 0px var(--border-color);
+      margin-top: 16px;
+    }
+
+    .mc-option-btn {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      width: 100%;
+      text-align: left;
+      padding: 14px 18px;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      background-color: #ffffff;
+      font-family: inherit;
+      font-size: 1rem;
+      line-height: 1.5;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.1s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+      box-shadow: 3px 3px 0 var(--border-color);
+    }
+    .mc-option-btn:hover:not(:disabled) {
+      background-color: #f8fafc;
+      transform: translate(-1px, -1px);
+      box-shadow: 4px 4px 0 var(--border-color);
+    }
+    .mc-option-btn:disabled {
+      cursor: default;
+    }
+    .mc-option-btn.correct {
+      background-color: #dcfce7 !important;
+      border-color: #16a34a !important;
+      color: #14532d !important;
+    }
+    .mc-option-btn.incorrect {
+      background-color: #fee2e2 !important;
+      border-color: #dc2626 !important;
+      color: #7f1d1d !important;
+    }
+
+    .option-letter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 2px solid var(--border-color);
+      background-color: var(--bg-canvas);
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .feedback-banner {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 10px;
+      border: 2px solid var(--border-color);
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .feedback-success {
+      background-color: #dcfce7;
+      border-color: #16a34a;
+      color: #14532d;
+    }
+    .feedback-warning {
+      background-color: #fef3c7;
+      border-color: #d97706;
+      color: #78350f;
+    }
+
+    .side-by-side-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .side-box {
+      padding: 16px;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      background: #faf5f1;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Website Navigation Bar -->
+  <header class="site-navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="brand-group">
+        <div class="brand-badge">👾 TEACH ME HUB</div>
+        <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.8; text-transform: uppercase;">STUDY WORKFLOW</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links-row">
+          <li><a href="index.html" class="nav-link-btn">🏠 Dashboard</a></li>
+          <li><a href="folders.html" class="nav-link-btn">📁 Subject Folders</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="header-breadcrumb" style="font-size: 0.8rem; color: #555;">
+          <span>AI > Learn Mode: Neural Networks</span>
+        </div>
+        <span class="pill-badge pill-ai">Artificial Intelligence</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content View -->
+  <main style="padding: 24px 16px; min-height: 80vh;">
+    <div class="learn-container">
+
+      <!-- Header actions bar -->
+      <section class="neo-box" style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <span class="pill-badge pill-ai">Artificial Intelligence</span>
+            <h2 style="margin-top: 6px; font-size: 1.45rem;">Neural Networks — 3-Tier Learn Mode</h2>
+            <p style="font-size: 0.85rem; color: #555; margin-top: 4px;">Source: <code>Neural Networks & Deep Learning Notes</code></p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="flashcards-neural-networks.html" class="btn">🎴 Flashcards</a>
+            <a href="note-neural-networks.html" class="btn btn-primary">📝 Linked Note</a>
+          </div>
+        </div>
+
+        <!-- Progress Overview -->
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 2px dashed #cbd5e1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; font-weight: 700; flex-wrap: wrap; gap: 8px;">
+            <span>Queue: <span id="queue-progress-text">1 / 1</span></span>
+            <span id="tier-pill-slot">
+              <span class="tier-badge t1-badge">Tier 1: Multiple Choice</span>
+            </span>
+            <span>Mastered: <span id="mastery-counter" style="color: #16a34a;">0</span> / <span id="total-cards-counter">0</span></span>
+          </div>
+          <div class="lm-progress-bar">
+            <div class="lm-progress-fill" id="lm-progress-fill"></div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #64748b; flex-wrap: wrap; gap: 8px;">
+            <span>💡 3-Tier Cognitive Ladder: Recognition (MC) → Cued Recall (Cloze) → Free Active Recall</span>
+            <button class="btn btn-sm" onclick="reshuffleQueue()" title="Shuffle the practice queue">🔀 Reshuffle Queue</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Active Quiz Card -->
+      <div id="quiz-card-container" class="quiz-card">
+
+        <!-- Tier 1: Multiple Choice -->
+        <div id="tier1Section">
+          <div style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+            Tier 1 · Recognition (Multiple Choice)
+          </div>
+          <h3 id="t1QuestionText" style="font-size: 1.25rem; font-weight: 800; line-height: 1.45; margin-bottom: 20px; color: #0f172a;"></h3>
+          <div id="t1OptionsGrid" style="display: grid; gap: 12px;"></div>
+          <div id="t1FeedbackBox" class="feedback-banner" style="display: none;"></div>
+        </div>
+
+        <!-- Tier 2: Cloze Completion -->
+        <div id="tier2Section" style="display: none;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: #d97706; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+            Tier 2 · Cued Recall (Cloze Completion)
+          </div>
+          <h3 id="t2QuestionText" style="font-size: 1.2rem; font-weight: 800; line-height: 1.45; margin-bottom: 12px; color: #0f172a;"></h3>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 16px;">
+            Fill in the missing key term from the source notes below:
+          </p>
+          <div id="t2SentenceContainer" style="padding: 18px; background: #faf5f1; border: 2px dashed var(--border-color); border-radius: 10px; font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;"></div>
+          
+          <form id="t2Form" onsubmit="event.preventDefault(); submitTier2();">
+            <div style="display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap;">
+              <input type="text" id="t2InputField" placeholder="Type the exact missing term..." autocomplete="off" style="flex: 1; min-width: 250px; padding: 12px 16px; font-size: 1.05rem; border: 2.5px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none;">
+              <button type="submit" class="btn btn-primary" style="padding: 12px 24px; font-size: 1rem;">Submit Term</button>
+            </div>
+          </form>
+          <div id="t2FeedbackBox" class="feedback-banner" style="display: none;"></div>
+        </div>
+
+        <!-- Tier 3: Free Active Recall & Side-by-Side -->
+        <div id="tier3Section" style="display: none;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: #0f766e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+            Tier 3 · Free Active Recall (Cognitive Generation)
+          </div>
+          <h3 id="t3QuestionText" style="font-size: 1.25rem; font-weight: 800; line-height: 1.45; margin-bottom: 12px; color: #0f172a;"></h3>
+          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 14px;">
+            Explain this concept completely in your own words without looking at your notes. (Spaces and formatting work natively without keyboard conflicts):
+          </p>
+          <textarea id="t3RecallInput" rows="5" placeholder="Type your full recall explanation here..." style="width: 100%; padding: 14px; font-size: 1rem; border: 2.5px solid var(--border-color); border-radius: 8px; font-family: inherit; line-height: 1.6; outline: none; margin-bottom: 16px; box-sizing: border-box;"></textarea>
+          
+          <div id="t3ActionContainer">
+            <button class="btn btn-primary" id="t3VerifyBtn" onclick="verifyTier3Answer()" style="padding: 12px 24px; font-size: 1rem;">
+              Compare Side-by-Side with Source Notes →
+            </button>
+          </div>
+
+          <!-- Comparison Display -->
+          <div id="t3SideBySideContainer" style="display: none;">
+            <div class="side-by-side-grid">
+              <div class="side-box">
+                <div style="font-size: 0.85rem; font-weight: 800; color: #475569; text-transform: uppercase; margin-bottom: 8px;">
+                  ✍️ What You Typed:
+                </div>
+                <div id="t3UserResponse" style="font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; color: #0f172a;"></div>
+              </div>
+              <div class="side-box" style="background: #ffffff; border-color: #16a34a;">
+                <div style="font-size: 0.85rem; font-weight: 800; color: #16a34a; text-transform: uppercase; margin-bottom: 8px;">
+                  📖 Source Note Excerpt:
+                </div>
+                <div id="t3SourceResponse" style="font-size: 0.95rem; line-height: 1.6; color: #0f172a;"></div>
+              </div>
+            </div>
+
+            <!-- Self-evaluation prompt -->
+            <div style="margin-top: 24px; padding: 20px; background: #f8fafc; border: 2px solid var(--border-color); border-radius: 10px; text-align: center;">
+              <h4 style="font-size: 1.05rem; margin-bottom: 8px;">Self-Assessment: Did your answer capture the core concept?</h4>
+              <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 18px;">
+                You decide your mastery. AI does not automatically judge or replace your critical evaluation.
+              </p>
+              <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+                <button class="btn" style="border-color: var(--accent-orange); background: #fffdf5;" onclick="resolveTier3(false)">
+                  ⏳ Still Learning (Re-queue for practice)
+                </button>
+                <button class="btn btn-primary" style="background-color: #dcfce7; color: #14532d; border-color: #16a34a;" onclick="resolveTier3(true)">
+                  ✅ Mastered! (Advance to next card)
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Completion Banner (hidden until queue empty) -->
+      <div id="completionBanner" class="quiz-card" style="display: none; text-align: center; padding: 48px 24px;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
+        <h2 style="font-size: 1.8rem; margin-bottom: 12px;">All Cards Mastered in Learn Mode!</h2>
+        <p style="font-size: 1.05rem; color: #475569; max-width: 540px; margin: 0 auto 28px auto;">
+          You successfully navigated through Multiple Choice recognition, Cloze completion, and typed active recall verification across the entire deck.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+          <button class="btn btn-primary" onclick="restartLearnSession()">🔁 Practice Again</button>
+          <a href="flashcards-neural-networks.html" class="btn">🎴 Return to Flashcards</a>
+          <a href="folders.html" class="btn">📁 Subject Folders</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Deck source data directly from notes
+    const deckData = [
+      {
+            "q": "**Deep learning**",
+            "a": "Machine learning techniques where several \u201clayers\u201d of simple processing units are connected in a network so that the input is passed through each of them.",
+            "status": "new"
+      },
+      {
+            "q": "What biological system inspired deep learning, and what advantage does it offer?",
+            "a": "Inspired by the processing of visual info in the brain & allows the network to learn more complex structures without requiring large amounts of data.",
+            "status": "new"
+      },
+      {
+            "q": "**Neurons**",
+            "a": "Simple units that receive and transmit signals to each other; contain a cell body & wires that connect neurons to each other.",
+            "status": "new"
+      },
+      {
+            "q": "How can biological systems be used in AI and machine learning?",
+            "a": "Biological systems can be used as inspiration to build better AI and machine learning techniques.",
+            "status": "new"
+      },
+      {
+            "q": "What are the two key features of a neural network?",
+            "a": "1. Consists of a large number of neurons, each of which can process info on its own so that vast amounts of info can be processed simultaneously.<br>2. Neurons both store and process information so there is no need to retrieve data from memory for processing.",
+            "status": "new"
+      },
+      {
+            "q": "**Parallel processing**",
+            "a": "Processing many pieces of info at the same time.",
+            "status": "new"
+      },
+      {
+            "q": "What hardware enables cost-effective parallel processing for deep learning?",
+            "a": "Graphics processors (GPUs) are able to do parallel processing and are a cost-effective solution for running massive deep learning methods.",
+            "status": "new"
+      },
+      {
+            "q": "**Weights**",
+            "a": "A set of adaptive parameters that are used as multipliers on the inputs of the neuron, which are added up.",
+            "status": "new"
+      },
+      {
+            "q": "What is the linear combination of inputs in an artificial neuron?",
+            "a": "The sum of the weights times inputs (plus an intercept term).",
+            "status": "new"
+      },
+      {
+            "q": "If a neuron has 6 inputs, how many weights must it have?",
+            "a": "It must have six weights.",
+            "status": "new"
+      },
+      {
+            "q": "In the shopping items analogy, what do weights, inputs, and intercept represent?",
+            "a": "Inputs represent shopping items (input 1, input 2, etc.), weights represent the prices of the items, and the intercept term represents a fixed additional charge.",
+            "status": "new"
+      },
+      {
+            "q": "What does a neuron do with the computed linear combination?",
+            "a": "The neuron takes the computed linear combination and puts it through an activation function.",
+            "status": "new"
+      },
+      {
+            "q": "**Identity function**",
+            "a": "An activation function that does nothing and outputs the linear combination directly.",
+            "status": "new"
+      },
+      {
+            "q": "**Step function**",
+            "a": "An activation function where if the value of the linear combination is greater than zero, it sends a pulse (ON); otherwise it does nothing (OFF).",
+            "status": "new"
+      },
+      {
+            "q": "**Sigmoid function**",
+            "a": "A \u201csoft\u201d version of the step function.",
+            "status": "new"
+      },
+      {
+            "q": "How can the output of an artificial neuron be used in real-world systems?",
+            "a": "It can be used to extract a prediction or a decision (e.g., if designed to ID a stop sign in a self-driving car, input = pixels of an image & output activates a stopping procedure).",
+            "status": "new"
+      },
+      {
+            "q": "When does learning or adaptation occur in a neural network?",
+            "a": "Learning or adaptation occurs when weights are adjusted to make the network produce the correct outputs like in linear or logistic regression.",
+            "status": "new"
+      },
+      {
+            "q": "**Perceptron**",
+            "a": "The simple neuron model with the step activation function; among the very first formal models of neural computation; \u201cthe mother of all artificial neural networks\u201d.",
+            "status": "new"
+      },
+      {
+            "q": "What type of classification task can a perceptron perform?",
+            "a": "It can be used as a simple (binary) classifier.",
+            "status": "new"
+      },
+      {
+            "q": "**The perceptron algorithm**",
+            "a": "Feeding the network training data one example at a time; each misclassification leads to an update in the weight.",
+            "status": "new"
+      },
+      {
+            "q": "How do multilayer neural networks reach the full potential of neurons?",
+            "a": "By making the output of one neuron be the input to other neurons so that the output of the whole network is obtained as an output of a certain subset of the neurons.",
+            "status": "new"
+      },
+      {
+            "q": "**Input layer**",
+            "a": "Consists of neurons that get inputs directly from the data.",
+            "status": "new"
+      },
+      {
+            "q": "**Hidden layers**",
+            "a": "Layers which use other neurons\u2019 output as input, and whose output serves as other layers\u2019 input.",
+            "status": "new"
+      },
+      {
+            "q": "**Output layer**",
+            "a": "The subset of neurons in a neural network that produces the final output of the entire network.",
+            "status": "new"
+      },
+      {
+            "q": "**Backpropagation**",
+            "a": "Key idea: quantify the sensitivity of the output of a multilayer neural network with respect to the individual weights.",
+            "status": "new"
+      },
+      {
+            "q": "In the digit recognition classifier example (X vs. O), how are pixel values represented?",
+            "a": "Represent info in the pixels by numerical values that can be used as input (1 if square is colored, 0 if not), listed in the same order as reading text.",
+            "status": "new"
+      },
+      {
+            "q": "In the 25-pixel classifier example, how many weights are needed?",
+            "a": "A weight for each input pixel (25 total weights in the example).",
+            "status": "new"
+      },
+      {
+            "q": "In the 25-pixel classifier, how does the step activation function distinguish X from O?",
+            "a": "If the linear combo is negative, neuron activation = 0 (identified as an X); if the linear combo is positive (1), neuron activation = 1 (identified as an O).",
+            "status": "new"
+      },
+      {
+            "q": "In the 25-pixel X vs. O classifier, what specific weights are assigned to distinguish the shapes?",
+            "a": "Assign -1 to the center pixel and +1 to pixels in the middle of each of the 4 sides of the image; all other weights are 0.",
+            "status": "new"
+      },
+      {
+            "q": "**Convolutional neural networks (CNNs)**",
+            "a": "Networks that include a convolutional layer.",
+            "status": "new"
+      },
+      {
+            "q": "**Convolutional layers**",
+            "a": "A special layer in a deep neural network that can detect image features like bright or dark spots, edges in different orientations, etc., eliminating the need for an immense amount of training data.",
+            "status": "new"
+      },
+      {
+            "q": "**Generative network**",
+            "a": "A network trained to generate images like ones in the training data (other networks later separate generated images from real images in the training data).",
+            "status": "new"
+      }
+]
+
+    const STORAGE_KEY = "teachme_neural_statuses";
+
+    // State
+    let queue = [];
+    let currentQueueIdx = 0;
+    let currentTier = 1;
+    let targetClozeTerm = "";
+
+    // Initialize Deck & State
+    function initLearnSession() {
+      // Load saved progress if any
+      let saved = {};
+      try {
+        saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+      } catch (e) {}
+
+      deckData.forEach((card, idx) => {
+        if (saved[idx]) {
+          card.status = saved[idx];
+        } else if (!card.status) {
+          card.status = "new";
+        }
+      });
+
+      // Build practice queue: non-mastered first, or full deck if all mastered
+      queue = [...deckData];
+      fisherYatesShuffle(queue);
+      currentQueueIdx = 0;
+      updateHeaderStats();
+      renderCurrentCard();
+    }
+
+    function fisherYatesShuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    function reshuffleQueue() {
+      const remaining = queue.slice(currentQueueIdx);
+      fisherYatesShuffle(remaining);
+      queue = queue.slice(0, currentQueueIdx).concat(remaining);
+      renderCurrentCard();
+    }
+
+    function restartLearnSession() {
+      document.getElementById("completionBanner").style.display = "none";
+      document.getElementById("quiz-card-container").style.display = "block";
+      initLearnSession();
+    }
+
+    function updateHeaderStats() {
+      const masteredCount = deckData.filter(c => c.status === "mastered").length;
+      document.getElementById("mastery-counter").innerText = masteredCount;
+      document.getElementById("total-cards-counter").innerText = deckData.length;
+
+      const progressPercent = Math.round((masteredCount / deckData.length) * 100);
+      document.getElementById("lm-progress-fill").style.width = progressPercent + "%";
+
+      document.getElementById("queue-progress-text").innerText = (currentQueueIdx + 1) + " / " + queue.length;
+    }
+
+    function renderCurrentCard() {
+      if (currentQueueIdx >= queue.length) {
+        // Check if there are still non-mastered cards
+        const unmastered = queue.filter(c => c.status !== "mastered");
+        if (unmastered.length > 0) {
+          queue = [...unmastered];
+          fisherYatesShuffle(queue);
+          currentQueueIdx = 0;
+        } else {
+          // Complete!
+          document.getElementById("quiz-card-container").style.display = "none";
+          document.getElementById("completionBanner").style.display = "block";
+          updateHeaderStats();
+          return;
+        }
+      }
+
+      updateHeaderStats();
+      setupTier1();
+    }
+
+    // ==========================================
+    // TIER 1: MULTIPLE CHOICE (Sampled Distractors)
+    // ==========================================
+    function setupTier1() {
+      currentTier = 1;
+      updateTierBadge("Tier 1: Multiple Choice", "t1-badge");
+      document.getElementById("tier1Section").style.display = "block";
+      document.getElementById("tier2Section").style.display = "none";
+      document.getElementById("tier3Section").style.display = "none";
+
+      const card = queue[currentQueueIdx];
+      document.getElementById("t1QuestionText").innerText = card.q;
+      const feedback = document.getElementById("t1FeedbackBox");
+      feedback.style.display = "none";
+      feedback.innerHTML = "";
+
+      // Collect distractors strictly from deckData
+      const otherAnswers = deckData
+        .filter(c => c.a !== card.a)
+        .map(c => c.a);
+      
+      fisherYatesShuffle(otherAnswers);
+      const distractors = otherAnswers.slice(0, 3);
+      
+      const options = [
+        { text: card.a, isCorrect: true },
+        ...distractors.map(d => ({ text: d, isCorrect: false }))
+      ];
+      fisherYatesShuffle(options);
+
+      const grid = document.getElementById("t1OptionsGrid");
+      grid.innerHTML = "";
+      const letters = ["A", "B", "C", "D"];
+
+      options.forEach((opt, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "mc-option-btn";
+        btn.innerHTML = `<span class="option-letter">${letters[idx]}</span> <span>${opt.text}</span>`;
+        btn.onclick = () => handleTier1Selection(btn, opt.isCorrect, card.a);
+        grid.appendChild(btn);
+      });
+    }
+
+    function handleTier1Selection(selectedBtn, isCorrect, correctText) {
+      const allBtns = document.querySelectorAll(".mc-option-btn");
+      allBtns.forEach(b => b.disabled = true);
+
+      const feedback = document.getElementById("t1FeedbackBox");
+      feedback.style.display = "block";
+
+      if (isCorrect) {
+        selectedBtn.classList.add("correct");
+        feedback.className = "feedback-banner feedback-success";
+        feedback.innerHTML = `
+          <strong>✅ Correct!</strong> Excellent recognition from the source notes.<br>
+          <button class="btn btn-primary" style="margin-top: 12px;" onclick="setupTier2()">Advance to Tier 2: Cued Recall →</button>
+        `;
+      } else {
+        selectedBtn.classList.add("incorrect");
+        // Highlight correct
+        allBtns.forEach(b => {
+          if (b.innerText.includes(correctText.replace(/<[^>]+>/g, "").slice(0, 30))) {
+            b.classList.add("correct");
+          }
+        });
+        feedback.className = "feedback-banner feedback-warning";
+        feedback.innerHTML = `
+          <strong>💡 Notice the distinction from source notes.</strong> This card has been pushed back in your queue for practice.<br>
+          <button class="btn" style="margin-top: 12px;" onclick="requeueCurrentAndProceedToTier2()">Continue to Tier 2</button>
+        `;
+      }
+    }
+
+    function requeueCurrentAndProceedToTier2() {
+      const current = queue[currentQueueIdx];
+      queue.push(current); // Re-queue at the back
+      setupTier2();
+    }
+
+    // ==========================================
+    // TIER 2: CLOZE COMPLETION (Cued Recall)
+    // ==========================================
+    function setupTier2() {
+      currentTier = 2;
+      updateTierBadge("Tier 2: Cued Recall", "t2-badge");
+      document.getElementById("tier1Section").style.display = "none";
+      document.getElementById("tier2Section").style.display = "block";
+      document.getElementById("tier3Section").style.display = "none";
+
+      const card = queue[currentQueueIdx];
+      document.getElementById("t2QuestionText").innerText = card.q;
+      const feedback = document.getElementById("t2FeedbackBox");
+      feedback.style.display = "none";
+      feedback.innerHTML = "";
+
+      // Extract key target word/phrase: bold term or substantial word
+      const boldMatch = card.a.match(/\*\*(.*?)\*\*/);
+      let targetWord = "";
+      if (boldMatch) {
+        targetWord = boldMatch[1].trim();
+      } else {
+        const words = card.a.replace(/<[^>]+>/g, "").split(/\s+/).filter(w => w.length > 5);
+        targetWord = words[0] || "concept";
+      }
+      targetClozeTerm = targetWord;
+
+      const sentenceWithBlank = card.a.replace(targetWord, "<span style='border-bottom: 3px solid var(--accent-red); padding: 0 16px; font-weight: bold; color: var(--accent-red);'>[ &nbsp; ? &nbsp; ]</span>");
+      document.getElementById("t2SentenceContainer").innerHTML = sentenceWithBlank;
+
+      const input = document.getElementById("t2InputField");
+      input.value = "";
+      input.disabled = false;
+      setTimeout(() => input.focus(), 50);
+    }
+
+    function submitTier2() {
+      const input = document.getElementById("t2InputField");
+      const userVal = input.value.trim().toLowerCase();
+      const targetVal = targetClozeTerm.toLowerCase().replace(/[^a-z0-9]/g, "");
+      const cleanUser = userVal.replace(/[^a-z0-9]/g, "");
+
+      if (!cleanUser) return;
+      input.disabled = true;
+
+      const feedback = document.getElementById("t2FeedbackBox");
+      feedback.style.display = "block";
+
+      if (cleanUser === targetVal || targetVal.includes(cleanUser) && cleanUser.length >= 3) {
+        feedback.className = "feedback-banner feedback-success";
+        feedback.innerHTML = `
+          <strong>✅ Spot on!</strong> Target term recalled: <strong>${targetClozeTerm}</strong>.<br>
+          <button class="btn btn-primary" style="margin-top: 12px;" onclick="setupTier3()">Advance to Tier 3: Free Active Recall →</button>
+        `;
+      } else {
+        feedback.className = "feedback-banner feedback-warning";
+        feedback.innerHTML = `
+          <strong>💡 Target term from notes:</strong> <strong>${targetClozeTerm}</strong>.<br>
+          <button class="btn" style="margin-top: 12px;" onclick="requeueTier2AndProceedToTier3()">Proceed to Tier 3</button>
+        `;
+      }
+    }
+
+    function requeueTier2AndProceedToTier3() {
+      const current = queue[currentQueueIdx];
+      queue.push(current);
+      setupTier3();
+    }
+
+    // ==========================================
+    // TIER 3: FREE ACTIVE RECALL (Side-by-Side)
+    // ==========================================
+    function setupTier3() {
+      currentTier = 3;
+      updateTierBadge("Tier 3: Free Active Recall", "t3-badge");
+      document.getElementById("tier1Section").style.display = "none";
+      document.getElementById("tier2Section").style.display = "none";
+      document.getElementById("tier3Section").style.display = "block";
+
+      const card = queue[currentQueueIdx];
+      document.getElementById("t3QuestionText").innerText = card.q;
+
+      const input = document.getElementById("t3RecallInput");
+      input.value = "";
+      input.disabled = false;
+
+      document.getElementById("t3ActionContainer").style.display = "block";
+      document.getElementById("t3SideBySideContainer").style.display = "none";
+      setTimeout(() => input.focus(), 50);
+    }
+
+    function verifyTier3Answer() {
+      const input = document.getElementById("t3RecallInput");
+      const userText = input.value.trim();
+      if (!userText) {
+        alert("Please write your recall response before comparing.");
+        return;
+      }
+
+      input.disabled = true;
+      const card = queue[currentQueueIdx];
+      document.getElementById("t3UserResponse").innerText = userText;
+      document.getElementById("t3SourceResponse").innerHTML = card.a;
+
+      document.getElementById("t3ActionContainer").style.display = "none";
+      document.getElementById("t3SideBySideContainer").style.display = "block";
+    }
+
+    function resolveTier3(isMastered) {
+      const card = queue[currentQueueIdx];
+      if (isMastered) {
+        card.status = "mastered";
+      } else {
+        card.status = "learning";
+        // Re-insert card 3 positions ahead in the remaining queue
+        const remaining = queue.slice(currentQueueIdx + 1);
+        const insertPos = Math.min(3, remaining.length);
+        remaining.splice(insertPos, 0, card);
+        queue = queue.slice(0, currentQueueIdx + 1).concat(remaining);
+      }
+
+      // Persist status
+      saveStatusToStorage();
+      currentQueueIdx++;
+      renderCurrentCard();
+    }
+
+    function saveStatusToStorage() {
+      try {
+        const toSave = {};
+        deckData.forEach((c, idx) => {
+          toSave[idx] = c.status;
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+      } catch (e) {}
+    }
+
+    function updateTierBadge(label, cls) {
+      const slot = document.getElementById("tier-pill-slot");
+      slot.innerHTML = `<span class="tier-badge ${cls}">${label}</span>`;
+    }
+
+    // Boot
+    initLearnSession();
+  </script>
+</body>
+</html>
