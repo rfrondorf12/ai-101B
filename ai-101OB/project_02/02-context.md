@@ -24,6 +24,12 @@ all teach me workflow runs should add both note and flashcard html file pages fo
 3. File paths and processes to find a tool (ex.: File > share > export) should always be highlighted in pink
 4. Headings should be used as they are in ap_american_government and ap_macro_notes files. 
 
+## **Flashcard page & Learn Mode rules that should always be followed**
+1. **Questions & Answers Reference Table:** Always render a complete Q&A reference table below the Studying Progress section on every flashcard page, listing card numbers, questions, full definitions, and live status badges.
+2. **Term Shuffling:** Learn Mode must always automatically randomize card order upon launching (using Fisher-Yates shuffle) so terms are never studied in predictable static sequence.
+3. **Spaced Repetition Queue:** When a card is missed in Tier 1/2 or marked "Needs Review" in Tier 3, it must be re-inserted 3-4 positions ahead in the active queue until mastered.
+4. **Typography & Readability:** Learn Mode and quiz interfaces must use clean system sans-serif fonts with line-height 1.6 and high-contrast styling for maximum legibility.
+
 # HTML File style references
 ## Image 1
 This image shows the kind of dashboard elements I would like. It also has a vertical sidebar which I like. I like the path and gamified elements of the study tool as well. ![[Screenshot 2026-10-04 at 4.30.39 PM.png]]

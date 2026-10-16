@@ -96,6 +96,7 @@
 
           <button class="btn btn-primary" onclick="toggleCardFlip()">🔄 Flip</button>
           <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
+          <button class="btn btn-teal" style="font-weight: 800; border: 2.5px solid var(--border-color); box-shadow: 3px 3px 0 var(--border-color);" onclick="openLearnMode()">🚀 3-Tier Learn Mode</button>
         </div>
 
         <!-- Mastery Rating Buttons -->
@@ -103,6 +104,65 @@
           <button class="btn" style="border-color: #fbb040;" onclick="markCardStatus('learning')">⏳ Still Learning</button>
           <button class="btn" style="border-color: #39b54a; background-color: #eafaf1;" onclick="markCardStatus('mastered')">✅ Mastered</button>
         </div>
+
+        <!-- 3-Tier Learn Mode Container -->
+        <div id="learnModeSection" style="display: none; margin-top: 28px; padding: 26px; border: 3px solid var(--border-color); border-radius: 14px; background-color: #ffffff; box-shadow: 6px 6px 0 var(--border-color); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6;">
+          <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid var(--border-color); padding-bottom: 12px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span id="lmTierBadge" class="pill-badge pill-ai" style="font-size: 0.9rem; font-weight: bold;">Tier 1: Multiple Choice</span>
+              <span style="font-weight: bold; font-size: 0.95rem;">Card <span id="lmCurrNum">1</span> of <span id="lmTotalNum">0</span></span>
+            </div>
+            <button class="btn btn-sm" onclick="closeLearnMode()">✖ Exit Learn Mode</button>
+          </div>
+
+          <!-- Tier 1: Multiple Choice -->
+          <div id="tier1Container">
+            <h3 id="t1Question" style="font-size: 1.15rem; margin-bottom: 18px; line-height: 1.4;"></h3>
+            <div id="t1Options" style="display: grid; gap: 12px;"></div>
+            <div id="t1Feedback" style="display: none; margin-top: 18px; padding: 14px; border-radius: 8px; font-weight: bold;"></div>
+          </div>
+
+          <!-- Tier 2: Cloze Completion -->
+          <div id="tier2Container" style="display: none;">
+            <div style="margin-bottom: 10px; font-size: 0.9rem; color: #555;"><strong>Tier 2: Cued Recall</strong> — Fill in the missing term from the source notes:</div>
+            <h3 id="t2Question" style="font-size: 1.1rem; margin-bottom: 14px; line-height: 1.4;"></h3>
+            <div id="t2ClozeSentence" style="font-size: 1.05rem; padding: 16px; background-color: var(--bg-canvas); border: 2px dashed var(--border-color); border-radius: 8px; margin-bottom: 16px; line-height: 1.6;"></div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <input type="text" id="t2Input" placeholder="Type the missing term..." style="flex: 1; min-width: 240px; padding: 10px 14px; font-size: 1rem; border: 2px solid var(--border-color); border-radius: 6px; font-family: inherit;">
+              <button class="btn btn-primary" onclick="submitTier2()">Submit Answer</button>
+            </div>
+            <div id="t2Feedback" style="display: none; margin-top: 16px; padding: 14px; border-radius: 8px; font-weight: bold;"></div>
+          </div>
+
+          <!-- Tier 3: Active Recall (Side-by-Side) -->
+          <div id="tier3Container" style="display: none;">
+            <div style="margin-bottom: 10px; font-size: 0.9rem; color: #555;"><strong>Tier 3: Free Active Recall</strong> — Type your explanation from memory without checking notes:</div>
+            <h3 id="t3Question" style="font-size: 1.1rem; margin-bottom: 14px; line-height: 1.4;"></h3>
+            <textarea id="t3Input" rows="4" placeholder="Explain the concept completely in your own words..." style="width: 100%; padding: 12px; font-size: 0.95rem; border: 2px solid var(--border-color); border-radius: 8px; font-family: inherit; margin-bottom: 14px; box-sizing: border-box;"></textarea>
+            <button class="btn btn-primary" id="t3CompareBtn" onclick="submitTier3Recall()">Compare Side-by-Side with Source Notes</button>
+
+            <div id="t3ComparisonArea" style="display: none; margin-top: 20px;">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 18px;">
+                <div style="padding: 14px; background: #faf5f1; border: 2px solid var(--border-color); border-radius: 8px;">
+                  <h4 style="font-size: 0.95rem; margin-bottom: 8px; color: #444;">✍️ What You Typed:</h4>
+                  <p id="t3UserAnswer" style="font-size: 0.95rem; line-height: 1.5; white-space: pre-wrap;"></p>
+                </div>
+                <div style="padding: 14px; background: #eafaf1; border: 2px solid #39b54a; border-radius: 8px;">
+                  <h4 style="font-size: 0.95rem; margin-bottom: 8px; color: #155724;">📖 Source Note Definition:</h4>
+                  <p id="t3SourceAnswer" style="font-size: 0.95rem; line-height: 1.5;"></p>
+                </div>
+              </div>
+              <div style="padding: 16px; background: #fdfdfd; border: 2px solid var(--border-color); border-radius: 8px; text-align: center;">
+                <p style="font-weight: bold; margin-bottom: 12px;">Did your explanation capture the essential concept from the notes?</p>
+                <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+                  <button class="btn" style="border-color: #fbb040;" onclick="completeTier3(false)">🔄 Needs More Review</button>
+                  <button class="btn btn-teal" style="background-color: #39b54a; color: white;" onclick="completeTier3(true)">🎯 Mastered Card!</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
 
         <!-- Studying Progress Section -->
         <div style="margin-top: 36px; padding: 22px; border: 2.5px solid var(--border-color); border-radius: 14px; background-color: #faf5f1;">
@@ -564,6 +624,246 @@
       renderTermList();
       updateProgress();
     });
-  </script>
+  
+
+    // ==========================================
+    // 3-TIER LEARN MODE LOGIC (Agent 2)
+    // ==========================================
+    let learnQueue = [];
+    let lmCardIndex = 0;
+    let lmCurrentTier = 1;
+    let lmTargetClozeWord = ;
+
+    function openLearnMode() {
+      document.getElementById("learnModeSection").style.display = "block";
+      document.getElementById("learnModeSection").scrollIntoView({ behavior: "smooth" });
+
+      // Term Shuffling on start using Fisher-Yates
+      learnQueue = [...deckData];
+      for (let i = learnQueue.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [learnQueue[i], learnQueue[j]] = [learnQueue[j], learnQueue[i]];
+      }
+      lmCardIndex = 0;
+      startCardLearnMode();
+    }
+
+    function closeLearnMode() {
+      document.getElementById("learnModeSection").style.display = "none";
+    }
+
+    function stripFormatting(str) {
+      return str.replace(/\*\*(.*?)\*\*/g, "").replace(/\*(.*?)\*/g, "").trim();
+    }
+
+    function startCardLearnMode() {
+      if (learnQueue.length === 0 || lmCardIndex >= learnQueue.length) {
+        alert("🎉 Congratulations! You have completed all 3 tiers of Learn Mode and mastered this deck!");
+        closeLearnMode();
+        return;
+      }
+      const card = learnQueue[lmCardIndex];
+      document.getElementById("lmCurrNum").innerText = lmCardIndex + 1;
+      document.getElementById("lmTotalNum").innerText = learnQueue.length;
+      setupTier1(card);
+    }
+
+    // Spaced repetition re-queue helper: pushes missed cards 3-4 slots ahead
+    function requeueCurrentCard(offset = 3) {
+      const currentCard = learnQueue[lmCardIndex];
+      currentCard.status = "learning";
+      if (typeof updateProgress === "function") updateProgress();
+      if (typeof updateUI === "function") updateUI();
+      const insertPos = Math.min(lmCardIndex + offset, learnQueue.length);
+      learnQueue.splice(insertPos, 0, currentCard);
+      document.getElementById("lmTotalNum").innerText = learnQueue.length;
+    }
+
+    // --- Tier 1: Multiple Choice ---
+    function setupTier1(card) {
+      lmCurrentTier = 1;
+      document.getElementById("lmTierBadge").innerText = "Tier 1: Multiple Choice";
+      document.getElementById("lmTierBadge").className = "pill-badge pill-ai";
+      document.getElementById("tier1Container").style.display = "block";
+      document.getElementById("tier2Container").style.display = "none";
+      document.getElementById("tier3Container").style.display = "none";
+      document.getElementById("t1Feedback").style.display = "none";
+
+      document.getElementById("t1Question").innerText = card.q.replace(/\*\*/g, "");
+
+      const otherAnswers = deckData
+        .filter(c => c.q !== card.q)
+        .map(c => stripFormatting(c.a));
+
+      const shuffledOthers = [...otherAnswers].sort(() => 0.5 - Math.random());
+      const distractors = shuffledOthers.slice(0, 3);
+      const correctAnswerText = stripFormatting(card.a);
+      const options = [correctAnswerText, ...distractors].sort(() => 0.5 - Math.random());
+
+      const optContainer = document.getElementById("t1Options");
+      optContainer.innerHTML = "";
+
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "btn";
+        btn.style.textAlign = "left";
+        btn.style.padding = "14px 18px";
+        btn.style.lineHeight = "1.5";
+        btn.style.fontSize = "1.02rem";
+        btn.style.width = "100%";
+        btn.style.backgroundColor = "#faf5f1";
+        btn.style.borderColor = "var(--border-color)";
+        btn.style.fontFamily = "inherit";
+        btn.innerText = opt;
+        btn.onclick = () => selectTier1Option(btn, opt, correctAnswerText, card);
+        optContainer.appendChild(btn);
+      });
+    }
+
+    function selectTier1Option(clickedBtn, selectedText, correctText, card) {
+      const allButtons = document.getElementById("t1Options").querySelectorAll("button");
+      allButtons.forEach(b => b.disabled = true);
+
+      const feedback = document.getElementById("t1Feedback");
+      feedback.style.display = "block";
+
+      if (selectedText === correctText) {
+        clickedBtn.style.backgroundColor = "#d4edda";
+        clickedBtn.style.borderColor = "#39b54a";
+        clickedBtn.style.color = "#155724";
+        feedback.style.backgroundColor = "#d4edda";
+        feedback.style.color = "#155724";
+        feedback.innerHTML = "✅ Correct! Recognition verified.<br><button class='btn btn-teal' style='margin-top: 10px; background: #39b54a; color: white;' onclick='setupTier2()'>Proceed to Tier 2: Cloze Recall →</button>";
+      } else {
+        clickedBtn.style.backgroundColor = "#f8d7da";
+        clickedBtn.style.borderColor = "#e82e25";
+        clickedBtn.style.color = "#721c24";
+        allButtons.forEach(b => {
+          if (b.innerText === correctText) {
+            b.style.backgroundColor = "#d4edda";
+            b.style.borderColor = "#39b54a";
+          }
+        });
+        feedback.style.backgroundColor = "#f8d7da";
+        feedback.style.color = "#721c24";
+        feedback.innerHTML = "❌ Missed. Re-queued for practice.<br><button class='btn' style='margin-top: 10px;' onclick='requeueAndProceed()'>Proceed with Spaced Queue →</button>";
+      }
+    }
+
+    function requeueAndProceed() {
+      requeueCurrentCard(3);
+      if (lmCardIndex < learnQueue.length - 1) {
+        lmCardIndex++;
+        startCardLearnMode();
+      } else {
+        startCardLearnMode();
+      }
+    }
+
+    // --- Tier 2: Cloze Completion ---
+    function setupTier2() {
+      lmCurrentTier = 2;
+      const card = learnQueue[lmCardIndex];
+      document.getElementById("lmTierBadge").innerText = "Tier 2: Cued Cloze Recall";
+      document.getElementById("lmTierBadge").className = "pill-badge";
+      document.getElementById("lmTierBadge").style.backgroundColor = "var(--accent-orange)";
+      document.getElementById("tier1Container").style.display = "none";
+      document.getElementById("tier2Container").style.display = "block";
+      document.getElementById("tier3Container").style.display = "none";
+      document.getElementById("t2Feedback").style.display = "none";
+
+      document.getElementById("t2Question").innerText = card.q.replace(/\*\*/g, "");
+
+      const boldMatch = card.a.match(/\*\*(.*?)\*\*/);
+      let targetWord = "";
+      if (boldMatch && boldMatch[1].trim().length > 0) {
+        targetWord = boldMatch[1].trim();
+      } else {
+        const words = card.a.split(/\s+/).filter(w => w.length > 5);
+        targetWord = words[0] || "concept";
+      }
+
+      lmTargetClozeWord = targetWord;
+      const sentenceWithBlank = card.a.replace(targetWord, "<span style='border-bottom: 3px solid var(--accent-red); padding: 0 16px; font-weight: bold; color: var(--accent-red);'>[ &nbsp; ? &nbsp; ]</span>");
+      document.getElementById("t2ClozeSentence").innerHTML = sentenceWithBlank;
+      document.getElementById("t2Input").value = "";
+      document.getElementById("t2Input").focus();
+    }
+
+    function submitTier2() {
+      const userVal = document.getElementById("t2Input").value.trim().toLowerCase();
+      const targetVal = lmTargetClozeWord.toLowerCase();
+      const feedback = document.getElementById("t2Feedback");
+      feedback.style.display = "block";
+
+      if (userVal.length > 0 && (targetVal.includes(userVal) || userVal.includes(targetVal))) {
+        feedback.style.backgroundColor = "#d4edda";
+        feedback.style.color = "#155724";
+        feedback.innerHTML = "✅ Excellent! Target term recalled: <strong>" + lmTargetClozeWord + "</strong>.<br><button class='btn btn-primary' style='margin-top: 10px;' onclick='setupTier3()'>Advance to Tier 3: Free Active Recall →</button>";
+      } else {
+        feedback.style.backgroundColor = "#fef3c7";
+        feedback.style.color = "#92400e";
+        feedback.innerHTML = "💡 Target term from notes: <strong>" + lmTargetClozeWord + "</strong>. (Card re-queued for practice)<br><button class='btn btn-sm' style='margin-top: 8px;' onclick='requeueTier2AndProceed()'>Proceed to Tier 3</button>";
+      }
+    }
+
+    function requeueTier2AndProceed() {
+      requeueCurrentCard(3);
+      setupTier3();
+    }
+
+    // --- Tier 3: Active Recall (Side-by-Side) ---
+    function setupTier3() {
+      lmCurrentTier = 3;
+      const card = learnQueue[lmCardIndex];
+      document.getElementById("lmTierBadge").innerText = "Tier 3: Free Active Recall";
+      document.getElementById("lmTierBadge").className = "pill-badge";
+      document.getElementById("lmTierBadge").style.backgroundColor = "var(--accent-teal)";
+      document.getElementById("tier1Container").style.display = "none";
+      document.getElementById("tier2Container").style.display = "none";
+      document.getElementById("tier3Container").style.display = "block";
+
+      document.getElementById("t3Question").innerText = card.q.replace(/\*\*/g, "");
+      document.getElementById("t3Input").value = "";
+      document.getElementById("t3ComparisonArea").style.display = "none";
+      document.getElementById("t3CompareBtn").style.display = "inline-block";
+      document.getElementById("t3Input").disabled = false;
+      document.getElementById("t3Input").focus();
+    }
+
+    function submitTier3Recall() {
+      const userText = document.getElementById("t3Input").value.trim();
+      if (!userText) {
+        alert("Please type your recall explanation before comparing.");
+        return;
+      }
+      const card = learnQueue[lmCardIndex];
+      document.getElementById("t3UserAnswer").innerText = userText;
+      document.getElementById("t3SourceAnswer").innerHTML = card.a;
+      document.getElementById("t3ComparisonArea").style.display = "block";
+      document.getElementById("t3CompareBtn").style.display = "none";
+      document.getElementById("t3Input").disabled = true;
+    }
+
+    function completeTier3(isMastered) {
+      const card = learnQueue[lmCardIndex];
+      if (isMastered) {
+        card.status = "mastered";
+      } else {
+        requeueCurrentCard(4);
+      }
+      if (typeof updateProgress === "function") updateProgress();
+      if (typeof updateUI === "function") updateUI();
+
+      if (lmCardIndex < learnQueue.length - 1) {
+        lmCardIndex++;
+        startCardLearnMode();
+      } else {
+        alert("🎉 Congratulations! You have completed all 3 tiers of Learn Mode and mastered this deck!");
+        closeLearnMode();
+      }
+    }
+
+</script>
 </body>
 </html>

@@ -207,7 +207,7 @@
         </div>
 
         <!-- 3-Tier Learn Mode Container -->
-        <div id="learnModeSection" style="display: none; margin-top: 28px; padding: 24px; border: 3px solid var(--border-color); border-radius: 14px; background-color: #ffffff; box-shadow: 6px 6px 0 var(--border-color);">
+        <div id="learnModeSection" style="display: none; margin-top: 28px; padding: 26px; border: 3px solid var(--border-color); border-radius: 14px; background-color: #ffffff; box-shadow: 6px 6px 0 var(--border-color); font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6;">
           <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2.5px solid var(--border-color); padding-bottom: 12px; margin-bottom: 18px; flex-wrap: wrap; gap: 10px;">
             <div style="display: flex; align-items: center; gap: 10px;">
               <span id="lmTierBadge" class="pill-badge pill-ai" style="font-size: 0.9rem; font-weight: bold;">Tier 1: Multiple Choice</span>
@@ -297,6 +297,29 @@
 
           <div style="margin-top: 16px; text-align: right;">
             <button class="btn btn-sm" onclick="resetProgress()" style="color: #666;">Reset Progress</button>
+          </div>
+        </div>
+
+        <!-- Flashcards Questions & Answers Reference Table -->
+        <div style="margin-top: 36px; padding: 24px; border: 2.5px solid var(--border-color); border-radius: 14px; background-color: #ffffff; box-shadow: 4px 4px 0 var(--border-color);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 2px solid var(--border-color); padding-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+            <h3 style="font-size: 1.15rem; font-family: system-ui, -apple-system, sans-serif;">📋 Flashcard Deck Questions & Answers</h3>
+            <span class="pill-badge pill-ai" style="font-weight: bold;"><span id="qa-table-count">35</span> Cards</span>
+          </div>
+          <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 0.95rem;">
+              <thead>
+                <tr style="background-color: var(--bg-canvas); border-bottom: 2px solid var(--border-color); text-align: left;">
+                  <th style="padding: 12px; width: 50px; border-right: 1px solid #e2e8f0;">#</th>
+                  <th style="padding: 12px; width: 42%; border-right: 1px solid #e2e8f0;">Question / Front</th>
+                  <th style="padding: 12px; border-right: 1px solid #e2e8f0;">Answer / Note Definition</th>
+                  <th style="padding: 12px; width: 120px; text-align: center;">Status</th>
+                </tr>
+              </thead>
+              <tbody id="qa-table-body">
+                <!-- Dynamically populated by renderQATable() -->
+              </tbody>
+            </table>
           </div>
         </div>
 
@@ -586,6 +609,8 @@
 
       const cardEl = document.getElementById("main-flashcard");
       cardEl.classList.remove("flipped");
+
+      renderQATable();
     }
 
     function toggleCardFlip() {
@@ -672,6 +697,7 @@
     // ==========================================
     // 3-TIER LEARN MODE LOGIC (Agent 2)
     // ==========================================
+    let learnQueue = [];
     let lmCardIndex = 0;
     let lmCurrentTier = 1;
     let lmTargetClozeWord = "";
@@ -679,7 +705,14 @@
     function openLearnMode() {
       document.getElementById("learnModeSection").style.display = "block";
       document.getElementById("learnModeSection").scrollIntoView({ behavior: "smooth" });
-      lmCardIndex = currentCardIndex;
+
+      // Fix 3: Term Shuffling on start using Fisher-Yates shuffle
+      learnQueue = [...deckData];
+      for (let i = learnQueue.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [learnQueue[i], learnQueue[j]] = [learnQueue[j], learnQueue[i]];
+      }
+      lmCardIndex = 0;
       startCardLearnMode();
     }
 
@@ -692,10 +725,26 @@
     }
 
     function startCardLearnMode() {
-      const card = activeCards[lmCardIndex];
+      if (learnQueue.length === 0 || lmCardIndex >= learnQueue.length) {
+        alert("🎉 Congratulations! You have completed all 3 tiers of Learn Mode and mastered this deck!");
+        closeLearnMode();
+        return;
+      }
+      const card = learnQueue[lmCardIndex];
       document.getElementById("lmCurrNum").innerText = lmCardIndex + 1;
-      document.getElementById("lmTotalNum").innerText = activeCards.length;
+      document.getElementById("lmTotalNum").innerText = learnQueue.length;
       setupTier1(card);
+    }
+
+    // Spaced repetition re-queue helper: pushes missed cards 3-4 slots ahead
+    function requeueCurrentCard(offset = 3) {
+      const currentCard = learnQueue[lmCardIndex];
+      currentCard.status = "learning";
+      saveProgress();
+      updateUI();
+      const insertPos = Math.min(lmCardIndex + offset, learnQueue.length);
+      learnQueue.splice(insertPos, 0, currentCard);
+      document.getElementById("lmTotalNum").innerText = learnQueue.length;
     }
 
     // --- Tier 1: Multiple Choice ---
@@ -727,11 +776,13 @@
         const btn = document.createElement("button");
         btn.className = "btn";
         btn.style.textAlign = "left";
-        btn.style.padding = "12px 16px";
-        btn.style.lineHeight = "1.4";
+        btn.style.padding = "14px 18px";
+        btn.style.lineHeight = "1.5";
+        btn.style.fontSize = "1.02rem";
         btn.style.width = "100%";
         btn.style.backgroundColor = "#faf5f1";
         btn.style.borderColor = "var(--border-color)";
+        btn.style.fontFamily = "inherit";
         btn.innerText = opt;
         btn.onclick = () => selectTier1Option(btn, opt, correctAnswerText, card);
         optContainer.appendChild(btn);
@@ -764,14 +815,24 @@
         });
         feedback.style.backgroundColor = "#f8d7da";
         feedback.style.color = "#721c24";
-        feedback.innerHTML = "❌ Missed. The correct answer from the notes is highlighted in green.<br><button class='btn' style='margin-top: 10px;' onclick='setupTier1(activeCards[lmCardIndex])'>Try Again</button>";
+        feedback.innerHTML = "❌ Missed. Re-queued for practice.<br><button class='btn' style='margin-top: 10px;' onclick='requeueAndProceed()'>Proceed with Spaced Queue →</button>";
+      }
+    }
+
+    function requeueAndProceed() {
+      requeueCurrentCard(3);
+      if (lmCardIndex < learnQueue.length - 1) {
+        lmCardIndex++;
+        startCardLearnMode();
+      } else {
+        startCardLearnMode();
       }
     }
 
     // --- Tier 2: Cloze Completion ---
     function setupTier2() {
       lmCurrentTier = 2;
-      const card = activeCards[lmCardIndex];
+      const card = learnQueue[lmCardIndex];
       document.getElementById("lmTierBadge").innerText = "Tier 2: Cued Cloze Recall";
       document.getElementById("lmTierBadge").className = "pill-badge";
       document.getElementById("lmTierBadge").style.backgroundColor = "var(--accent-orange)";
@@ -812,14 +873,19 @@
       } else {
         feedback.style.backgroundColor = "#fef3c7";
         feedback.style.color = "#92400e";
-        feedback.innerHTML = "💡 Target term from notes: <strong>" + lmTargetClozeWord + "</strong>.<br><button class='btn btn-sm' style='margin-top: 8px;' onclick='setupTier3()'>Proceed to Tier 3</button>";
+        feedback.innerHTML = "💡 Target term from notes: <strong>" + lmTargetClozeWord + "</strong>. (Card re-queued for practice)<br><button class='btn btn-sm' style='margin-top: 8px;' onclick='requeueTier2AndProceed()'>Proceed to Tier 3</button>";
       }
+    }
+
+    function requeueTier2AndProceed() {
+      requeueCurrentCard(3);
+      setupTier3();
     }
 
     // --- Tier 3: Active Recall (Side-by-Side) ---
     function setupTier3() {
       lmCurrentTier = 3;
-      const card = activeCards[lmCardIndex];
+      const card = learnQueue[lmCardIndex];
       document.getElementById("lmTierBadge").innerText = "Tier 3: Free Active Recall";
       document.getElementById("lmTierBadge").className = "pill-badge";
       document.getElementById("lmTierBadge").style.backgroundColor = "var(--accent-teal)";
@@ -841,7 +907,7 @@
         alert("Please type your recall explanation before comparing.");
         return;
       }
-      const card = activeCards[lmCardIndex];
+      const card = learnQueue[lmCardIndex];
       document.getElementById("t3UserAnswer").innerText = userText;
       document.getElementById("t3SourceAnswer").innerHTML = card.a;
       document.getElementById("t3ComparisonArea").style.display = "block";
@@ -850,22 +916,52 @@
     }
 
     function completeTier3(isMastered) {
-      const card = activeCards[lmCardIndex];
+      const card = learnQueue[lmCardIndex];
       if (isMastered) {
         card.status = "mastered";
       } else {
-        card.status = "learning";
+        requeueCurrentCard(4);
       }
       saveProgress();
       updateUI();
 
-      if (lmCardIndex < activeCards.length - 1) {
+      if (lmCardIndex < learnQueue.length - 1) {
         lmCardIndex++;
         startCardLearnMode();
       } else {
-        alert("🎉 Congratulations! You have completed all 3 tiers of Learn Mode for this deck!");
+        alert("🎉 Congratulations! You have completed all 3 tiers of Learn Mode and mastered this deck!");
         closeLearnMode();
       }
+    }
+
+    // --- Q&A Reference Table Renderer ---
+    function renderQATable() {
+      const tbody = document.getElementById("qa-table-body");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+      const countEl = document.getElementById("qa-table-count");
+      if (countEl) countEl.innerText = deckData.length;
+
+      deckData.forEach((c, idx) => {
+        const tr = document.createElement("tr");
+        tr.style.borderBottom = "1px solid #e2e8f0";
+        if (idx % 2 === 1) tr.style.backgroundColor = "#fcfaf8";
+
+        let statusBadge = '<span class="pill-badge" style="background:#cbd5e1; font-size:0.75rem; color:#333;">New</span>';
+        if (c.status === "learning") {
+          statusBadge = '<span class="pill-badge" style="background:#fbb040; color:#fff; font-size:0.75rem;">Learning</span>';
+        } else if (c.status === "mastered") {
+          statusBadge = '<span class="pill-badge" style="background:#39b54a; color:#fff; font-size:0.75rem;">Mastered</span>';
+        }
+
+        tr.innerHTML = `
+          <td style="padding: 10px 12px; font-weight: bold; border-right: 1px solid #e2e8f0; text-align: center; color: #666;">${idx + 1}</td>
+          <td style="padding: 10px 12px; font-weight: 600; border-right: 1px solid #e2e8f0; line-height: 1.4;">${c.q}</td>
+          <td style="padding: 10px 12px; border-right: 1px solid #e2e8f0; line-height: 1.4;">${c.a}</td>
+          <td style="padding: 10px 12px; text-align: center;">${statusBadge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
     }
 
     // Start

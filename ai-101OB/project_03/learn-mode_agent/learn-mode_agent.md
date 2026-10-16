@@ -22,7 +22,9 @@ Constructs and manages the interactive 3-tier Learn Mode deliverable from existi
 2. Builds **Tier 1 (Multiple Choice)**: Pairs flashcard questions with 3 distractors sampled strictly from other cards within the same deck.
 3. Builds **Tier 2 (Cloze Completion)**: Generates fill-in-the-blank prompts from key terms extracted from the notes.
 4. Builds **Tier 3 (Active Recall)**: Formats an open response text box with a side-by-side reveal of the source note excerpt for student self-evaluation.
-5. Injects the 3-tier Learn Mode interface into the web deliverable, commits, and pushes updates to `rfrondorf12/teach_me` for Vercel deployment.
+5. Injects automated term shuffling upon launch (Fisher-Yates) and a spaced repetition queue (re-inserting missed or unmastered terms 3-4 cards ahead until mastered).
+6. Applies high-legibility system typography and renders the full Questions & Answers reference table on the page.
+7. Commits and pushes updates to `rfrondorf12/teach_me` for Vercel deployment.
 
 ## What it may not decide
 
