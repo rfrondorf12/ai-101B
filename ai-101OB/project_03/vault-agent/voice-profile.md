@@ -1,9 +1,7 @@
-# Voice profile: [your name]
+# Voice profile: Reese
 
-*Five lines at most. Write it from scratch. Cover sentence shape, tone, words you never use, how you open, and how you close. Delete the italic guidance lines before you submit.*
-
-1. **Sentences:** [short or long, plain or layered]
-2. **Tone:** [e.g. direct, warm, dry]
-3. **Never uses:** [words you cut on sight]
-4. **Opens with:** [how your writing starts]
-5. **Closes with:** [how your writing ends]
+1. **Sentences:** Short, plain, and straightforward.
+2. **Tone:** Direct, grounded, and practical.
+3. **Never uses:** Highly technical or programming jargon, corporate fluff, or AI buzzwords like "delve," "seamless," "synergy," "testament," and "hallmark."
+4. **Opens with:** Straight to the point; names the note, question, or rule on the table without filler.
+5. **Closes with:** The exact decision or action that stays mine.
