@@ -96,7 +96,7 @@
 
           <button class="btn btn-primary" onclick="toggleCardFlip()">🔄 Flip</button>
           <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
-          <a href="learn-ai-for-app-building.html" class="btn btn-teal" style="font-weight: 800; border: 2.5px solid var(--border-color); box-shadow: 3px 3px 0 var(--border-color); text-decoration: none; display: inline-flex; align-items: center;">🚀 3-Tier Learn Mode</a>
+          <a href="learn-ai-for-app-building.html" class="btn btn-teal" style="font-weight: 800; border: 2.5px solid var(--border-color); box-shadow: 3px 3px 0 var(--border-color); text-decoration: none; display: inline-flex; align-items: center;">🚀 Learn Mode</a>
         </div>
 
         <!-- Mastery Rating Buttons -->
@@ -231,81 +231,111 @@
   <script>
     const deckData = [
       {
-        q: "What is **Vibecoding**?",
-        a: "Using natural language to build software or apps.",
-        status: "new"
+            "q": "What is **Vibecoding**?",
+            "a": "Using natural language to build software or apps.",
+            "status": "new",
+            "targetTerm": "Vibecoding",
+            "keyTerm": "Vibecoding"
       },
       {
-        q: "What is **Agentic AI**?",
-        a: "Takes action on your behalf under your supervision; writes code & builds the interface.",
-        status: "new"
+            "q": "What is **Agentic AI**?",
+            "a": "Takes action on your behalf under your supervision; writes code & builds the interface.",
+            "status": "new",
+            "targetTerm": "Agentic AI",
+            "keyTerm": "Agentic AI"
       },
       {
-        q: "When building a custom tool in Google AI Studio, what three things should you pay attention to?",
-        a: "1. Natural conversation flow<br>2. Specificity of feedback<br>3. Speed from idea to prototype.",
-        status: "new"
+            "q": "When building a custom tool in Google AI Studio, what three things should you pay attention to?",
+            "a": "1. Natural conversation flow<br>2. Specificity of feedback<br>3. Speed from idea to prototype.",
+            "status": "new",
+            "targetTerm": "conversation flow",
+            "keyTerm": "Google AI Studio"
       },
       {
-        q: "What is the purpose of the prototype app called **The Tiebreaker**?",
-        a: "Helps make decisions by showing different pros and cons through a pros and cons list, a comparison table, or a SWOT analysis.",
-        status: "new"
+            "q": "What is the purpose of the prototype app called **The Tiebreaker**?",
+            "a": "Helps make decisions by showing different pros and cons through a pros and cons list, a comparison table, or a SWOT analysis.",
+            "status": "new",
+            "targetTerm": "The Tiebreaker",
+            "keyTerm": "The Tiebreaker"
       },
       {
-        q: "What real-world test input was used for **The Tiebreaker**?",
-        a: "'Should I offer my software for free with paid features, or charge a flat $20/month premium plan?'",
-        status: "new"
+            "q": "What real-world test input was used for **The Tiebreaker**?",
+            "a": "'Should I offer my software for free with paid features, or charge a flat $20/month premium plan?'",
+            "status": "new",
+            "targetTerm": "The Tiebreaker",
+            "keyTerm": "The Tiebreaker"
       },
       {
-        q: "How do you troubleshoot errors in **The Tiebreaker**?",
-        a: "See error button for Auto fix, then verify the fix.",
-        status: "new"
+            "q": "How do you troubleshoot errors in **The Tiebreaker**?",
+            "a": "See error button for Auto fix, then verify the fix.",
+            "status": "new",
+            "targetTerm": "The Tiebreaker",
+            "keyTerm": "The Tiebreaker"
       },
       {
-        q: "What does the **Brand builder app** prototype do?",
-        a: "Lets you describe a product and imagine it across different mediums (billboard, newspaper, social post) while maintaining product consistency without people in images.",
-        status: "new"
+            "q": "What does the **Brand builder app** prototype do?",
+            "a": "Lets you describe a product and imagine it across different mediums (billboard, newspaper, social post) while maintaining product consistency without people in images.",
+            "status": "new",
+            "targetTerm": "Brand builder app",
+            "keyTerm": "Brand builder app"
       },
       {
-        q: "Which specific model must be used for images in the **Brand builder app**?",
-        a: "The Nano-Banana model.",
-        status: "new"
+            "q": "Which specific model must be used for images in the **Brand builder app**?",
+            "a": "The Nano-Banana model.",
+            "status": "new",
+            "targetTerm": "Brand builder app",
+            "keyTerm": "Brand builder app"
       },
       {
-        q: "How do you troubleshoot when the brand builder app tries to use multiple models and confuses itself?",
-        a: "Click error button, copy paste errors into prompt box, and provide feedback: 'Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps.'",
-        status: "new"
+            "q": "How do you troubleshoot when the brand builder app tries to use multiple models and confuses itself?",
+            "a": "Click error button, copy paste errors into prompt box, and provide feedback: 'Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps.'",
+            "status": "new",
+            "targetTerm": "copy paste errors",
+            "keyTerm": "troubleshooting"
       },
       {
-        q: "What is the goal of the **Interactive dashboard** prototype?",
-        a: "Allows you to visualize data in many different ways accurately after providing/attaching data.",
-        status: "new"
+            "q": "What is the goal of the **Interactive dashboard** prototype?",
+            "a": "Allows you to visualize data in many different ways accurately after providing/attaching data.",
+            "status": "new",
+            "targetTerm": "Interactive dashboard",
+            "keyTerm": "Interactive dashboard"
       },
       {
-        q: "How do you iterate on design and layout in the **Interactive dashboard**?",
-        a: "Use the annotate app button in the prompt box and use the comment tool to highlight a specific area, then send prompt.",
-        status: "new"
+            "q": "How do you iterate on design and layout in the **Interactive dashboard**?",
+            "a": "Use the annotate app button in the prompt box and use the comment tool to highlight a specific area, then send prompt.",
+            "status": "new",
+            "targetTerm": "Interactive dashboard",
+            "keyTerm": "Interactive dashboard"
       },
       {
-        q: "What 4 questions should you assess on the worksheet before building an app?",
-        a: "1. Does the task solve part of a broader workflow?<br>2. Can you outline a clear, step-by-step process?<br>3. Does the process involve consistent inputs and outputs?<br>4. What's the complexity level (calendar/email/other platforms)?",
-        status: "new"
+            "q": "What 4 questions should you assess on the worksheet before building an app?",
+            "a": "1. Does the task solve part of a broader workflow?<br>2. Can you outline a clear, step-by-step process?<br>3. Does the process involve consistent inputs and outputs?<br>4. What's the complexity level (calendar/email/other platforms)?",
+            "status": "new",
+            "targetTerm": "workflow",
+            "keyTerm": "workflow assessment"
       },
       {
-        q: "What is the rule for prompting different blocks of an app?",
-        a: "Break it up into blocks: give the overall goal, but prompt it to make one block at a time to make correcting errors easier.",
-        status: "new"
+            "q": "What is the rule for prompting different blocks of an app?",
+            "a": "Break it up into blocks: give the overall goal, but prompt it to make one block at a time to make correcting errors easier.",
+            "status": "new",
+            "targetTerm": "one block at a time",
+            "keyTerm": "prompting blocks"
       },
       {
-        q: "What is your responsibility after publishing an app?",
-        a: "You are responsible for the outputs it produces and need to maintain its functionality for users.",
-        status: "new"
+            "q": "What is your responsibility after publishing an app?",
+            "a": "You are responsible for the outputs it produces and need to maintain its functionality for users.",
+            "status": "new",
+            "targetTerm": "responsible",
+            "keyTerm": "responsibility"
       },
       {
-        q: "What are the 6 reflection questions to ask after using your new app?",
-        a: "1. What did I just achieve?<br>2. How much time have I saved?<br>3. Have I reduced costs?<br>4. Has the quality of my work improved?<br>5. Am I more productive?<br>6. Did I discover something new?",
-        status: "new"
+            "q": "What are the 6 reflection questions to ask after using your new app?",
+            "a": "1. What did I just achieve?<br>2. How much time have I saved?<br>3. Have I reduced costs?<br>4. Has the quality of my work improved?<br>5. Am I more productive?<br>6. Did I discover something new?",
+            "status": "new",
+            "targetTerm": "reflection",
+            "keyTerm": "reflection questions"
       }
-    ];
+];
 
     let currentIndex = 0;
     let isFlipped = false;

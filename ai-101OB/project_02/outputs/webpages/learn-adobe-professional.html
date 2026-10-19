@@ -6,7 +6,6 @@
   <title>Adobe Certified Professional — Learn Mode</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Scoped high-contrast typography for Learn Mode study interface */
     .learn-container {
       max-width: 780px;
       margin: 0 auto;
@@ -26,8 +25,7 @@
       box-shadow: 2px 2px 0 var(--border-color);
     }
     .t1-badge { background-color: var(--accent-yellow); color: #240404; }
-    .t2-badge { background-color: var(--accent-orange); color: #240404; }
-    .t3-badge { background-color: var(--accent-teal); color: #240404; }
+    .t2-badge { background-color: var(--accent-teal); color: #240404; }
 
     .lm-progress-bar {
       width: 100%;
@@ -173,7 +171,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
           <div>
             <span class="pill-badge pill-art">Art</span>
-            <h2 style="margin-top: 6px; font-size: 1.45rem;">Adobe Certified Professional — 3-Tier Learn Mode</h2>
+            <h2 style="margin-top: 6px; font-size: 1.45rem;">Adobe Certified Professional — Learn Mode</h2>
             <p style="font-size: 0.85rem; color: #555; margin-top: 4px;">Source: <code>Adobe InDesign & Design Principles Study Guide</code></p>
           </div>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -195,7 +193,7 @@
             <div class="lm-progress-fill" id="lm-progress-fill"></div>
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #64748b; flex-wrap: wrap; gap: 8px;">
-            <span>💡 3-Tier Cognitive Ladder: Recognition (MC) → Cued Recall (Cloze) → Free Active Recall</span>
+            <span>💡 2-Stage Cognitive Ladder: Recognition (Multiple Choice) → Free Active Recall (Side-by-Side)</span>
             <button class="btn btn-sm" onclick="reshuffleQueue()" title="Shuffle the practice queue">🔀 Reshuffle Queue</button>
           </div>
         </div>
@@ -204,67 +202,47 @@
       <!-- Active Quiz Card -->
       <div id="quiz-card-container" class="quiz-card">
 
-        <!-- Tier 1: Multiple Choice -->
+        <!-- Stage 1: Multiple Choice (Recognition) -->
         <div id="tier1Section">
           <div style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-            Tier 1 · Recognition (Multiple Choice)
+            Stage 1 · Recognition (Multiple Choice)
           </div>
           <h3 id="t1QuestionText" style="font-size: 1.25rem; font-weight: 800; line-height: 1.45; margin-bottom: 20px; color: #0f172a;"></h3>
           <div id="t1OptionsGrid" style="display: grid; gap: 12px;"></div>
           <div id="t1FeedbackBox" class="feedback-banner" style="display: none;"></div>
         </div>
 
-        <!-- Tier 2: Cloze Completion -->
+        <!-- Stage 2: Free Active Recall & Side-by-Side Assessment -->
         <div id="tier2Section" style="display: none;">
-          <div style="font-size: 0.85rem; font-weight: 700; color: #d97706; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-            Tier 2 · Cued Recall (Cloze Completion)
-          </div>
-          <h3 id="t2QuestionText" style="font-size: 1.2rem; font-weight: 800; line-height: 1.45; margin-bottom: 12px; color: #0f172a;"></h3>
-          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 16px;">
-            Fill in the missing key term from the source notes below:
-          </p>
-          <div id="t2SentenceContainer" style="padding: 18px; background: #faf5f1; border: 2px dashed var(--border-color); border-radius: 10px; font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;"></div>
-          
-          <form id="t2Form" onsubmit="event.preventDefault(); submitTier2();">
-            <div style="display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap;">
-              <input type="text" id="t2InputField" placeholder="Type the exact missing term..." autocomplete="off" style="flex: 1; min-width: 250px; padding: 12px 16px; font-size: 1.05rem; border: 2.5px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none;">
-              <button type="submit" class="btn btn-primary" style="padding: 12px 24px; font-size: 1rem;">Submit Term</button>
-            </div>
-          </form>
-          <div id="t2FeedbackBox" class="feedback-banner" style="display: none;"></div>
-        </div>
-
-        <!-- Tier 3: Free Active Recall & Side-by-Side -->
-        <div id="tier3Section" style="display: none;">
           <div style="font-size: 0.85rem; font-weight: 700; color: #0f766e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-            Tier 3 · Free Active Recall (Cognitive Generation)
+            Stage 2 · Free Active Recall (Cognitive Generation)
           </div>
-          <h3 id="t3QuestionText" style="font-size: 1.25rem; font-weight: 800; line-height: 1.45; margin-bottom: 12px; color: #0f172a;"></h3>
+          <h3 id="t2QuestionText" style="font-size: 1.25rem; font-weight: 800; line-height: 1.45; margin-bottom: 12px; color: #0f172a;"></h3>
           <p style="font-size: 0.9rem; color: #475569; margin-bottom: 14px;">
-            Explain this concept completely in your own words without looking at your notes. (Spaces and formatting work natively without keyboard conflicts):
+            Explain this concept completely in your own words without looking at your notes. (Full keyboard freedom for spaces, returns, and punctuation):
           </p>
-          <textarea id="t3RecallInput" rows="5" placeholder="Type your full recall explanation here..." style="width: 100%; padding: 14px; font-size: 1rem; border: 2.5px solid var(--border-color); border-radius: 8px; font-family: inherit; line-height: 1.6; outline: none; margin-bottom: 16px; box-sizing: border-box;"></textarea>
+          <textarea id="t2RecallInput" rows="5" placeholder="Type your full recall explanation here..." style="width: 100%; padding: 14px; font-size: 1rem; border: 2.5px solid var(--border-color); border-radius: 8px; font-family: inherit; line-height: 1.6; outline: none; margin-bottom: 16px; box-sizing: border-box;"></textarea>
           
-          <div id="t3ActionContainer">
-            <button class="btn btn-primary" id="t3VerifyBtn" onclick="verifyTier3Answer()" style="padding: 12px 24px; font-size: 1rem;">
+          <div id="t2ActionContainer">
+            <button class="btn btn-primary" id="t2VerifyBtn" onclick="verifyActiveRecall()" style="padding: 12px 24px; font-size: 1rem;">
               Compare Side-by-Side with Source Notes →
             </button>
           </div>
 
           <!-- Comparison Display -->
-          <div id="t3SideBySideContainer" style="display: none;">
+          <div id="t2SideBySideContainer" style="display: none;">
             <div class="side-by-side-grid">
               <div class="side-box">
                 <div style="font-size: 0.85rem; font-weight: 800; color: #475569; text-transform: uppercase; margin-bottom: 8px;">
                   ✍️ What You Typed:
                 </div>
-                <div id="t3UserResponse" style="font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; color: #0f172a;"></div>
+                <div id="t2UserResponse" style="font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; color: #0f172a;"></div>
               </div>
               <div class="side-box" style="background: #ffffff; border-color: #16a34a;">
                 <div style="font-size: 0.85rem; font-weight: 800; color: #16a34a; text-transform: uppercase; margin-bottom: 8px;">
                   📖 Source Note Excerpt:
                 </div>
-                <div id="t3SourceResponse" style="font-size: 0.95rem; line-height: 1.6; color: #0f172a;"></div>
+                <div id="t2SourceResponse" style="font-size: 0.95rem; line-height: 1.6; color: #0f172a;"></div>
               </div>
             </div>
 
@@ -275,10 +253,10 @@
                 You decide your mastery. AI does not automatically judge or replace your critical evaluation.
               </p>
               <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
-                <button class="btn" style="border-color: var(--accent-orange); background: #fffdf5;" onclick="resolveTier3(false)">
+                <button class="btn" style="border-color: var(--accent-orange); background: #fffdf5;" onclick="resolveCardMastery(false)">
                   ⏳ Still Learning (Re-queue for practice)
                 </button>
-                <button class="btn btn-primary" style="background-color: #dcfce7; color: #14532d; border-color: #16a34a;" onclick="resolveTier3(true)">
+                <button class="btn btn-primary" style="background-color: #dcfce7; color: #14532d; border-color: #16a34a;" onclick="resolveCardMastery(true)">
                   ✅ Mastered! (Advance to next card)
                 </button>
               </div>
@@ -293,7 +271,7 @@
         <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
         <h2 style="font-size: 1.8rem; margin-bottom: 12px;">All Cards Mastered in Learn Mode!</h2>
         <p style="font-size: 1.05rem; color: #475569; max-width: 540px; margin: 0 auto 28px auto;">
-          You successfully navigated through Multiple Choice recognition, Cloze completion, and typed active recall verification across the entire deck.
+          You successfully navigated through Multiple Choice recognition and typed active recall verification across the entire deck.
         </p>
         <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
           <button class="btn btn-primary" onclick="restartLearnSession()">🔁 Practice Again</button>
@@ -306,241 +284,326 @@
   </main>
 
   <script>
-    // Deck source data directly from notes
     const deckData = [
       {
-        q: "What are the two essential things a designer must clarify with a client at the beginning of every project?",
-        a: "The **purpose** of the design (the client's business goals and what they want to achieve) and the **target audience**.",
-        status: "new"
+            "q": "What are the two essential things a designer must clarify with a client at the beginning of every project?",
+            "a": "The **purpose** of the design (the client's business goals and what they want to achieve) and the **target audience**.",
+            "status": "new",
+            "targetTerm": "purpose",
+            "keyTerm": "purpose and target audience"
       },
       {
-        q: "What three key questions should a designer ask if a client brief is not detailed enough?",
-        a: "1. What is the main message you are trying to convey?<br>2. What action do you want the viewer to take after seeing the design?<br>3. How is this image going to be used (small handheld print vs. wall poster)?",
-        status: "new"
+            "q": "What three key questions should a designer ask if a client brief is not detailed enough?",
+            "a": "1. What is the main message you are trying to convey?<br>2. What action do you want the viewer to take after seeing the design?<br>3. How is this image going to be used (small handheld print vs. wall poster)?",
+            "status": "new",
+            "targetTerm": "main message",
+            "keyTerm": "client brief"
       },
       {
-        q: "How does the **target audience** influence graphic design complexity?",
-        a: "Older/mature audiences can understand complex graphics, infographics, and statistics; younger audiences require simpler graphics, more vibrant colors, and characters.",
-        status: "new"
+            "q": "How does the **target audience** influence graphic design complexity?",
+            "a": "Older/mature audiences can understand complex graphics, infographics, and statistics; younger audiences require simpler graphics, more vibrant colors, and characters.",
+            "status": "new",
+            "targetTerm": "target audience",
+            "keyTerm": "target audience"
       },
       {
-        q: "What is meant by project **deliverables**?",
-        a: "The actual files that you will need to supply to your client at the end of the project, depending on the output (print, web, or video).",
-        status: "new"
+            "q": "What is meant by project **deliverables**?",
+            "a": "The actual files that you will need to supply to your client at the end of the project, depending on the output (print, web, or video).",
+            "status": "new",
+            "targetTerm": "deliverables",
+            "keyTerm": "deliverables"
       },
       {
-        q: "What default resolution and color mode settings are used when creating a document for print in Photoshop?",
-        a: "A resolution of **300 ppi** (pixels per inch), working in RGB color mode for full tool availability and outputting/converting to **CMYK**.",
-        status: "new"
+            "q": "What default resolution and color mode settings are used when creating a document for print in Photoshop?",
+            "a": "A resolution of **300 ppi** (pixels per inch), working in RGB color mode for full tool availability and outputting/converting to **CMYK**.",
+            "status": "new",
+            "targetTerm": "300 ppi",
+            "keyTerm": "default"
       },
       {
-        q: "What does **CMYK** stand for, and what does the letter **K** represent?",
-        a: "Cyan, Magenta, Yellow, and Key color (Black), which are the four ink colors used in printing.",
-        status: "new"
+            "q": "What does **CMYK** stand for, and what does the letter **K** represent?",
+            "a": "Cyan, Magenta, Yellow, and Key color (Black), which are the four ink colors used in printing.",
+            "status": "new",
+            "targetTerm": "CMYK",
+            "keyTerm": "CMYK"
       },
       {
-        q: "What are the best file formats for print, and what is the standard bleed size?",
-        a: "**PDF**, **TIFF**, and **EPS**; standard bleed is **3 millimeters** (set via File > Print under Corner Crop Marks).",
-        status: "new"
+            "q": "What are the best file formats for print, and what is the standard bleed size?",
+            "a": "**PDF**, **TIFF**, and **EPS**; standard bleed is **3 millimeters** (set via File > Print under Corner Crop Marks).",
+            "status": "new",
+            "targetTerm": "PDF",
+            "keyTerm": "formats"
       },
       {
-        q: "What resolution, color mode, and export formats are standard for web images?",
-        a: "**72 ppi** resolution, **RGB** color mode, exported as **JPEG**, **PNG**, **GIF**, or modern **WebP** via Export As or Save for Web.",
-        status: "new"
+            "q": "What resolution, color mode, and export formats are standard for web images?",
+            "a": "**72 ppi** resolution, **RGB** color mode, exported as **JPEG**, **PNG**, **GIF**, or modern **WebP** via Export As or Save for Web.",
+            "status": "new",
+            "targetTerm": "72 ppi",
+            "keyTerm": "resolution,"
       },
       {
-        q: "What are the pixel dimensions for Full HD (1080p) and 4K (UHDTV) in video projects?",
-        a: "Full HD is **1920 × 1080 pixels**; 4K UHDTV is **3840 × 2160 pixels**.",
-        status: "new"
+            "q": "What are the pixel dimensions for Full HD (1080p) and 4K (UHDTV) in video projects?",
+            "a": "Full HD is **1920 \u00c3\u0097 1080 pixels**; 4K UHDTV is **3840 \u00c3\u0097 2160 pixels**.",
+            "status": "new",
+            "targetTerm": "1920 \u00c3\u0097 1080 pixels",
+            "keyTerm": "pixel"
       },
       {
-        q: "What is **pixel aspect ratio**, and what ratio is used for anamorphic video?",
-        a: "The ratio between the width and height of an individual pixel (modern video uses square pixels 1.0; anamorphic format uses a **2:1** ratio with rectangular pixels).",
-        status: "new"
+            "q": "What is **pixel aspect ratio**, and what ratio is used for anamorphic video?",
+            "a": "The ratio between the width and height of an individual pixel (modern video uses square pixels 1.0; anamorphic format uses a **2:1** ratio with rectangular pixels).",
+            "status": "new",
+            "targetTerm": "pixel aspect ratio",
+            "keyTerm": "pixel aspect ratio"
       },
       {
-        q: "What is the difference between a **raster image** and a **vector image**?",
-        a: "A **raster image** is made of pixels and is resolution dependent; a **vector image** is resolution independent and can be scaled up or down without losing quality.",
-        status: "new"
+            "q": "What is the difference between a **raster image** and a **vector image**?",
+            "a": "A **raster image** is made of pixels and is resolution dependent; a **vector image** is resolution independent and can be scaled up or down without losing quality.",
+            "status": "new",
+            "targetTerm": "raster image",
+            "keyTerm": "raster image"
       },
       {
-        q: "What are the three key components of project communication?",
-        a: "1. **Project scope**<br>2. **Due dates**<br>3. **Possible impacts of delays**.",
-        status: "new"
+            "q": "What are the three key components of project communication?",
+            "a": "1. **Project scope**<br>2. **Due dates**<br>3. **Possible impacts of delays**.",
+            "status": "new",
+            "targetTerm": "Project scope",
+            "keyTerm": "three"
       },
       {
-        q: "What is **scope creep**, and how do you prevent it?",
-        a: "The gradual, unapproved expansion of project goals, deliverables, or requirements beyond original agreement. Prevent with written deliverables, signed contracts, and limiting revision rounds.",
-        status: "new"
+            "q": "What is **scope creep**, and how do you prevent it?",
+            "a": "The gradual, unapproved expansion of project goals, deliverables, or requirements beyond original agreement. Prevent with written deliverables, signed contracts, and limiting revision rounds.",
+            "status": "new",
+            "targetTerm": "scope creep",
+            "keyTerm": "scope creep"
       },
       {
-        q: "What is a **change order**?",
-        a: "A signed document between designer and client whenever additional changes, directions, or tasks are requested that were not agreed on in the beginning.",
-        status: "new"
+            "q": "What is a **change order**?",
+            "a": "A signed document between designer and client whenever additional changes, directions, or tasks are requested that were not agreed on in the beginning.",
+            "status": "new",
+            "targetTerm": "change order",
+            "keyTerm": "change order"
       },
       {
-        q: "What is the difference between a **Gantt chart** and the **Critical Path Method (CPM)**?",
-        a: "A **Gantt chart** visualizes tasks, timelines, overlaps, and deadlines; the **Critical Path Method** identifies the specific sequence of dependent tasks that directly impact project completion.",
-        status: "new"
+            "q": "What is the difference between a **Gantt chart** and the **Critical Path Method (CPM)**?",
+            "a": "A **Gantt chart** visualizes tasks, timelines, overlaps, and deadlines; the **Critical Path Method** identifies the specific sequence of dependent tasks that directly impact project completion.",
+            "status": "new",
+            "targetTerm": "Gantt chart",
+            "keyTerm": "Gantt chart"
       },
       {
-        q: "What is a **feedback loop** in graphic design?",
-        a: "The complete process of the designer delivering work for review, the client reviewing and sending feedback, and the designer addressing feedback and making changes.",
-        status: "new"
+            "q": "What is a **feedback loop** in graphic design?",
+            "a": "The complete process of the designer delivering work for review, the client reviewing and sending feedback, and the designer addressing feedback and making changes.",
+            "status": "new",
+            "targetTerm": "feedback loop",
+            "keyTerm": "feedback loop"
       },
       {
-        q: "What are the five key stages of project management in order?",
-        a: "1. **Planning and Analysis**<br>2. **Scheduling**<br>3. **Building**<br>4. **Review and Evaluation**<br>5. **Implementation and Publication**.",
-        status: "new"
+            "q": "What are the five key stages of project management in order?",
+            "a": "1. **Planning and Analysis**<br>2. **Scheduling**<br>3. **Building**<br>4. **Review and Evaluation**<br>5. **Implementation and Publication**.",
+            "status": "new",
+            "targetTerm": "Planning and Analysis",
+            "keyTerm": "stages"
       },
       {
-        q: "What is **copyright** in graphic design?",
-        a: "A legal protection that gives creators ownership over their original work (designs, illustrations, logos, layouts) automatically upon creation.",
-        status: "new"
+            "q": "What is **copyright** in graphic design?",
+            "a": "A legal protection that gives creators ownership over their original work (designs, illustrations, logos, layouts) automatically upon creation.",
+            "status": "new",
+            "targetTerm": "copyright",
+            "keyTerm": "copyright"
       },
       {
-        q: "What is **public domain**?",
-        a: "Creative materials not protected by intellectual property laws (copyright, trademark, patent); owned by the public and usable by anyone without permission.",
-        status: "new"
+            "q": "What is **public domain**?",
+            "a": "Creative materials not protected by intellectual property laws (copyright, trademark, patent); owned by the public and usable by anyone without permission.",
+            "status": "new",
+            "targetTerm": "public domain",
+            "keyTerm": "public domain"
       },
       {
-        q: "What is a **derivative work**, and does altering an original work make it yours?",
-        a: "A work altered from or based on an existing piece. Changing a design does NOT make it yours; the original creator still owns the copyright and permission is required.",
-        status: "new"
+            "q": "What is a **derivative work**, and does altering an original work make it yours?",
+            "a": "A work altered from or based on an existing piece. Changing a design does NOT make it yours; the original creator still owns the copyright and permission is required.",
+            "status": "new",
+            "targetTerm": "derivative work",
+            "keyTerm": "derivative work"
       },
       {
-        q: "What is **fair use**, and what four factors do courts evaluate?",
-        a: "A legal rule allowing limited use of copyrighted material without permission for education, commentary, news, or parody. Evaluated by: 1. Purpose, 2. Nature of work, 3. Amount used, 4. Effect on the market/financial value.",
-        status: "new"
+            "q": "What is **fair use**, and what four factors do courts evaluate?",
+            "a": "A legal rule allowing limited use of copyrighted material without permission for education, commentary, news, or parody. Evaluated by: 1. Purpose, 2. Nature of work, 3. Amount used, 4. Effect on the market/financial value.",
+            "status": "new",
+            "targetTerm": "fair use",
+            "keyTerm": "fair use"
       },
       {
-        q: "What is **licensing**?",
-        a: "A legal agreement permitting use of copyrighted material by paying a fee established by the copyright holder under specified terms and conditions.",
-        status: "new"
+            "q": "What is **licensing**?",
+            "a": "A legal agreement permitting use of copyrighted material by paying a fee established by the copyright holder under specified terms and conditions.",
+            "status": "new",
+            "targetTerm": "licensing",
+            "keyTerm": "licensing"
       },
       {
-        q: "What is **Creative Commons (CC)**?",
-        a: "A licensing system that lets creators share their work with the public while retaining some rights ('some rights reserved').",
-        status: "new"
+            "q": "What is **Creative Commons (CC)**?",
+            "a": "A licensing system that lets creators share their work with the public while retaining some rights ('some rights reserved').",
+            "status": "new",
+            "targetTerm": "Creative Commons (CC)",
+            "keyTerm": "Creative Commons (CC)"
       },
       {
-        q: "When are a **model release** and a **location release** required?",
-        a: "A **model release** is required when a recognizable person appears in your work; a **location release** is required for private property or recognizable landmarks.",
-        status: "new"
+            "q": "When are a **model release** and a **location release** required?",
+            "a": "A **model release** is required when a recognizable person appears in your work; a **location release** is required for private property or recognizable landmarks.",
+            "status": "new",
+            "targetTerm": "model release",
+            "keyTerm": "model release"
       },
       {
-        q: "What are the three primary working/project file formats in Adobe software?",
-        a: "**PSD** (Photoshop Document), **AI** (Adobe Illustrator), and **INDD** (InDesign Document).",
-        status: "new"
+            "q": "What are the three primary working/project file formats in Adobe software?",
+            "a": "**PSD** (Photoshop Document), **AI** (Adobe Illustrator), and **INDD** (InDesign Document).",
+            "status": "new",
+            "targetTerm": "PSD",
+            "keyTerm": "three"
       },
       {
-        q: "What does **bit depth** measure, and how many colors can an 8-bit image hold?",
-        a: "A way of measuring the amount of colors in a file format; 8-bit holds **256 colors** (2^8), while 24-bit holds 8 bits per channel (RGB) for 16.7 million colors.",
-        status: "new"
+            "q": "What does **bit depth** measure, and how many colors can an 8-bit image hold?",
+            "a": "A way of measuring the amount of colors in a file format; 8-bit holds **256 colors** (2^8), while 24-bit holds 8 bits per channel (RGB) for 16.7 million colors.",
+            "status": "new",
+            "targetTerm": "bit depth",
+            "keyTerm": "bit depth"
       },
       {
-        q: "What is the primary difference between **EPS** and **SVG** vector formats?",
-        a: "**EPS** is predominantly used for print projects; **SVG** (Scalable Vector Graphics) is specifically designed for the web.",
-        status: "new"
+            "q": "What is the primary difference between **EPS** and **SVG** vector formats?",
+            "a": "**EPS** is predominantly used for print projects; **SVG** (Scalable Vector Graphics) is specifically designed for the web.",
+            "status": "new",
+            "targetTerm": "EPS",
+            "keyTerm": "EPS"
       },
       {
-        q: "What is **Camera RAW**, and why is it preferred over JPEG for editing?",
-        a: "Unprocessed sensor data that retains a much wider tonal range, allowing recovery of highlight and shadow details without burning out to pure white or solid black.",
-        status: "new"
+            "q": "What is **Camera RAW**, and why is it preferred over JPEG for editing?",
+            "a": "Unprocessed sensor data that retains a much wider tonal range, allowing recovery of highlight and shadow details without burning out to pure white or solid black.",
+            "status": "new",
+            "targetTerm": "Camera RAW",
+            "keyTerm": "Camera RAW"
       },
       {
-        q: "What does a **histogram** show, and what do edge peaks indicate?",
-        a: "It displays the number of pixels across tonal regions from darkest blacks (left) to brightest whites (right). Peaks on either far edge indicate **clipping** (lost shadow or highlight detail).",
-        status: "new"
+            "q": "What does a **histogram** show, and what do edge peaks indicate?",
+            "a": "It displays the number of pixels across tonal regions from darkest blacks (left) to brightest whites (right). Peaks on either far edge indicate **clipping** (lost shadow or highlight detail).",
+            "status": "new",
+            "targetTerm": "histogram",
+            "keyTerm": "histogram"
       },
       {
-        q: "What is **aliasing**, and how does **anti-aliasing** correct it?",
-        a: "**Aliasing** is the jagged stair-stepping effect along curved edges and low-resolution type; **anti-aliasing** averages and smooths edge colors to eliminate stair-stepping.",
-        status: "new"
+            "q": "What is **aliasing**, and how does **anti-aliasing** correct it?",
+            "a": "**Aliasing** is the jagged stair-stepping effect along curved edges and low-resolution type; **anti-aliasing** averages and smooths edge colors to eliminate stair-stepping.",
+            "status": "new",
+            "targetTerm": "aliasing",
+            "keyTerm": "aliasing"
       },
       {
-        q: "Why don't perfectly horizontal or vertical lines need anti-aliasing?",
-        a: "Because horizontal and vertical lines can align perfectly to the pixel grid, creating crisp, sharp edges naturally.",
-        status: "new"
+            "q": "Why don't perfectly horizontal or vertical lines need anti-aliasing?",
+            "a": "Because horizontal and vertical lines can align perfectly to the pixel grid, creating crisp, sharp edges naturally.",
+            "status": "new",
+            "targetTerm": "pixel grid",
+            "keyTerm": "pixel grid"
       },
       {
-        q: "What is Photoshop's AI neural filter for resizing raster images called?",
-        a: "**SuperZoom**, powered by Adobe Sensei AI, which can upscale images up to 9x while enhancing details and removing JPEG artifacts.",
-        status: "new"
+            "q": "What is Photoshop's AI neural filter for resizing raster images called?",
+            "a": "**SuperZoom**, powered by Adobe Sensei AI, which can upscale images up to 9x while enhancing details and removing JPEG artifacts.",
+            "status": "new",
+            "targetTerm": "SuperZoom",
+            "keyTerm": "Photoshop's"
       },
       {
-        q: "What is a **color gamut**, and how do sRGB and Adobe RGB compare?",
-        a: "The subset of colors that can be represented by a color space. **sRGB** has a smaller gamut designed for web; **Adobe RGB** has a wider gamut used for print design.",
-        status: "new"
+            "q": "What is a **color gamut**, and how do sRGB and Adobe RGB compare?",
+            "a": "The subset of colors that can be represented by a color space. **sRGB** has a smaller gamut designed for web; **Adobe RGB** has a wider gamut used for print design.",
+            "status": "new",
+            "targetTerm": "color gamut",
+            "keyTerm": "color gamut"
       },
       {
-        q: "What does the **Out of Gamut warning** in Photoshop's Color Picker signify?",
-        a: "The selected color cannot be represented with CMYK printing inks; clicking the warning jumps to the nearest achievable CMYK print color.",
-        status: "new"
+            "q": "What does the **Out of Gamut warning** in Photoshop's Color Picker signify?",
+            "a": "The selected color cannot be represented with CMYK printing inks; clicking the warning jumps to the nearest achievable CMYK print color.",
+            "status": "new",
+            "targetTerm": "Out of Gamut warning",
+            "keyTerm": "Out of Gamut warning"
       },
       {
-        q: "What are the three axes of the device-independent **LAB color mode**?",
-        a: "**L** (Lightness: 0 to 100, black to white), **a-axis** (green to red), and **b-axis** (blue to yellow).",
-        status: "new"
+            "q": "What are the three axes of the device-independent **LAB color mode**?",
+            "a": "**L** (Lightness: 0 to 100, black to white), **a-axis** (green to red), and **b-axis** (blue to yellow).",
+            "status": "new",
+            "targetTerm": "LAB color mode",
+            "keyTerm": "LAB color mode"
       },
       {
-        q: "How do you synchronize color management settings across all Adobe CC applications?",
-        a: "Open **Adobe Bridge**, go to Edit > Color Settings, select your saved settings profile, and click **Apply**.",
-        status: "new"
+            "q": "How do you synchronize color management settings across all Adobe CC applications?",
+            "a": "Open **Adobe Bridge**, go to Edit > Color Settings, select your saved settings profile, and click **Apply**.",
+            "status": "new",
+            "targetTerm": "Adobe Bridge",
+            "keyTerm": "synchronize"
       },
       {
-        q: "What is the **rule of thirds** in composition?",
-        a: "A guideline dividing the frame into 3×3 sections, placing focal points off-center along the grid lines or intersections to guide the viewer's eye.",
-        status: "new"
+            "q": "What is the **rule of thirds** in composition?",
+            "a": "A guideline dividing the frame into 3\u00c3\u00973 sections, placing focal points off-center along the grid lines or intersections to guide the viewer's eye.",
+            "status": "new",
+            "targetTerm": "rule of thirds",
+            "keyTerm": "rule of thirds"
       },
       {
-        q: "What is the difference between wide and shallow **depth of field**?",
-        a: "**Wide depth of field** keeps both foreground and background in sharp focus; **shallow depth of field** blurs foreground and background to isolate the subject.",
-        status: "new"
+            "q": "What is the difference between wide and shallow **depth of field**?",
+            "a": "**Wide depth of field** keeps both foreground and background in sharp focus; **shallow depth of field** blurs foreground and background to isolate the subject.",
+            "status": "new",
+            "targetTerm": "depth of field",
+            "keyTerm": "depth of field"
       },
       {
-        q: "What are **Smart Guides** in Photoshop, and what is the keyboard shortcut?",
-        a: "Dynamic purple/magenta guides showing alignment and spacing between layers; shortcut is **Cmd/Ctrl + Shift + R** (View > Show > Smart Guides).",
-        status: "new"
+            "q": "What are **Smart Guides** in Photoshop, and what is the keyboard shortcut?",
+            "a": "Dynamic purple/magenta guides showing alignment and spacing between layers; shortcut is **Cmd/Ctrl + Shift + R** (View > Show > Smart Guides).",
+            "status": "new",
+            "targetTerm": "Smart Guides",
+            "keyTerm": "Smart Guides"
       },
       {
-        q: "What is a **Smart Object**, and why is it used before transforming layers?",
-        a: "An embedded container layer that preserves original image resolution and data, preventing pixelation and quality loss when scaling, rotating, or warping repeatedly.",
-        status: "new"
+            "q": "What is a **Smart Object**, and why is it used before transforming layers?",
+            "a": "An embedded container layer that preserves original image resolution and data, preventing pixelation and quality loss when scaling, rotating, or warping repeatedly.",
+            "status": "new",
+            "targetTerm": "Smart Object",
+            "keyTerm": "Smart Object"
       },
       {
-        q: "What happens when you apply a filter to a **Smart Object** layer?",
-        a: "It automatically becomes a non-destructive **Smart Filter**, allowing you to toggle visibility, adjust settings, or delete it at any time.",
-        status: "new"
+            "q": "What happens when you apply a filter to a **Smart Object** layer?",
+            "a": "It automatically becomes a non-destructive **Smart Filter**, allowing you to toggle visibility, adjust settings, or delete it at any time.",
+            "status": "new",
+            "targetTerm": "Smart Object",
+            "keyTerm": "Smart Object"
       },
       {
-        q: "What are the four core pillars of **non-destructive editing** in Photoshop?",
-        a: "1. Separate **Layers**<br>2. **Smart Objects** & Smart Filters<br>3. **Adjustment Layers** (with clipping masks)<br>4. **Layer Masks**.",
-        status: "new"
+            "q": "What are the four core pillars of **non-destructive editing** in Photoshop?",
+            "a": "1. Separate **Layers**<br>2. **Smart Objects** & Smart Filters<br>3. **Adjustment Layers** (with clipping masks)<br>4. **Layer Masks**.",
+            "status": "new",
+            "targetTerm": "non-destructive editing",
+            "keyTerm": "non-destructive editing"
       },
       {
-        q: "What is the difference between **kerning** and **tracking**?",
-        a: "**Kerning** adjusts spacing between a specific pair of individual characters; **tracking** adjusts character spacing uniformly across an entire word, line, or block of text.",
-        status: "new"
+            "q": "What is the difference between **kerning** and **tracking**?",
+            "a": "**Kerning** adjusts spacing between a specific pair of individual characters; **tracking** adjusts character spacing uniformly across an entire word, line, or block of text.",
+            "status": "new",
+            "targetTerm": "kerning",
+            "keyTerm": "kerning"
       },
       {
-        q: "What happens when you change resolution in Image Size with **Resample unchecked**?",
-        a: "Pixel dimensions and image data remain identical; only print output resolution (ppi) and physical document size change without recalculating or adding pixels.",
-        status: "new"
+            "q": "What happens when you change resolution in Image Size with **Resample unchecked**?",
+            "a": "Pixel dimensions and image data remain identical; only print output resolution (ppi) and physical document size change without recalculating or adding pixels.",
+            "status": "new",
+            "targetTerm": "Resample unchecked",
+            "keyTerm": "Resample unchecked"
       }
-    ]
+];
 
     const STORAGE_KEY = "teachme_adobe_statuses";
 
     // State
     let queue = [];
     let currentQueueIdx = 0;
-    let currentTier = 1;
-    let targetClozeTerm = "";
+    let currentStage = 1;
 
     // Initialize Deck & State
     function initLearnSession() {
-      // Load saved progress if any
       let saved = {};
       try {
         saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
@@ -554,7 +617,6 @@
         }
       });
 
-      // Build practice queue: non-mastered first, or full deck if all mastered
       queue = [...deckData];
       fisherYatesShuffle(queue);
       currentQueueIdx = 0;
@@ -595,14 +657,12 @@
 
     function renderCurrentCard() {
       if (currentQueueIdx >= queue.length) {
-        // Check if there are still non-mastered cards
         const unmastered = queue.filter(c => c.status !== "mastered");
         if (unmastered.length > 0) {
           queue = [...unmastered];
           fisherYatesShuffle(queue);
           currentQueueIdx = 0;
         } else {
-          // Complete!
           document.getElementById("quiz-card-container").style.display = "none";
           document.getElementById("completionBanner").style.display = "block";
           updateHeaderStats();
@@ -611,18 +671,17 @@
       }
 
       updateHeaderStats();
-      setupTier1();
+      setupStage1();
     }
 
     // ==========================================
-    // TIER 1: MULTIPLE CHOICE (Sampled Distractors)
+    // STAGE 1: MULTIPLE CHOICE (Sampled Distractors)
     // ==========================================
-    function setupTier1() {
-      currentTier = 1;
-      updateTierBadge("Tier 1: Multiple Choice", "t1-badge");
+    function setupStage1() {
+      currentStage = 1;
+      updateTierBadge("Stage 1: Multiple Choice", "t1-badge");
       document.getElementById("tier1Section").style.display = "block";
       document.getElementById("tier2Section").style.display = "none";
-      document.getElementById("tier3Section").style.display = "none";
 
       const card = queue[currentQueueIdx];
       document.getElementById("t1QuestionText").innerText = card.q;
@@ -630,7 +689,6 @@
       feedback.style.display = "none";
       feedback.innerHTML = "";
 
-      // Collect distractors strictly from deckData
       const otherAnswers = deckData
         .filter(c => c.a !== card.a)
         .map(c => c.a);
@@ -668,12 +726,15 @@
         selectedBtn.classList.add("correct");
         feedback.className = "feedback-banner feedback-success";
         feedback.innerHTML = `
-          <strong>✅ Correct!</strong> Excellent recognition from the source notes.<br>
-          <button class="btn btn-primary" style="margin-top: 12px;" onclick="setupTier2()">Advance to Tier 2: Cued Recall →</button>
+          <strong>✅ Correct!</strong> Recognized definition from source notes.<br>
+          <button class="btn btn-primary" id="t1AdvanceBtn" style="margin-top: 12px;" onclick="setupStage2()">Advance to Free Active Recall →</button>
         `;
+        setTimeout(() => {
+          const adv = document.getElementById("t1AdvanceBtn");
+          if (adv) adv.focus();
+        }, 50);
       } else {
         selectedBtn.classList.add("incorrect");
-        // Highlight correct
         allBtns.forEach(b => {
           if (b.innerText.includes(correctText.replace(/<[^>]+>/g, "").slice(0, 30))) {
             b.classList.add("correct");
@@ -682,110 +743,40 @@
         feedback.className = "feedback-banner feedback-warning";
         feedback.innerHTML = `
           <strong>💡 Notice the distinction from source notes.</strong> This card has been pushed back in your queue for practice.<br>
-          <button class="btn" style="margin-top: 12px;" onclick="requeueCurrentAndProceedToTier2()">Continue to Tier 2</button>
+          <button class="btn" style="margin-top: 12px;" onclick="requeueCurrentAndProceedToStage2()">Continue to Active Recall</button>
         `;
       }
     }
 
-    function requeueCurrentAndProceedToTier2() {
+    function requeueCurrentAndProceedToStage2() {
       const current = queue[currentQueueIdx];
-      queue.push(current); // Re-queue at the back
-      setupTier2();
+      queue.push(current);
+      setupStage2();
     }
 
     // ==========================================
-    // TIER 2: CLOZE COMPLETION (Cued Recall)
+    // STAGE 2: FREE ACTIVE RECALL (Side-by-Side)
     // ==========================================
-    function setupTier2() {
-      currentTier = 2;
-      updateTierBadge("Tier 2: Cued Recall", "t2-badge");
+    function setupStage2() {
+      currentStage = 2;
+      updateTierBadge("Stage 2: Free Active Recall", "t2-badge");
       document.getElementById("tier1Section").style.display = "none";
       document.getElementById("tier2Section").style.display = "block";
-      document.getElementById("tier3Section").style.display = "none";
 
       const card = queue[currentQueueIdx];
       document.getElementById("t2QuestionText").innerText = card.q;
-      const feedback = document.getElementById("t2FeedbackBox");
-      feedback.style.display = "none";
-      feedback.innerHTML = "";
 
-      // Extract key target word/phrase: bold term or substantial word
-      const boldMatch = card.a.match(/\*\*(.*?)\*\*/);
-      let targetWord = "";
-      if (boldMatch) {
-        targetWord = boldMatch[1].trim();
-      } else {
-        const words = card.a.replace(/<[^>]+>/g, "").split(/\s+/).filter(w => w.length > 5);
-        targetWord = words[0] || "concept";
-      }
-      targetClozeTerm = targetWord;
-
-      const sentenceWithBlank = card.a.replace(targetWord, "<span style='border-bottom: 3px solid var(--accent-red); padding: 0 16px; font-weight: bold; color: var(--accent-red);'>[ &nbsp; ? &nbsp; ]</span>");
-      document.getElementById("t2SentenceContainer").innerHTML = sentenceWithBlank;
-
-      const input = document.getElementById("t2InputField");
-      input.value = "";
-      input.disabled = false;
-      setTimeout(() => input.focus(), 50);
-    }
-
-    function submitTier2() {
-      const input = document.getElementById("t2InputField");
-      const userVal = input.value.trim().toLowerCase();
-      const targetVal = targetClozeTerm.toLowerCase().replace(/[^a-z0-9]/g, "");
-      const cleanUser = userVal.replace(/[^a-z0-9]/g, "");
-
-      if (!cleanUser) return;
-      input.disabled = true;
-
-      const feedback = document.getElementById("t2FeedbackBox");
-      feedback.style.display = "block";
-
-      if (cleanUser === targetVal || targetVal.includes(cleanUser) && cleanUser.length >= 3) {
-        feedback.className = "feedback-banner feedback-success";
-        feedback.innerHTML = `
-          <strong>✅ Spot on!</strong> Target term recalled: <strong>${targetClozeTerm}</strong>.<br>
-          <button class="btn btn-primary" style="margin-top: 12px;" onclick="setupTier3()">Advance to Tier 3: Free Active Recall →</button>
-        `;
-      } else {
-        feedback.className = "feedback-banner feedback-warning";
-        feedback.innerHTML = `
-          <strong>💡 Target term from notes:</strong> <strong>${targetClozeTerm}</strong>.<br>
-          <button class="btn" style="margin-top: 12px;" onclick="requeueTier2AndProceedToTier3()">Proceed to Tier 3</button>
-        `;
-      }
-    }
-
-    function requeueTier2AndProceedToTier3() {
-      const current = queue[currentQueueIdx];
-      queue.push(current);
-      setupTier3();
-    }
-
-    // ==========================================
-    // TIER 3: FREE ACTIVE RECALL (Side-by-Side)
-    // ==========================================
-    function setupTier3() {
-      currentTier = 3;
-      updateTierBadge("Tier 3: Free Active Recall", "t3-badge");
-      document.getElementById("tier1Section").style.display = "none";
-      document.getElementById("tier2Section").style.display = "none";
-      document.getElementById("tier3Section").style.display = "block";
-
-      const card = queue[currentQueueIdx];
-      document.getElementById("t3QuestionText").innerText = card.q;
-
-      const input = document.getElementById("t3RecallInput");
+      const input = document.getElementById("t2RecallInput");
       input.value = "";
       input.disabled = false;
 
-      document.getElementById("t3ActionContainer").style.display = "block";
-      document.getElementById("t3SideBySideContainer").style.display = "none";
-      setTimeout(() => input.focus(), 50);
+      document.getElementById("t2ActionContainer").style.display = "block";
+      document.getElementById("t2SideBySideContainer").style.display = "none";
+      setTimeout(() => input.focus(), 60);
     }
 
-    function verifyTier3Answer() {
-      const input = document.getElementById("t3RecallInput");
+    function verifyActiveRecall() {
+      const input = document.getElementById("t2RecallInput");
       const userText = input.value.trim();
       if (!userText) {
         alert("Please write your recall response before comparing.");
@@ -794,27 +785,25 @@
 
       input.disabled = true;
       const card = queue[currentQueueIdx];
-      document.getElementById("t3UserResponse").innerText = userText;
-      document.getElementById("t3SourceResponse").innerHTML = card.a;
+      document.getElementById("t2UserResponse").innerText = userText;
+      document.getElementById("t2SourceResponse").innerHTML = card.a;
 
-      document.getElementById("t3ActionContainer").style.display = "none";
-      document.getElementById("t3SideBySideContainer").style.display = "block";
+      document.getElementById("t2ActionContainer").style.display = "none";
+      document.getElementById("t2SideBySideContainer").style.display = "block";
     }
 
-    function resolveTier3(isMastered) {
+    function resolveCardMastery(isMastered) {
       const card = queue[currentQueueIdx];
       if (isMastered) {
         card.status = "mastered";
       } else {
         card.status = "learning";
-        // Re-insert card 3 positions ahead in the remaining queue
         const remaining = queue.slice(currentQueueIdx + 1);
         const insertPos = Math.min(3, remaining.length);
         remaining.splice(insertPos, 0, card);
         queue = queue.slice(0, currentQueueIdx + 1).concat(remaining);
       }
 
-      // Persist status
       saveStatusToStorage();
       currentQueueIdx++;
       renderCurrentCard();

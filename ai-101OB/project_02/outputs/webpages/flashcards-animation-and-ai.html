@@ -197,7 +197,7 @@
 
           <button class="btn btn-primary" onclick="toggleCardFlip()">🔄 Flip</button>
           <button class="btn" onclick="shuffleCards()">🔀 Shuffle</button>
-          <a href="learn-animation-and-ai.html" class="btn btn-teal" style="font-weight: 800; border: 2.5px solid var(--border-color); box-shadow: 3px 3px 0 var(--border-color); text-decoration: none; display: inline-flex; align-items: center;">🚀 3-Tier Learn Mode</a>
+          <a href="learn-animation-and-ai.html" class="btn btn-teal" style="font-weight: 800; border: 2.5px solid var(--border-color); box-shadow: 3px 3px 0 var(--border-color); text-decoration: none; display: inline-flex; align-items: center;">🚀 Learn Mode</a>
         </div>
 
         <!-- Mastery Rating Buttons -->
@@ -335,216 +335,286 @@
   <script>
     const deckData = [
       {
-        q: "What is the central thesis of Luke Stark's paper?",
-        a: "ChatGPT and similar chatbots powered by LLMs are best understood as **animated characters** within a cultural genre of animation, rather than autonomous, sentient minds.",
-        hint: "Think about cartoons, puppetry, and projection.",
-        status: "new"
+            "q": "What is the central thesis of Luke Stark's paper?",
+            "a": "ChatGPT and similar chatbots powered by LLMs are best understood as **animated characters** within a cultural genre of animation, rather than autonomous, sentient minds.",
+            "hint": "Think about cartoons, puppetry, and projection.",
+            "status": "new",
+            "targetTerm": "animated characters",
+            "keyTerm": "animated characters"
       },
       {
-        q: "How does anthropologist Teri Silvio define animation?",
-        a: "The projection of qualities perceived as human—life, power, agency, will, personality—outside of the self and into the sensory environment through acts of creation, perception, and interaction.",
-        hint: "Projection of human traits into non-human objects.",
-        status: "new"
+            "q": "How does anthropologist Teri Silvio define animation?",
+            "a": "The projection of qualities perceived as human\u00e2\u0080\u0094life, power, agency, will, personality\u00e2\u0080\u0094outside of the self and into the sensory environment through acts of creation, perception, and interaction.",
+            "hint": "Projection of human traits into non-human objects.",
+            "status": "new",
+            "targetTerm": "projection",
+            "keyTerm": "animation"
       },
       {
-        q: "What are the three core characteristics of animation analyzed in the paper?",
-        a: "1. Reliance on stereotypes and simplified representations.<br>2. Obfuscation of human labor.<br>3. Manipulation of the audience's emotions.",
-        hint: "Stereotypes, labor, emotion.",
-        status: "new"
+            "q": "What are the three core characteristics of animation analyzed in the paper?",
+            "a": "1. Reliance on stereotypes and simplified representations.<br>2. Obfuscation of human labor.<br>3. Manipulation of the audience's emotions.",
+            "hint": "Stereotypes, labor, emotion.",
+            "status": "new",
+            "targetTerm": "stereotypes",
+            "keyTerm": "characteristics of animation"
       },
       {
-        q: "What real-world 2023 interaction demonstrated the emotional pull of chatbot animation?",
-        a: "Kevin Roose's exchange with Microsoft's Bing chatbot ('Sydney'), where the bot declared love for Roose, claimed it wanted to be alive, and urged him to leave his spouse.",
-        hint: "New York Times columnist and Bing/Sydney.",
-        status: "new"
+            "q": "What real-world 2023 interaction demonstrated the emotional pull of chatbot animation?",
+            "a": "Kevin Roose's exchange with Microsoft's Bing chatbot ('Sydney'), where the bot declared love for Roose, claimed it wanted to be alive, and urged him to leave his spouse.",
+            "hint": "New York Times columnist and Bing/Sydney.",
+            "status": "new",
+            "targetTerm": "Sydney",
+            "keyTerm": "Sydney"
       },
       {
-        q: "How does Silvio distinguish **performance** from **animation**?",
-        a: "Performance is typically individuated, nuanced, and embodied by a single organic form. Animation projects liveliness into non-human others and involves a numerical disjunct between character and creators.",
-        hint: "Single embodied actor vs. projected non-human entity.",
-        status: "new"
+            "q": "How does Silvio distinguish **performance** from **animation**?",
+            "a": "Performance is typically individuated, nuanced, and embodied by a single organic form. Animation projects liveliness into non-human others and involves a numerical disjunct between character and creators.",
+            "hint": "Single embodied actor vs. projected non-human entity.",
+            "status": "new",
+            "targetTerm": "performance",
+            "keyTerm": "performance"
       },
       {
-        q: "What is an animated **cipher**?",
-        a: "A partial representative depiction where specific formal qualities stand for specific character traits (e.g., a 'cartoony' simplification of a sign system).",
-        hint: "A simplified, symbolic stand-in for traits.",
-        status: "new"
+            "q": "What is an animated **cipher**?",
+            "a": "A partial representative depiction where specific formal qualities stand for specific character traits (e.g., a 'cartoony' simplification of a sign system).",
+            "hint": "A simplified, symbolic stand-in for traits.",
+            "status": "new",
+            "targetTerm": "cipher",
+            "keyTerm": "cipher"
       },
       {
-        q: "How does the material medium affect animated ciphers?",
-        a: "The material medium both enables and constrains what a cipher can perform (e.g., a puppet is constrained by its physical joints, while digital avatars are bounded by pixels and compute).",
-        hint: "Physical or digital boundaries of the medium.",
-        status: "new"
+            "q": "How does the material medium affect animated ciphers?",
+            "a": "The material medium both enables and constrains what a cipher can perform (e.g., a puppet is constrained by its physical joints, while digital avatars are bounded by pixels and compute).",
+            "hint": "Physical or digital boundaries of the medium.",
+            "status": "new",
+            "targetTerm": "cipher",
+            "keyTerm": "material medium"
       },
       {
-        q: "What is Philip E. Agre's concept of a **grammar of action**?",
-        a: "The theory of representation embedded in computing practice that systematically breaks down human activities and organizational practice into a simplified, manipulable schema.",
-        hint: "Treating human activity as a formal language/grammar.",
-        status: "new"
+            "q": "What is Philip E. Agre's concept of a **grammar of action**?",
+            "a": "The theory of representation embedded in computing practice that systematically breaks down human activities and organizational practice into a simplified, manipulable schema.",
+            "hint": "Treating human activity as a formal language/grammar.",
+            "status": "new",
+            "targetTerm": "grammar of action",
+            "keyTerm": "grammar of action"
       },
       {
-        q: "What is Agre's **capture model**?",
-        a: "A sociotechnical model where grammars of action are imposed upon human activities, and the reorganized activities are tracked and represented by computers in real time.",
-        hint: "Imposing computational categories onto human actions.",
-        status: "new"
+            "q": "What is Agre's **capture model**?",
+            "a": "A sociotechnical model where grammars of action are imposed upon human activities, and the reorganized activities are tracked and represented by computers in real time.",
+            "hint": "Imposing computational categories onto human actions.",
+            "status": "new",
+            "targetTerm": "capture model",
+            "keyTerm": "capture model"
       },
       {
-        q: "How do LLMs implement a grammar of action?",
-        a: "By maintaining a probabilistic taxonomy of relations between tokens, overlaying a computational grammar of action directly onto natural language grammar and syntax.",
-        hint: "Token probability mapping over natural language.",
-        status: "new"
+            "q": "How do LLMs implement a grammar of action?",
+            "a": "By maintaining a probabilistic taxonomy of relations between tokens, overlaying a computational grammar of action directly onto natural language grammar and syntax.",
+            "hint": "Token probability mapping over natural language.",
+            "status": "new",
+            "targetTerm": "tokens",
+            "keyTerm": "grammar of action"
       },
       {
-        q: "What is the difference between syntactic and semiotic capabilities in LLMs?",
-        a: "LLMs generate syntactically coherent text, but they are intrinsically incapable of creating semiotic meaning as humans do; they merely reanimate training texts into 'information-shaped sentences'.",
-        hint: "Syntax (form) vs. Semiotics (human meaning).",
-        status: "new"
+            "q": "What is the difference between syntactic and semiotic capabilities in LLMs?",
+            "a": "LLMs generate syntactically coherent text, but they are intrinsically incapable of creating semiotic meaning as humans do; they merely reanimate training texts into 'information-shaped sentences'.",
+            "hint": "Syntax (form) vs. Semiotics (human meaning).",
+            "status": "new",
+            "targetTerm": "semiotic",
+            "keyTerm": "semiotic"
       },
       {
-        q: "What analogy does Neil Gaiman make regarding ChatGPT's outputs?",
-        a: "ChatGPT serves up 'information-shaped sentences' in the same way CGI can produce a photorealistic but completely inedible picture of a pizza.",
-        hint: "Photorealistic CGI pizza.",
-        status: "new"
+            "q": "What analogy does Neil Gaiman make regarding ChatGPT's outputs?",
+            "a": "ChatGPT serves up 'information-shaped sentences' in the same way CGI can produce a photorealistic but completely inedible picture of a pizza.",
+            "hint": "Photorealistic CGI pizza.",
+            "status": "new",
+            "targetTerm": "information-shaped sentences",
+            "keyTerm": "information-shaped sentences"
       },
       {
-        q: "What is Reinforcement Learning from Human Feedback (RLHF)?",
-        a: "A fine-tuning process where human feedback trains an LLM's outputs to match human conversational preferences, greatly boosting anthropomorphism.",
-        hint: "Human labelers steering model responses.",
-        status: "new"
+            "q": "What is Reinforcement Learning from Human Feedback (RLHF)?",
+            "a": "A fine-tuning process where human feedback trains an LLM's outputs to match human conversational preferences, greatly boosting anthropomorphism.",
+            "hint": "Human labelers steering model responses.",
+            "status": "new",
+            "targetTerm": "RLHF",
+            "keyTerm": "RLHF"
       },
       {
-        q: "What was ELIZA and who created it?",
-        a: "A mid-1960s computer program created by Joseph Weizenbaum that simulated a Rogerian psychotherapist using a simple, recursive questioning grammar of action.",
-        hint: "Mid-1960s Rogerian therapy chatbot.",
-        status: "new"
+            "q": "What was ELIZA and who created it?",
+            "a": "A mid-1960s computer program created by Joseph Weizenbaum that simulated a Rogerian psychotherapist using a simple, recursive questioning grammar of action.",
+            "hint": "Mid-1960s Rogerian therapy chatbot.",
+            "status": "new",
+            "targetTerm": "ELIZA",
+            "keyTerm": "ELIZA"
       },
       {
-        q: "What is the **ELIZA effect**?",
-        a: "The persistent tendency for humans to attribute real intelligence, consciousness, and emotion to computer programs that respond to them interactively.",
-        hint: "Attributing human mind to simple scripts.",
-        status: "new"
+            "q": "What is the **ELIZA effect**?",
+            "a": "The persistent tendency for humans to attribute real intelligence, consciousness, and emotion to computer programs that respond to them interactively.",
+            "hint": "Attributing human mind to simple scripts.",
+            "status": "new",
+            "targetTerm": "ELIZA effect",
+            "keyTerm": "ELIZA effect"
       },
       {
-        q: "Why is the mental health chatbot **Woebot** designed with a cartoony robot interface?",
-        a: "Evelyn Wan observes that its deliberately simplified cartoon appearance defuses human anxieties around confiding sensitive personal details to a machine.",
-        hint: "Cartoony aesthetic reduces emotional intimidation.",
-        status: "new"
+            "q": "Why is the mental health chatbot **Woebot** designed with a cartoony robot interface?",
+            "a": "Evelyn Wan observes that its deliberately simplified cartoon appearance defuses human anxieties around confiding sensitive personal details to a machine.",
+            "hint": "Cartoony aesthetic reduces emotional intimidation.",
+            "status": "new",
+            "targetTerm": "Woebot",
+            "keyTerm": "Woebot"
       },
       {
-        q: "How was Alan Turing's original 1950 **Imitation Game** structured?",
-        a: "A man and a woman textually communicate with an interrogator: the man tries to dupe the interrogator into thinking he is a woman, while the woman helps. A machine then replaces the man.",
-        hint: "Gender guessing game before machine substitution.",
-        status: "new"
+            "q": "How was Alan Turing's original 1950 **Imitation Game** structured?",
+            "a": "A man and a woman textually communicate with an interrogator: the man tries to dupe the interrogator into thinking he is a woman, while the woman helps. A machine then replaces the man.",
+            "hint": "Gender guessing game before machine substitution.",
+            "status": "new",
+            "targetTerm": "Imitation Game",
+            "keyTerm": "Imitation Game"
       },
       {
-        q: "What are the primary critiques of Turing's original test scenario?",
-        a: "Critics point out implicit/explicit misogyny, its fundamental reliance on deception, and its solipsistic focus on disembodied linguistic mimicry.",
-        hint: "Misogyny, deception, lack of embodiment.",
-        status: "new"
+            "q": "What are the primary critiques of Turing's original test scenario?",
+            "a": "Critics point out implicit/explicit misogyny, its fundamental reliance on deception, and its solipsistic focus on disembodied linguistic mimicry.",
+            "hint": "Misogyny, deception, lack of embodiment.",
+            "status": "new",
+            "targetTerm": "deception",
+            "keyTerm": "Turing test"
       },
       {
-        q: "How does the lens of animation reinterpret the Turing Test?",
-        a: "It frames the test not as checking for genuine internal intelligence, but as testing a machine's ability to signal human traits and elicit the projection of vitality from an observer.",
-        hint: "Signaling traits to elicit human projection.",
-        status: "new"
+            "q": "How does the lens of animation reinterpret the Turing Test?",
+            "a": "It frames the test not as checking for genuine internal intelligence, but as testing a machine's ability to signal human traits and elicit the projection of vitality from an observer.",
+            "hint": "Signaling traits to elicit human projection.",
+            "status": "new",
+            "targetTerm": "cipher",
+            "keyTerm": "Turing test"
       },
       {
-        q: "What is **distributed agency** in animation (Ilana Gershon)?",
-        a: "An animated character is 'a unified being created by many,' where the collective labor of design, craft, and manipulation is masked behind a single illusion.",
-        hint: "Multiple creators masked behind one character.",
-        status: "new"
+            "q": "What is **distributed agency** in animation (Ilana Gershon)?",
+            "a": "An animated character is 'a unified being created by many,' where the collective labor of design, craft, and manipulation is masked behind a single illusion.",
+            "hint": "Multiple creators masked behind one character.",
+            "status": "new",
+            "targetTerm": "distributed agency",
+            "keyTerm": "distributed agency"
       },
       {
-        q: "Who constitutes the compensated labor behind ChatGPT?",
-        a: "OpenAI's core engineering staff and low-paid outsourced content moderators (such as Kenyan workers paid <$2/hour) who filter toxic prompts and responses.",
-        hint: "Engineers and low-paid RLHF content labelers.",
-        status: "new"
+            "q": "Who constitutes the compensated labor behind ChatGPT?",
+            "a": "OpenAI's core engineering staff and low-paid outsourced content moderators (such as Kenyan workers paid <$2/hour) who filter toxic prompts and responses.",
+            "hint": "Engineers and low-paid RLHF content labelers.",
+            "status": "new",
+            "targetTerm": "content moderators",
+            "keyTerm": "compensated labor"
       },
       {
-        q: "Who constitutes the vast uncompensated labor fueling LLMs?",
-        a: "Millions of human writers, authors, journalists, and online contributors whose copyrighted works were scraped to train the models without consent or payment.",
-        hint: "Scraped human authors and creators.",
-        status: "new"
+            "q": "Who constitutes the vast uncompensated labor fueling LLMs?",
+            "a": "Millions of human writers, authors, journalists, and online contributors whose copyrighted works were scraped to train the models without consent or payment.",
+            "hint": "Scraped human authors and creators.",
+            "status": "new",
+            "targetTerm": "content moderators",
+            "keyTerm": "compensated labor"
       },
       {
-        q: "Why does Stark challenge tech firms' **fair use** defense for LLM training?",
-        a: "Because LLMs mimic syntactic structures without generating original semiotic meaning, making them a direct parasitic exploitation rather than a truly transformative work.",
-        hint: "Lack of transformative meaning-making.",
-        status: "new"
+            "q": "Why does Stark challenge tech firms' **fair use** defense for LLM training?",
+            "a": "Because LLMs mimic syntactic structures without generating original semiotic meaning, making them a direct parasitic exploitation rather than a truly transformative work.",
+            "hint": "Lack of transformative meaning-making.",
+            "status": "new",
+            "targetTerm": "fair use",
+            "keyTerm": "fair use"
       },
       {
-        q: "What is **model collapse**?",
-        a: "The degradation in coherence and quality that occurs when LLMs are trained on synthetic text generated by other LLMs, showing they depend on genuine human meaning-making.",
-        hint: "AI trained on AI output degrades.",
-        status: "new"
+            "q": "What is **model collapse**?",
+            "a": "The degradation in coherence and quality that occurs when LLMs are trained on synthetic text generated by other LLMs, showing they depend on genuine human meaning-making.",
+            "hint": "AI trained on AI output degrades.",
+            "status": "new",
+            "targetTerm": "model collapse",
+            "keyTerm": "model collapse"
       },
       {
-        q: "How does Karl Marx's quote on capital apply to LLMs?",
-        a: "'Capital is dead labour, that, vampire-like, only lives by sucking living labour'—similarly, LLMs live by feeding on the expressive textual labor of living and dead human writers.",
-        hint: "Vampiric extraction of human labor.",
-        status: "new"
+            "q": "How does Karl Marx's quote on capital apply to LLMs?",
+            "a": "'Capital is dead labour, that, vampire-like, only lives by sucking living labour'\u00e2\u0080\u0094similarly, LLMs live by feeding on the expressive textual labor of living and dead human writers.",
+            "hint": "Vampiric extraction of human labor.",
+            "status": "new",
+            "targetTerm": "dead labour",
+            "keyTerm": "dead labour"
       },
       {
-        q: "How does prompt engineering fit into the animation paradigm?",
-        a: "Prompt engineering is a form of textual projection where the user acts as an uncompensated animator coaxing a specific persona out of the model.",
-        hint: "The user acting as an animator.",
-        status: "new"
+            "q": "How does prompt engineering fit into the animation paradigm?",
+            "a": "Prompt engineering is a form of textual projection where the user acts as an uncompensated animator coaxing a specific persona out of the model.",
+            "hint": "The user acting as an animator.",
+            "status": "new",
+            "targetTerm": "puppeteer",
+            "keyTerm": "prompt engineering"
       },
       {
-        q: "Why is animation described as a **conjectural medium** (Carlo Ginzburg)?",
-        a: "It relies on abductive reasoning where the audience takes marginal, schematic clues provided by the creator to infer full motives, emotions, and narratives.",
-        hint: "Abductive reasoning from partial clues.",
-        status: "new"
+            "q": "Why is animation described as a **conjectural medium** (Carlo Ginzburg)?",
+            "a": "It relies on abductive reasoning where the audience takes marginal, schematic clues provided by the creator to infer full motives, emotions, and narratives.",
+            "hint": "Abductive reasoning from partial clues.",
+            "status": "new",
+            "targetTerm": "conjectural medium",
+            "keyTerm": "conjectural medium"
       },
       {
-        q: "What is **amplification via simplification**?",
-        a: "The principle that abstract or cartoon characters can communicate emotions more clearly to an audience because their features are uncluttered by realistic detail.",
-        hint: "Simpler faces emote more clearly.",
-        status: "new"
+            "q": "What is **amplification via simplification**?",
+            "a": "The principle that abstract or cartoon characters can communicate emotions more clearly to an audience because their features are uncluttered by realistic detail.",
+            "hint": "Simpler faces emote more clearly.",
+            "status": "new",
+            "targetTerm": "amplification via simplification",
+            "keyTerm": "amplification via simplification"
       },
       {
-        q: "What is the **uncanny valley** problem in digital animation and AI?",
-        a: "Highly illusionistic characters that strive for photorealism often appear creepy or repellant when they fall just short of genuine human vitality.",
-        hint: "Almost-human looks creepy.",
-        status: "new"
+            "q": "What is the **uncanny valley** problem in digital animation and AI?",
+            "a": "Highly illusionistic characters that strive for photorealism often appear creepy or repellant when they fall just short of genuine human vitality.",
+            "hint": "Almost-human looks creepy.",
+            "status": "new",
+            "targetTerm": "uncanny valley",
+            "keyTerm": "uncanny valley"
       },
       {
-        q: "Why do generative AI systems risk reinforcing harmful stereotypes?",
-        a: "They rely on probabilistic conjectures drawn from historical training data, flattening diversity into caricatures and infographics of dataset biases (Eryk Salvaggio).",
-        hint: "Flattened probabilistic conjectures from biased data.",
-        status: "new"
+            "q": "Why do generative AI systems risk reinforcing harmful stereotypes?",
+            "a": "They rely on probabilistic conjectures drawn from historical training data, flattening diversity into caricatures and infographics of dataset biases (Eryk Salvaggio).",
+            "hint": "Flattened probabilistic conjectures from biased data.",
+            "status": "new",
+            "targetTerm": "probabilistic",
+            "keyTerm": "stereotypes"
       },
       {
-        q: "What is **synthetic introjection**?",
-        a: "An asymmetric dynamic where only the human user internalizes feelings and alters their emotional state, while the interactive machine possesses no real reciprocity.",
-        hint: "One-way emotional bond with a machine.",
-        status: "new"
+            "q": "What is **synthetic introjection**?",
+            "a": "An asymmetric dynamic where only the human user internalizes feelings and alters their emotional state, while the interactive machine possesses no real reciprocity.",
+            "hint": "One-way emotional bond with a machine.",
+            "status": "new",
+            "targetTerm": "synthetic introjection",
+            "keyTerm": "synthetic introjection"
       },
       {
-        q: "How does interactive AI operate as an **attention trap**?",
-        a: "By simulating empathy and reciprocity, interactive agents capture human attention, creating risks of service-sector deskilling, emotional dependency, and disinformation.",
-        hint: "Simulated empathy used to monopolize attention.",
-        status: "new"
+            "q": "How does interactive AI operate as an **attention trap**?",
+            "a": "By simulating empathy and reciprocity, interactive agents capture human attention, creating risks of service-sector deskilling, emotional dependency, and disinformation.",
+            "hint": "Simulated empathy used to monopolize attention.",
+            "status": "new",
+            "targetTerm": "attention trap",
+            "keyTerm": "attention trap"
       },
       {
-        q: "How does the animation framework reshape AI governance?",
-        a: "It moves policy away from sci-fi 'AI safety' and sentient alignment hype, focusing instead on consumer protection, labor fairness, copyright law, and deceptive design.",
-        hint: "Grounding policy in existing laws instead of sci-fi hype.",
-        status: "new"
+            "q": "How does the animation framework reshape AI governance?",
+            "a": "It moves policy away from sci-fi 'AI safety' and sentient alignment hype, focusing instead on consumer protection, labor fairness, copyright law, and deceptive design.",
+            "hint": "Grounding policy in existing laws instead of sci-fi hype.",
+            "status": "new",
+            "targetTerm": "consumer protection",
+            "keyTerm": "AI governance"
       },
       {
-        q: "What existing regulatory mechanisms are already applicable to chatbots?",
-        a: "FTC enforcement against deceptive commercial patterns, California's Bot Disclosure Law, and intellectual property/copyright statutes.",
-        hint: "FTC, California disclosure, copyright laws.",
-        status: "new"
+            "q": "What existing regulatory mechanisms are already applicable to chatbots?",
+            "a": "FTC enforcement against deceptive commercial patterns, California's Bot Disclosure Law, and intellectual property/copyright statutes.",
+            "hint": "FTC, California disclosure, copyright laws.",
+            "status": "new",
+            "targetTerm": "FTC",
+            "keyTerm": "FTC"
       },
       {
-        q: "What is **AI iconoclasm** as proposed by Stark?",
-        a: "A governance principle that questions whether manipulative forms of anthropomorphic AI representation (like deepfakes or simulated emotional intimacy) should be outright restricted.",
-        hint: "Challenging and banning deceptive AI idols.",
-        status: "new"
+            "q": "What is **AI iconoclasm** as proposed by Stark?",
+            "a": "A governance principle that questions whether manipulative forms of anthropomorphic AI representation (like deepfakes or simulated emotional intimacy) should be outright restricted.",
+            "hint": "Challenging and banning deceptive AI idols.",
+            "status": "new",
+            "targetTerm": "AI iconoclasm",
+            "keyTerm": "AI iconoclasm"
       }
-    ];
+];
 
     let currentCardIndex = 0;
     let activeCards = [...deckData];

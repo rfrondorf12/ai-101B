@@ -6,7 +6,6 @@
   <title>AI for App Building — Learn Mode</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Scoped high-contrast typography for Learn Mode study interface */
     .learn-container {
       max-width: 780px;
       margin: 0 auto;
@@ -26,8 +25,7 @@
       box-shadow: 2px 2px 0 var(--border-color);
     }
     .t1-badge { background-color: var(--accent-yellow); color: #240404; }
-    .t2-badge { background-color: var(--accent-orange); color: #240404; }
-    .t3-badge { background-color: var(--accent-teal); color: #240404; }
+    .t2-badge { background-color: var(--accent-teal); color: #240404; }
 
     .lm-progress-bar {
       width: 100%;
@@ -173,7 +171,7 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
           <div>
             <span class="pill-badge pill-ai">Artificial Intelligence</span>
-            <h2 style="margin-top: 6px; font-size: 1.45rem;">AI for App Building — 3-Tier Learn Mode</h2>
+            <h2 style="margin-top: 6px; font-size: 1.45rem;">AI for App Building — Learn Mode</h2>
             <p style="font-size: 0.85rem; color: #555; margin-top: 4px;">Source: <code>AI App Building Lecture & Reference</code></p>
           </div>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -195,7 +193,7 @@
             <div class="lm-progress-fill" id="lm-progress-fill"></div>
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #64748b; flex-wrap: wrap; gap: 8px;">
-            <span>💡 3-Tier Cognitive Ladder: Recognition (MC) → Cued Recall (Cloze) → Free Active Recall</span>
+            <span>💡 2-Stage Cognitive Ladder: Recognition (Multiple Choice) → Free Active Recall (Side-by-Side)</span>
             <button class="btn btn-sm" onclick="reshuffleQueue()" title="Shuffle the practice queue">🔀 Reshuffle Queue</button>
           </div>
         </div>
@@ -204,67 +202,47 @@
       <!-- Active Quiz Card -->
       <div id="quiz-card-container" class="quiz-card">
 
-        <!-- Tier 1: Multiple Choice -->
+        <!-- Stage 1: Multiple Choice (Recognition) -->
         <div id="tier1Section">
           <div style="font-size: 0.85rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-            Tier 1 · Recognition (Multiple Choice)
+            Stage 1 · Recognition (Multiple Choice)
           </div>
           <h3 id="t1QuestionText" style="font-size: 1.25rem; font-weight: 800; line-height: 1.45; margin-bottom: 20px; color: #0f172a;"></h3>
           <div id="t1OptionsGrid" style="display: grid; gap: 12px;"></div>
           <div id="t1FeedbackBox" class="feedback-banner" style="display: none;"></div>
         </div>
 
-        <!-- Tier 2: Cloze Completion -->
+        <!-- Stage 2: Free Active Recall & Side-by-Side Assessment -->
         <div id="tier2Section" style="display: none;">
-          <div style="font-size: 0.85rem; font-weight: 700; color: #d97706; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-            Tier 2 · Cued Recall (Cloze Completion)
-          </div>
-          <h3 id="t2QuestionText" style="font-size: 1.2rem; font-weight: 800; line-height: 1.45; margin-bottom: 12px; color: #0f172a;"></h3>
-          <p style="font-size: 0.9rem; color: #475569; margin-bottom: 16px;">
-            Fill in the missing key term from the source notes below:
-          </p>
-          <div id="t2SentenceContainer" style="padding: 18px; background: #faf5f1; border: 2px dashed var(--border-color); border-radius: 10px; font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px;"></div>
-          
-          <form id="t2Form" onsubmit="event.preventDefault(); submitTier2();">
-            <div style="display: flex; gap: 10px; align-items: stretch; flex-wrap: wrap;">
-              <input type="text" id="t2InputField" placeholder="Type the exact missing term..." autocomplete="off" style="flex: 1; min-width: 250px; padding: 12px 16px; font-size: 1.05rem; border: 2.5px solid var(--border-color); border-radius: 8px; font-family: inherit; outline: none;">
-              <button type="submit" class="btn btn-primary" style="padding: 12px 24px; font-size: 1rem;">Submit Term</button>
-            </div>
-          </form>
-          <div id="t2FeedbackBox" class="feedback-banner" style="display: none;"></div>
-        </div>
-
-        <!-- Tier 3: Free Active Recall & Side-by-Side -->
-        <div id="tier3Section" style="display: none;">
           <div style="font-size: 0.85rem; font-weight: 700; color: #0f766e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
-            Tier 3 · Free Active Recall (Cognitive Generation)
+            Stage 2 · Free Active Recall (Cognitive Generation)
           </div>
-          <h3 id="t3QuestionText" style="font-size: 1.25rem; font-weight: 800; line-height: 1.45; margin-bottom: 12px; color: #0f172a;"></h3>
+          <h3 id="t2QuestionText" style="font-size: 1.25rem; font-weight: 800; line-height: 1.45; margin-bottom: 12px; color: #0f172a;"></h3>
           <p style="font-size: 0.9rem; color: #475569; margin-bottom: 14px;">
-            Explain this concept completely in your own words without looking at your notes. (Spaces and formatting work natively without keyboard conflicts):
+            Explain this concept completely in your own words without looking at your notes. (Full keyboard freedom for spaces, returns, and punctuation):
           </p>
-          <textarea id="t3RecallInput" rows="5" placeholder="Type your full recall explanation here..." style="width: 100%; padding: 14px; font-size: 1rem; border: 2.5px solid var(--border-color); border-radius: 8px; font-family: inherit; line-height: 1.6; outline: none; margin-bottom: 16px; box-sizing: border-box;"></textarea>
+          <textarea id="t2RecallInput" rows="5" placeholder="Type your full recall explanation here..." style="width: 100%; padding: 14px; font-size: 1rem; border: 2.5px solid var(--border-color); border-radius: 8px; font-family: inherit; line-height: 1.6; outline: none; margin-bottom: 16px; box-sizing: border-box;"></textarea>
           
-          <div id="t3ActionContainer">
-            <button class="btn btn-primary" id="t3VerifyBtn" onclick="verifyTier3Answer()" style="padding: 12px 24px; font-size: 1rem;">
+          <div id="t2ActionContainer">
+            <button class="btn btn-primary" id="t2VerifyBtn" onclick="verifyActiveRecall()" style="padding: 12px 24px; font-size: 1rem;">
               Compare Side-by-Side with Source Notes →
             </button>
           </div>
 
           <!-- Comparison Display -->
-          <div id="t3SideBySideContainer" style="display: none;">
+          <div id="t2SideBySideContainer" style="display: none;">
             <div class="side-by-side-grid">
               <div class="side-box">
                 <div style="font-size: 0.85rem; font-weight: 800; color: #475569; text-transform: uppercase; margin-bottom: 8px;">
                   ✍️ What You Typed:
                 </div>
-                <div id="t3UserResponse" style="font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; color: #0f172a;"></div>
+                <div id="t2UserResponse" style="font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; color: #0f172a;"></div>
               </div>
               <div class="side-box" style="background: #ffffff; border-color: #16a34a;">
                 <div style="font-size: 0.85rem; font-weight: 800; color: #16a34a; text-transform: uppercase; margin-bottom: 8px;">
                   📖 Source Note Excerpt:
                 </div>
-                <div id="t3SourceResponse" style="font-size: 0.95rem; line-height: 1.6; color: #0f172a;"></div>
+                <div id="t2SourceResponse" style="font-size: 0.95rem; line-height: 1.6; color: #0f172a;"></div>
               </div>
             </div>
 
@@ -275,10 +253,10 @@
                 You decide your mastery. AI does not automatically judge or replace your critical evaluation.
               </p>
               <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
-                <button class="btn" style="border-color: var(--accent-orange); background: #fffdf5;" onclick="resolveTier3(false)">
+                <button class="btn" style="border-color: var(--accent-orange); background: #fffdf5;" onclick="resolveCardMastery(false)">
                   ⏳ Still Learning (Re-queue for practice)
                 </button>
-                <button class="btn btn-primary" style="background-color: #dcfce7; color: #14532d; border-color: #16a34a;" onclick="resolveTier3(true)">
+                <button class="btn btn-primary" style="background-color: #dcfce7; color: #14532d; border-color: #16a34a;" onclick="resolveCardMastery(true)">
                   ✅ Mastered! (Advance to next card)
                 </button>
               </div>
@@ -293,7 +271,7 @@
         <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
         <h2 style="font-size: 1.8rem; margin-bottom: 12px;">All Cards Mastered in Learn Mode!</h2>
         <p style="font-size: 1.05rem; color: #475569; max-width: 540px; margin: 0 auto 28px auto;">
-          You successfully navigated through Multiple Choice recognition, Cloze completion, and typed active recall verification across the entire deck.
+          You successfully navigated through Multiple Choice recognition and typed active recall verification across the entire deck.
         </p>
         <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
           <button class="btn btn-primary" onclick="restartLearnSession()">🔁 Practice Again</button>
@@ -306,96 +284,123 @@
   </main>
 
   <script>
-    // Deck source data directly from notes
     const deckData = [
       {
-        q: "What is **Vibecoding**?",
-        a: "Using natural language to build software or apps.",
-        status: "new"
+            "q": "What is **Vibecoding**?",
+            "a": "Using natural language to build software or apps.",
+            "status": "new",
+            "targetTerm": "Vibecoding",
+            "keyTerm": "Vibecoding"
       },
       {
-        q: "What is **Agentic AI**?",
-        a: "Takes action on your behalf under your supervision; writes code & builds the interface.",
-        status: "new"
+            "q": "What is **Agentic AI**?",
+            "a": "Takes action on your behalf under your supervision; writes code & builds the interface.",
+            "status": "new",
+            "targetTerm": "Agentic AI",
+            "keyTerm": "Agentic AI"
       },
       {
-        q: "When building a custom tool in Google AI Studio, what three things should you pay attention to?",
-        a: "1. Natural conversation flow<br>2. Specificity of feedback<br>3. Speed from idea to prototype.",
-        status: "new"
+            "q": "When building a custom tool in Google AI Studio, what three things should you pay attention to?",
+            "a": "1. Natural conversation flow<br>2. Specificity of feedback<br>3. Speed from idea to prototype.",
+            "status": "new",
+            "targetTerm": "conversation flow",
+            "keyTerm": "Google AI Studio"
       },
       {
-        q: "What is the purpose of the prototype app called **The Tiebreaker**?",
-        a: "Helps make decisions by showing different pros and cons through a pros and cons list, a comparison table, or a SWOT analysis.",
-        status: "new"
+            "q": "What is the purpose of the prototype app called **The Tiebreaker**?",
+            "a": "Helps make decisions by showing different pros and cons through a pros and cons list, a comparison table, or a SWOT analysis.",
+            "status": "new",
+            "targetTerm": "The Tiebreaker",
+            "keyTerm": "The Tiebreaker"
       },
       {
-        q: "What real-world test input was used for **The Tiebreaker**?",
-        a: "'Should I offer my software for free with paid features, or charge a flat $20/month premium plan?'",
-        status: "new"
+            "q": "What real-world test input was used for **The Tiebreaker**?",
+            "a": "'Should I offer my software for free with paid features, or charge a flat $20/month premium plan?'",
+            "status": "new",
+            "targetTerm": "The Tiebreaker",
+            "keyTerm": "The Tiebreaker"
       },
       {
-        q: "How do you troubleshoot errors in **The Tiebreaker**?",
-        a: "See error button for Auto fix, then verify the fix.",
-        status: "new"
+            "q": "How do you troubleshoot errors in **The Tiebreaker**?",
+            "a": "See error button for Auto fix, then verify the fix.",
+            "status": "new",
+            "targetTerm": "The Tiebreaker",
+            "keyTerm": "The Tiebreaker"
       },
       {
-        q: "What does the **Brand builder app** prototype do?",
-        a: "Lets you describe a product and imagine it across different mediums (billboard, newspaper, social post) while maintaining product consistency without people in images.",
-        status: "new"
+            "q": "What does the **Brand builder app** prototype do?",
+            "a": "Lets you describe a product and imagine it across different mediums (billboard, newspaper, social post) while maintaining product consistency without people in images.",
+            "status": "new",
+            "targetTerm": "Brand builder app",
+            "keyTerm": "Brand builder app"
       },
       {
-        q: "Which specific model must be used for images in the **Brand builder app**?",
-        a: "The Nano-Banana model.",
-        status: "new"
+            "q": "Which specific model must be used for images in the **Brand builder app**?",
+            "a": "The Nano-Banana model.",
+            "status": "new",
+            "targetTerm": "Brand builder app",
+            "keyTerm": "Brand builder app"
       },
       {
-        q: "How do you troubleshoot when the brand builder app tries to use multiple models and confuses itself?",
-        a: "Click error button, copy paste errors into prompt box, and provide feedback: 'Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps.'",
-        status: "new"
+            "q": "How do you troubleshoot when the brand builder app tries to use multiple models and confuses itself?",
+            "a": "Click error button, copy paste errors into prompt box, and provide feedback: 'Please make sure you do not use any other image models. Use only Gemini 2.5 Flash or Nano-Banana for all steps.'",
+            "status": "new",
+            "targetTerm": "copy paste errors",
+            "keyTerm": "troubleshooting"
       },
       {
-        q: "What is the goal of the **Interactive dashboard** prototype?",
-        a: "Allows you to visualize data in many different ways accurately after providing/attaching data.",
-        status: "new"
+            "q": "What is the goal of the **Interactive dashboard** prototype?",
+            "a": "Allows you to visualize data in many different ways accurately after providing/attaching data.",
+            "status": "new",
+            "targetTerm": "Interactive dashboard",
+            "keyTerm": "Interactive dashboard"
       },
       {
-        q: "How do you iterate on design and layout in the **Interactive dashboard**?",
-        a: "Use the annotate app button in the prompt box and use the comment tool to highlight a specific area, then send prompt.",
-        status: "new"
+            "q": "How do you iterate on design and layout in the **Interactive dashboard**?",
+            "a": "Use the annotate app button in the prompt box and use the comment tool to highlight a specific area, then send prompt.",
+            "status": "new",
+            "targetTerm": "Interactive dashboard",
+            "keyTerm": "Interactive dashboard"
       },
       {
-        q: "What 4 questions should you assess on the worksheet before building an app?",
-        a: "1. Does the task solve part of a broader workflow?<br>2. Can you outline a clear, step-by-step process?<br>3. Does the process involve consistent inputs and outputs?<br>4. What's the complexity level (calendar/email/other platforms)?",
-        status: "new"
+            "q": "What 4 questions should you assess on the worksheet before building an app?",
+            "a": "1. Does the task solve part of a broader workflow?<br>2. Can you outline a clear, step-by-step process?<br>3. Does the process involve consistent inputs and outputs?<br>4. What's the complexity level (calendar/email/other platforms)?",
+            "status": "new",
+            "targetTerm": "workflow",
+            "keyTerm": "workflow assessment"
       },
       {
-        q: "What is the rule for prompting different blocks of an app?",
-        a: "Break it up into blocks: give the overall goal, but prompt it to make one block at a time to make correcting errors easier.",
-        status: "new"
+            "q": "What is the rule for prompting different blocks of an app?",
+            "a": "Break it up into blocks: give the overall goal, but prompt it to make one block at a time to make correcting errors easier.",
+            "status": "new",
+            "targetTerm": "one block at a time",
+            "keyTerm": "prompting blocks"
       },
       {
-        q: "What is your responsibility after publishing an app?",
-        a: "You are responsible for the outputs it produces and need to maintain its functionality for users.",
-        status: "new"
+            "q": "What is your responsibility after publishing an app?",
+            "a": "You are responsible for the outputs it produces and need to maintain its functionality for users.",
+            "status": "new",
+            "targetTerm": "responsible",
+            "keyTerm": "responsibility"
       },
       {
-        q: "What are the 6 reflection questions to ask after using your new app?",
-        a: "1. What did I just achieve?<br>2. How much time have I saved?<br>3. Have I reduced costs?<br>4. Has the quality of my work improved?<br>5. Am I more productive?<br>6. Did I discover something new?",
-        status: "new"
+            "q": "What are the 6 reflection questions to ask after using your new app?",
+            "a": "1. What did I just achieve?<br>2. How much time have I saved?<br>3. Have I reduced costs?<br>4. Has the quality of my work improved?<br>5. Am I more productive?<br>6. Did I discover something new?",
+            "status": "new",
+            "targetTerm": "reflection",
+            "keyTerm": "reflection questions"
       }
-    ]
+];
 
     const STORAGE_KEY = "teachme_ai_statuses";
 
     // State
     let queue = [];
     let currentQueueIdx = 0;
-    let currentTier = 1;
-    let targetClozeTerm = "";
+    let currentStage = 1;
 
     // Initialize Deck & State
     function initLearnSession() {
-      // Load saved progress if any
       let saved = {};
       try {
         saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
@@ -409,7 +414,6 @@
         }
       });
 
-      // Build practice queue: non-mastered first, or full deck if all mastered
       queue = [...deckData];
       fisherYatesShuffle(queue);
       currentQueueIdx = 0;
@@ -450,14 +454,12 @@
 
     function renderCurrentCard() {
       if (currentQueueIdx >= queue.length) {
-        // Check if there are still non-mastered cards
         const unmastered = queue.filter(c => c.status !== "mastered");
         if (unmastered.length > 0) {
           queue = [...unmastered];
           fisherYatesShuffle(queue);
           currentQueueIdx = 0;
         } else {
-          // Complete!
           document.getElementById("quiz-card-container").style.display = "none";
           document.getElementById("completionBanner").style.display = "block";
           updateHeaderStats();
@@ -466,18 +468,17 @@
       }
 
       updateHeaderStats();
-      setupTier1();
+      setupStage1();
     }
 
     // ==========================================
-    // TIER 1: MULTIPLE CHOICE (Sampled Distractors)
+    // STAGE 1: MULTIPLE CHOICE (Sampled Distractors)
     // ==========================================
-    function setupTier1() {
-      currentTier = 1;
-      updateTierBadge("Tier 1: Multiple Choice", "t1-badge");
+    function setupStage1() {
+      currentStage = 1;
+      updateTierBadge("Stage 1: Multiple Choice", "t1-badge");
       document.getElementById("tier1Section").style.display = "block";
       document.getElementById("tier2Section").style.display = "none";
-      document.getElementById("tier3Section").style.display = "none";
 
       const card = queue[currentQueueIdx];
       document.getElementById("t1QuestionText").innerText = card.q;
@@ -485,7 +486,6 @@
       feedback.style.display = "none";
       feedback.innerHTML = "";
 
-      // Collect distractors strictly from deckData
       const otherAnswers = deckData
         .filter(c => c.a !== card.a)
         .map(c => c.a);
@@ -523,12 +523,15 @@
         selectedBtn.classList.add("correct");
         feedback.className = "feedback-banner feedback-success";
         feedback.innerHTML = `
-          <strong>✅ Correct!</strong> Excellent recognition from the source notes.<br>
-          <button class="btn btn-primary" style="margin-top: 12px;" onclick="setupTier2()">Advance to Tier 2: Cued Recall →</button>
+          <strong>✅ Correct!</strong> Recognized definition from source notes.<br>
+          <button class="btn btn-primary" id="t1AdvanceBtn" style="margin-top: 12px;" onclick="setupStage2()">Advance to Free Active Recall →</button>
         `;
+        setTimeout(() => {
+          const adv = document.getElementById("t1AdvanceBtn");
+          if (adv) adv.focus();
+        }, 50);
       } else {
         selectedBtn.classList.add("incorrect");
-        // Highlight correct
         allBtns.forEach(b => {
           if (b.innerText.includes(correctText.replace(/<[^>]+>/g, "").slice(0, 30))) {
             b.classList.add("correct");
@@ -537,110 +540,40 @@
         feedback.className = "feedback-banner feedback-warning";
         feedback.innerHTML = `
           <strong>💡 Notice the distinction from source notes.</strong> This card has been pushed back in your queue for practice.<br>
-          <button class="btn" style="margin-top: 12px;" onclick="requeueCurrentAndProceedToTier2()">Continue to Tier 2</button>
+          <button class="btn" style="margin-top: 12px;" onclick="requeueCurrentAndProceedToStage2()">Continue to Active Recall</button>
         `;
       }
     }
 
-    function requeueCurrentAndProceedToTier2() {
+    function requeueCurrentAndProceedToStage2() {
       const current = queue[currentQueueIdx];
-      queue.push(current); // Re-queue at the back
-      setupTier2();
+      queue.push(current);
+      setupStage2();
     }
 
     // ==========================================
-    // TIER 2: CLOZE COMPLETION (Cued Recall)
+    // STAGE 2: FREE ACTIVE RECALL (Side-by-Side)
     // ==========================================
-    function setupTier2() {
-      currentTier = 2;
-      updateTierBadge("Tier 2: Cued Recall", "t2-badge");
+    function setupStage2() {
+      currentStage = 2;
+      updateTierBadge("Stage 2: Free Active Recall", "t2-badge");
       document.getElementById("tier1Section").style.display = "none";
       document.getElementById("tier2Section").style.display = "block";
-      document.getElementById("tier3Section").style.display = "none";
 
       const card = queue[currentQueueIdx];
       document.getElementById("t2QuestionText").innerText = card.q;
-      const feedback = document.getElementById("t2FeedbackBox");
-      feedback.style.display = "none";
-      feedback.innerHTML = "";
 
-      // Extract key target word/phrase: bold term or substantial word
-      const boldMatch = card.a.match(/\*\*(.*?)\*\*/);
-      let targetWord = "";
-      if (boldMatch) {
-        targetWord = boldMatch[1].trim();
-      } else {
-        const words = card.a.replace(/<[^>]+>/g, "").split(/\s+/).filter(w => w.length > 5);
-        targetWord = words[0] || "concept";
-      }
-      targetClozeTerm = targetWord;
-
-      const sentenceWithBlank = card.a.replace(targetWord, "<span style='border-bottom: 3px solid var(--accent-red); padding: 0 16px; font-weight: bold; color: var(--accent-red);'>[ &nbsp; ? &nbsp; ]</span>");
-      document.getElementById("t2SentenceContainer").innerHTML = sentenceWithBlank;
-
-      const input = document.getElementById("t2InputField");
-      input.value = "";
-      input.disabled = false;
-      setTimeout(() => input.focus(), 50);
-    }
-
-    function submitTier2() {
-      const input = document.getElementById("t2InputField");
-      const userVal = input.value.trim().toLowerCase();
-      const targetVal = targetClozeTerm.toLowerCase().replace(/[^a-z0-9]/g, "");
-      const cleanUser = userVal.replace(/[^a-z0-9]/g, "");
-
-      if (!cleanUser) return;
-      input.disabled = true;
-
-      const feedback = document.getElementById("t2FeedbackBox");
-      feedback.style.display = "block";
-
-      if (cleanUser === targetVal || targetVal.includes(cleanUser) && cleanUser.length >= 3) {
-        feedback.className = "feedback-banner feedback-success";
-        feedback.innerHTML = `
-          <strong>✅ Spot on!</strong> Target term recalled: <strong>${targetClozeTerm}</strong>.<br>
-          <button class="btn btn-primary" style="margin-top: 12px;" onclick="setupTier3()">Advance to Tier 3: Free Active Recall →</button>
-        `;
-      } else {
-        feedback.className = "feedback-banner feedback-warning";
-        feedback.innerHTML = `
-          <strong>💡 Target term from notes:</strong> <strong>${targetClozeTerm}</strong>.<br>
-          <button class="btn" style="margin-top: 12px;" onclick="requeueTier2AndProceedToTier3()">Proceed to Tier 3</button>
-        `;
-      }
-    }
-
-    function requeueTier2AndProceedToTier3() {
-      const current = queue[currentQueueIdx];
-      queue.push(current);
-      setupTier3();
-    }
-
-    // ==========================================
-    // TIER 3: FREE ACTIVE RECALL (Side-by-Side)
-    // ==========================================
-    function setupTier3() {
-      currentTier = 3;
-      updateTierBadge("Tier 3: Free Active Recall", "t3-badge");
-      document.getElementById("tier1Section").style.display = "none";
-      document.getElementById("tier2Section").style.display = "none";
-      document.getElementById("tier3Section").style.display = "block";
-
-      const card = queue[currentQueueIdx];
-      document.getElementById("t3QuestionText").innerText = card.q;
-
-      const input = document.getElementById("t3RecallInput");
+      const input = document.getElementById("t2RecallInput");
       input.value = "";
       input.disabled = false;
 
-      document.getElementById("t3ActionContainer").style.display = "block";
-      document.getElementById("t3SideBySideContainer").style.display = "none";
-      setTimeout(() => input.focus(), 50);
+      document.getElementById("t2ActionContainer").style.display = "block";
+      document.getElementById("t2SideBySideContainer").style.display = "none";
+      setTimeout(() => input.focus(), 60);
     }
 
-    function verifyTier3Answer() {
-      const input = document.getElementById("t3RecallInput");
+    function verifyActiveRecall() {
+      const input = document.getElementById("t2RecallInput");
       const userText = input.value.trim();
       if (!userText) {
         alert("Please write your recall response before comparing.");
@@ -649,27 +582,25 @@
 
       input.disabled = true;
       const card = queue[currentQueueIdx];
-      document.getElementById("t3UserResponse").innerText = userText;
-      document.getElementById("t3SourceResponse").innerHTML = card.a;
+      document.getElementById("t2UserResponse").innerText = userText;
+      document.getElementById("t2SourceResponse").innerHTML = card.a;
 
-      document.getElementById("t3ActionContainer").style.display = "none";
-      document.getElementById("t3SideBySideContainer").style.display = "block";
+      document.getElementById("t2ActionContainer").style.display = "none";
+      document.getElementById("t2SideBySideContainer").style.display = "block";
     }
 
-    function resolveTier3(isMastered) {
+    function resolveCardMastery(isMastered) {
       const card = queue[currentQueueIdx];
       if (isMastered) {
         card.status = "mastered";
       } else {
         card.status = "learning";
-        // Re-insert card 3 positions ahead in the remaining queue
         const remaining = queue.slice(currentQueueIdx + 1);
         const insertPos = Math.min(3, remaining.length);
         remaining.splice(insertPos, 0, card);
         queue = queue.slice(0, currentQueueIdx + 1).concat(remaining);
       }
 
-      // Persist status
       saveStatusToStorage();
       currentQueueIdx++;
       renderCurrentCard();
