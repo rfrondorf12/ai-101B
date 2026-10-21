@@ -1,4 +1,4 @@
-# AGENTS.md: [your name]'s stewardship agent
+# AGENTS.md: Reese's stewardship agent
 
 *Part B. Write this in your own words. Do not copy the ESF Companion or the sample. Delete the italic guidance lines before you submit.*
 
