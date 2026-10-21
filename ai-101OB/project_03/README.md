@@ -10,10 +10,10 @@ Every file you need for Project 3 is in this folder, in the order you use them. 
 | 10      | `intent-statement.md`                    | Say what you are building and why, before you build.                                      |
 | 10      | `workflow-agent.md`                      | Part A. Write the agent file. Save a copy in your Project 2 folder as `agents/[role].md`. |
 | 10      | `run-comparison.md`                      | Compare your Project 2 run to your agent run. Save both in `outputs/`.                    |
-| 11      | `vault-agent/AGENTS.md`                  | Part B. Name the agent's identity, permissions, and limits.                               |
-| 11      | `vault-agent/voice-profile.md`           | Five lines, written from scratch.                                                         |
-| 11      | `vault-agent/hard-rules.md`              | Five rules in your own words. One is a teaching rule.                                     |
-| 11      | `vault-agent/skills/skill-name/SKILL.md` | Encode your Project 2 workflow. Include one complex step.                                 |
+| 11      | `imra/AGENTS.md`                         | Part B. Name the agent's identity, permissions, and limits.                               |
+| 11      | `imra/voice-profile.md`                  | Five lines, written from scratch.                                                         |
+| 11      | `imra/hard-rules.md`                     | Five rules in your own words. One is a teaching rule.                                     |
+| 11      | `imra/skills/run-study-workflow/SKILL.md` | Encode your Project 2 workflow. Include one complex step.                                 |
 | 11      | `testing-log.md`                         | Log the caught-violation demo and the fresh-input test.                                   |
 | 9 to 12 | `ai-use-log.md`                          | Log every prompt, output, and decision.                                                   |
 | 12      | `defense-notes.md`                       | Plan your live defense.                                                                   |
