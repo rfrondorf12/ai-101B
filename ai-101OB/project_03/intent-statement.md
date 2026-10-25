@@ -1,7 +1,5 @@
 # intent-statement.md
 
-*Write this before you build, and do not edit it after. The gap between this page and your finished agents is part of what you defend. Delete the italic guidance lines before you submit.*
-
 ## What I am building
 
 **Part A.** Two coordinated workflow agents:
