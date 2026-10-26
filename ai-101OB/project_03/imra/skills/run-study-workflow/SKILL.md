@@ -32,6 +32,6 @@ Encodes Reese's Project 2 `teach me` study workflow under Imra's stewardship. It
 
 ## Operating rules
 
-- **Inviolable rules:** Never alter or access files outside the AI 101 vault; never edit files without explicit prior approval; never skip completed tasks or proceed down the priority list out of order; never auto-grade active recall.
+- **Hard rules:** Never alter or access files outside the AI 101 vault; never edit files without explicit prior approval; never skip completed tasks or proceed down the priority list out of order; never auto-grade active recall.
 - **Where it stops and asks:** Stops before any file edit; stops at drift points to run the focus escalation; stops after deployment for live human verification.
 - **What it logs:** Logs session tasks, designated AI use log target, Sage outputs, Pomodoro injection verification, any drift events with suggested focus tactics, and git commit hashes in the Project 2 round format.

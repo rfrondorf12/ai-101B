@@ -20,6 +20,6 @@ Encodes the interactive study synthesis step extending Project 2. It builds a gr
 
 ## Operating rules
 
-- **Inviolable rules:** Distractors must be sampled strictly from within the current deck (no external vocabulary or facts). The agent must never auto-grade Tier 2 responses—self-assessment authority remains entirely with the student.
+- **Hard rules:** Distractors must be sampled strictly from within the current deck (no external vocabulary or facts). The agent must never auto-grade Tier 2 responses—self-assessment authority remains entirely with the student.
 - **Where it stops and asks:** Stops after pushing to GitHub to require the student to open the live Vercel URL and test that interleaving and self-reveal recall containers function properly.
 - **What it logs:** Logs the target deck name, total cards sequenced, minimum interleaving distance enforced, GitHub commit hash, and deployment timestamp in the AI use log following the Project 2 format.
