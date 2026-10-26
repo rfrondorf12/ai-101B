@@ -10,7 +10,6 @@
 | Input used | `study_notes/uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.pdf` (*Animation and AI*, Luke Stark) | `study_notes/uhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh.pdf` (*Animation and AI*, Luke Stark) |
 | Step file or agent | `03-task.md` and `04-task2.md` | `agents/study-builder.md` and `agents/learn-mode_agent.md` |
 
-*Use the same input for both runs. Otherwise the comparison means nothing.*
 
 ## What changed
 

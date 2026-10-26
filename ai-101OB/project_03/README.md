@@ -19,7 +19,6 @@ Every file you need for Project 3 is in this folder, in the order you use them. 
 | 12      | `defense-notes.md`                       | Plan your live defense.                                                                   |
 | 12      | `disclosure.md`                          | State what AI contributed and what you decided.                                           |
 
-Replace every `[bracketed placeholder]` with your own words. Delete the italic guidance lines before you submit.
 
 ## Submit
 
